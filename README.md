@@ -296,7 +296,8 @@ Major goals of the [HTML specification](http://www.w3.org/TR/html5/) were to:
 ##### A3.
 Key new features of HTML5 include:
 
-* Improved support for embedding graphics, audio, and video content via the new [`<canvas>`](http://www.w3schools.com/tags/tag_canvas.asp), `<audio>`, and `<video>` tags.
+* Improved support for embedding graphics, audio, and video content via the new [`<canvas>`](http://www.w3schools.com/tags/tag_canvas.asp), 
+  [`<audio>`](http://www.w3schools.com/tags/tag_audio.asp), and [`<video>`](http://www.w3schools.com/tags/tag_video.asp) tags.
 * Extensions to the JavaScript API such as geolocation and drag-and-drop as well for storage and caching.
 * Introduction of "web workers".
 * Several new semantic tags were also added to complement the structural logic of modern web applications. These include the <main>, <nav>, <article>, <section>, <header>, <footer>, and <aside> tags.
