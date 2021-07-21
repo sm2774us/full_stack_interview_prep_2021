@@ -262,6 +262,42 @@ A typical use is to highlight every instance of the keyword or keywords searched
 
 ---
 
-##### Q1.
+##### Q1. Give a simple implementation of the `<video>` tag to embed a video stored at `http://www.example.com/amazing_video.mp4`. Give the video a width of 640 pixels by 360 pixels. Provide the user with controls.
 
 ##### A1.
+Here is one simple implementation:
+
+```html
+<video src="http://www.example.com/amazing_video.mp4" width="640" height="360" controls></video>
+```
+
+Alternatively, the source file may be indicated with a separate <source> tag inside the <video> element, as in:
+
+```html
+<video width="640" height="360" controls>
+  <source src="http://www.example.com/amazing_video.mp4">
+</video>
+```
+
+##### Q2. What were some of the key goals and motivations for the HTML5 specification?
+
+##### A2.
+HTML5 was designed to replace both HTML 4, XHTML, and the HTML DOM Level 2.
+
+Major goals of the [HTML specification](http://www.w3.org/TR/html5/) were to:
+
+* Deliver rich content (graphics, movies, etc.) without the need for additional plugins (e.g., Flash).
+* Provide better semantic support for web page structure through the introduction of new structural element tags.
+* Provide a stricter parsing standard to simplify error handling, ensure more consistent cross-browser behavior, and simplify backward compatibility with documents written to older standards.
+* Provide better cross-platform support (i.e., to work well whether running on a PC, Tablet, or Smartphone).
+
+##### Q3. What are some of the key new features in HTML5?
+
+##### A3.
+Key new features of HTML5 include:
+
+* Improved support for embedding graphics, audio, and video content via the new [`<canvas>`](http://www.w3schools.com/tags/tag_canvas.asp), `<audio>`, and `<video>` tags.
+* Extensions to the JavaScript API such as geolocation and drag-and-drop as well for storage and caching.
+* Introduction of "web workers".
+* Several new semantic tags were also added to complement the structural logic of modern web applications. These include the <main>, <nav>, <article>, <section>, <header>, <footer>, and <aside> tags.
+* New form controls, such as <calendar>, <date>, <time>, <email>, <url>, and <search>.
