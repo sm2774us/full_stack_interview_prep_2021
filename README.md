@@ -716,7 +716,7 @@ in the below code snippet.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 ```
 
-![SGML-HTML-XML-and-XHTML-Relationship-image](assets/SGML-HTML-XML-and-XHTML-Relationship.png)
+![SGML-HTML-XML-and-XHTML-Relationship-image](./assets/SGML-HTML-XML-and-XHTML-Relationship.PNG)
 
 In short SGML is the parent of every one. Older HTML utilizes SGML and HTML 4.0 uses 
 XHTML which derived from XML.
