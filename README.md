@@ -34,6 +34,8 @@ you are not as gung-ho about web design as you thought you were.
 3. What kind of things must you be wary of when design or developing for multilingual sites?
    * Another problem with many solutions: setting the default language, using Unicode encoding, using the 'lang' attribute, being aware of standard font sizes and text direction, and language word length (may affect layout).
 
+---
+
 # Phase 1
 
 ### A) HTML
@@ -46,8 +48,6 @@ you are not as gung-ho about web design as you thought you were.
 * [Top 50 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#f-top-50-html-questions)
 * [Common HTML questions for freshers](https://github.com/sm2774us/full_stack_interview_prep_2021#g-common-html-questions-for-freshers)
 
-
-
 ### B) CSS
 
 - [25 helpful CSS questions and answers](http://www.skilledup.com/articles/25-css-interview-questions-answers)
@@ -55,6 +55,102 @@ you are not as gung-ho about web design as you thought you were.
 - [CSS Questions and Answers](http://www.techrepublic.com/blog/software-engineer/css-interview-questions-and-answers/)
 - [Questions and Exercises About CSS](https://css-tricks.com/interview-questions-css/)
 - [Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments](http://career.guru99.com/top-50-csscascading-style-sheet-interview-questions/)
+
+### Sass
+
+- [Top 17 Sass Questions from Career Guru](http://career.guru99.com/top-17-sass-interview-questions/)
+
+---
+
+# Phase 2
+
+### JavaScript
+
+* [JavaScript Essentials](https://javascript.info/)
+* [Master JavaScript Series](https://github.com/getify/You-Dont-Know-JS)
+* [10 Questions Every JavaScript Developer Should Know](https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95)
+* [21 Essential JavaScript Questions from best mentors all over the world](https://www.codementor.io/javascript/tutorial/21-essential-javascript-tech-interview-practice-questions-answers)
+* [25 Essential JavaScript Questions from top 3% developers company](http://www.toptal.com/javascript/interview-questions)
+* [5 More JavaScript Exercises](http://www.sitepoint.com/5-javascript-interview-exercises/)
+* [5 Typical JavaScript Exercises](http://www.sitepoint.com/5-typical-javascript-interview-exercises/)
+* [Development hiring managers and potential interviewees may find these sample JavaScript proficiency Q&As and code snippets useful](http://www.techrepublic.com/blog/software-engineer/javascript-interview-questions-and-answers/)
+* [JavaScript 101 Question](https://github.com/nishant8BITS/101-JavaScript-Interview-Question)
+* [JavaScript Questions have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of JavaScript](http://www.tutorialspoint.com/javascript/javascript_interview_questions.htm)
+* [JS: Basics and Tricky Questions](http://www.thatjsdude.com/interview/js2.html)
+* [JS: Algorithm](http://thatjsdude.com/interview/js1.html)
+* [Some basic javascript coding challenges and questions](https://github.com/kolodny/exercises)
+* [Some JavaScript exercises](https://github.com/csvenja/javascript-exercises)
+* [Ten Questions I've Been Asked, Most More Than Once, Over Six Technical JavaScript / Front-End Engineer Job Interviews.](https://www.reddit.com/r/javascript/comments/3rb88w/ten_questions_ive_been_asked_most_more_than_once)
+* [Top 85 JavaScript Questions](http://career.guru99.com/top-85-javascript-interview-questions/)
+* [Cake JavaScript Questions](https://www.interviewcake.com/javascript-interview-questions)
+* [The Best Frontend JavaScript Questions (written by a Frontend Engineer)](https://performancejs.com/post/hde6d32/The-Best-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer))
+
+## Data Structures & Algorithms
+
+- [EKAlgorithms contains some well known CS algorithms & data structures](https://github.com/EvgenyKarkan/EKAlgorithms)
+- [Five programming problems every Software Engineer should be able to solve in less than 1 hour](http://www.shiftedup.com/2015/05/07/five-programming-problems-every-software-engineer-should-be-able-to-solve-in-less-than-1-hour)
+- [Top 10 Algorithms for Coding Interview](http://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/)
+- [Top 50 Data Structure Questions from Career Guru](http://career.guru99.com/top-50-data-structure-interview-questions/)
+
+## Coding exercises
+
+- [Common questions and puzzles solved in a number of languages](https://github.com/mre/the-coding-interview)
+
+---
+
+# Phase 3
+
+### AngularJS
+
+- [10 Essential AngularJS Questions](http://www.toptal.com/angular-js/interview-questions)
+- [An AngularJS exam with questions from beginner to expert](https://github.com/gdi2290/ngExam)
+- [29 AngularJS Questions – Can You Answer Them All?](https://www.codementor.io/angularjs/tutorial/angularjs-interview-questions-sample-answers)
+- [AngularJS questions and answers for experienced developers](http://www.web-technology-experts-notes.in/2014/11/angularjs-interview-questions-and-answers-for-experienced.html)
+- [AngularJS Questions which have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of AngularJS](http://www.tutorialspoint.com/angularjs/angularjs_interview_questions.htm)
+- [This article discusses the top 50 Most occurred AngularJS question with answers](http://www.codeproject.com/Articles/891718/AngularJS-Interview-Questions-and-Answers)
+- [Top 25 Angularjs Questions and Quiz](http://career.guru99.com/top-25-angular-js-interview-questions/)
+
+### ReactJS
+
+- [Reddit users share their expectations from ReactJS interview](https://www.reddit.com/r/reactjs/comments/3m5equ/react_what_interview_questions_to_expect/)
+- [This is a first in the series of questions related with ReactJS](http://interview-questions-247.appspot.com/reactjs-interview-questions-set-1)
+- [This quiz intends to test your understanding around ReactJS fundamentals (Set 3)](http://interview-questions-247.appspot.com/reactjs-interview-questions-set-3)
+- [This quiz intends to test your understanding around ReactJS fundamentals](http://interview-questions-247.appspot.com/reactjs-interview-questions-set-2)
+- [5 Essential React.js Questions](https://www.codementor.io/reactjs/tutorial/5-essential-reactjs-interview-questions)
+- [React Questions](https://tylermcginnis.com/react-interview-questions/)
+
+---
+
+# Phase 4
+
+### NodeJS
+
+* [7 Essential Nodejs Questions](http://www.toptal.com/nodejs/interview-questions)
+* [Node.js Questions & Answers from LazyQuestion.com](http://www.lazyquestion.com/interview-questions-and-answer/nodejs)
+* [Node.JS Questions have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of Node.JS](http://www.tutorialspoint.com/nodejs/nodejs_interview_questions.htm)
+* [There are two sides of the table: you either want to hire Nodejs developers or you want to get hired as a Nodejs developer This list helps you navigate a bit in this space, giving you some questions to ask, and a list of questions you should know the answer to](https://blog.risingstack.com/node-js-interview-questions/)
+* [Top 25 Nodejs Questions & Answers from Career Guru](http://career.guru99.com/top-25-interview-questions-on-node-js/)
+
+---
+
+# Phase 5
+
+### Postgres
+
+* [13 PostgreSQL Q&A](http://www.dotnetfunda.com/interviews/cat/208/postgresql)
+* [Frequently Asked Basic PostgreSQL Questions and Answers](http://nazafbtemplate.blogspot.com.by/2014/06/frequently-asked-basic-postgresql.html)
+* [PostgreSQL Preparation Guide](http://www.globalguideline.com/interview_questions/Questions.php?sc=postgresqk_database_](http://www.globalguideline.com/interview_questions/Questions.php?sc=postgresqk_database_))
+* [PostgreSQL Q&A](http://www.coolinterview.com/type.asp?iType=411)
+
+### SQL
+
+* [10 Frequently asked SQL Query Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
+* [18 Essential SQL Questions](http://www.toptal.com/sql/interview-questions)
+* [Common Questions and Answers](http://www.indiabix.com/technical/sql-server-common-questions/)
+* [General Questions and Answers](http://www.indiabix.com/technical/sql-server-general-questions/)
+* [Schema, Questions & Solutions for SQL Exercising](https://github.com/XD-DENG/SQL-exercise)
+* [SQL Questions that have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of SQL](http://www.tutorialspoint.com/sql/sql_interview_questions.htm)
+* [Top 20 SQL Questions with Answers](http://dwbi.org/database/sql/72-top-20-sql-interview-questions-with-answers)
 
 ---
 
