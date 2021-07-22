@@ -562,21 +562,21 @@ Perhaps the biggest issue is the poor browser support XHTML currently enjoys. In
 ##### A7.
 8 total. 4 pairs of tags.
 
-> ```html<HTML>```
+> `<HTML>`
 >
-> ```html<HEAD>```
+> `<HEAD>`
 >
-> ```html<TITLE>Simplest page ever!</TITLE>```
+> `<TITLE>Simplest page ever!</TITLE>`
 >
-> ```html</HEAD>```
+> `</HEAD>`
 >
-> ```html<BODY>```
+> `<BODY>`
 >
-> ```htmlDoesn’t get simpler than this.```
+> `Doesn't get simpler than this.`
 >
-> ```html</BODY>```
+> `</BODY>`
 >
-> ```html</HTML>```
+> `</HTML>`
 >
 
 ##### Q8.
