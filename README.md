@@ -40,7 +40,7 @@ you are not as gung-ho about web design as you thought you were.
 
 * [10 Typical HTML Exercises](https://github.com/sm2774us/full_stack_interview_prep_2021#a-10-typical-html-exercises)
 * [16 Essential HTML5 Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#b-16-essential-html5-questions)
-* [35 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#c-35-helpful-html--html5-questions--answers)
+* [28 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#c-28-helpful-html--html5-questions--answers)
 * [40 important HTML interview questions with answers](https://github.com/sm2774us/full_stack_interview_prep_2021#d-40-important-html-interview-questions-with-answers)
 * [HTML questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#e-html-questions-and-answers-for-freshers-and-experienced-developers)
 * [Top 50 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#f-top-50-html-questions)
@@ -522,27 +522,29 @@ the entire scene needs to be redrawn, including any objects that might have been
 
 ---
 
-#### C: 35 Helpful HTML & HTML5 Questions & Answers
+#### C: 28 Helpful HTML & HTML5 Questions & Answers
 
 ---
 
-##### Q1. What is HTML?
-##### A1.
+##### Beginner HTML Questions
+
+###### Q1. What is HTML?
+###### A1.
 HTML stands for **H**yper**T**ext **M**arkup **L**anguage. It is the dominant markup language for creating websites and anything that can be viewed in a web browser. If you want to get some extra bonus points, you can learn the history of HTML and throw in some obscure facts.
 
-##### Q2. What is the difference between HTML elements and tags?
-##### A2.
+###### Q2. What is the difference between HTML elements and tags?
+###### A2.
 HTML elements communicate to the browser how to render text. When surrounded by angular brackets `<>` they form HTML tags. For the most part, tags come in pairs and surround text.
 
-##### Q3. What is "Semantic HTML?"
-##### A3.
+###### Q3. What is "Semantic HTML?"
+###### A3.
 Semantic HTML is a coding style where the tags embody what the text is meant to convey. 
 In Semantic HTML, tags like `<b></b>` for bold, and `<i></i>` for italic should not be used, reason being they just represent formatting, and provide no indication of meaning or structure.
 The semantically correct thing to do is use `<strong></strong>` and `<em></em>`. 
 These tags will have the same bold and italic effects, while demonstrating meaning and structure (emphasis in this case).
 
-##### Q4. What does `DOCTYPE` mean?
-##### A4.
+###### Q4. What does `DOCTYPE` mean?
+###### A4.
 The term `DOCTYPE` tells the browser which type of HTML is used on a webpage. In turn, the browsers use `DOCTYPE` to determine how to render a page. 
 Failing to use `DOCTYPE` or using a wrong `DOCTYPE` may load your page in Quirks Mode. See example:
 
@@ -550,16 +552,16 @@ Failing to use `DOCTYPE` or using a wrong `DOCTYPE` may load your page in Quirks
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 ```
 
-##### Q5. What's the difference between standards mode and quirks mode?
-##### A5.
+###### Q5. What's the difference between standards mode and quirks mode?
+###### A5.
 Quirks Mode is a default compatibility mode and may be different from browser to browser, which may result to a lack of consistency in appearance from browser to browser.
 
-##### Q6. What are the limitations when serving XHTML pages?
-##### A6.
+###### Q6. What are the limitations when serving XHTML pages?
+###### A6.
 Perhaps the biggest issue is the poor browser support XHTML currently enjoys. Internet Explorer and a number of other user agents cannot parse XHTML as XML. Thus, it is not the extensible language it was promised to be. There are many other issues. Take your pick.
 
-##### Q7. How many HTML tags are should be used for the most simple of web pages?
-##### A7.
+###### Q7. How many HTML tags are should be used for the most simple of web pages?
+###### A7.
 8 total. 4 pairs of tags.
 
 > `<HTML>`
@@ -579,89 +581,109 @@ Perhaps the biggest issue is the poor browser support XHTML currently enjoys. In
 > `</HTML>`
 >
 
-##### Q8.
-##### A8.
+###### Q8. How do you make comments without text being picked up by the browser?
+###### A8.
+Comments are used to explain and clarify code or to prevent code from being recognized by the browser. Comments start with "`*<!--`" and end with " `-->`".
 
-##### Q9.
-##### A9.
+###### Q9. What is the difference between linking to an image, a website, and an email address?
+###### A9.
+To link an image, use `<img>` tags. You need specify the image in quotes using the source attribute, `src` in the opening tag. 
+For hyperlinking, the anchor tag, `<a>`, is used and the link is specified in the `href` attribute. Text to be hyperlinked should be 
+placed between the anchor tags. Little known fact: href stands for "hypertext reference." When linking to an email, the `href` 
+specification will be `"mailto:send@here.com."` See examples below:
 
-##### Q10.
-##### A10.
+```html
+<a href="skilprelaunch2.wpengine.com">Skilledup</a>
+```
 
-##### Q11.
-##### A11.
+```html
+<a href="brad@skilledup.com">Email Me</a>
+```
 
-##### Q12.
-##### A12.
+###### Q10. My hyperlink or image is not displaying correctly, what is wrong with it?
+###### A10.
+It could be any number of things, but the most common mistakes are leaving out a tag bracket or quote missing for `href`, `src`, or `alt` 
+text may be the issue. You should also verify the link itself.
 
-##### Q13.
-##### A13.
+###### Q11. What is the syntax difference between a bulleted list and numbered list?
+###### A11.
+Bulleted lists use the `<ul>` tag, which stands for "unordered," whereas `<ol>` is used to create an ordered list.
 
-##### Q14.
-##### A14.
+###### Q12. What is the difference between `<div>` and `<frame>`?
+###### A12.
+A `<div>` is a generic container element for grouping and styling, whereas a `<frame>` creates divisions within a web page and 
+should be used within the `<frameset>` tag. The use of `<frame>` and `<frameset>` are no longer popular and are now being replaced 
+with the more flexible `<iframe>`, which has become popular for embedding foreign elements (ie. Youtube videos) into a page.
 
-##### Q15.
-##### A15.
+##### HTML5 Interview Questions
 
-##### Q16.
-##### A16.
+###### Q13. What is the difference between the application model of HTML and HTML5?
+###### A13.
+Trick question, there is no difference. HTML5 is a continuum of HTML and just a souped up version of the original HTML. There has been no major paradigm shift.
 
-##### Q17.
-##### A17.
+###### Q14. Ok, what’s the real difference between HTML and HTML5?
+###### A14.
+There are many. From a broader perspective, HTML was a simple language for laying out text and images on a webpage, whereas HTML5 can be viewed as an application development platform that does what HTML does that and more, including better support for audio, video, and interactive graphics. It has a number of new elements, supports offline data storage for applications, and has more robust exchange protocols. Thus, proprietary plug-in technologies like Adobe Flash, Microsoft Silverlight, Apache Pivot, and Sun JavaFX are no longer needed, because browsers can now process these elements without additional requirements.
 
-##### Q18.
-##### A18.
+###### Q15. What is the new `DOCTYPE`?
+###### A15.
+Instead of typing out a ridiculously long `DOCTYPE` statement to tell the browser how to render your webpage, this long line of code has been truncated to `<!doctype html>`.
 
-##### Q19.
-##### A19.
+###### Q16. What are some new HTML5 markup elements?
+###### A16.
+There are several: `<article>`, `<aside>`, `<bdi>`, `<command>`, `<details>`, `<figure>`, `<figcaption>`, `<summary>`, `<header>`, `<footer>`, `<hgroup>`, `<mark>`, `<meter>`, `<nav>`, `<progress>`, `<ruby>`, `<rt>`, `<section>`, `<time>`, and `<wpr>`.
 
-##### Q20.
-##### A20.
+###### Q17. What elements have disappeared?
+###### A17.
+As mentioned above, `<frame>` and `<frameset>` have been eliminated. Other elements that are no longer supported include: `<noframe>`, `<applet>`, `<bigcenter>` and `<basefront>`.
 
-##### Q21.
-##### A11.
+###### Q18. What are the new media-related elements in HTML5?
+###### A18.
+HTML5 has strong support for media. There are now special `<audio>` and `<video>` tags. There are additional A/V support tags as well: `<embed>` is a container for 3rd party applications. `<track>` is for adding text tracks to media. `<source>` is useful for A/V media from multiple sources.
 
-##### Q22.
-##### A22.
+###### Q19. What are the new image elements in HTML5?
+###### A19.
+Canvas and WebGL. `<Canvas>` is a new element that acts as a container for graphical elements like images and graphics. Coupled with JavaScript, it supports 2D graphics. WebGL stands for Web Graphics Language, a free cross-platform API that is used for generating 3D graphics in web browsers.
 
-##### Q23.
-##### A23.
+###### Q20. What is the difference between SVG and `<Canvas>`?
+###### A20.
+`<Canvas>` is an element that manipulates two-dimensional (2D) pixels while Scalable Vector Graphics works in 2D and three-dimensional (3D) vectors. Essentially, `<Canvas>`is to SVG as Photoshop is to Illustrator.
 
-##### Q24.
-##### A24.
+###### Q21. What are some new input attributes in HTML5?
+###### A11.
+There are many new form elements including: `datalist`, `datetime`, `output`, `keygen`, `date`, `month`, `week`, `time`, `number`, `range`, `email`, and `url`.
 
-##### Q25.
-##### A25.
+###### Q22. What are `data`**-** attributes good for?
+###### A22.
+The HTML5 `data`**-** attribute is a new addition that assigns custom data to an element. It was built to store sensitive or private data that is exclusive to a page or application, for which there are no other matching attributes or elements.
 
-##### Q26.
-##### A26.
+###### Q23. What is the difference between HTML5 interaction in Sencha and Twitter/Bootstrap?
+###### A23.
+Sencha and Twitter/Bootstrap are both HTML development frameworks that integrate HTML5, CSS3, and JavaScript. The major difference is that in Sencha, the three languages are all comingled together in code, whereas in Bootstrap, HTML and CSS and decoupled.
 
-##### Q27.
-##### A27.
+###### Q24. What purpose do Work Workers serve and what are some of their benefits?
+###### A24.
+Web Workers are background scripts that do not interfere with the user interface or user interactions on a webpage, allowing HTML to render uninterrupted while JavaScript works in the background.
 
-##### Q28.
-##### A28.
+###### Q25. Describe the difference between cookies, `sessionStorage`, and `localStorage`.
+###### A25.
+Cookies are small text files that websites place in a browser for tracking or login purposes. Meanwhile, `localStorage` and `sessionStorage` are new objects, both of which are storage specifications but vary in scope and duration. Of the two, `localStorage` is permanent and website-specific whereas `sessionStorage` only lasts as long as the duration of the longest open tab.
 
-##### Q29.
-##### A29.
+###### Q26. What are some of the major new API’s that come standard with HTML5?
+###### A26.
+To name a few: Media API, Text Track API, Application Cache API, User Interaction, Data Transfer API, Command API, Constraint Validation API, and the History API.
 
-##### Q30.
-##### A30.
+###### Q27. What is the difference in caching between HTML5 and the old HTML?
+###### A27.
+An important feature of HTML5 is the Application Cache. It creates an offline version of a web application. and stores website files such as HTML files, CSS, images, and JavaScript, locally. It is a feature that speeds up site performance.
 
-##### Q31.
-##### A31.
+###### Q28. Did you remember your portfolio?
+###### A28.
+If you have past experience, all eyes will be on your work portfolio.
 
-##### Q32.
-##### A32.
-
-##### Q33.
-##### A33.
-
-##### Q34.
-##### A34.
-
-##### Q35.
-##### A35.
+**Tips:**
+---
+Whether you learned your web development skills through online self-study or through a traditional classroom, chances are, you’re at least half-ready  for an interview, especially if you were diligent in your studies. If that’s the case, these HTML5 interview questions will serve as a great refresher. If not, then they are a good gauge of your employment prospects unless you really prepare for the interview. Either way, relax and don’t sound like a robot spitting out recorded answers. Over-rehearsing won’t land you the job but it may get you an interview horror story. Remember that one of the most important things you can do is to bring a portfolio of past web work examples. Beyond knowing the ins and outs of HTML, it is the one thing that can truly demonstrate the quality of your work, and it can open the door to many web development jobs. Good luck on your interview!
 
 ---
 
@@ -669,8 +691,35 @@ Perhaps the biggest issue is the poor browser support XHTML currently enjoys. In
 
 ---
 
-##### Q1.
+##### Q1. What is the relationship between SGML, HTML, XML and XHTML ?
 ##### A1.
+SGML (**S**tandard **G**eneralized **M**arkup **L**anguage) is a standard which tells how to specify 
+document markup. It’s only a Meta language which describes how a document markup should 
+be. HTML is a markup language which is described using SGML. 
+So by SGML they created DTD which the HTML refers and needs to adhere to the same. So you 
+will always find `DOCTYPE` attribute at the top of HTML page which defines which `DTD` is 
+used for parsing purpose.
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+```
+
+Now parsing SGML was a pain so they created XML to make things better. XML uses SGML. 
+For example in SGML you have to start and end tags but in XML you can have closing tags 
+which close automatically (`</customer>`).
+
+XHTML was created from XML which was used in HTML 4.0. So for example in SGML 
+derived HTML `</br>` is not valid but in XHTML it’s valid. You can refer XML DTD as shown 
+in the below code snippet.
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+```
+
+![SGML-HTML-XML-and-XHTML-Relationship-image](assets/SGML-HTML-XML-and-XHTML-Relationship.png)
+
+In short SGML is the parent of every one. Older HTML utilizes SGML and HTML 4.0 uses 
+XHTML which derived from XML.
 
 ##### Q2.
 ##### A2.
