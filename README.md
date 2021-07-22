@@ -721,47 +721,363 @@ in the below code snippet.
 In short SGML is the parent of every one. Older HTML utilizes SGML and HTML 4.0 uses 
 XHTML which derived from XML.
 
-##### Q2.
+##### Q2. What is HTML 5
 ##### A2.
+HTML 5 is a new standard for HTML whose main target is to deliver everything without need to 
+any additional plugins like flash, Silverlight etc. It has everything from animations, videos, rich 
+GUI etc.
+HTML5 is cooperation output between World Wide Web Consortium (W3C) and the Web 
+Hypertext Application Technology Working Group (WHATWG).
 
-##### Q3.
+##### Q3. In HTML 5 we do not need DTD why?
 ##### A3.
+HTML 5 does not use SGML or XHTML it’s completely a new thing so you do not need to refer 
+DTD. For HTML 5 you just need to put the below doctype code which makes the browser 
+identify that this is a HTML 5 document.
 
-##### Q4.
+```html
+<!DOCTYPE html
+```
+
+##### Q4. If I do not put <! DOCTYPE html> will HTML 5 work?
 ##### A4.
+No, browser will not be able to identify that it’s a HTML document and HTML 5 tags will not 
+function properly.
 
-##### Q5.
+##### Q5. Which browsers support HTML 5?
 ##### A5.
+Almost all browsers i.e. Safari, Chrome, Firefox, Opera, Internet Explorer support HTML 5.
 
-##### Q6.
+##### Q6. How is the page structure of HTML 5 different from HTML 4 or previous HTML?
 ##### A6.
+A typical web page has headers, footers, navigation, central area and side bars. Now if we want 
+to represent the same in HTML 4 with proper names to the HTML section we would probably 
+use a DIV tag. 
+But in HTML 5 they have made it more clear by creating element names for those sections which
+makes your HTML more readable.
 
-##### Q7.
+![HTML-4_layout_vs_HTML-5_layout-image](./assets/HTML-4_layout_vs_HTML-5_layout.PNG)
+
+Below are more details of the HTML 5 elements which form the page structure.
+ * `<header>`: Represents header data of HTML.
+ * `<footer>`: Footer section of the page.
+ * `<nav>`: Navigation elements in the page.
+ * `<article>`: Self-contained content.
+ * `<section>`: Used inside article to define sections or group content in to sections.
+ * `<aside>`: Represent side bar contents of a page.
+
+##### Q7. What is datalist in HTML 5?
 ##### A7.
+Datalist element in HTML 5 helps to provide autocomplete feature in a textbox as shown below.
 
-##### Q8.
+![HTML5-Datalist-element-image](./assets/HTML5-Datalist-element.PNG)
+
+Below is the HTML code for DataList feature:-
+```html
+<input list="Country">
+<datalist id="Country">
+ <option value="India">
+ <option value="Italy"> <option value="Iran">
+ <option value="Israel">
+ <option value="Indonesia">
+</datalist>
+```
+
+##### Q8. What are the different new form element types in HTML 5?
 ##### A8.
+There are 10 important new form elements introduced in HTML 5:-
 
-##### Q9.
+1. Color.
+2. Date
+3. Datetime-local
+4. Email 
+5. Time 
+6. Url
+7. Range
+8. Telephone 
+9. Number
+10. Search
+
+Let’s understand these elements step by step.
+
+If you want to show color picker dialog box.
+
+```html
+<input type="color" name="favcolor">
+```
+
+![HTML-5-color-picker-dialog-box-image](./assets/HTML-5-color-picker-dialog-box.PNG)
+
+If you want to show calendar dialog box.
+
+```html
+<input type="date" name="bday">
+```
+
+![HTML-5-calendar-dialog-box-image](./assets/HTML-5-calendar-dialog-box.PNG)
+
+If you want to show calendar with local time.
+
+```html
+<input type="datetime-local" name="bdaytime">
+```
+
+![HTML-5-calendar-dialog-box-with-localtime-image](./assets/HTML-5-calendar-dialog-box-with-localtime.PNG)
+
+If you want to create a HTML text with email validation we can set the type as "email".
+
+```html
+<input type="email" name="email">
+```
+
+![HTML-5-email-validation-image](./assets/HTML-5-email-validation.PNG)
+
+For URL validation set the type as "url" as shown in the below HTML code.
+
+```html
+<input type="url" name="sitename">
+```
+
+![HTML-5-URL-validation-image](./assets/HTML-5-URL-validation.PNG)
+
+For URL validation set the type as "url" as shown in the below HTML code.
+If you want to display textbox with number range you can set type to number.
+
+```html
+<input type="number" name="quantity" min="1" max="5">
+```
+
+![HTML-5-number-range-textbox-image](./assets/HTML-5-number-range-textbox.PNG)
+
+If you want to display a range control you can use type as range.
+
+```html
+<input type="range" min="0" max="10" step="2" value="6">
+```
+
+![HTML-5-range-control-image](./assets/HTML-5-range-control.PNG)
+
+Want to make text box as search engine box.
+
+```html
+<input type="search" name="googleengine">
+```
+
+Want to only take time input.
+
+```html
+<input type="time" name="usr_time">
+```
+
+If you want to make text box to accept telephone numbers.
+
+```html
+<input type="tel" name="mytel">
+```
+
+##### Q9. What is output element in HTML 5
 ##### A9.
+Output element is needed when you need calculation from two inputs to be summarized in to a 
+label. For instance you have two textboxes ( see the below figure) and you want to add numbers 
+from these textboxes and send them to a label.
 
-##### Q10.
+[HTML-5-output-element-image](./assets/HTML-5-output-element.PNG)
+
+Below goes the code of how to use output element with HTML 5.
+
+```html
+<form onsubmit="return false" oninput="o.value = parseInt(a.value) + 
+parseInt(b.value)">
+ <input name="a" type="number"> +
+ <input name="b" type="number"> =
+ <output name="o"></output>
+</form>
+```
+
+You can also replace "parseInt" with "valueAsNumber" for simplicity. You can also use "for" in 
+the output element for more readability.
+
+```html
+<output name="o" for="a b"></output>
+```
+
+##### Q10. What is SVG?
 ##### A10.
+SVG stands for **S**calable **V**ector **G**raphics. It’s a text based graphic language which draws images 
+using text, lines, dots etc. This makes it lightweight and renders faster.
 
-##### Q11.
+##### Q11. Can we see a simple example of SVG using HTML 5?
 ##### A11.
+Let’s say we want to display the below simple line using HTML 5 SVG.
 
-##### Q12.
+![HTML-5-SVG-Simple-Line-Example-image](./assets/HTML-5-SVG-Simple-Line-Example.PNG)
+
+Below is how the code of HTML 5. You can see the SVG tag which encloses the polygon tag for 
+displaying the star image.
+
+```html
+<svg id="svgelem" height="200" xmlns="http://www.w3.org/2000/svg">
+ <line x1="0" y1="0" x2="200" y2="100"
+ style="stroke:red;stroke-width:2"/>
+</svg>
+```
+
+##### Q12. What is canvas in HTML 5?
 ##### A12.
+Canvas is an HTML area on which you can draw graphics.
 
-##### Q13.
+##### Q13. So how can we draw a simple line on Canvas?
 ##### A13.
+* Define the Canvas area.
+* Get access to canvas context area.
+* Draw the graphic.
 
-##### Q14.
+**Define the canvas area**
+
+So to define canvas area you need to use the below HTML code. This defines the area on which you can draw.
+
+```html
+<canvas id="mycanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
+```
+
+**Get access to canvas area**
+
+To draw on the canvas area we need to first get reference of the context section. Below is the code for canvas section.
+
+```JavaScript
+var c=document.getElementById("mycanvas");
+var ctx=c.getContext("2d");
+```
+
+**Draw the graphic**
+
+Now once you have access to the context object we can start drawing on the context. So first call the "move" method and start from a point, 
+use line method and draw the line and then apply stroke over it.
+
+```JavaScript
+ctx.moveTo(10,10);
+ctx.lineTo(200,100);
+ctx.stroke();
+```
+
+Below is the complete code.
+
+```JavaScript
+<body onload="DrawMe();">
+<canvas id="mycanvas" width="600" height="500" style="border:1px solid 
+#000000;"></canvas>
+</body>
+<script>
+function DrawMe()
+{
+  var c=document.getElementById("mycanvas");
+  var ctx=c.getContext("2d");
+  ctx.moveTo(10,10);
+  ctx.lineTo(200,100);
+  ctx.stroke();
+}
+```
+
+You should get the below output.
+
+![HTML-5-Canvas-Simple-Line-Example-image](./assets/HTML-5-Canvas-Simple-Line-Example.PNG)
+
+
+##### Q14. What is the difference between Canvas and SVG graphics?
+> Note :- If you see the previous two questions both canvas and SVG can draw 
+>
+> graphics on the browser. So in this question interviewer wants to know when 
+>
+> will you use what.
+>
+
 ##### A14.
 
-##### Q15.
+| SVG                                                       | Canvas                                                 |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| Here’s it’s like draw and remember. In other words any    | Canvas is like draw and forget. Once something is      |  
+| shape drawn by using SVG can be remembered and            | drawn you cannot access that pixel and manipulate it.  |
+| manipulated and browser can render it again.              |                                                        |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| SVG is good for creating graphics like CAD software’s     | Canvas is good for draw and forget scenarios like      |
+| where once something is drawn the user wants to           | animation and games.                                   |
+| manipulate it.                                            |                                                        |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| This is slow as it needs to remember the co-ordinates for | This is faster as there is no intention of remembering |
+| later manipulations.                                      | things later.                                          |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| We can have event handler associated with the drawing     | Here we cannot associate event handlers with drawing   |
+| object.                                                   | objects as we do not have reference of them.           |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| Resolution independent.                                   | Resolution dependent.                                  |
+
+
+##### Q15. How to draw rectangle using Canvas and SVG using HTML 5 ?
 ##### A15.
+HTML 5 code Rectangle code using SVG.
+```html5
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <rect width="300" height="100"
+ style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/>
+</svg>
+```
+
+HTML 5 Rectangle code using canvas.
+```JavaScript
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.rect(20,20,150,100);
+ctx.stroke();
+```
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <circle cx="100" cy="50" r="40" stroke="black"
+ stroke-width="2" fill="red"/>
+</svg
+```
+
+```JavaScript
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
+var radius = 70;
+context.beginPath();
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+context.fillStyle = 'green';
+context.fill();
+context.lineWidth = 5;
+context.strokeStyle = '#003300';
+context.stroke();
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<body onload="DrawMe();">
+<svg width="500" height="100">
+ <circle id="circle1" cx="20" cy="20" r="10"
+ style="stroke: none; fill: #ff0000;"/>
+</svg>
+</body>
+<script>
+var timerFunction = setInterval(DrawMe, 20);
+alert("ddd");
+function DrawMe()
+{
+var circle = document.getElementById("circle1");
+var x = circle.getAttribute("cx");
+var newX = 2 + parseInt(x);
+if(newX > 500) 
+{
+ newX = 20;
+}
+ circle.setAttribute("cx", newX);
+}
+</script>
+</html>
+```
 
 ##### Q16.
 ##### A16.
