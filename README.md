@@ -2,6 +2,37 @@ Here is a curated list of resources, question and exercises to go through that c
 
 The contents have been broken down into **4** phases, covering the basics from HTML/CSS to APIs. It would be best to cover these phases in chronological order to gain a broad understanding from the basics to the more advanced topics.
 
+# Phase 0
+
+### A) Ice Breaker Questions
+
+#### General Questions
+Believe it or not, some people find that the most difficult part of the interview is the icebreaker portion that involves small talk 
+and requires some clever improvisation on your part. You can prepare by knowing some of the questions potential employers might ask 
+during this interview phase. Come up with a good story for each of the questions. If you don’t have an answer for these, then maybe 
+you are not as gung-ho about web design as you thought you were.
+
+1. Have you learned something new or interesting lately?
+   * Make sure you know all the relevant news and blogs. You should be reading them regardless, but doing so on a daily basis during your job search is important. Be ready to talk casually and fluently about the latest web trends.
+
+2. Why did you get into coding, programming, etc.?
+   * "Because I can make good $," "I don’t like to dress up or shave," and "because I loved the movie Hackers," are not good enough answers. Well ... a comment about Hackers might fly but make sure you have a real backstory that describes your "Aha!" moment.
+   
+3. What is your preferred development environment?
+   * This is your chance to talk shop and demonstrate some industry knowledge. Be prepared to talk about your favorite editor, browser, plug-ins, operating system, and other tools. Freshen up on your lingo.
+
+4. What is the coolest thing you ever coded? Do you have any personal projects you are working on?
+   * These two questions are interchangeable. Any developer worth his weight had to practice somewhere or on something before they landed their first gig. If not, how did you get this interview anyway?! Review your past experiences, and even if they were boring to you, figure out a new frame of reference that demonstrates passion and a zest for learning.
+
+### B) General Website Optimization Questions
+1. How do you optimize a website’s assets?
+   * There are a number of answers to this question: File concatenation, file compression, CDN Hosting, offloading assets, re-organizing and refining code, etc. Have a few ready.
+
+2. What are three ways to reduce page load time?
+   * Again there are many answers here: Reduce image sizes, remove unnecessary widgets, HTTP compression, put CSS at the top and script references at the bottom or in external files, reduce lookups, minimize redirects, caching, etc.
+
+3. What kind of things must you be wary of when design or developing for multilingual sites?
+   * Another problem with many solutions: setting the default language, using Unicode encoding, using the 'lang' attribute, being aware of standard font sizes and text direction, and language word length (may affect layout).
 
 # Phase 1
 
@@ -17,7 +48,7 @@ The contents have been broken down into **4** phases, covering the basics from H
 
 
 
-### CSS
+### B) CSS
 
 - [25 helpful CSS questions and answers](http://www.skilledup.com/articles/25-css-interview-questions-answers)
 - [CSS  questions and answers for freshers and experienced developers](http://www.careerride.com/Interview-Questions-CSS.aspx)
@@ -47,7 +78,7 @@ Is it valid? If not, can you explain why?
 
 ##### A1.
 The markup uses [the picture element](https://www.w3.org/TR/html-picture-element/), which is a pretty new addition to the specification.
-The code is all valid apart from the last image specified in the **`srcset`** attribute; **`320y`** isn’t a valid value.
+The code is all valid apart from the last image specified in the **`srcset`** attribute; **`320y`** isn't a valid value.
 If the **`y`** is replaced with a **`w`**, it becomes valid though.
 
 ##### Q2. The `main` element
@@ -60,8 +91,8 @@ The W3C specification [describes it](https://www.w3.org/TR/html51/grouping-conte
 the content that describes the main topic of a page or is the central functionality of an application.
 The specification also states that a document must not include more than one **`main`** element.
 
-The WHATWG specification doesn’t assign any semantic value to the **`main`** element and [describes it](https://html.spec.whatwg.org/multipage/semantics.html#the-main-element)
-as a container for the dominant contents of another element. Also, according to WHATWG, you don’t have a limit in the number of times 
+The WHATWG specification doesn't assign any semantic value to the **`main`** element and [describes it](https://html.spec.whatwg.org/multipage/semantics.html#the-main-element)
+as a container for the dominant contents of another element. Also, according to WHATWG, you don't have a limit in the number of times 
 you can use the **`main`** element in a single document. If you have multiple **`article`** elements on a page, you may want to markup the 
 **`main`** content of each **`article`** with a separate **`main`** element.
 
@@ -124,7 +155,7 @@ The code can be rewritten as follows:
 ```
 
 To improve the accessibility, the main navigation list has been wrapped with a **`nav`** element.
-To improve the accessibility in older technologies that don’t support the new semantic elements,
+To improve the accessibility in older technologies that don't support the new semantic elements,
 the role of **`header`**, **`navigation`**, **`main`**, **`article`**, and **`contentinfo`** have been added 
 to the **`header`**, **`nav`**, **`main`**, **`article`**, and **`footer`** elements respectively.
 
@@ -133,11 +164,11 @@ Then, an explicit **`label`** element has been added to give context for the **`
 the **`input`** through the use of the **`for`** attribute.
 
 ##### Q4. The **`small`** element
-Describe when it’s appropriate to use the **`small`** element and provide an example.
+Describe when it's appropriate to use the **`small`** element and provide an example.
 
 ##### A4.
 In HTML 4.01 the **`small`** element was a presentational element to mark up smaller text. [In HTML5](https://www.w3.org/TR/html5/text-level-semantics.html#the-small-element)
-it should be used semantically to represent legal disclaimers, caveats, and so on. The text may well be "small", but this isn’t required.
+it should be used semantically to represent legal disclaimers, caveats, and so on. The text may well be "small", but this isn't required.
 
 An example of its use is shown below:
 
@@ -152,7 +183,7 @@ but it has since been removed from the specs. Can you describe why **`hgroup`** 
 
 ##### A5.
 The **`hgroup`** element was introduced to group multiple heading elements (**`h1`**–**`h6`**) in order to avoid the creation of an 
-unintended sublevel in the hierarchy. To understand what problem it tried to address, let’s consider the following markup:
+unintended sublevel in the hierarchy. To understand what problem it tried to address, let's consider the following markup:
 
 ```html
 <article>
@@ -197,7 +228,7 @@ Does an empty value affect accessibility in any way?
 
 ##### A6.
 The [alt attribute](https://www.w3.org/TR/html5/embedded-content-0.html#alt) is mandatory on **`img`** elements but its value can be empty 
-(i.e. **`alt=""`**). An empty value is recommended when the image shown is used for decorative purposes only and therefore isn’t part of 
+(i.e. **`alt=""`**). An empty value is recommended when the image shown is used for decorative purposes only and therefore isn't part of 
 the content of the page. With regards to accessibility, if the **`alt`** attribute is empty, screen readers will ignore the image. 
 This is highly recommended because using a value of something like "Content separator" will only disturb the user when this text is spoken.
 
@@ -205,7 +236,7 @@ This is highly recommended because using a value of something like "Content sepa
 Is it possible to express a date range using a single **`time`** element?
 
 ##### A7.
-No, it isn’t possible. The information can be expressed using two [time elements](https://www.w3.org/TR/html5/text-level-semantics.html#the-time-element) though.
+No, it isn't possible. The information can be expressed using two [time elements](https://www.w3.org/TR/html5/text-level-semantics.html#the-time-element) though.
 For example to describe a time interval ranging from November 6, 2014 to November 9, 2014, a developer can write:
 
 ```html
@@ -214,11 +245,11 @@ For example to describe a time interval ranging from November 6, 2014 to Novembe
 ```
 
 ##### Q8. **`meter`** and **`progress`**
-What’s the difference between the **`meter`** element and the **`progress`** element?
+What's the difference between the **`meter`** element and the **`progress`** element?
 
 ##### A8.
 The [meter element](https://www.w3.org/TR/html5/forms.html#the-meter-element) represents a scalar measurement within a _known_ range,
-or a fractional value. This element isn’t a good fit to measure something like external temperature because it doesn’t have a fixed range.
+or a fractional value. This element isn't a good fit to measure something like external temperature because it doesn't have a fixed range.
 However, **`meter`** can be used to describe the occupied memory of a hard disk.
 
 The [progress element](https://www.w3.org/TR/html5/forms.html#the-progress-element) is used to show the completion progress of a task. Unlike the **`meter`** element, the progress described by 
@@ -346,7 +377,7 @@ For example, an HTML 4.01 document would use the `<meta>` tag as follows:
 </html>
 ```
 
-##### Q6. Discuss the differences between an HTML specification and a browser’s implementation thereof.
+##### Q6. Discuss the differences between an HTML specification and a browser's implementation thereof.
 
 ##### A6.
 HTML specifications such as HTML5 define a set of rules that a document must adhere to in order to be "valid" according to that specification.
@@ -366,15 +397,15 @@ Thus, many decisions about how to handle malformed documents are left up to the 
 
 ##### A7.
 The `<header>` element is used to contain introductory and navigational information about a section of the page. 
-This can include the section heading, the author’s name, time and date of publication, table of contents, or other navigational information.
+This can include the section heading, the author's name, time and date of publication, table of contents, or other navigational information.
 
 The `<article>` element is meant to house a self-contained composition that can logically be independently recreated outside of the page 
-without losing it’s meaining. Individual blog posts or news stories are good examples.
+without losing it's meaining. Individual blog posts or news stories are good examples.
 
 The `<section>` element is a flexible container for holding content that shares a common informational theme or purpose.
 
 The `<footer>` element is used to hold information that should appear at the end of a section of content and contain additional 
-information about the section. Author’s name, copyright information, and related links are typical examples of such content.
+information about the section. Author's name, copyright information, and related links are typical examples of such content.
 
 ##### Q8. Can a `<section>` contain `<article>` elements? Can an `<article>` contain `<section>` elements? Provide usage examples.
 
@@ -495,26 +526,58 @@ the entire scene needs to be redrawn, including any objects that might have been
 
 ---
 
-##### Q1.
+##### Q1. What is HTML?
 ##### A1.
+HTML stands for **H**yper**T**ext **M**arkup **L**anguage. It is the dominant markup language for creating websites and anything that can be viewed in a web browser. If you want to get some extra bonus points, you can learn the history of HTML and throw in some obscure facts.
 
-##### Q2.
+##### Q2. What is the difference between HTML elements and tags?
 ##### A2.
+HTML elements communicate to the browser how to render text. When surrounded by angular brackets `<>` they form HTML tags. For the most part, tags come in pairs and surround text.
 
-##### Q3.
+##### Q3. What is "Semantic HTML?"
 ##### A3.
+Semantic HTML is a coding style where the tags embody what the text is meant to convey. 
+In Semantic HTML, tags like `<b></b>` for bold, and `<i></i>` for italic should not be used, reason being they just represent formatting, and provide no indication of meaning or structure.
+The semantically correct thing to do is use `<strong></strong>` and `<em></em>`. 
+These tags will have the same bold and italic effects, while demonstrating meaning and structure (emphasis in this case).
 
-##### Q4.
+##### Q4. What does `DOCTYPE` mean?
 ##### A4.
+The term `DOCTYPE` tells the browser which type of HTML is used on a webpage. In turn, the browsers use `DOCTYPE` to determine how to render a page. 
+Failing to use `DOCTYPE` or using a wrong `DOCTYPE` may load your page in Quirks Mode. See example:
 
-##### Q5.
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+```
+
+##### Q5. What's the difference between standards mode and quirks mode?
 ##### A5.
+Quirks Mode is a default compatibility mode and may be different from browser to browser, which may result to a lack of consistency in appearance from browser to browser.
 
-##### Q6.
+##### Q6. What are the limitations when serving XHTML pages?
 ##### A6.
+Perhaps the biggest issue is the poor browser support XHTML currently enjoys. Internet Explorer and a number of other user agents cannot parse XHTML as XML. Thus, it is not the extensible language it was promised to be. There are many other issues. Take your pick.
 
-##### Q7.
+##### Q7. How many HTML tags are should be used for the most simple of web pages?
 ##### A7.
+8 total. 4 pairs of tags.
+
+> ```html<HTML>```
+>
+> ```html<HEAD>```
+>
+> ```html<TITLE>Simplest page ever!</TITLE>```
+>
+> ```html</HEAD>```
+>
+> ```html<BODY>```
+>
+> ```htmlDoesn’t get simpler than this.```
+>
+> ```html</BODY>```
+>
+> ```html</HTML>```
+>
 
 ##### Q8.
 ##### A8.
