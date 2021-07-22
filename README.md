@@ -9,14 +9,14 @@ The contents have been broken down into **4** phases, covering the basics from H
 #### General Questions
 Believe it or not, some people find that the most difficult part of the interview is the icebreaker portion that involves small talk 
 and requires some clever improvisation on your part. You can prepare by knowing some of the questions potential employers might ask 
-during this interview phase. Come up with a good story for each of the questions. If you don’t have an answer for these, then maybe 
+during this interview phase. Come up with a good story for each of the questions. If you don't have an answer for these, then maybe 
 you are not as gung-ho about web design as you thought you were.
 
 1. Have you learned something new or interesting lately?
    * Make sure you know all the relevant news and blogs. You should be reading them regardless, but doing so on a daily basis during your job search is important. Be ready to talk casually and fluently about the latest web trends.
 
 2. Why did you get into coding, programming, etc.?
-   * "Because I can make good $," "I don’t like to dress up or shave," and "because I loved the movie Hackers," are not good enough answers. Well ... a comment about Hackers might fly but make sure you have a real backstory that describes your "Aha!" moment.
+   * "Because I can make good $," "I don't like to dress up or shave," and "because I loved the movie Hackers," are not good enough answers. Well ... a comment about Hackers might fly but make sure you have a real backstory that describes your "Aha!" moment.
    
 3. What is your preferred development environment?
    * This is your chance to talk shop and demonstrate some industry knowledge. Be prepared to talk about your favorite editor, browser, plug-ins, operating system, and other tools. Freshen up on your lingo.
@@ -25,7 +25,7 @@ you are not as gung-ho about web design as you thought you were.
    * These two questions are interchangeable. Any developer worth his weight had to practice somewhere or on something before they landed their first gig. If not, how did you get this interview anyway?! Review your past experiences, and even if they were boring to you, figure out a new frame of reference that demonstrates passion and a zest for learning.
 
 ### B) General Website Optimization Questions
-1. How do you optimize a website’s assets?
+1. How do you optimize a website's assets?
    * There are a number of answers to this question: File concatenation, file compression, CDN Hosting, offloading assets, re-organizing and refining code, etc. Have a few ready.
 
 2. What are three ways to reduce page load time?
@@ -621,7 +621,7 @@ with the more flexible `<iframe>`, which has become popular for embedding foreig
 ###### A13.
 Trick question, there is no difference. HTML5 is a continuum of HTML and just a souped up version of the original HTML. There has been no major paradigm shift.
 
-###### Q14. Ok, what’s the real difference between HTML and HTML5?
+###### Q14. Ok, what's the real difference between HTML and HTML5?
 ###### A14.
 There are many. From a broader perspective, HTML was a simple language for laying out text and images on a webpage, whereas HTML5 can be viewed as an application development platform that does what HTML does that and more, including better support for audio, video, and interactive graphics. It has a number of new elements, supports offline data storage for applications, and has more robust exchange protocols. Thus, proprietary plug-in technologies like Adobe Flash, Microsoft Silverlight, Apache Pivot, and Sun JavaFX are no longer needed, because browsers can now process these elements without additional requirements.
 
@@ -669,7 +669,7 @@ Web Workers are background scripts that do not interfere with the user interface
 ###### A25.
 Cookies are small text files that websites place in a browser for tracking or login purposes. Meanwhile, `localStorage` and `sessionStorage` are new objects, both of which are storage specifications but vary in scope and duration. Of the two, `localStorage` is permanent and website-specific whereas `sessionStorage` only lasts as long as the duration of the longest open tab.
 
-###### Q26. What are some of the major new API’s that come standard with HTML5?
+###### Q26. What are some of the major new API's that come standard with HTML5?
 ###### A26.
 To name a few: Media API, Text Track API, Application Cache API, User Interaction, Data Transfer API, Command API, Constraint Validation API, and the History API.
 
@@ -683,7 +683,7 @@ If you have past experience, all eyes will be on your work portfolio.
 
 **Tips:**
 ---
-Whether you learned your web development skills through online self-study or through a traditional classroom, chances are, you’re at least half-ready  for an interview, especially if you were diligent in your studies. If that’s the case, these HTML5 interview questions will serve as a great refresher. If not, then they are a good gauge of your employment prospects unless you really prepare for the interview. Either way, relax and don’t sound like a robot spitting out recorded answers. Over-rehearsing won’t land you the job but it may get you an interview horror story. Remember that one of the most important things you can do is to bring a portfolio of past web work examples. Beyond knowing the ins and outs of HTML, it is the one thing that can truly demonstrate the quality of your work, and it can open the door to many web development jobs. Good luck on your interview!
+Whether you learned your web development skills through online self-study or through a traditional classroom, chances are, you're at least half-ready  for an interview, especially if you were diligent in your studies. If that's the case, these HTML5 interview questions will serve as a great refresher. If not, then they are a good gauge of your employment prospects unless you really prepare for the interview. Either way, relax and don't sound like a robot spitting out recorded answers. Over-rehearsing won't land you the job but it may get you an interview horror story. Remember that one of the most important things you can do is to bring a portfolio of past web work examples. Beyond knowing the ins and outs of HTML, it is the one thing that can truly demonstrate the quality of your work, and it can open the door to many web development jobs. Good luck on your interview!
 
 ---
 
@@ -694,7 +694,7 @@ Whether you learned your web development skills through online self-study or thr
 ##### Q1. What is the relationship between SGML, HTML, XML and XHTML ?
 ##### A1.
 SGML (**S**tandard **G**eneralized **M**arkup **L**anguage) is a standard which tells how to specify 
-document markup. It’s only a Meta language which describes how a document markup should 
+document markup. It's only a Meta language which describes how a document markup should 
 be. HTML is a markup language which is described using SGML. 
 So by SGML they created DTD which the HTML refers and needs to adhere to the same. So you 
 will always find `DOCTYPE` attribute at the top of HTML page which defines which `DTD` is 
@@ -709,7 +709,7 @@ For example in SGML you have to start and end tags but in XML you can have closi
 which close automatically (`</customer>`).
 
 XHTML was created from XML which was used in HTML 4.0. So for example in SGML 
-derived HTML `</br>` is not valid but in XHTML it’s valid. You can refer XML DTD as shown 
+derived HTML `</br>` is not valid but in XHTML it's valid. You can refer XML DTD as shown 
 in the below code snippet.
 
 ```html
@@ -731,7 +731,7 @@ Hypertext Application Technology Working Group (WHATWG).
 
 ##### Q3. In HTML 5 we do not need DTD why?
 ##### A3.
-HTML 5 does not use SGML or XHTML it’s completely a new thing so you do not need to refer 
+HTML 5 does not use SGML or XHTML it's completely a new thing so you do not need to refer 
 DTD. For HTML 5 you just need to put the below doctype code which makes the browser 
 identify that this is a HTML 5 document.
 
@@ -741,7 +741,7 @@ identify that this is a HTML 5 document.
 
 ##### Q4. If I do not put <! DOCTYPE html> will HTML 5 work?
 ##### A4.
-No, browser will not be able to identify that it’s a HTML document and HTML 5 tags will not 
+No, browser will not be able to identify that it's a HTML document and HTML 5 tags will not 
 function properly.
 
 ##### Q5. Which browsers support HTML 5?
@@ -798,7 +798,7 @@ There are 10 important new form elements introduced in HTML 5:-
 9. Number
 10. Search
 
-Let’s understand these elements step by step.
+Let's understand these elements step by step.
 
 If you want to show color picker dialog box.
 
@@ -903,12 +903,12 @@ the output element for more readability.
 
 ##### Q10. What is SVG?
 ##### A10.
-SVG stands for **S**calable **V**ector **G**raphics. It’s a text based graphic language which draws images 
+SVG stands for **S**calable **V**ector **G**raphics. It's a text based graphic language which draws images 
 using text, lines, dots etc. This makes it lightweight and renders faster.
 
 ##### Q11. Can we see a simple example of SVG using HTML 5?
 ##### A11.
-Let’s say we want to display the below simple line using HTML 5 SVG.
+Let's say we want to display the below simple line using HTML 5 SVG.
 
 ![HTML-5-SVG-Simple-Line-Example-image](./assets/HTML-5-SVG-Simple-Line-Example.PNG)
 
@@ -995,13 +995,13 @@ You should get the below output.
 
 | SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
-| Here’s it’s like draw and remember. In other words any    | Canvas is like draw and forget. Once something is      |  
+| Here's it's like draw and remember. In other words any    | Canvas is like draw and forget. Once something is      |  
 | shape drawn by using SVG can be remembered and            | drawn you cannot access that pixel and manipulate it.  |
 | manipulated and browser can render it again.              |                                                        |
 
 | SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
-| SVG is good for creating graphics like CAD software’s     | Canvas is good for draw and forget scenarios like      |
+| SVG is good for creating graphics like CAD software's     | Canvas is good for draw and forget scenarios like      |
 | where once something is drawn the user wants to           | animation and games.                                   |
 | manipulate it.                                            |                                                        |
 
@@ -1111,7 +1111,7 @@ To apply the above “intro” style to div we can use the "class" selector as s
 
 ##### Q17. How can you apply CSS style using ID value?
 ##### A17.
-So let’s say you have a HTML paragraph tag with id "mytext" as shown in the below snippet.
+So let's say you have a HTML paragraph tag with id "mytext" as shown in the below snippet.
 
 ```html
 <p id="mytext">This is HTML interview questions.</p>
@@ -1188,7 +1188,7 @@ a:active {color:yellow;}
 ##### A19.
 CSS column layout helps you to divide your text in to columns. For example consider the below 
 magazine news which is one big text but we need to divide the same in to 3 columns with a 
-border in between. That’s where HTML 5 column layout comes to help.
+border in between. That's where HTML 5 column layout comes to help.
 
 ![CSS-Column-Layout-image](./assets/CSS-Column-Layout.PNG)
 
@@ -1317,7 +1317,7 @@ function SomeHeavyFunction() {
 }
 ```
 
-Let’s say the above for loop code is executed on a HTML button click. Now this method execution is synchronous.
+Let's say the above for loop code is executed on a HTML button click. Now this method execution is synchronous.
 In other words the complete browser will wait until the for loop completes.
 
 ```html
@@ -1400,7 +1400,7 @@ words when the server has updates it will send updates to the browser client. Th
 achieved by using "SERVER SENT EVENTS".
 
 So the first thing the browser needs to do is connect to the server source which will send updates.
-Let’s say we have page "stock.aspx" which sends stock updates. So to connect to the page we 
+Let's say we have page "stock.aspx" which sends stock updates. So to connect to the page we 
 need to use attach to the event source object as shown in the below code.
 
 ```JavaScript
@@ -1424,47 +1424,230 @@ command that needs to be sent from the server side.
 | Tell client to retry in 10 seconds | retry: 10000 |
 | Raise a specific event with data | event: success<br/>data: Your are logged in |
 
-##### Q27.
+So for example if we want to send data below is the ASP.NET code for the same. Please note the content type is set to text/event.
+
+```C#
+Response.ContentType="text/event-stream";
+Response.Expires=-1;
+Response.Write("data: " + DateTime.Now.ToString());
+Response.Flush();
+```
+
+To retry after 10 second below is the command.
+
+```C#
+Response.Write("retry: 10000");
+```
+
+If you want to attach an event we need to use the "addEventListener" event as shown in the below code.
+
+```JavaScript
+source.addEventListener('message', function(e) {
+  console.log(e.data);
+}, false);
+```
+
+From the server side the below message will trigger the "message" function of javascript.
+
+```JSON
+event: message
+data : hello
+```
+
+##### Q27. What is local storage concept in HTML 5?
 ##### A27.
+Many times we would like to store information about the user locally in the computer. For 
+example let's say user has half-filled a long form and suddenly the internet connection breaks 
+off. So the user would like you to store this information locally and when the internet comes 
+back.He would like to get that information and send it to the server for storage.
 
-##### Q28.
+Modern browsers have storage called as "Local storage" in which you can store this information.
+
+##### Q28. How can we add and remove data from local storage?
 ##### A28.
+Data is added to local storage using "key" and "value". Below sample code shows country data "India" added with key value "Key001".
 
-##### Q29.
+```JavaScript
+localStorage.setItem("Key001","India");
+```
+
+To retrieve data from local storage we need to use "getItem" providing the key name.
+
+```JavaScript
+var country = localStorage.getItem("Key001");
+```
+
+You can also store JavaScript object's in the local storage using the below code.
+
+```JavaScript
+var country = {};
+country.name = "India";
+country.code = "I001";
+localStorage.setItem("I001", country);
+var country1 = localStorage.getItem("I001");
+```
+
+If you want to store in JSON format you can use "JSON.stringify" function as shown in the  below code.
+
+```JavaScript
+localStorage.setItem("I001",JSON.stringify(country));
+```
+
+##### Q29. What is the lifetime of local storage?
 ##### A29.
+Local storage does not have a life time it will stay until either the user clear it from the browser 
+or you remove it using JavaScript code
 
-##### Q30.
+##### Q30. What is the difference between local storage and cookies?
 ##### A30.
+|    | Cookies | Local storage |
+| :- | :-      | :-            |
+| **Client side / Server side** | Data accessible both at client side and<br/>server side. Cookie data is sent to the<br/>server side with every request. | Data is accessible only at the local<br/>browser side. Server cannot access local<br/>storage until deliberately sent to the<br/>server via POST or GET |
+| **Size**                      | 4095 bytes per cookie. | 5 MB per domain. |
+| **Expiration**                | Cookies have expiration attached to it.<br/>So after that expiration the cookie and<br/>the cookie data get's deleted. | There is no expiration data. Either the<br/>end user needs to delete it from the<br/>browser or programmatically using<br/>JavaScript we need to remove the same |
 
-##### Q31.
+##### Q31. What is session storage and how can you create one?
 ##### A31.
+Session storage is same like local storage but the data is valid for a session. In simple words the data is deleted as soon as you close 
+the browser. To create a session storage you need to use "sessionStorage.variablename".
 
-##### Q32.
+In the below code we have a created a variable called as "clickcount".
+
+If you refresh the browser the count increases. But if you close the browser and start again the "clickcount" variable starts from zero.
+
+```JavaScript
+if(sessionStorage.clickcount) {
+  sessionStorage.clickcount=Number(sessionStorage.clickcount)+1;
+} else {
+  sessionStorage.clickcount = 0;
+}
+```
+
+##### Q32. What is difference between session storage and local storage?
 ##### A32.
+Local storage data persists forever but session storage is valid until the browser is open, as soon 
+as the browser closes the session variable resets.
 
-##### Q33.
+##### Q33. What is WebSQL?
 ##### A33.
+WebSQL is a structured relational database at the client browser side. It's a local RDBMS inside the browser on which you can fire SQL queries.
 
-##### Q34.
+##### Q34. Is WebSQL a part of HTML 5 specification?
 ##### A34.
+No, many people label it as HTML 5 but it’s not part of HTML 5 specification. The specification is based around SQLite
 
-##### Q35.
+##### Q35. So how can we use WebSQL ?
 ##### A35.
+The first step we need to do is open the database by using “OpenDatabase” function as shown below. The first argument is the name of the database, the next is the version, then a simple 
+textual title and finally the size of the database.
 
-##### Q36.
+```JavaScript
+var db=openDatabase('dbCustomer','1.0','Customer app’, 2 * 1024 * 1024);
+```
+
+To execute SQL we then need to use "transaction" function and call "executeSql" function to fire SQL.
+
+```JavaScript
+db.transaction(function (tx) {
+  tx.executeSql('CREATE TABLE IF NOT EXISTS tblCust(id unique, customername)');
+  tx.executeSql('INSERT INTO tblcust (id, customername) VALUES(1, "shiv")');
+  tx.executeSql('INSERT INTO tblcust (id, customername) VALUES (2, "raju")');
+}
+```
+
+In case you are firing “select” query you will get data is “results” collection which we can loop and display in the HTML UI.
+
+```JavaScript
+db.transaction(function (tx) {
+  tx.executeSql('SELECT * FROM tblcust', [], function (tx, results) {
+    for (i = 0; i < len; i++) {
+      msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
+      document.querySelector('#customer).innerHTML += msg;
+    }
+  }, null);
+});
+```
+
+##### Q36. What is application cache in HTML5?
 ##### A36.
+One of the most demanded things by end user is offline browsing. In other words if internet connection is not available page should come 
+from browser cache i.e. offline and application cache helps you to achieve the same.
 
-##### Q37.
+Application cache helps you to specify which files should be cached and not cached.
+
+
+##### Q37. So how do we implement application cache in HTML 5 ?
 ##### A37.
+The first thing in we need to specify is the "manifest" file. "manifest" file helps you to define 
+how your caching should work. Below is the structure of the manifest file:
 
-##### Q38.
+```
+CACHE MANIFEST
+# version 1.0
+CACHE :
+Login.aspx
+```
+
+* All manifest file starts with CACHE MANIFEST statement.
+* #( hash tag) helps to provide the version of the cache file.
+* CACHE command specifies which files needs to be cached.
+* The content type of the manifest file should be "text/cache-manifest".
+
+Below is how cache manifest has been provided using ASP.NET C#.
+
+```C#
+Response.ContentType = "text/cache-manifest";
+Response.Write("CACHE MANIFEST \n");
+Response.Write("# 2012-02-21 v1.0.0 \n");
+Response.Write("CACHE : \n");
+Response.Write("Login.aspx \n");
+Response.Flush();
+Response.End();
+```
+
+One the cache manifest file is created the next thing is to provide the link of the manifest file in 
+the HTML page as shown below.
+
+```html
+<html manifest="cache.aspx">
+```
+
+When the above file runs first time it gets added in the browser application cache and in case server goes down the page is served from the application cache.
+
+##### Q38. So how do we refresh the application cache of the browser?
 ##### A38.
+Application cache is removed by changing version number to a new version number as specified in the "#" tag in the below code.
 
-##### Q39.
+```
+CACHE MANIFEST
+# version 2.0(new)
+CACHE :
+Login.aspx
+Aboutus.aspx
+NETWORK :
+Pages.aspx
+```
+
+##### Q39. What is fallback in Application cache?
 ##### A39.
+Fallback in application cache helps you to specify the file which will displayed if the server is 
+not reachable. For instance in the below manifest file we are saying if someone hits "/home" and 
+if the server is not reachable then "homeoffline.html" file should be served. 
 
-##### Q40.
+```
+FALLBACK:
+/home/ /homeoffline.html
+```
+
+##### Q40. What is network in application cache ?
 ##### A40.
+Network command says files which should not be cached. For example in the below code we are saying that "home.aspx" should never be 
+cached and or available offline.
+
+```
+NETWORK:
+home.aspx
+```
 
 ---
 
@@ -1472,8 +1655,757 @@ command that needs to be sent from the server side.
 
 ---
 
-##### Q1.
+##### Q1. Do all HTML tags come in pair?
 ##### A1.
+No, not all HTMLS tags come in pair. For e.g. `<img>`, `<br>`.
+
+##### Q2. What are some of the common lists that can be used when designing a page?
+##### A2.
+Some of the common lists that can be used are:
+
+a) Ordered list
+b) Unordered list
+c) Definition list
+d) Menu list
+e) Directory list
+
+##### Q3. What is the advantage of collapsing white space?
+##### A3.
+* The browser collapses the multiple white spaces into a single white space in HTML.
+* This allows the developers to arrange the HTML code in a well organized and legible format.
+
+##### Q4. Is it possible to list elements straight in an html file?
+##### A4.
+Yes, it is possible with the use of indents.
+
+##### Q5. Does a hyperlink apply only to text?
+##### A5.
+* No. The hyperlinks can be applied to both text as well as the images.
+* It means that even the images can become clickable links with a capability to take the visitor to the next page.
+* This can be done simply by using `<a href>` tag.
+
+##### Q6. What hierarchy is being followed when in style sheets?
+##### A6.
+* Inline style takes priority over embedded style sheets.
+* Embedded style take priority over external style sheets.
+* If a single selector includes three different style definitions, the definition that is closest to the actual tag gets the priority.
+
+##### Q7. What happens if the list-style-type property is used on a non-list element like a paragraph?
+##### A7.
+* Here the property will be ignored without having any effect on the paragraph.
+
+##### Q8. What is the advantage of using frames?
+##### A8.
+* Frames make it easier to navigate through a site.
+* The links that appear in the frame can appear through out the site.
+
+##### Q9. How can I hide my source?
+##### A9.
+* No. you can’t hide your source as it is required by the browser to display your document.
+
+##### Q10. How will you align a table to the right or left?
+##### A10.
+* To align the table to the right, you can use <TABLE ALIGN="right">
+* To align the table to the left, you can use <TABLE ALIGN="left">
+
+##### Q11. Why doesn't **`<TABLE WIDTH="100%">`** use the full browser width?
+##### A11.
+* This is because the graphical browser is designed to leave a margin between the display area and actual content.
+* The navigator also leaves some space for the scroll bar on the right side of the display area. Though, if the page is not long enough, the scroll bar doesn’t appear.
+
+##### Q12. How would you automatically transfer your visitors to a new web page?
+##### A12.
+* You can do it with the help of meta tag mentioned below:
+```html
+<META HTTP-EQUIV="Refresh" CONTENT="2"; URL="http://www.yourname.com">
+```
+* Place this tag between `<HEAD></HEAD>`.
+* It will load yousite.com in 2 seconds.
+
+##### Q13. You want only a vertical scrollbar and no horizontal scrollbar on your page. How would you do it?
+##### A13.
+* This can be done by defining the frame with SCROLLING = auto and having content to just fit into this frame.
+* SCROLLING="yes" gets the scroll bar on both the sides, even when not needed.
+* SCROLLING="no" doesn’t get the scrollbars at all, even when they are needed.
+
+##### Q14. How do you refer to the .css file in the web page?
+##### A14.
+* .css file in the web page can be referred with the use of `<link>` tag.
+* It should be kept between `<head></head>` tag.
+Example:
+```html
+<link href="/css/mystyle.css" type="text/css" rel="stylesheet" />
+```
+
+##### Q15. What is a better way to design the layout of a web page – a table `tag` or `div`?
+##### A15.
+* The better way to design the layout of the webpage is by using the `<div>` tag.
+* The `<table>` tag is used to present the data in tabular format.
+
+##### Q16. What is a `<dl>` tag in HTML?
+##### A16.
+* `<dl>` is a definition list tag used in HTML.
+* It is used with `<dt>` and `<dd>`.
+* `<dt>` list the item while `<dd>` describes it.
+
+##### Q17. What are empty HTML elements?
+##### A17.
+* HTML elements with no content are called empty elements.
+* For eg: `<br>`
+
+##### Q18.How to create nest tables within tables in HTML?
+##### A18.
+We can create nest table i.e. table inside a table.
+
+To create table we use following attributes:
+
+* `<table>……</table>`: declare starting and ending of table.
+* `<tr>…</tr>`: declare table row.
+* `<td>…</td>`: table data.
+
+```html
+<table>
+       <tr>
+             <td>first cell of the outer table</td>
+             <td>second cell of the outer table, creating second table inside the first table
+                           <table>
+                                  <tr>
+                                           <td>first cell of the second table</td>
+                                           <td>second cell of the second table</td>
+                                  </tr>
+                           </table>
+             </td>
+       </tr>
+</table>
+```
+
+##### Q19. Explain Non Breaking space in HTML.
+##### A19.
+When we add many spaces in the content then HTML remove all space except one space this is Non Breaking Space.
+To overcome this problem we use '`&nbsp;`' (without space between & and nbsp;). Suppose we want to add 3 space 
+between two words then we have to use &nbsp; three time.
+
+Example:
+actual code:- hello I m Rohit Srivastava.
+Display as:- Hello I m Rohit Srivastava.
+
+But when we use &nbsp:
+Actual code:- Hello I&nbsp;m Rohit Srivastava.
+Display as:- Hello I m Rohit Srivastava
+NOTE: (without space between & and nbsp;)
+
+##### Q20. How do I link to a location in the middle of an HTML document?
+##### A20.
+
+We can link to a location in the middle of an HTML document. Using Following steps:
+
+**1. Label the destination of the link :** There are two ways of labeling destination using Anchor:
+- NAME attribute:
+
+Example:
+```html
+<h2><a name="destination">Destination: Explanation</a></h2>
+```
+
+- ID attribute:
+
+Example:
+```html
+<h2 id="Destination_ID"> Destination: Explanation </h2>
+```
+
+**2. Link to the labeled destination :** We can link with the destination in the same URL page and with Different URL page.
+
+Example:
+Same URL: `<a href="#Destination"> Visit to destination</a>` or
+Different URL: `<a href="thesis.html#section2">go to Section 2 of my thesis</a>`
+
+##### Q21. Explain Cell Padding and Cell Spacing.
+##### A21.
+- **Cell Padding :** It refers to the gap or space between the cell content and cell border or cell wall.
+- **Cell Spacing :** It refers to the gap between the two cells of same tables.
+
+In HTML cell spacing and padding both are used with Table Border layout.
+
+Example:
+```html
+<table border cellpadding=2>
+<table border cellspacing=2>
+<table border cellpadding=2 cellspacing=2>
+```
+
+##### Q22. How to create a button which acts like a link?
+##### A22.
+To create buttons which act as a hyperlink, there are two ways:
+```html
+<FORM ACTION="[url]" METHOD=get>
+<INPUT TYPE=submit VALUE="Text on button">
+</FORM>
+```
+
+```html
+<INPUT TYPE="submit" VALUE="Go to my link location"
+ONCLICK=" http://www.careerride.com/;" />
+```
+
+##### Q23. What is difference between HTML and XHTML?
+##### A23.
+The differences between HTML and XHTML are:
+
+1. HTML is application of Standard Generalized Markup Language(SGML) whereas XML is application of Extensible Markup Language(XML).
+2. HTML is a static Web Page whereas XHTML is dynamic Web Page.
+3. HTML allows programmer to perform changes in the tags and use attribute minimization whereas XHTML when user need a new markup tag then user can define it in this.
+4. HTML is about displaying information whereas XHTML is about describing the information.
+
+##### Q24. How many types CSS can be include in HTML?
+##### A24.
+There are three ways to include the CSS with HTML:
+
+**1. Inline CSS :** It is used when only small context is to be styled.
+ * To use inline styles add the style attribute in the relevant tag.
+**2. External Style Sheet :** Is used when the style is applied to many pages.
+ * Each page must link to the style sheet using the `<link>` tag. The `<link>` tag goes inside the head section:
+```html
+<head>
+  <link rel="stylesheet" type="text/css" href="mystyle.css" />
+</head>
+```
+**3. Internal Style Sheet :** Is used when a single document has a unique style.
+ * Internal styles sheet needs to put in the head section of an HTML page, by using the <style> tag, like this:
+```html
+<head>
+<style type="text/css">
+hr {color:sienna}
+p {margin-left:20px}
+body {background-image:url("images/back40.gif")}
+</style>
+</head>
+```
+
+##### Q25. What are logical and physical tags in HTML?
+##### A25.
+* Logical tags are used to tell the meaning of the enclosed text. The example of the logical tag is `<strong> </strong>` tag.
+  When we enclosed text in strong tag then it tell the browser that enclosed text is more important than other text.
+* Physical text are used to tell the browser that how to display the text enclosed in the physical tag. Some example of the 
+  physical tags are: `<b>`, `<big>`, `<i>`
+
+##### Q26. Does HTML support JavaScript?
+##### A26.
+Yes, HTML supports JavaScript. We can use JavaScript anywhere in the HTML Coding. Mainly there are four sections 
+where we can add JavaScript in HTML.
+
+1. Head Section : We can add JavaScript in Head section of HTML.
+`<head>…Javascript…</head>`
+2. Body Section : `<body>…Javascript…</body>`
+3. Head and Body both : We can add Javascript in both head and body section.
+`<body…Javascript…</body>` and `<head>…Javascript…</head>`
+4. External File : Script in and external file and then include in `<head>…</head>` section.
+
+##### Q27. Explain marquee tag.
+##### A27.
+Marquee tag : Marquee tag is used when we want that some text or content move in the web page whether horizontally or vertically.
+
+Syntax of Marquee tag:
+```html
+<marquee>move text</marquee>
+```
+
+Attribute of Marquee tag are: bgcolor, direction, height, width, vspace etc.
+
+##### Q28. How do I add midi music to my web page?
+##### A28.
+We can add midi Music in our HTML web page using following tag:
+
+```html
+<bgsound src="music.mid" loop="1">
+```
+
+**Attribute LOOP = 1 :** Shows that music.mid is played only for one time. We can also set the value of loop to infinite. This tag is supported by Netscape and Internet Explorer.
+
+Example:
+```html
+<embed src="canyon.mid" Autostart=TRUE Width=145 Height=60 Loop=true>
+```
+
+##### Q29. What are new Media Elements in HTML5?
+##### A29.
+Following are the New Media Elements are present in HTML5:
+
+**1. <audio> tag :** For playing audio.
+**2. <video> tag :** For playing video.
+**3. <source> tag :** For media resources for media elements.
+**4. <embed> tag :** For embedded content.
+**5. <track> tag :** For text tracks used in media players.
+
+##### Q30. Explain various HTML list tags.
+##### A30.
+In HTML we can list the element in two ways:
+
+**1. Ordered list :** In this list item are marked with numbers.
+Syntax:
+```html
+<ol>
+<li> first item </li>
+<li>second item </li></ol>
+```
+
+Display as:
+1. First item
+2. Second item.
+
+**2. Unordered Lists :** In this item are marked with bullets.
+Syntax:
+```html
+<ul>
+<li> first item</li>
+<li>second item </li></ul>
+```
+
+Display as:
+- First item
+- Second item.
+
+##### Q31. Explain HTML background.
+##### A31.
+There are two types of background in HTML:
+
+**1. Colored Background :** In this the background of the html is colored.
+The Syntax is:
+```html
+<body bgcolor = “red”>
+```
+
+The value of the `bgcolor` can be set in three ways by hexadecimal number, an RGB value and Color name.
+
+Example:
+```html
+<body bgcolor = “black”>
+<body bgcolor = “rgb(0,0,0)”>
+<body bgcolor = “#000000”>
+```
+
+**2. Image Background :** In this we set the background of the website by an image. Syntax used for this is :
+```html
+<body background=”study.gif”>
+```
+
+##### Q32. What is CSS?
+##### A32.
+CSS stands for **C**ascading **S**tyle **S**heets. By using CSS with HTML we can change the look of the web page by 
+changing the font size and color of the font. CSS plays an important role in building the website. 
+Well written CSS file can be used to change the presentation of each web page. By including only one CSS file. 
+It gives web site developer and user more control over the web pages.
+
+##### Q33. What is difference between HTML and HTML5?
+##### A33.
+The differences between HTML and HTML5 are:
+
+1. Document of HTML is very large as compare to the HTML5.
+2. Audio and Video tags are not present in HTML whereas HTML5 contains audio and video tags.
+3. Vector technology is not integral part of HTML whereas HTML5 Vector technology is the integral part of it.
+4. HTML supported by all old browsers whereas HTML5 is supported by new browser.
+5. In HTML web sockets are not available whereas in HTML5 Full duplex communication channel is present.
+
+##### Q34. How to insert JavaScript in HTML?
+##### A34.
+We can insert JavaScript in HTML using `<script>` tag. JavaScript can be enclosed in `<script type = text/javascript>` 
+and ending with `</script>`.
+
+Example:
+```html
+<html>
+  <body>
+        <script type="text/javascript">
+               ...JavaScript….
+        </script>
+  </body>
+</html>
+```
+
+##### Q35. What is the Use of SPAN in HTML and give one example?
+##### A35.
+**SPAN :** Used for the following things:
+
+1. Highlight the any color text
+2. For adding colored text
+3. For adding background image to text.
+
+Example:
+```html
+<p>
+<span style="color:#000000;">
+In this page we use span.
+</span>
+</p>
+```
+
+##### Q36. What are the different way in which website layout can be made?
+##### A36.
+Website layout describes how the webpage of the website will look. 
+It describes the content that has to be placed in columns i.e. it can be either one or many columns. 
+There are two ways in which different layout can be created and these are called as using table method or using div method.
+
+There are basically two tags that are used `<table>` and `<div>`.
+
+`<table>` : Using this is the simplest way to create a layout.
+
+The example code is given as:
+```html
+<html>
+<body>
+<table width="500" border="0">
+<tr>
+<td colspan="2" style="background-color:#FFA500;">
+<h1>Main Title</h1>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="background-color:#FFA500;text-align:center;">
+This is my page</td>
+</tr>
+</table>
+</body>
+</html>
+```
+
+`<div>` : It is used as a block element and is defined to group HTML elements together in one.
+The `<div>` tag is used to create multiple layouts.
+
+The sample code is given as:
+```html
+<html>
+<body>
+<div id="container" style="width:500px">
+<h1 style="margin-bottom:0;">Main Title of Web Page</h1></div>
+<b>Menu</b><br />
+</div>
+</body>
+</html>
+```
+
+##### Q37. What is the importance of Doctype in HTML?
+##### A37.
+`Doctype` tag is not a HTML tag, it is just an instruction that is passed to the web browser to check for the information 
+that is being provided by the markup language in which the page is written. Doctype is sometimes referred as 
+Document type definition (DTD) that describes some rules that has to be followed while writing the markup language so to make 
+the web browser understand the language and the content correctly. Doctype is very important to be placed in the beginning of the HTML 
+and before the <HTML> tag to allow easy rendering of the pages that are used.
+Differentiate different types of Doctypes from one another
+Doctype helps the web browser to correctly render the web pages. There are different types of Doctype that are available and they are as follows:
+
+1. Strict Doctype : It consists of all the HTML elements and it is also known as DTD (Document type definition) but it doesn't include the presentational and deprecated elements i.e. font, center, etc. Framesets related elements are also not allowed in this.
+For example:
+`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">`
+
+2. Transitional Doctype : It consists of all the HTML elements and attributes. It is also known as DTD (Document type definition). It includes the presentational and deprecated elements i.e. font, center, etc. Framesets related elements are also not allowed in this.
+For example:
+`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`
+
+3. Frameset Doctype : It consists of all the HTML elements and attributes. It is also known as DTD (Document type definition). It includes the presentational and deprecated elements i.e. font, center, etc. Framesets related elements are also allowed in this.
+For example:
+`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">`
+
+##### Q38. Why it is important to set the meta information?
+##### A38.
+Metadata is the data about the data or the information about the data. There is a tag `<meta>` that is being provided for the HTML document.
+This information won't be displayed anywhere and will not be visible to the user. It will be parsable by the machine which will 
+parse it according to the requirement. It consists of the elements that are related to the page description, keywords, document 
+related element. The tag that is being used resides in the <head> section in HTML. The meta information is being used by the web browser 
+or by the search engines to rank and let the user find the pages easily.
+The meta information is being written as:
+```html
+<meta name="description" content="Here you will get everything" />
+```
+
+##### Q39. What are the different types of entities in HTML?
+##### Q39.
+The different types of entities that are present in HTML are < (less than) or > (greater then).
+It allows the special or the reserved characters are matched with the source code and then it is saved.
+The sample code is being given by:
+```
+&entity_name;
+```
+OR
+```
+&#entity_number;
+```
+
+There is always a concept associated with it that will create more simpler provision to avoid the spaces that are being coming in between the characters or the text.
+
+##### Q40. What does the elements mean in syntax given for URL in HTML?
+##### A40.
+URL stands for Uniform Resource locater. This helps just like the Internet pooling concept where the people 
+recognize themselves and others people connected together with each other. URL allows a document to be located on World Wide Web (www).
+The example of the URL is as follows with the complete element:
+scheme://host.domain:port/path/filename
+
+This code has got with no meaning but there are some elements that are defined:
+
+scheme - Is the type of internet service. In this HTTP can be used which has to most common type.
+Host – It is used to control the host name and fetch the information from other templates as well.
+Domain – It defines the internet domain that is google.com.
+:port – It defines the port number on the Host where the default port that is being used is 80.
+path – This defines the path of the server that consists of a hierarchical directory structure.
+filename - It defines the unique name for the file or the document that saves it.
+
+##### Q41. How to add helper plug-ins on the webpage using HTML?
+##### A41.
+A helper application is a program that is used in the browser to help the users with lots of information that is not being provided with the applications. These helper application is known as Plug-ins. Helper application includes audio, video, etc. The tag that is used to embed is <object>. Helper application allows easy incorporation of audio and video that is controlled by the user. Helper application allow the control over the volume setting and other functions like play, stop,etc.
+```
+<object width="420" height="360" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.career.com/qtplugin.cab">
+<param name="src" value="hello.wav"/>
+<param name="controller" value="true"/>
+</object>
+```
+
+##### Q42. What is the purpose of canvas in HTML?
+##### A42.
+Canvas is an element that is used for the graphics for the web page. It uses JavaScript to bring the graphics functionality live. It allows easy way to draw the graphics and use different types of tools to create drawing on the web page. Canvas is just a rectangular area that controls the pixel of every element that is used in the web page. Canvas uses methods like paths, circles, etc.
+The canvas element will be used as follows:
+```html
+<canvas id="can" width="200" height="100"></canvas>
+```
+
+The canvas element includes id, width and height settings and with the javascript it gets used like:
+```html
+<script type="text/javascript">
+var c=document.getElementById("can");
+var ctx=c.getContext("2d");
+ctx.fillStyle="#FF0000";
+ctx.fillRect(0,0,150,75);
+</script>
+```
+
+##### Q43. What is the purpose of iframe in HTML?
+##### Q43.
+Iframe is called as inline frame that places one HTML document in a frame. It is different from the object element as the inline frame can be made in the target frame. The target frame consists of the links that is defined by other elements used in the web page. Iframe is used to focus on printing or viewing of the source. Iframe can be used by the user in those browser that supports it. If they have used iframe also then the incompatible browser won't display the actual but display of the alternative text will take place. The content of the iframe is being written in between <iframe>.........</iframe>.
+The sample example is given below:
+```html
+<iframe src="http://www.abc.com"></iframe>
+```
+
+##### Q44. What are the different types of frames tags used in HTML?
+##### Q44.
+Frames allow the display of the document visually. It allows the window to be split into segments that can contain multiple different documents. It can utilize many resources and repeat some parts of the layout that can be used in a frame.
+
+Frames consists of different types of tags and they are as follows:
+
+1. `<frameset>...</frameset>` : It consists of the frames that includes the layout using the attributes of rows and cols.
+2. `<frame>` or `<frame/>` : It consists of a single frame and gets included within the frameset. It is always come up with a src attribute that provides the source that has to be shown in a particular frame.
+3. `<noframes>...</noframes>` : It consists of the normal HTML content that is used to show no frames.
+4. `<iframe>...</iframe>` : It consists of internal frame that will contain the src attribute to include the frame that is internal to a particular region.
+
+##### Q45. Write a code to change the color of the background or text? Explain the elements involved in it.
+##### A45.
+To change the color of the background of the body or the text there is a <body> tag that has to be included where there are 
+some elements that has to be used to set the properties of it.
+The code is as follows:
+```html
+<html>
+<head>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000000" VLINK="#000000" ALINK="#ffff00">
+</body>
+</html>
+```
+
+The elements that are used in this tag is as follows:
+
+1. BGCOLOR : Represents the background color which will be applied totally on the body if there is no other bgcolor used with any other tag internally.
+2. TEXT : Represents the color of the text that will be applied to the complete text present in the body.
+3. LINK : Represents the color of all the text links that are present inside the body.
+4. VLINK : Represents the color of the links that has already been visited.
+5. ALINK : Represents the color of the text links that will change when the page accessed will be active.
+
+##### Q46. What is the main function of `<pre>` tag in HTML?
+##### A46.
+`<pre>` tag defines the pre-formatted text that is used to display the text with the fixed width and uses a predefined fonts and it keeps both spaces and line breaks separate and show the text as it is.
+The code that can be used to display the text that can be written in whatever way the user wants is as follows:
+```html
+<pre>
+Text in a pre element ----//
+is displayed in a fixed-width
+font, and it preserves
+both spaces and
+line breaks
+</pre>
+```
+
+##### Q47. How can tables be made nested in HTML?
+##### A47.
+Tables can be made nested by making it come in another table. This consists of many attributes and tags that can be used in nesting the tables.
+
+The tags that are used for the table is as follows:
+
+`<TR>` : This is the tag that has to be written after the <table> tag and before any other tags. This makes a table row that store the data elements.
+`<TD>` : This tag can be used anywhere and it consists of the data that has to come on the website.
+`<TH>` : This tag consists of the table heading.
+
+The sample code will explain the above explanation much better:
+```html
+<table>
+<tr>
+<td>this is the first cell</td>
+<td>this is the second cell
+<table> <!--Starting of the table that is embedded inside another table-->
+<tr>
+<td>this is the first cell second table</td>
+<td>this is the second cell of second table</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+```
+
+##### Q48. How can tables be used inside a form? Explain with an example.
+##### A48.
+A form can consist of the table and its properties to display it on the web page. The form is placed with the 
+`<td>` tag that includes the data of the table. This can also be used to position the form in relation to the other content. 
+The table will be added within the form.
+
+The code is given as:
+```html
+<FORM ACTION="[URL]">
+<TABLE>
+<TR>
+<TH>This is the table heading</TH>
+<TD><INPUT TYPE="text" NAME="account"></TD>
+</TR>
+<TR>
+<TH>This is another heading for a button</TH>
+<TD><INPUT TYPE="password" NAME="password"></TD>
+</TR>
+<TR>
+<TD> </TD>
+<TD><INPUT TYPE="submit" NAME="Log On"></TD>
+</TR>
+</TABLE>
+</FORM>
+```
+
+In this the form elements are getting used inside the table tags like `<input type>`, `<text area>`, etc.
+The form input will be given using the <td> tag that displays the table data and related information accordingly.
+
+##### Q49. What are the different ways to use different colors for different links or same link?
+##### A49.
+The presentation is being done by CSS that is used with the HTML, to give the style to the HTML content.
+This is called as style sheet. The links can be specified in different colors by the following way:
+```css
+a:link {color: blue; background: white}
+a:visited {color: purple; background: white}
+a:active {color: red; background: white}
+```
+
+This is the CSS properties that is being defined to set the color for the links that are active, visited and normal link. User can use the class attribute in the tags like <a> to use it and see the change in the link color. It is shown as:
+```html
+<a class="exp" href="[URL]">example of the link</a>
+```
+
+The style sheet can be modified according to the code that is being written. The coding will include:
+```css
+a.exp:link {color: yellow; background: black}
+a.exp:visited {color: white; background: black}
+a.exp:active {color: red; background: black}
+```
+
+##### Q50. How to upload files using HTML to website?
+##### A50.
+The uploading of files requires some necessary configuration like: An HTTP server that acts as a transaction between 
+the user and the server. Access to the directory of cgi-bin that consists of the receiving script.
+
+There are some scripts that are already available. Form for the implementation and the coding of it will be like:
+```html
+<form method="post" enctype="multipart/form-data" action="up.cgi">
+```
+
+The form that has to be uploaded will be done by the following given code:
+
+```html
+<input type=file name=upload><br>
+This tag will contain the file name that has to be uploaded on the website.
+Any remarks about the file will be written like:
+<input type=text name=remark><br>
+<input type=submit value=Press> This form will allow user to upload their own file in an easy way.
+</form>
+```
+
+##### Q51. Write a program to include the custom button with the form
+##### A51. 
+Custom button can be given just by putting the image with the button or by using any other button then normal. Usually the button is being made by the <input> tag like:
+```html
+<input type= “submit” value= submit>
+```
+
+An image can be used for the custom button as an input type like:
+```html
+<input type = ”image” value = submit>
+```
+
+The input in the image format defines the graphical button that has to be placed in the form of submit on the web site. Image input type return the x-y coordinates rather than the normal text as a value. The attributes of Value and Alt will be used to set the name value attribute. The example for the same will be given as:
+```html
+<input type="image" name="submit" alt="submit" value="submit" src="submit.jpg">
+```
+
+##### Q52. How to prevent the display of "Getting framed" in HTML?
+##### A52.
+Getting framed refers to the document that is being displayed in someone else's frameset in your HTML.
+This will be password protected and the permissions has to be taken before inserting the frameset.
+The framing of the document can be avoided by using TARGET=_top applied to all the links that will lead to the document that are 
+outside the scope of a particular user without permission. A javaScript can be used that will automatically handle the request 
+to remove the existing framesets. This can be given as:
+```html
+<script type="text/javascript">
+if (top.frames.length!=0)
+{
+    if (window.location.href.replace)
+       top.location.replace(self.location.href);
+    else
+       top.location.href=self.document.href;
+}
+</script>
+```
+
+##### Q53. How to include a frameset inside another frameset?
+##### A53.
+One frameset can be defined inside another frameset if the accessing permission are provided directly. The frameset can be stored by using the JavaScript in the document that is being written by the user and the script is as follows:
+```html
+<SCRIPT TYPE="text/javascript">
+if (parent.location.href == self.location.href)
+{
+    if (window.location.href.replace)
+       window.location.replace('frame.html');
+    else
+       // causes problems with back button, but works
+       window.location.href = 'frame.html';
+}
+</SCRIPT>
+```
+
+The anchor `<a>` tag is used to link the frameset that can be used to restore the frames that has been stored.
+```html
+<A HREF="frameset.html" TARGET="_top">Restore the frame
+```
+
+There is always a separate frameset document written for every content document. The frameset documents are generated automatically. 
+The content document can be linked separately rather than linking them together.
+
+##### Q54. How to update two frames at the same time using HTML?
+##### A54.
+To update the two frames at the same time there is a requirement for the HTML based techniques that links the documents with a 
+new frameset document. It specifies a new frames that can be combined with other frames. There is a JavaScript that will be 
+used to link the updated frame and the method that will be used is onClick(). HTML based technique allow the new frameset 
+document with the attribute of TARGET=_top. In this the first frameset document uses a secondary frameset document that 
+will be defined as the nested frameset. The following code explains it further:
+
+```html
+<frameset cols="*,3*">
+<frame src="first.html" name="first_frameset">
+<frame src="second.html" name="sec_frameset">
+<noframes>
+</body></noframes>
+</frameset>
+```
 
 ---
 
