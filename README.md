@@ -9,7 +9,7 @@ The contents have been broken down into **4** phases, covering the basics from H
 
 * [10 Typical HTML Exercises](https://github.com/sm2774us/full_stack_interview_prep_2021#a-10-typical-html-exercises)
 * [16 Essential HTML5 Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#b-16-essential-html5-questions)
-* [35 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#c-35-helpful-html-html5-questions-and-answers)
+* [35 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#c-35-helpful-html--html5-questions--answers)
 * [40 important HTML interview questions with answers](https://github.com/sm2774us/full_stack_interview_prep_2021#d-important-html-interview-questions-with-answers)
 * [HTML questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#e-html-questions-and-answers-for-freshers-and-experienced-developers)
 * [Top 50 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#b-16-essential-html5-questions#f-top-50-html-questions)
