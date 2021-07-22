@@ -915,7 +915,7 @@ Let’s say we want to display the below simple line using HTML 5 SVG.
 Below is how the code of HTML 5. You can see the SVG tag which encloses the polygon tag for 
 displaying the star image.
 
-```html
+```svg
 <svg id="svgelem" height="200" xmlns="http://www.w3.org/2000/svg">
  <line x1="0" y1="0" x2="200" y2="100"
  style="stroke:red;stroke-width:2"/>
@@ -1022,7 +1022,7 @@ You should get the below output.
 ##### Q15. How to draw rectangle using Canvas and SVG using HTML 5 ?
 ##### A15.
 HTML 5 code Rectangle code using SVG.
-```html5
+```svg
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
  <rect width="300" height="100"
  style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/>
@@ -1037,7 +1037,7 @@ ctx.rect(20,20,150,100);
 ctx.stroke();
 ```
 
-```html
+```svg
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
  <circle cx="100" cy="50" r="40" stroke="black"
  stroke-width="2" fill="red"/>
@@ -1086,17 +1086,158 @@ if(newX > 500)
 </html>
 ```
 
-##### Q16.
+##### Q16. What are selectors in CSS?
 ##### A16.
+Selectors help to select an element to which you want to apply a style. For example below is a 
+simple style called as ‘intro” which applies red color to background of a HTML element.
 
-##### Q17.
+```css
+<style>
+.intro
+{
+background-color:red;
+}
+</style>
+```
+
+To apply the above “intro” style to div we can use the "class" selector as shown below.
+
+```html
+<div class="intro">
+  <p>My name is Shivprasad koirala.</p>
+  <p>I write interview questions.</p>
+</div>
+```
+
+##### Q17. How can you apply CSS style using ID value?
 ##### A17.
+So let’s say you have a HTML paragraph tag with id "mytext" as shown in the below snippet.
 
-##### Q18.
+```html
+<p id="mytext">This is HTML interview questions.</p>
+```
+
+You can create a style using "#" selector with the "id" name and apply the CSS value to the 
+paragraph tag. So to apply style to "mytext" element we can use "#mytext" as shown in the 
+below CSS code.
+
+```css
+<style>
+#mytext
+{
+background-color:yellow;
+}
+</style>
+```
+
+##### Q18. Quick revision of some important selectors.
 ##### A18.
+Set all paragraph tags back ground color to yellow.
+```css
+P,h1
+{
+  background-color:yellow;
+}
+```
 
-##### Q19.
+Sets all paragraph tags inside div tag to yellow background.
+```css
+div p
+{
+  background-color:yellow;
+}
+```
+
+Sets all paragraph tags following div tags to yellow background.
+```css
+div+p
+{
+  background-color:yellow;
+}
+```
+
+Sets all attribute with “target” to yellow background.
+```html
+a[target]
+{
+  background-color:yellow;
+}
+
+<a href="http://www.questpond.com">ASP.NET interview questions</a>
+<a href="http://www.questpond.com" target="_blank">c# interview questions</a>
+<a href="http://www.questpond.org" target="_top">.NET interview questions with answers</a>
+```
+
+Set all elements to yellow background when control gets focus.
+```css
+input:focus
+{
+  background-color:yellow;
+}
+```
+
+Set hyperlinks according to action on links.
+```css
+a:link {color:green;}
+a:visited {color:green;}
+a:hover {color:red;}
+a:active {color:yellow;}
+```
+
+##### Q19. What is the use of column layout in CSS?
 ##### A19.
+CSS column layout helps you to divide your text in to columns. For example consider the below 
+magazine news which is one big text but we need to divide the same in to 3 columns with a 
+border in between. That’s where HTML 5 column layout comes to help.
+
+![CSS-Column-Layout-image](./assets/CSS-Column-Layout.PNG)
+
+To implement column layout we need to specify the following:-
+* How many columns we want to divide the text in to ?
+
+To specify number of columns we need to us column-count. "webkit" and "moz-column" are needed for chrome and firefox respectively.
+```css
+-moz-column-count:3; /* Firefox */
+-webkit-column-count:3; /* Safari and Chrome */
+column-count:3;
+```
+
+* How much gap we want to give between those columns ?
+```css
+-moz-column-gap:40px; /* Firefox */
+-webkit-column-gap:40px; /* Safari and Chrome */
+column-gap:20px;
+```
+
+* Do you want to draw a line between those columns , if yes how much thick ?
+```css
+-moz-column-rule:4px outset #ff00ff; /* Firefox */
+-webkit-column-rule:4px outset #ff00ff; /* Safari and Chrome */
+column-rule:6px outset #ff00ff;
+```
+
+Below is the complete code for the same.
+
+```html
+<style>
+.magazine
+{
+-moz-column-count:3; /* Firefox */
+-webkit-column-count:3; /* Safari and Chrome */
+column-count:3;
+-moz-column-gap:40px; /* Firefox */
+-webkit-column-gap:40px; /* Safari and Chrome */
+column-gap:20px;
+-moz-column-rule:4px outset #ff00ff; /* Firefox */
+-webkit-column-rule:4px outset #ff00ff; /* Safari and Chrome */
+column-rule:6px outset #ff00ff;
+}
+</style>
+You can then apply the style to the text by using the class attribute.
+<div class="magazine">
+Your text goes here which you want to divide in to 3 columns.
+</div>
+```
 
 ##### Q20.
 ##### A20.
