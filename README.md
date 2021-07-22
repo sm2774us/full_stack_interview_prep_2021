@@ -650,7 +650,7 @@ Canvas and WebGL. `<Canvas>` is a new element that acts as a container for graph
 `<Canvas>` is an element that manipulates two-dimensional (2D) pixels while Scalable Vector Graphics works in 2D and three-dimensional (3D) vectors. Essentially, `<Canvas>`is to SVG as Photoshop is to Illustrator.
 
 ###### Q21. What are some new input attributes in HTML5?
-###### A11.
+###### A21.
 There are many new form elements including: `datalist`, `datetime`, `output`, `keygen`, `date`, `month`, `week`, `time`, `number`, `range`, `email`, and `url`.
 
 ###### Q22. What are `data`**-** attributes good for?
@@ -1233,32 +1233,196 @@ column-gap:20px;
 column-rule:6px outset #ff00ff;
 }
 </style>
+```
+
 You can then apply the style to the text by using the class attribute.
+
+```html
 <div class="magazine">
 Your text goes here which you want to divide in to 3 columns.
 </div>
 ```
 
-##### Q20.
+##### Q20. Can you explain CSS box model?
 ##### A20.
+CSS box model is a rectangular space around a HTML element which defines border, padding and margin. 
 
-##### Q21.
-##### A11.
+Border: - This defines the maximum area in which the element will be contained. We can make the border visible, invisible, define height and width etc.
 
-##### Q22.
+Padding: - This defines the spacing between border and element.
+
+Margin: - This defines the spacing between border and any neighboring elements.
+
+![CSS-Box-Model-1-image](./assets/CSS-Box-Model-1.PNG)
+
+For instance below is a simple CSS code which defines a box with border , padding and margin values.
+
+```css
+.box {
+ width: 200px;
+ border: 10px solid #99c;
+ padding: 20px;
+ margin: 50px;
+}
+```
+
+Now if we apply the above CSS to a DIV tag as shown in the below code , your output would be as shown in the figure below. 
+I have created two test "Some text" and "Some other text" so that we can see how margin property functions.
+
+```html
+<div align="middle" class="box">
+Some text
+</div>
+
+Some other text
+```
+
+![CSS-Box-Model-2-image](./assets/CSS-Box-Model-2.PNG)
+
+##### Q21. Can you explain some text effects in CSS 3?
+##### A21.
+Here the interviewer is expecting you to answer one of two text effects by CSS. Below are two effects which are worth noting.
+
+1. Shadow text effect
+
+```css
+.specialtext
+{
+  text-shadow: 5px 5px 5px #FF0000;
+}
+```
+
+![CSS3-Text-Effects-1-Shadow-Text-Effect-image](./assets/CSS3-Text-Effects-1-Shadow-Text-Effect.PNG)
+
+2. Word wrap effect
+
+```css
+<style> 
+.breakword
+{word-wrap:break-word;}
+</style>
+```
+
+![CSS3-Text-Effects-2-Word-Wrap-Effect](./assets/CSS3-Text-Effects-2-Word-Wrap-Effect.PNG)
+
+##### Q22. What are web workers and why do we need them ?
 ##### A22.
+Consider the below heavy for loop code which runs above million times. 
 
-##### Q23.
+```JavaScript
+function SomeHeavyFunction() {
+  for (i = 0; i < 10000000000000; i++) {
+    x = i + x;
+  }
+}
+```
+
+Let’s say the above for loop code is executed on a HTML button click. Now this method execution is synchronous.
+In other words the complete browser will wait until the for loop completes.
+
+```html
+<input type="button" onclick="SomeHeavyFunction();" />
+```
+
+This can further lead to browser getting freezed and unresponsive with an error message as  shown in the screen below.
+
+![web-page-unresponsive-browser-message-image](./assets/web-page-unresponsive-browser-message.PNG)
+
+So if we can move this heavy for loop in a JavaScript file and run it asynchronously that means 
+the browser does need to wait for the loop then we can have a more responsive browser. That's 
+what web worker are for.
+
+Web worker helps to execute JavaScript file asynchronously.
+
+##### Q23. What are the restrictions of Web Worker thread ?
 ##### A23.
+Web worker threads cannot modify HTML elements, global variables and some window  properties like Window.Location.
+You are free to use javascript data types, XMLHttpRequest calls etc.
 
-##### Q24.
+##### Q24. So how do we create a worker thread in JavaScript?
 ##### A24.
+To create a worker thread we need to pass the JavaScript file name and create the worker object.
 
-##### Q25.
+```JavaScript
+var worker = new Worker("MyHeavyProcess.js");
+```
+
+To send message to the worker object we need to use "PostMessage", below is the code for the same. 
+
+```JavaScript
+worker.postMessage();
+```
+
+When the worker thread sends data we get it in the "OnMessage" event on the callers end.
+
+```JavaScript
+worker.onmessage = function (e) {
+document.getElementById("txt1").value = e.data;
+};
+```
+
+![webworker-thread-image](./assets/webworker-thread.PNG)
+
+The heavy loop is in the "MyHeavyProcess.js" javascript file, below is the code for the same. 
+When the JavaScript file wants to send message he uses "postmessage" and any message sent from the caller 
+is received in the "onmessage" event. 
+
+```JavaScript
+var x =0
+self.onmessage = function (e) {
+  for (i = 0; i < 1000000000; i++) {
+    x = i + x;
+  }
+  self.postMessage(x); 
+};
+```
+
+##### Q25. How to terminate a web worker
 ##### A25.
 
-##### Q26.
+```JavaScript
+w.terminate();
+```
+
+##### Q26. Why do we need HTML 5 server-sent events?
 ##### A26.
+One of the common requirements in web world is getting updates from the server. Take the example 
+of a stock ticker application where the browser has to take regular updates from the server for the
+recent stock value.
+
+![HTML-5-Server-Side-Events-image](./assets/HTML-5-Server-Side-Events.PNG)
+
+Now to implement this kind of requirement developers normally write some kind of PULL code 
+which goes to the server and fetches data in certain interval. Now PULL solution is good but it 
+makes the network chatty with lot of calls and also it adds load on the server.
+So rather than PULL it would be great if we can have some kind of PUSH solution. In simple 
+words when the server has updates it will send updates to the browser client. That can be 
+achieved by using "SERVER SENT EVENTS".
+
+So the first thing the browser needs to do is connect to the server source which will send updates.
+Let’s say we have page "stock.aspx" which sends stock updates. So to connect to the page we 
+need to use attach to the event source object as shown in the below code.
+
+```JavaScript
+var source = new EventSource("stock.aspx");
+```
+
+We also need to attach the function where we will receive messages when server sends update. 
+For than we need to attach function to the "onmessage" event as shown in the below code.
+```JavaScript
+source.onmessage = function (event) {
+  document.getElementById("result").innerHTML += event.data + "<br>";
+};
+```
+ 
+Now from the server side we need to send events. Below are some lists of important events with 
+command that needs to be sent from the server side. 
+
+| Event | Command |
+| :-    | :-      |
+| Send data to the client. | data: hello |
+| Tell client to retry in 10 seconds | retry: 10000 |
+| Raise a specific event with data | event: success<br/>data: Your are logged in |
 
 ##### Q27.
 ##### A27.
