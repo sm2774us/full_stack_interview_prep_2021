@@ -998,19 +998,26 @@ You should get the below output.
 | Here’s it’s like draw and remember. In other words any    | Canvas is like draw and forget. Once something is      |  
 | shape drawn by using SVG can be remembered and            | drawn you cannot access that pixel and manipulate it.  |
 | manipulated and browser can render it again.              |                                                        |
+
+| SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
 | SVG is good for creating graphics like CAD software’s     | Canvas is good for draw and forget scenarios like      |
 | where once something is drawn the user wants to           | animation and games.                                   |
 | manipulate it.                                            |                                                        |
+
+| SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
 | This is slow as it needs to remember the co-ordinates for | This is faster as there is no intention of remembering |
 | later manipulations.                                      | things later.                                          |
+
+| SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
 | We can have event handler associated with the drawing     | Here we cannot associate event handlers with drawing   |
 | object.                                                   | objects as we do not have reference of them.           |
+
+| SVG                                                       | Canvas                                                 |
 | --------------------------------------------------------- | ------------------------------------------------------ |
 | Resolution independent.                                   | Resolution dependent.                                  |
-
 
 ##### Q15. How to draw rectangle using Canvas and SVG using HTML 5 ?
 ##### A15.
