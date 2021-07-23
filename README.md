@@ -50,8 +50,9 @@ you are not as gung-ho about web design as you thought you were.
 
 ### B) CSS
 
-- [25 helpful CSS questions and answers](http://www.skilledup.com/articles/25-css-interview-questions-answers)
-- [CSS  questions and answers for freshers and experienced developers](http://www.careerride.com/Interview-Questions-CSS.aspx)
+- [25 helpful CSS questions and answers](https://github.com/sm2774us/full_stack_interview_prep_2021#h-25-helpful-css-questions-and-answers)
+- [Top 25 CSS Interview Questions and Answers for Experienced](https://github.com/sm2774us/full_stack_interview_prep_2021#i-top-25-css-interview-questions-and-answers-for-experienced)
+- [CSS questions and answers for freshers and experienced developers](CSS questions and answers for freshers and experienced developers)
 - [CSS Questions and Answers](http://www.techrepublic.com/blog/software-engineer/css-interview-questions-and-answers/)
 - [Questions and Exercises About CSS](https://css-tricks.com/interview-questions-css/)
 - [Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments](http://career.guru99.com/top-50-csscascading-style-sheet-interview-questions/)
@@ -152,6 +153,8 @@ you are not as gung-ho about web design as you thought you were.
 * [SQL Questions that have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of SQL](http://www.tutorialspoint.com/sql/sql_interview_questions.htm)
 * [Top 20 SQL Questions with Answers](http://dwbi.org/database/sql/72-top-20-sql-interview-questions-with-answers)
 
+---
+#### A: HTML
 ---
 
 #### A: 10 Typical HTML Exercises
@@ -3334,4 +3337,574 @@ Example:
 > `<input type="email">`
 >
 
+---
 
+### B: CSS
+
+---
+
+#### H: 25 helpful CSS questions and answers
+
+---
+
+##### Q1. What do you mean by CSS?
+##### A1.
+CSS refers to Cascading style sheets. It is a styling language which is easy enough for HTML basics. 
+It is accepted in web designing, and its application is ordinary in XHTML.
+
+##### Q2. Tell me some limitations of CSS?
+##### A2.
+Some of the limitations are:
+
+* No expressions.
+* No column declaration.
+* Limitations of vertical control.
+* Ascending by selectors is not possible etc.
+
+##### Q3. Name some advantages of CSS?
+##### A3.
+Some of the advantages are:
+
+* Accessibility.
+* Bandwidth.
+* Page reformatting.
+* Site-wide consistency.
+* Content separated from presentation.
+
+##### Q4. What do you mean by CSS frameworks?
+##### A4.
+It is a pre-planned library, which permits easier and more values complaint webpage styling, using CSS language.
+
+##### Q5. What does CSS selector mean?
+##### A5.
+A thread corresponding of HTML elements by which declarations or a set of it is affirmed and is a link that can be 
+referred for connecting Style sheet and HTML is CSS selector.
+
+##### Q6. Differentiate logical tags from physical tags?
+##### A6.
+The difference between them is:
+
+* Physical tags are new versions, while logical tags are old and focus on content.
+* Physical tags are also referred to as presentational score; logical tags are ineffective for appearances.
+
+##### Q7. Explain Declaration block?
+##### A7.
+A list of instructions within braces consisting of property, value and colon is known as declaration block.
+Example: [Property 1: value 3]
+
+##### Q8. What are the various "fonts" attributes?
+##### A8.
+Some of them are:
+
+* Caption
+* Icon
+* Font weight
+* Font family
+* Font style etc.
+
+##### Q9. State the difference between class selector from the ID selector?
+##### A9.
+While the general block is set to the class selector, the ID selector prefers only a particular element conflicting 
+from other elements.
+
+##### Q10. Name the different types of media used?
+##### A10.
+Different media has different properties as they are case insensitive:
+
+* **Handheld-** uses handheld plans.
+* **Aural-** for noise synthesizers and verbal communication
+* **Projection-** projects the CSS on projectors.
+* **Screen-** computers and laptop screens. Etc. 
+
+##### Q11. What do you mean by Inline style?
+##### A11.
+The Inline style in a CSS is utilized to add up styling to an entity HTML element.
+
+##### Q12. What are some major versions of CSS?
+##### A12.
+Some major versions of CSS are:
+
+* **CSS1**
+* **CSS2**
+* **CSS2.1**
+* **CSS3**
+* **CSS4**
+
+##### Q13. Who maintain the CSS specifications?
+##### A13.
+World Wide Web Consortium upholds the CSS specifications.
+
+##### Q14. Enlist the media type CSS allows?
+##### A14.
+The plan and customization of documents are rendered by media. By applying media power over the exterior style sheets, they can be retrieved and used by loading it from the system.
+
+##### Q15. Why is it easy to insert a file by importing it?
+##### A15.
+Importing allows combining outside sheets with being included in many sheets. Different files and sheets can be utilized to have diverse functions. Syntax:
+
+```css
+@import notation
+```
+,used with,
+```css 
+<style>
+``` 
+tag.
+
+##### Q16. What do you mean by contextual selector?
+##### A16.
+Selector used to choose particular occurrences of a constituent is called the contextual selector. A gap separates the individual selectors. Only the last part of the pattern is addressed in this type of selector.
+For e.g.: 
+```css
+TD P TEXT {color: red}
+```
+
+##### Q17. How can the dimensions be defined as an element?
+##### A17.
+Dimension properties can be defined by:
+
+* **Max-height**
+* **Height**
+* **Width**
+* **Max-width** etc.
+
+##### Q18. Explain Attribute selector?
+##### A18.
+It is distinct by a set of elements, parts and its value.
+
+##### Q19. What do you mean by `at-rule`?
+##### A19.
+Rule, which is appropriate in the whole sheet and not partly, is known as `at-rule`. It is proceeding by `@` followed by `A-Z`, `a-z` or `0-9`.
+
+##### Q20. Define Inline style?
+##### A20.
+The Inline style is used to add up styling to character HTML elements.
+
+##### Q21. How can comments be added in CSS?
+##### A21.
+The comments in CSS can be supplementary with `/*` and `*/`.
+
+##### Q22. Are quotes mandatory in URL?
+##### A22.
+Quotes are not obligatory in URL's, and it can be single or double.
+
+##### Q23. How does the `Z index` function?
+##### A23.
+Overlapping may happen while using CSS for positioning HTML elements. `Z index` useful to specify the overlapping element. 
+It is a figure which can be positive or negative, the non-payment value being zero.
+
+##### Q24. What is the way to backward compatibility be designed in CSS?
+##### A24.
+HTML sheet methods are collaborated with CSS and used accordingly.
+
+##### Q25. Define the float property of CSS?
+##### A25.
+By float property, the picture can be stimulated to the right or the left along with the text to wrap around it. 
+Elements previous to this property is functional and do not change their properties.
+
+---
+
+#### I: Top 25 CSS Interview Questions and Answers for Experienced
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q3.
+##### A3.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+---
+
+#### J: CSS questions and answers for freshers and experienced developers
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q3.
+##### A3.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+---
+
+#### K: CSS Questions and Answers
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q3.
+##### A3.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+---
+
+#### L: Questions and Exercises About CSS
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q3.
+##### A3.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+---
+
+#### M: Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q3.
+##### A3.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+---
