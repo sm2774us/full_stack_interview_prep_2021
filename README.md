@@ -4689,80 +4689,1127 @@ There's a demo you can play with on [cssdeck](http://cssdeck.com/item/302/css-im
 
 ---
 
-##### Q1.
+##### Q1. What are different ways to integrate a CSS into a Web page?
 ##### A1.
+There are three ways to integrate CSS into a Web page
 
-##### Q2.
+**1) Inline :** HTML elements may have CSS applied to them via the STYLE attribute.
+**2) Embedded :** By placing the code in a STYLE element within the HEAD element.
+**3) Linked/ Imported :** Place the CSS in an external file and link it via a link element.
+
+##### Q2. If background and colour should always be set together, why do they exist as separate properties?
 ##### A2.
+The reasons for this are as follows:
 
-##### Q3.
+1. It increases the legibility of the style sheets. The background property is a complex property in CSS. If it is combined with color, the complexity will further increase.
+2. Color is inherited, but background isn’t. This can further increase the confusion.
+
+##### Q3. Explain external Style Sheet? How would you link to it?
 ##### A3.
+1. External Style Sheet can be called as a template/document/file which contains style information and can be linked with more than one HTML documents.
+2. Using this the entire site can be formatted and styles just by editing one file.
+3. The file is linked with HTML documents via the LINK element inside the HEAD element.
 
-##### Q4.
+```html
+<HEAD> <LINK REL=STYLESHEET HREF="style.css" TYPE="text/css"> </HEAD>
+```
+
+##### Q4. What are the advantages and disadvantages of External Style Sheets?
 ##### A4.
+**The advantages of External Style Sheets are:**
 
-##### Q5.
+1. Using them, the styles of multiple documents can be controlled from one file.
+2. Classes can be created for use on multiple HTML element types in many documents.
+3. In complex situations, selector and grouping methods can be used to apply styles.
+
+**The disadvantages of External Style Sheets are:**
+
+1. In order to import style information for each document, an extra download is needed.
+2. Until the external style sheet is loaded, it may not be possible to render the document.
+3. For small number of style definitions, it is not viable.
+
+##### Q5. What are the advantages and disadvantages of Embedded Style Sheets?
 ##### A5.
+**The advantages of Embedded Style Sheets are:**
 
-##### Q6.
+1. It is possible to create classes for use on multiple tag types in the document
+2. Under complex situations, selector and grouping methods can be used to apply styles.
+3. No extra download is required to import the information.
+
+**The disadvantages of Embedded Style Sheets are:**
+
+1. It is not possible to control the styles for multiple documents from one file, using this method.
+
+##### Q6. What are the advantages and disadvantages of Inline Styles?
 ##### A6.
+**The advantages of Inline Styles are:**
 
-##### Q7.
+1. It is especially useful for small number of style definitions.
+2. It has the ability to override other style specification methods at the local level.
+
+**The disadvantages of Inline Styles are:**
+
+1. It does not separate out the style information from content.
+2. The styles for many documents can not be controlled from one source.
+3. Selector grouping methods can not be used to handle complex situations.
+4. Control classes can not be created to control multiple element types within the document.
+
+##### Q7. How can you eliminate the blue border around linked images on web page?
 ##### A7.
+This can be done by specifying the border property for linked images in your CSS as none:
+For Example:
+```css
+a img { border: none ; }
+```
 
-##### Q8.
+However, this makes it difficult for the users to differentiate between the clickable and non-clickable images.
+
+##### Q8. What is CSS selector?
 ##### A8.
+1. Basically it is a string that identifies the elements to which a particular declaration or set of declarations will apply.
+2. It can also be referred to as a link between the HTML document and the style sheet.
+3. It is equivalent of HTML elements.
 
-##### Q9.
+For example:
+```css
+A {text-indent: 12pt}
+```
+
+Here, the selector is A, which is called as type selector.
+
+##### Q9. What is Tweening?
 ##### A9.
+1. It is the short form for in-betweening.
+2. It is the process of generating intermediate frames between two images.
+3. It gives the impression that the first image has smoothly evolved into the second one.
+4. It is an important method used in all types of animations.
+5. In CSS3, Transforms(matrix,translate,rotate,scale etc) module can be used to achieve tweening.
 
-##### Q10.
+##### Q10. Explain **RWD**.
 ##### A10.
+1. **RWD** is the abbreviation for **R**esponsive **W**eb **D**esign.
+2. In this technique, the designed page is perfectly displayed on every screen size and device, be it desktop, mobile, laptop or any other device. You don’t need to create a different page for each device.
 
-##### Q11.
+##### Q11. What is the use of CSS sprites?
 ##### A11.
+1. A web page with large number of images takes a longer time to load. This is because each image separately sends out a http request.
+2. The concept of CSS sprite helps in reducing this loading time for a web page by combining various small images into one image. This reduces the numbers of http request and hence the loading time.
 
-##### Q12.
+Here’s an example sprite, with three different countries flags combined into a single image:
+
+![CSS-Sprite-Example-image](./assets/CSS-Sprite-Example.PNG)
+
+You set the same background-image on several CSS classes and set the background position and dimensions of the individual classes to display a single portion of the sprite. Here’s some code that demonstrates the concept:
+
+```css
+.flags-canada, .flags-mexico, .flags-usa {
+  background-image: url('../images/flags.png');
+  background-repeat: no-repeat;
+}
+
+.flags-canada {
+  height: 128px;
+  background-position: -5px -5px;
+}
+
+.flags-usa {
+  height: 135px;
+  background-position: -5px -143px;
+}
+
+.flags-mexico {
+  height: 147px;
+  background-position: -5px -288px;
+}
+```
+
+If you’re thinking that there has to be a way to automate this so that you aren’t manually creating these sprites and then adjusting your stylesheet to match, you’re right, and you’re in luck!
+
+**Generate Sprites with Grunt / Gulp / Node**
+
+If you’re using Grunt, Gulp, or Node in general, [~~css-sprite~~](https://github.com/aslansky/css-sprite) (now called [sprity](https://www.npmjs.com/package/sprity)) 
+is a wonderful node package that creates sprites from a glob of images. 
+Sprity has a lot of great features including formatting output as PNG, JPG (or [Data URIs](https://css-tricks.com/data-uris/) of those), 
+and stylesheet generation in CSS, LESS, Sass, and Stylus.
+
+To compile sprites via command line, install css-sprite globally with:
+
+```bash
+$ npm install sprity -g
+```
+
+Then, to generate sprites and the corresponding stylesheet, run:
+
+```bash
+$ sprity ./output-directory/ ./input-directory/*.png
+```
+
+For more information on using css-sprite with Grunt or Gulp (or many other environments), 
+head over to [the project’s repository on GitHub](https://github.com/sprity/sprity).
+
+##### Q12. What is the syntax to link external style sheet?
 ##### A12.
+External style sheet are made up of css format only, it contains style information that can be linked with the HTML document 
+externally. It is one of the easy and structured way as it keeps the style separate from the structure. 
+It is a convenient way as only one file will be affected if any changes will be made overall. The file is linked 
+through Link tag used inside the HTML Head.
 
-##### Q13.
+```html
+<html>
+<head>
+<link rel=stylesheet href="style.css" type="text/css">
+</head>
+</html>
+```
+
+##### Q13. How embedded style can be linked with HTML documents?
 ##### A13.
+Embedded style is inside the HTML code only. It is written using the <Style> tag and used under the <Head> structure. It gets applied to the element for which the style will be written.
 
-##### Q14.
+The syntax of it is as follows:
+
+```html
+<head>
+<style type="text/css">
+p {text-indent: 10pt;}
+h1{text-color: #ffffff;}
+</style>
+</head>
+```
+
+##### Q14. Why imported is an easy way to insert the file?
 ##### A14.
+Imported style sheet allows you to import the files which are external or combine one style sheet with another. 
+There can be created many files, different style sheets to have different functions. 
+`import` function gives the provision to combine many elements or functionality into one. 
+The syntax to import any file is `@import` notation, which is used inside the `<style>` tag. 
+There is a one rule that implies that the last imported sheet will override the previous ones.
 
-##### Q15.
+The syntax is shown by coding as:
+```html
+<link rel=stylesheet href="main.css" type="text/css">
+<styletype="text=css">
+<!--
+@import url(http://www.careerride.css);
+@import url(http://www.carrerride.main.css);
+.... your code
+-->
+</style>
+```
+
+The `<!-- -->` is used as a comment for those browsers that doesn’t support css.
+
+##### Q15. How do I combine multiple sheets into one?
 ##### A15.
+Multiple sheets can be combined into by using the <link> tag and the with the title attribute. 
+The title value allows one or more <link> tags to link with each other. After combination that theme 
+will be applied as combined and will be shown to the user.
 
-##### Q16.
+The syntax of it will be as follows:
+```html
+<link rel= “text/css” href="default.css" title="combined">
+<link rel= “text/css” href="style.css" title="combined">
+<link rel= “text/css” href="para.css" title="combined">
+```
+
+Another way to combine the style sheets is the use of import which can be used in the `<style>` tag and the 
+syntax can be given as follows:
+```html
+@import url(site_url);
+```
+
+##### Q16. What are the rules in CSS ruleset?
 ##### A16.
+CSS consists of two types of CSS rules, first is for ruleset which identifies the style and the selector. 
+It combines the style and the selector.
 
-##### Q17.
+**1. Ruleset is a combination of CSS rules,**
+For Example : 
+```css
+h1{text-color: 15pt;}
+```
+, where this is the CSS rule.
+
+**2. Ruleset is selector + declaration**
+For Example : 
+```css
+h1 + {text-color: 15pt;}
+```
+
+##### Q17. What are CLASS selectors used for?
 ##### A17.
+Class selectors are the selectors which are stand alone to a specific style that is declared. 
+Class attribute can be used to declare the style and make an association with any HTML element.
 
-##### Q18.
+The syntax for creation of class selector is: `.classname`.
+The name can be from a-z, A-z or in digits.
+
+The example code is shown as below:
+
+```
+.head{font: 12em;}, this is a class selector
+<body class= "head"> this is the class that is associated with the element </body>.
+```
+
+##### Q18. What is the difference between class selector and ID selector?
 ##### A18.
+1. Class selector can be given to an overall block. This is sometimes termed as block element as well, 
+   whereas ID selector identifies a unique name and a style for a specific element.
+2. ID selector declares the style for only one particular element which can be differentiated from other element, 
+   whereas Class selector is being given for the whole complete block.
 
-##### Q19.
+Example of ID selector is being written like this:
+```css
+#idname {color: red; background: black;}
+```
+
+This can be used in HTML as
+```html
+<p id= "idname">this element only will be affected by the use of this id element</p>
+```
+
+##### Q19. What is contextual selector?
 ##### A19.
+Contextual selector specifies a specific occurrence of an element. It is combination of many selectors that are 
+separated by white spaces. In this only the element that matches the specified element will be used not all the elements.
 
-##### Q20.
+For example the syntax of it is being given as:
+```css
+td p code {color: #000000}
+```
+
+The element which is being defined as code will only be displayed as red as its color is being mentioned as red. 
+But this is being done only if it occurs in the `p` text.
+```css
+td p code, h1, em {color: red}
+```
+
+The element `code` and `em` will only be displayed in red only when it occurs in `h1` or `p`.
+
+##### Q20. What do you understand by parent-child selector?
 ##### A20.
+Parent-child selector represents the direct relationship between parent element and child element. 
+It is been created by using two or more (`~`) tilde separated selectors.
 
-##### Q21.
+For example:
+```css
+body ~ p {background-color: red; text: #ff00ff;}
+```
+
+Here the `p` element gets declared for a specific element and style only that element but if it 
+has some child element then those elements will also get styled.
+
+One more example to show the parent-child relationship as:
+```css
+body ~ p ~ em {background-color: red; text: #ff00ff;}
+```
+
+The syntax in HTML will be written as:
+```html
+<body><p><em> It will show the two colors for em and p</em></p></body>
+```
+
+##### Q21. What is 'important' declaration used in CSS?
 ##### A21.
+Important declarations are those declarations which have high weightage then normal declarations. 
+These declarations override other declarations of less importance while executing. 
+If suppose there are two statements from two users and both consist of important declaration then 
+one of the user's declaration will override the another user's declaration.
 
-##### Q22.
+For example:
+```css
+body {background: #ff00ff !important; color: grey}
+```
+
+In this body background has more weight than the color.
+
+##### Q22. Is there any provision to include one or more declaration in a selector?
 ##### A22.
+There is a provision to include one or more declaration in a selector by using the semicolon 
+as this shows the separation of the properties.
 
-##### Q23.
+For example:
+```css
+selector {declaration1; declaration2}
+p {background: white; color: black}
+```
+
+##### Q23. What is the use and syntax of class in CSS?
 ##### A23.
+A CSS class is an attribute used to define a group of HTML elements in order to apply unique formatting to those 
+elements in CSS. This group can contain more than one type of element.
 
-##### Q24.
+The class attribute doesn't impact the semantic meaning of the HTML document. Meaning, simply adding a class attribute to an element without any CSS will not change the appearance or formatting of the element on the front end.
+
+However, you should still choose a name that's not based on the appearance of the element to avoid confusion when adding CSS. For instance, say you want to make all the headings on your page bold and change their font color to blue. To start, you'd create and add a class name to your heading elements. Instead of using a class name like .bold, opt for a name like .bright. That way, you won't confuse the class name with the HTML bold element.
+
+Class names don't have to be one word either. A widely-accepted practice for creating CSS classes is to use lowercase and replace spaces with hyphens. Some examples include .bright-blue and .fancy-text.
+
+Now that we understand what a CSS class is and how it appears in the body section of an HTML file, let's take a look at common use cases.
+
+**How to Use CSS Classes**
+You can use CSS classes to group HTML elements and then apply custom styles to them.
+
+For example, in [Bootstrap CSS](https://blog.hubspot.com/website/bootstrap-css?_ga=2.250361094.1857383017.1604334734-658134876.1604334734), 
+the CSS class `.btn` can be used with the `<button>` element as well as the `<a>` and `<input>` elements. 
+Since Bootstrap's default stylesheet contains CSS that will automatically format any elements defined with the `.btn` class, 
+simply adding this class attribute to an HTML element will change its appearance and behavior. 
+For example, adding the `.btn` class to a button element will set the font and font size, 
+and if a visitor clicks on the button text, then an outline of a button with rounded edges will appear. 
+
+**How to Create a Class in CSS**
+Creating a CSS class is easy. You just need to add some HTML and CSS to your web pages.
+
+Start by adding a class attribute to the HTML elements you want to style. To do so properly, just add **class="class-name"** inside the opening tags of those element.
+
+Let's look at an example below.
+
+Here's the HTML:
+```html
+<h1>Not green</h1>
+<p class="pastoral">Green</p>
+<p>Not green</p>
+<p><a href="default.asp" target="_blank" class ="pastoral">The link</a> that appears within this paragraph is green.</p>
+```
+
+Then, you can create a rule set for that particular class. You simply need a class selector and a declaration block. The declaration block consists of CSS properties defined with values.  In the example below, for example, the CSS color property is defined with the color name "green."
+
+Here's the CSS:
+
+```css
+.pastoral {
+  color: green;
+}
+```
+
+Here's the result:
+
+![CSS-Class-image](./assets/CSS-Class.PNG)
+
+##### Q24. How does grouping happen inside a CSS?
 ##### A24.
+Grouping in CSS can be done by using the comma (`,`) separator in between one or more selectors 
+that share the same style. A list of separator can be separated by using a semicolon as well.
 
-##### Q25.
+For Example:
+```css
+h1 {font-style: italic}
+p.first {font-style: italic}
+.name {font-style: italic}
+```
+
+In the above example all the css element share the same style so instead of writing like that it can be written as:
+```css
+h1, p.first, .name {font-style: italic}
+```
+
+This reduces the size of the style sheet and also save the writing time for those sheets.
+
+##### Q25. What is the purpose of pseudo-elements?
 ##### A25.
+> **Pseudo elements** allow the use of the part of element and not the element itself. 
+>
+> They are applied to block level element, which is used for the complete block for which the CSS is being written. 
+>
+> This allow the subpart of an element to be styled like paragraphs and headings.
+>
+
+For example:
+```css
+selector:pseudo-element {property:value;}
+p: first-line {text-transform: lowercase;}
+```
+
+It adds the style to the first line of the code in the paragraph.
+
+##### Q26. How pseudo-classes are different from pseudo-elements?
+##### A26.
+> **Pseudo classes** are used to add style and special effects to some selectors which is being used inside some class.
+>
+
+The syntax it as follows
+```css
+selector:pseudo-class {property:value;}
+a:link {color:#FF0000;}
+```
+
+**pseudo classes** can be combined with other classes as well.
+The syntax of it will be shown as:
+```css
+selector.class:pseudo-class {property:value;}
+a.red:visited {color:#FF0000;}
+```
+
+##### Q27. What does cascade and cascading order defines?
+##### A27.
+**Cascade** is a method in CSS that defines the importance of particular style rules. This doesn’t allow any 
+conflict to occur between other elements that is being defined within the same CSS. Declaration with more 
+importance get executed first then others.
+
+The syntax is as follows:
+```css
+selector{property: value ! important} /* increased weight */
+selector (property: value} /* normal weight */
+```
+
+**Cascading order** is a sorting method that consists of some rules of the declarations through which it can be sorted 
+and the conflict can be resolved which might occur between it. In this all the declarations has to be found that 
+apply the selector and properties to a specific elements.
+
+##### Q28. What are the different sorting methods used inside the cascading order?
+##### A28.
+Cascading order is a sorting method that allows many different sorting methods like:
+
+**1. Sort by origin :** In this some rules will be defined like:
+- Normal weight in provider’s style sheet will override the style sheet rules of the user’s.
+- Increased weight in user’s style sheet will override normal weight of style sheet of provider.
+
+**2. Sort by selector's specificity :** In this more specific selector will override the selectors that are less specific: For Example:
+- ID selector is the most specific one.
+- Contextual selectors are less specific.
+- So, ID selector will override the contextual selector style sheets.
+
+**3. Sort by order specified :** If two selectors are same in the weight and other properties then the specification will be seen for overriding.
+**For Example:**
+- Style attribute used for inline style will override all other styles.
+- Link element used for external style will override imported style.
+
+##### Q29. How are inline and block elements different from each other?
+##### A29.
+1. Inline elements don’t have line breaks. An Inline element doesn’t have elements to set width and height.
+For Example:
+```
+em, strong, etc. codes are few examples of inline elements.
+```
+
+2. Block elements do have line breaks and they define the width by setting a container. It also allowed setting height. 
+   It can contain the elements that occur in inline elements.
+For Example:
+```
+width and height
+max-width and max-height
+min-width and min-height
+hi (i=1-6)- heading element
+p- paragraph element.
+```
+
+##### Q30. How does inheritance work in CSS?
+##### A30.
+Inheritance is a concept that is used in HTML and other languages but it is used in CSS as well to define the 
+hierarchy of the element from top level to bottom level. In inheritance child will inherit the properties of parent. 
+In this the restriction is being applied that not all the properties can be applied. Inheritance passes its properties 
+to its children class so that the same property doesn’t have to define the same property. Inherited properties 
+can be overrided by the children class if child uses the same name properties.
+
+For Example:
+```css
+body {font-size: 10pt;}
+```
+
+And another definition is being defined in the child class
+```css
+body {font-size: 10pt;}
+h1 {font-size: 14pt;}
+```
+
+All the paragraph text will be displayed using the property defined in the body except for the h1 style which will 
+show the text in font 14 only.
+
+##### Q31. What are the advantages of the external over inline style methods?
+##### A31.
+1. External Style Sheets are useful as it keeps the style and content separately and doesn't allow it to mix with each other. 
+   It can control the styles for multiple documents, whereas inline style mixes the content with the style and make the code messier.
+2. External style sheet allows the creation of various classes in a structured way, whereas inline style sheet can't create 
+   or control class elements.
+3. External style sheet can use selector and grouping methods to apply styles, whereas inline styles can't use selector 
+   and grouping methods.
+
+##### Q32. How do you override the underlining of hyperlinks?
+##### A32.
+The concept of override the underlining of hyperlinks in CSS is done by using control statements 
+and using external style sheet.
+
+For Example:
+```css
+a { text-decoration: none; }
+```
+
+Suppose this is being written in CSS file and in the anchor tag in HTML the format is being written as:
+```html
+<a href="career.html" style="text-decoration: none">link text</a>
+```
+
+So, anything thing written as inline will override the style for the hyperlink used in external style sheet.
+
+##### Q33. How to center the block-elements with CSS?
+##### A33.
+CSS allows you to style your web-pages and sheets so that you can visualize it in better way.
+
+This can be done in two ways:
+1. It can be done by defining the properties like margin-left and right to auto and width can be given any value.
+For Example:
+```css
+body {width: 30em; background: cyan;}
+h1 {width: 22em; margin-left: auto; margin-right: auto}
+```
+
+2. It can be done by the use of table like:
+```css
+table {margin-left: auto; margin-right: auto; width: 400px;}
+```
+
+This table width is being defined by the content used. These are the methods that are used to center the block element.
+
+##### Q34. What will happen if we will use floats across the page with 100% width?
+##### A34.
+In CSS if float declaration is being made then it add some width in the form of border and it allow it to float even more. 
+So, the width can be used just by adding the border of say 1 pixel in CSS element.
+
+##### Q35. What is the Difference between id and class?
+##### A35.
+The id and class is being used in HTML and includes the values from CSS. The difference is as follows:
+
+1. Id is an attribute that it uniquely assigns a name to a particular element, whereas class defines an element with certain set of properties which can be used for a complete block.
+2. Id can be used for an element and uniquely identifies it, whereas class is used as block element and applied to many tags where it is used.
+3. Id restricts the use of properties to one specific element, whereas class applies the rules and properties to specific block or group of elements.
+
+##### Q36. How to restore the default property value using CSS?
+##### A36.
+CSS doesn’t provide any default values that can be used if the user wants to revert back to the old values. 
+The only option which can be performed to restore the default property value is to re-declare the property 
+which you want to revert back to. Rules should be defined for using the selectors like tag name, etc. that you 
+want to override for more specific values.
+
+##### Q37. What is the purpose of Nesting Selectors?
+##### A37.
+Nesting selectors are the selectors that define a selector inside another selector.
+
+For Example:
+```css
+h1
+{color:blue;
+text-align:center;}
+.marked
+{background-color:red;}
+.marked h1
+{color:white;}
+```
+
+In this a particular style is being defined for the element of h1, and another is given for all other elements. 
+Here the class is given as "marked" and one more style given for h1 element within the h1 style.
+
+##### Q38. How CSS float works?
+##### A38.
+CSS float is useful when you don’t have to give width for an element or you don’t want to keep the element fixed. 
+It allows the elements to be given left or right boundaries to expand and wrap all other elements. 
+Float is basically used for images and for layouts. Elements in this can be made float horizontally i.e. left or right.
+
+For Example:
+```css
+img{float:right;}
+```
+
+##### Q39. What is the use of Media Types in CSS?
+##### A39.
+Media types in CSS define the media like audio and video to be used in your HTML document to represent the properties in a better way. The font property can be used for media types as it can be used for print media or screen media. Document requires a defined media to represent the screen that can be read on the paper. It is used as:@media
+
+```html
+<html>
+<head>
+<style>
+@media screen
+{
+    p.test {font-family:verdana,sans-serif;font-size:14px;}
+}
+@media print
+{
+    p.test {font-family:times,serif;font-size:10px;}
+}
+</style>
+</head>
+<body>
+----------Your code here----------
+</body>
+</html>
+```
+
+##### Q40. What are the different Media Types included in CSS?
+##### A40.
+Media types are not case sensitive and it allows you to define different properties in different media.
+
+The different media type that is included in CSS is:
+
+**1. Aural –** Used for speech and sound synthesizers
+**2. Print –** Used to show the content as they will look when you will use the print command
+**3. Projection -** Used to show the CSS for the projectors
+**4. Handheld -** Used for handheld devices
+**5. Screen -** Used for screens like computers and laptops. 
+
+##### Q41. Why CSS Box Model is used? What are the elements that it includes?
+##### A41.
+CSS box model defines the design and layout of the styling element. It is a box that shows the elements that will come before others. Like, it consists of margins, borders, padding, and the actual content. It allows a structured way to show the elements in comparison to other elements.
+
+The terms that are used in box model is shown as:
+
+**1. Margin –** It shows the top most layer and it shows the overall structure which consists of border and other elements that is being shown below.
+**2. Border –** It shows the padding and content option and keep a border around it. Border can be affected by background color.
+**3. Padding –** It shows the space between the content blocks. It is affected by the background color.
+**4. Content –** It shows the actual content like text and images. These all are essential terms that allows you to understand the structure and apply it to your code.
+
+##### Q42. Write the css code showing the usage of all the background properties.
+##### A42.
+With the help of css there are several ways to change the background properties of an html page. For ex. the following code will place the background image at the center of the body element. Also the background would not be repeated and the scroll would be locked.
+```css
+body
+{
+    font-family : "Verdana, Arial, Helvetica, sans-serif;
+    background-image: url(images/background_image.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #FF00FF;
+    color : #FF0000;
+    margin: 20px;
+}
+```
+
+##### Q43. How are contextual selectors used in CSS?
+##### A43.
+The contextual selector is a special type of selector that is used to select special occurrences of an element. 
+This selector is a string of individual selectors separated by spaces. It defines a search patterns of the element where only the last element in the pattern is addressed to.
+
+For Example:
+```css
+td p text {color: blue}
+```
+
+This implies that the `text` will appear blue in color only if it occurs in the context of the element 
+`p` which itself occurs in the context of `td`.
+```css
+p.about {color: red}
+```
+
+This implies that any element specified with class .about will appear in red color but only 
+if it occurs in context to `p`.
+
+##### Q44. How can the same properties be defined for different elements without repeating them again and again? Explain with an example.
+##### A44.
+In order to specify the same style properties for multiple elements in css we can make use of class. 
+Class in general are a group of of instances of the same elements to which the same style can be assigned 
+or it can be a group of different instances to which a common style can be assigned.
+
+For Example:
+
+CSS code
+```css
+p.class1 {color: red} /* defines a class of p selector */
+p.class2 {color: blue} /* defines another class of p selector */
+.class3 {color: green} /*this class can be used with any element*/
+```
+
+HTML code
+```html
+<p class=class1>This paragraph will be colored in red</p>
+<p class=class2>This paragraph will be colored in blue</p>
+<p class=class3>This paragraph will be shown in green</p>
+<li class=class3>This list item will also be green</li>
+```
+
+##### Q45. How can imported style sheets be linked? Explain with the help of an example?
+##### A45.
+- Imported style sheets are those style sheets which as their name suggests can be combined for use with another sheet. 
+  By doing so the designer is able to create a single main sheet which has declarations that apply to the whole site 
+  and specific style sheets that apply only to certain specific elements.
+- In order to import a style sheet the style element must contain the `@` notation. In case of multiple sheets being 
+  imported they will be done so in the order they are imported. The last imported sheet would over write any previous 
+  style sheet property.
+
+For Example:
+```html
+<link rel=stylesheet href="major.css" type="text/css">
+<styletype="text=css">
+<!--
+@import url(http://www.css.stylesheet1.css);
+@import url(http://www.css.stylesheet2.css);
+-->
+</style>
+```
+
+##### Q46. Explain with the help of an example the usage of a parent-child selector.
+##### A46.
+The parent-child selector as the name suggests is used for selecting the direct descendent of a parent element. 
+This selector is represented by using the “`~`” tilde symbol between two selectors.
+
+For Example:
+```css
+body ~ li {background: blue; color: red}
+```
+
+This specifies that the `li` element will be declared the above style rules only when the `li` would be a 
+descendant of the `body` element.
+```css
+body ~ li ~ em {background: blue; color: white}
+```
+
+In this example the `em` will be specified the above properties only when it is a descendant of `li` which itself 
+is a child of body. The parent child selector can be used to specify a particular element when there are multiple 
+instances of the same element.
+
+##### Q47. Why should inline styles be used carefully?
+##### A47.
+Inline style rules allows a user to attach individual styles to individual elements in an HTML document. 
+The syntax of an inline style rule attached to an HTML element:
+```html
+<p style=”color: red;”> Red text</p>
+```
+
+Inline styles are generally not the preferred way of applying a style rule and must be used carefully 
+because of the following reasons:
+
+1. The style rules can easily get mixed up in an HTML page code.
+2. The entire rule must be specified in the value of the style attribute, this can be tough in case of long rules.
+3. By using inline styles the user is unable to take advantage of CSS properties such as grouping selectors and re usability of a style sheet.
+4. It is generally advised to use either internal or external style sheets as they are more convenient to manage and can be changed easily as they are at the same place.
+
+##### Q48. How do hexadecimal color codes differ from RGB values?
+##### A48.
+In CSS a user can specify a color in two ways:
+
+**1. Hexadecimal color codes :** These as their name suggest use six characters to represent a color. 
+     It is a combination of numbers and letters. When you use a hexadecimal code to specify a color it should 
+     always be precede by a "`#`". This ensures that the color is displayed correctly in a browser.
+Example :
+```css
+p {color: #0000FF;}
+```
+
+**2. RGB color values :** Every color can be defined as a mixture of red, green and blue. 
+     In CSS the user can also define the value of a color by specifying the RGB values in two different ways:
+
+**- rgb(r,g,b) :** In this type the values can be in between the integers 0 and 255.
+**- rgb(r%,g%,b%) :** The rgb basically represent the percentage of red, green and blue of the color.
+
+The hexadecimal values of a color are the ones that are most widely used.
+
+##### Q49. What is the use of a pseudo class? Explain with the help of an example?
+##### A49.
+The pseudo classes are used to define the css properties of an element that does not exist otherwise.
+Pseudo classes enables the user to define the style properties of an element which otherwise would not have been possible. 
+The pseudo class name is always preceded by a colon " `:` ".
+
+Pseudo classes can be used with:
+
+1. Elements
+2. Classes
+3. ID's
+
+Some of the common pseudo classes that are used with hyperlink are:
+
+1. link defines the properties of the link that have not been visited.
+2. visited defines the properties if the links that have been visited.
+3. hover defines the properties of the link when the mouse cursor hovers on them.
+
+For Example:
+```css
+a:link {color: black;}
+```
+
+This will set the color of any hypelink that points to an unvisited link and will appear in black color.
+
+##### Q50. How is a CSS executed in case of more than one conflicting rule?
+##### A50.
+If there are two or more css rules which are pointing towards the same element there are some basic rules 
+that a browser follows in order to know which is the most specific and will be executed `/` applied.
+
+For Example:
+```css
+p {color: red;}
+p {color: blue;}
+```
+
+In the above case all the `p` contents would appear blue as this rule was specified the last.
+In css every element is assigned a unique specificity value. Based on the specificity value a style rule is executed.
+
+For Example:
+**p :** this has the specificity of 1
+**div p :** this has a specificity of 2 ( ie 1 + 1 of two selectors )
+**.class :** has a specificity of 10
+**#id :** This has a specificity of 100.
+
+In this way whichever selector has the highest specificity will apply in case of multiple selectors 
+pointing at the same element.
+
+##### Q51. Explain with the help of examples how the display property is used in CSS.
+##### A51.
+In CSS the user has the ability to define how the content will be displayed. There are three fundamental types of display:
+
+**1. Inline :** The elements are displayed in a line.
+**2. Block :** In this display style a line break is placed before and after every element.
+**3. None :** Does not display the elements.
+
+The syntax of specifying a display style is :
+```css
+h1 { display: inline; }
+```
+
+CSS provides the user with further more display styles such as:
+
+**1. list-item :** Does the same work as the HTML li element. Displays the content in a list.
+**2. marker :** This property is exclusively used with the pseudo elements :before and :after.
+**3. Tables :** The table properties can be used in similar way to the table elements provided by HTML but css further extends the functionality by providing properties like table-column, table-caption etc.
+
+For Example:
+```css
+div.test
+{
+    display:inline;
+    zoom:1.0;
+}
+```
+
+##### Q52. Explain what are image sprites and how are they used in css.
+##### A52.
+Image sprites are basically a collection of images put into a single image. A web page can contain multiple images 
+and loading them all one by one can be a slow process. By using image sprites only a single image is used and by specifying the area of the image to be displayed the same image can be used multiple times.
+
+For example: 
+We have a an image.gif which contains the home, forward and back navigation buttons. With the help of css the user 
+can simply specify only the part of the image that is needed. Now the user wants to only display the home part of 
+the image for the home button.
+
+CSS code:
+```css
+img.home
+{
+    width:50px;
+    height: 44px;
+    background: url (image.gif) 0 0 ;
+}
+```
+
+In the above css code only a part of the overall image.gif will be used, in this case the home page button area only. 
+By using image sprites the page loading time can be reduced by substantial margins. The user only needs to know 
+absolute image area to be dispalyed.
+
+##### Q53. With the help of examples explain grouping and nesting of css selectors.
+##### A53.
+**Grouping selectors :** In css the designer can reduce the code by simply groping together selectors with the 
+same property values.
+
+For Example:
+```css
+h1 {color: green;}
+h2 {color: green;}
+p {color: green;}
+```
+
+As you can see from the above code the all the elements have the same property. To avoid rewriting the same code again and again the user can simply group the selectors by separating each selector with a comma.
+**Grouped selectors :**
+```css
+h1,h2,p {color: green;}
+```
+
+**Nesting selectors :** This enables the user to specify a style for a selector within a selector.
+For Example:
+```css
+p
+{
+color:blue;
+text-align:center;
+}
+.marked
+{
+background-color:red;
+}
+.marked p
+{
+color:white;
+}
+```
+
+In the above example separate properties are assigned for `p` and the `.marked` class. 
+But the last value that is `.marked p` implies that the property will apply to `p` elements with class defined 
+as `.marked`.
+
+##### Q54. How can HTML elements be styled having specific attributes?
+##### A54.
+CSS allows the user to style the html elements that have specific attributes. It does not only rely on class and id.
+
+For Example:
+```css
+[title]
+{
+color:red;
+}
+```
+
+This will simply color any attribute containing `title`.
+
+CSS also allows the user to specify an attribute with a particular value.
+For Example:
+```css
+[title=test]
+{
+color:red;
+}
+```
+
+This will simply color the text `test` that appears anywhere in the `title` attribute.
+
+Also the user can specify an attribute with multiple values.
+For Example:
+```css
+[title~=test] {color:blue;}
+```
+
+##### Q55. What are the different provision provided in css to define the dimension of an element?
+##### A55.
+In css the user can choose from multiple dimension properties to style an element. The list of css dimension properties are:
+
+**1. height :** This property allows the user to specify the height of a specific element.
+**2. max-height :** This allows the user to set the maximum height of an element.
+**3. max-width :** This specifies the maximum width of an element.
+**4. min-height :** It allows the user to specify the minimum height of an element.
+**5. min-width :** Used to set the minimum width of an element.
+**6. width :** This property is used to set the width of an element.
+
+For Example:
+```css
+img.big {height:100px} <!-- specifies the height of an element-->
+img.big {max-height:100px} <!-- specifies the maximum height of an element-->
+```
+
+##### Q56. Explain the concept of the box model in css.
+##### A56.
+CSS uses the concept of a box model which implies that every HTML element is a box. This term is used when we are 
+talking about design and layout. The CSS box model is actually a box that wraps an HTML element.
+
+A box comprises of the following components:
+
+**1. margins :** Used to clear an area around a border.
+**2. border :** Border goes around the padding and the content.
+**3. padding :** Used to clear the area around the content.
+**4. content :** This contains the actual content of the box that is the text and the images.
+
+It is important to note that when a user sets the height and width of an element, they are doing so only for the content area. 
+To know the fill size of the element the user must also specify the other layers i.e. the padding border and margins.
+
+For Example:
+```css
+p
+{
+    width:220px;
+    padding:10px;
+    border:5px solid gray;
+    margin:0px;
+}
+```
+
+The `total width` of an `element` is calculated like this:
+`Total element width = width + left padding + right padding + left border + right border + left margin + right margin`
+
+The `total height` of an `element` is calculated like this:
+`Total element height = height + top padding + bottom padding + top border + bottom border + top margin + bottom margin`
+
+##### Q57. How is the float property implemented in css?
+##### A57.
+The css float property allows an element to be pushed to the left or right which allows other elements to wrap 
+around the floated element. The elements specified before the float element will not be effected. Only the elements 
+specified after the floated elements will float around the element.
+
+For Example:
+```css
+img { float:right;}
+```
+
+This implies that if an image is floated towards the right then the text that follows its would flow around it on the left. 
+The user can also float multiple elements together. The elements would float if there is space available for them to float. 
+Any float element will cause the other elements following it to float around it, to avoid this the user can make use of the 
+clear property. The clear property is used to specify the sides of an element on which the floating of elements is not 
+allowed.
+
+For Example:
+```css
+.line {clear:both;}
+```
+
+This would prevent the elements from floating around after the float element.
+
+##### Q58. What is the purpose of the `z-index`? Explain with the help of an example.
+##### A58.
+While using css to position html elements they may overlap each other. The `z-index` is used to specify which 
+element overlaps which element. The `z-index` is a number which can either have a positive or a negative value. 
+By default the `z-index` value is zero. In case elements have the same `z-index` number specified then the browser 
+will layer them according to the order in which they appear in the HTML.
+
+For Example:
+We have a list of 4 elements each with their defined numbers:
+```css
+element1 - z-index number 25
+element2 - z-index number -34
+element3 - z-index number 10
+element4 - z-index number not defined
+```
+
+In this case the order of their stack would be:
+```
+element1
+element3
+element4
+element2
+```
+
+##### Q59. Explain the meaning of **graceful degradation** in reference to CSS.
+##### A59.
+Generally **graceful degradation** is a concept that allows a system to continue to operate properly in the event 
+of a failure of a component. In web design the graceful degradation is a very important area. When a developer 
+creates a website he creates it to take advantage of the latest browser support etc. but care should also be 
+taken to render the website properly on older browsers. In this way the designer is able to get a wider audience 
+by stepping down some of the features to provide basic functionality to people with older browsers. 
+
+For example while specifying an image in the html css code many time an alt tag is used. This means that in case 
+the image cannot be shown in a browser it will instead show the text specified within the alt tag.
+
+##### Q60. What is the other alternative to graceful degradation?
+##### A60.
+The other concept is know as **progressive enhancement**. **Progressive enhancement** focuses on the content of a web 
+rather than the browsers itself. In this way a website can be viewed on different platforms according to the amount of 
+resources available. For ex a user with the latest browser and a high bandwidth connection might get some extra eye candy 
+as compared to a user visiting the same site on a dial-up and old browser. But the overall functionality provided would 
+be the same. Gmail does so as well where users with slow connections are provided a plain html view whereas high bandwidth 
+users get the complete site to access. This concept recently has come into play as mobile devices with Internet surfing 
+capabilities have started to grow and expand its user base.
+
+##### Q61. How are shorthand properties are used in css? Give examples.
+##### A61.
+One of the primary advantages of css is that it greatly reduces page load times. Writing multiple properties and their 
+values in a single line of css code is known as css shorthand technique. One thing to be kept in mind is that while 
+using the css shorthand technique is that the order of specifying the values of an attribute must be maintained. 
+In case the user wants to keep a value as default it is not needed to be mentioned.
+
+For Example:
+```css
+margin-top: 5em;
+margin-bottom: 3em;
+margin-right: 1em;
+margin-left: 1em
+```
+Becomes:
+```css
+margin: 5em 1em 3em (top, right and left, bottom);
+```
+
+And,
+```css
+border-width:5px;
+border-style:solid;
+border-color:#fff;
+```
+
+Becomes:
+```css
+border:5px solid #fff;
+```
 
 ---
 
