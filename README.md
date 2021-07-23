@@ -1997,16 +1997,17 @@ where we can add JavaScript in HTML.
 `<body…Javascript…</body>` and `<head>…Javascript…</head>`
 4. External File : Script in and external file and then include in `<head>…</head>` section.
 
-##### Q27. Explain marquee tag.
+##### Q27. Explain `marquee` tag.
 ##### A27.
-Marquee tag : Marquee tag is used when we want that some text or content move in the web page whether horizontally or vertically.
+`Marquee` tag : `Marquee` tag is used when we want that some text or content move in the web page whether 
+horizontally or vertically.
 
 Syntax of Marquee tag:
 ```html
 <marquee>move text</marquee>
 ```
 
-Attribute of Marquee tag are: bgcolor, direction, height, width, vspace etc.
+Attribute of `Marquee` tag are: `bgcolor`, `direction`, `height`, `width`, `vspace` etc.
 
 ##### Q28. How do I add midi music to my web page?
 ##### A28.
@@ -2505,159 +2506,383 @@ will be defined as the nested frameset. The following code explains it further:
 
 ---
 
-#### F: Top 50 HTML Questions
+#### F: Top 60 HTML Questions
 
 ---
 
-##### Q1.
+##### Q1. What is HTML?
 ##### A1.
+HTML is short for **H**yper**T**ext **M**arkup **L**anguage and is the language of the World Wide Web.
+It is the standard text formatting language used for creating and displaying pages on the Web.
+HTML documents are made up of two things: the content and the tags that format it for proper display on pages.
 
-##### Q2.
+##### Q2. What are tags?
 ##### A2.
+Content is placed in between HTML tags in order to properly format it.
+It makes use of the less than symbol (`<`) and the greater than symbol (`>`). A slash symbol is also used as a closing tag.
+For example:
 
-##### Q3.
+```html
+<strong>sample</strong>
+```
+
+##### Q3. Do all HTML tags come in a pair?
 ##### A3.
+No, there are single HTML tags that do not need a closing tag. Examples are the `<img>` tag and `<br>` tags.
 
-##### Q4.
+##### Q4. What are some of the common lists that can be used when designing a page?
 ##### A4.
+You can insert any or a combination of the following list types:
+– ordered list
+– unordered list
+– definition list
+– menu list
+– directory list
+Each of this list types makes use of a different tag set to compose
 
-##### Q5.
+##### Q5. How do you insert a comment in HTML?
 ##### A5.
 
-##### Q6.
+Comments in HTML begins with `<!–` and ends with `–>`. For example:
+
+```html
+<!-- A SAMPLE COMMENT -->
+```
+ 
+##### Q6. Do all character entities display properly on all systems?
 ##### A6.
+No, there are some character entities that cannot be displayed when the operating system that the browser is running on 
+does not support the characters. When that happens, these characters are displayed as boxes.
 
-##### Q7.
+##### Q7. What is an image map?
 ##### A7.
+Image map lets you link to many different web pages using a single image.
+You can define shapes in images that you want to make part of an image mapping.
 
-##### Q8.
+##### Q8. What is the advantage of collapsing white space?
 ##### A8.
+White spaces are a blank sequence of space characters, which is treated as a single space character in HTML.
+Because the browser collapses multiple spaces into a single space, you can indent lines of text without worrying about multiple spaces.
+This enables you to organize the HTML code into a much more readable format.
 
-##### Q9.
+##### Q9. Can attribute values be set to anything or are there specific values that they accept?
 ##### A9.
+Some attribute values can be set to only predefined values. Other attributes can accept any numerical value 
+that represents the number of pixels for a size.
 
-##### Q10.
+##### Q10. How do you insert a copyright symbol on a browser page?
 ##### A10.
+To insert the copyright symbol, you need to type `&copy;` or & `#169;` in an HTML file.
 
-##### Q11.
+##### Q11. How do you create links to sections within the same page?
 ##### A11.
+Links can be created using the `<a>` tag, with referencing through the use of the number (`#`) symbol.
+For example, you can have one line as `<a href="#topmost">BACK TO TOP</a>`, which would result in the words 
+`"BACK TO TOP"` appearing on the webpage and links to a bookmark named topmost. You then create a separate tag 
+command like `<a name="topmost">` somewhere on the top of the same webpage so that the user will be linked 
+to that spot when he clicked on `"BACK TO TOP"`.
 
-##### Q12.
+##### Q12. Is there any way to keep list elements straight in an HTML file?
 ##### A12.
+By using indents, you can keep the list elements straight. If you indent each subnested list in further than the parent list 
+that contains it, you can at a glance determine the various lists and the elements that it contains.
 
-##### Q13.
+##### Q13. If you see a web address on a magazine, to which web page does it point?
 ##### A13.
+Every web page on the web can have a separate web address. Most of these addresses are relative to the top-most web page.
+The published web address that appears within magazines typically points this top-most page. From this top level page,
+you can access all other pages within the website.
 
-##### Q14.
+##### Q14. What is the use of alternative text in image mapping?
 ##### A14.
+When you use image maps, it can easily become confusing and difficult to determine which hotspots correspond to which links.
+Using alternative text lets, you put a descriptive text on each hotspot link.
 
-##### Q15.
+##### Q15. Do older HTML files work on newer browsers?
 ##### A15.
+Yes, older HTML files are compliant to the HTML standard. Most older files work on the newer browsers, though some features may not work.
 
-##### Q16.
+##### Q16. Does a hyperlink apply to text only?
 ##### A16.
+No, hyperlinks can be used in the text as well as images. That means you can convert an image into a link that will allow users to 
+link to another page when clicked. Surround the image within the `<a href=" ">…</a>` tag combinations.
 
-##### Q17.
+##### Q17. If the user’s operating system does not support the needed character, how can the symbol be represented?
 ##### A17.
+In cases wherein their operating system does not support a particular character, it is still possible to display that character 
+by showing it as an image instead.
 
-##### Q18.
+##### Q18. How do you change the number type in the middle of a list?
 ##### A18.
+The `<li>` tag includes two attributes – type and value. The type attribute can be used to change the numbering type for any list item.
+The value attribute can change the number index.
 
-##### Q19.
+##### Q19. What are style sheets?
 ##### A19.
+Style sheets enable you to build consistent, transportable, and well-defined style templates. These templates can be linked 
+to several different web pages, making it easy to maintain and change the look and feel of all the web pages within site.
 
-##### Q20.
+##### Q20. State  bullet types available in HTML.
 ##### A20.
+With ordered lists, you can select to use some different list types including alphabetical and Roman numerals.
+The `type` attribute for unordered lists can be set to `disc`, `square`, or `circle`.
 
-##### Q21.
+##### Q21. How do you create multicolored text in a webpage?
 ##### A11.
+To create text with different colors, use the `<font color="color">…</font>` tags for every character that you want to apply 
+color. You can use this tag combination as many times as needed, surrounding a single character or an entire word.
 
-##### Q22.
+##### Q22. Why are there both numerical and named character entity values?
 ##### A22.
+The numerical values are taken from the ASCII values for the various characters, but these can be difficult to remember.
+Because of this, named character entity values were created to make it easier for web page designers to use.
 
-##### Q23.
+##### Q23. Write an HTML table tag sequence that outputs the following: `50 pcs 100 500<br/>10 pcs 5 50`
 ##### A23.
+```html
+<table> 
+<tr> 
+<td>50 pcs</td> 
+<td>100</td> 
+<td>500</td> 
+</tr> 
+<tr> 
+<td>10 pcs</td> 
+<td>5</td> 
+<td>50</td> 
+</tr> 
+</table>
+```
 
-##### Q24.
+##### Q24. What is the advantage of grouping several checkboxes together?
 ##### A24.
+Although checkboxes don’t affect one another, grouping checkboxes together help to organize them.
+Checkbox buttons can have their name and do not need to belong to a group. A single web page can have many different groups 
+of checkboxes.
 
-##### Q25.
+##### Q25. What will happen if you overlap sets of tags?
 ##### A25.
+If two sets of HTML tags are overlapped, only the first tag will be recognized. You will find this problem when the text 
+does not display properly on the browser screen.
 
-##### Q26.
+##### Q26. What are applets?
 ##### A26.
+Applets are small programs that can be embedded within web pages to perform some specific functionality, 
+such as computations, animations, and information processing. Applets are written using the Java language.
 
-##### Q27.
+##### Q27. What if there is no text between the tags or if a text was omitted by mistake? Will it affect the display of the HTML file?
 ##### A27.
+If there is no text between the tags, then there is nothing to format. Therefore no formatting will appear.
+Some tags, especially tags without a closing tag like the `<img>` tag, do not require any text between them.
 
-##### Q28.
+##### Q28. Is it possible to set specific colors for table borders?
 ##### A28.
+You can specify a border color using style sheets, but the colors for a table that does not use style sheets 
+will be the same as the text color.
 
-##### Q29.
+##### Q29. How do you create a link that will connect to another web page when clicked?
 ##### A29.
+To create hyperlinks, or links that connect to another web page, use the href tag. The general format for this is: 
 
-##### Q30.
+```html
+<a href="site">text</a>
+```
+
+Replace "site" with the actual page URL that is supposed to be linked to when the text is clicked.
+
+##### Q30. What other ways can be used to align images and wrap text?
 ##### A30.
+Tables can be used to position text and images. Another useful way to wrap text around an image is to use style sheets.
 
-##### Q31.
+##### Q31. Can a single text link point to two different web pages?
 ##### A31.
+No. The `<a>` tag can accept only a single href attribute, and it can point to only a single web page.
 
-##### Q32.
+##### Q32. What is the difference between the directory and menu lists and the unordered list?
 ##### A32.
+The key difference is that the directory and menu lists do not include attributes for changing the bullet style.
 
-##### Q33.
+##### Q33. Can you change the color of bullets?
 ##### A33.
+The bullet color is always the same as that of the first character in the list item. If you surround the 
+`<li>` and the first character with a set of `<font>` tags with the color attribute set, the bullet color, 
+and the first character will be a different color from the text.
 
-##### Q34.
+##### Q34. What are the limits of the text field size?
 ##### A34.
+The default size for a text field is around 13 characters. However, if you include the size attribute, 
+you can set the size value to be as low as 1. The maximum size value will be determined by the browser width. 
+If the size attribute is set to 0, the size will be set to the default size of 13 characters.
 
-##### Q35.
+##### Q35. Do `<th>` tags always need to come at the start of a row or column?
 ##### A35.
+Any `<tr>` tag can be changed to a `<th>` tag. This causes the text contained within the `<th>` tag to be displayed as bold 
+in the browser. Although `<th>` tags are mainly used for headings, they do not need to be used exclusively for headings.
 
-##### Q36.
+##### Q36. What is the relationship between the `border` and `rule` attributes?
 ##### A36.
+Default cell borders, with a thickness of 1 pixel, are automatically added between cells if the `border` attribute 
+is set to a nonzero value. Likewise, If the `border` attribute is not included, a default 1-pixel border appears 
+if the rules attribute is added to the `<table>` tag.
 
-##### Q37.
+##### Q37. What is a `marquee`?
 ##### A37.
+A `marquee` allows you to put a scrolling text in a web page. To do this, place whatever text you want to appear 
+scrolling within the `<marquee>` and `</marquee>` tags.
 
-##### Q38.
+##### Q38. How do you create text on a webpage that will allow you to send an email when clicked?
 ##### A38.
+To change text into a clickable link to send email, use the mailto command within the href tag.
+The format is as follows:
 
-##### Q39.
+```html
+<A HREF="mailto:youremailaddress">text to be clicked</A>
+```
+ 
+##### Q39. Are `<br>` tags the only way to separate sections of text?
 ##### A39.
+No. The `<br>` tag is only one way to separate lines of text. Other tags, like the `<p>` tag and `<blockquote>` tag, 
+also separate sections of text.
 
-##### Q40.
+##### Q40. Are there instances where the text will appear outside of the browser?
 ##### A40.
+By default, the text is wrapped to appear within the browser window. However, if the text is part of a table cell 
+with a defined width, the text could extend beyond the browser window.
 
-##### Q41.
+##### Q41. How are active links different from normal links?
 ##### A41.
+The default color for normal and active links is blue. Some browsers recognize an active link when the mouse cursor 
+is placed over that link; others recognize active links when the link has the focus. Those that don’t have a mouse 
+cursor over that link is considered a normal link.
 
-##### Q42.
+##### Q42. Do style sheets limit the number of new style definitions that can be included within the brackets?
 ##### A42.
+Style sheets do not limit the number of style definitions that can be included within the brackets for a given selector.
+Every new style definition, however, must be separated from the others by a semicolon symbol.
 
-##### Q43.
+##### Q43. Can I specify fractional weight values such as 670 or 973 for font weight?
 ##### A43.
+Implementation largely depends on the browser, but the standard does not support fractional weight values.
+Acceptable values must end with two zeroes.
 
-##### Q44.
+##### Q44. What is the hierarchy that is being followed when it comes to style sheets?
 ##### A44.
+If a single selector includes three different style definitions, the definition that is closest to the actual tag 
+takes precedence. Inline style takes priority over embedded style sheets, which takes priority over external style sheets.
 
-##### Q45.
+##### Q45. Can several selectors with class names be grouped together?
 ##### A45.
+You can define several selectors with the same style definition by separating them with commas. This same technique 
+also works for selectors with class names.
 
-##### Q46.
+##### Q46. What happens if you open the external CSS file in a browser?
 ##### A46.
+When you try to open the external CSS file in a browser, the browser cannot open the file, because the file has a 
+different extension. The only way to use an external CSS file is to reference it using `<link/>` tag within another 
+HTML document.
 
-##### Q47.
+##### Q47. How do you make a picture into a background image of a web page?
 ##### A47.
+To do this, place a tag code after the `</head>` tag as follows:
 
-##### Q48.
+```html
+<body background = "image.gif">
+```
+
+Replace image.gif with the name of your image file. This will take the picture and make it the background image 
+of your web page.
+
+##### Q48. What happens if the list-style-type property is used on a non-list element like a paragraph?
 ##### A48.
+If the list-style-type property is used on a non-list element like a paragraph, the property will be ignored 
+and do not affect the paragraph.
 
-##### Q49.
+##### Q49. When is it appropriate to use frames?
 ##### A49.
+Frames can make navigating a site much easier. If the main links to the site are located in a frame that appears 
+at the top or along the edge of the browser, the content for those links can be displayed in the remainder of the 
+browser window.
 
-##### Q50.
+##### Q50. What happens if the number of values in the rows or cols attribute doesn’t add up to 100 percent?
 ##### A50.
+The browser sizes the frames relative to the total sum of the values. If the cols attribute is set to 100%, 200% 
+the browser displays two vertical frames with the second being twice as big as the first.
+
+##### Q51. Which browsers support HTML5?
+##### A51.
+The latest versions of Google Chrome, Apple Safari, Mozilla Firefox, and Opera all support most of the HTML5 features.
+
+##### Q52. Name two new tags included in the HTML 5.
+##### A52.
+`<Video>` and `<Audio>` are new tags which are included in HTML5 version. They are mainly used as a replacement for 
+Flash, Silverlight, and similar technologies to play multimedia items.
+
+##### Q53. Do you know which are two semantic tags are included in HTML5 version?
+##### A53.
+The `<article>` and `<section>` tags are two new tags that are included in HTML5. Articles can be composed of 
+multiple sections that can have multiple articles. An article tag represents a full block of content which is a 
+section of a bigger whole.
+
+##### Q54. What is `<figure>` in HTML5?
+##### A54.
+This tag represents a piece of self-contained flow content. It is mostly used as a single unit as a reference 
+the main flow of the document.
+
+##### Q55. What is the use of `Canvas` element?
+##### A55.
+The `canvas` element helps to build charts, graphs, bypass Photoshop to create 2D images and place them 
+directly into HTML5 code.
+
+##### Q56. What are the new `FORM` elements which are available in HTML5?
+##### A56.
+The new `Form` elements in HTML5 offers much better functionality than the earlier versions.
+
+The tags given provided to carry out these functions are:
+
+1) `<datalist>` – This tag is use to specify a list of options for input controls.
+
+2) `<keygen>` – This tag represents a key-pair generator field.
+
+3) `<output>` – It represents the result of any scripting calculation.
+
+##### Q57. Tell me two benefits of HTML5 Web Storage.
+##### A57.
+Two main benefits of HTML5 Web Storage:
+
+* It can store up to 10 MB data which is certainly more than what cookies have.
+* Web storage data cannot be transferred with the HTTP request. It helps to increase the performance of the application.
+
+##### Q58. What are two types of Web Storage in HTML5?
+##### A58.
+Two storage types of HTML5 are:
+
+* **Session Storage:**
+
+It stores data of current session only. It means that the data stored in session storage clear automatically when the browser is closed.
+
+* **Local Storage:**
+
+Local storage is another type of HTML5 Web Storage. In local storage, data is not deleted automatically when the current browser window is closed.
+
+##### Q59. What is the Application Cache in HTML5 and why it is used?
+##### A59.
+The Application Cache concept means that a web application is cached. It can be accessible without the need for internet connection.
+
+Some advantages of Application Cache:
+
+1. **Offline browsing –** Web users can also use the application when they are offline.
+2. **Speed –** Cached resources load quicker
+3. **Reduce the server load –** The web browser will only download updated resources from the server.
+
+##### Q60. Explain five new input types provided by HTML5 for forms?
+##### A60.
+Following are the important, new data types offered by HTML5:
+
+1. **date:** It allows the user to select a date.
+2. **datetime-local:** This input type allows the user to select a date and time without time zone.
+3. **datetime:** This input type allows the user to select a date and time with time zone.
+4. **month:** It enables the user to select a month and year
+5. **email:** These input fields used to contain an e-mail address.
 
 ---
 
