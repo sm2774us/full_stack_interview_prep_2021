@@ -52,10 +52,10 @@ you are not as gung-ho about web design as you thought you were.
 
 - [25 helpful CSS questions and answers](https://github.com/sm2774us/full_stack_interview_prep_2021#h-25-helpful-css-questions-and-answers)
 - [Top 25 CSS Interview Questions and Answers for Experienced](https://github.com/sm2774us/full_stack_interview_prep_2021#i-top-25-css-interview-questions-and-answers-for-experienced)
-- [CSS questions and answers for freshers and experienced developers](CSS questions and answers for freshers and experienced developers)
-- [CSS Questions and Answers](http://www.techrepublic.com/blog/software-engineer/css-interview-questions-and-answers/)
-- [Questions and Exercises About CSS](https://css-tricks.com/interview-questions-css/)
-- [Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments](http://career.guru99.com/top-50-csscascading-style-sheet-interview-questions/)
+- [CSS questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#j-css-questions-and-answers-for-freshers-and-experienced-developers)
+- [CSS Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#k-css-questions-and-answers)
+- [Questions and Exercises About CSS](https://github.com/sm2774us/full_stack_interview_prep_2021#m-top-50-csscascading-style-sheet-questions-covering-the-most-of-tricky-css-moments)
+- [Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments](https://github.com/sm2774us/full_stack_interview_prep_2021#m-top-50-csscascading-style-sheet-questions-covering-the-most-of-tricky-css-moments)
 
 ### Sass
 
