@@ -3377,8 +3377,189 @@ It is a pre-planned library, which permits easier and more values complaint webp
 
 ##### Q5. What does CSS selector mean?
 ##### A5.
-A thread corresponding of HTML elements by which declarations or a set of it is affirmed and is a link that can be 
-referred for connecting Style sheet and HTML is CSS selector.
+A CSS selector is the first part of a CSS Rule. It is a pattern of elements and other terms that tell the browser 
+which HTML elements should be selected to have the **CSS property values inside the rule applied to them**.
+
+**CSS selectors** are used to _select_ _the_ _content_ _you_ _want_ _to_ _style_.
+Selectors are the part of CSS rule set. CSS selectors select HTML elements according to its id, class, type, attribute etc.
+
+There are several different types of selectors in CSS.
+
+1. CSS Element Selector
+2. CSS Id Selector
+3. CSS Class Selector
+4. CSS Universal Selector
+5. CSS Group Selector
+
+**1) CSS Element Selector**
+The element selector selects the HTML element by name.
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+p{  
+    text-align: center;  
+    color: blue;  
+}   
+</style>  
+</head>  
+<body>  
+<p>This style will be applied on every paragraph.</p>  
+<p id="para1">Me too!</p>  
+<p>And me!</p>  
+</body>  
+</html>
+```
+
+**2) CSS Id Selector**
+The id selector selects the id attribute of an HTML element to select a specific element. 
+An id is always unique within the page so it is chosen to select a single, unique element.
+
+It is written with the hash character (`#`), followed by the id of the element.
+
+Let's take an example with the id "para1".
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+#para1 {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<p id="para1">Hello Javatpoint.com</p>  
+<p>This paragraph will not be affected.</p>  
+</body>  
+</html>    
+```
+
+**3) CSS Class Selector**
+The class selector selects HTML elements with a specific class attribute. It is used with a period character. 
+(full stop symbol) followed by the class name.
+
+Note: A class name should not be started with a number.
+Let's take an example with a class "center".
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+.center {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1 class="center">This heading is blue and center-aligned.</h1>  
+<p class="center">This paragraph is blue and center-aligned.</p>   
+</body>  
+</html>
+```  
+
+---
+
+**CSS Class Selector for specific element**
+
+If you want to specify that only one specific HTML element should be affected then you should use the element name 
+with class selector.
+
+Let's see an example.
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+p.center {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1 class="center">This heading is not affected</h1>  
+<p class="center">This paragraph is blue and center-aligned.</p>   
+</body>  
+</html>   
+```
+
+**4) CSS Universal Selector**
+The universal selector is used as a wildcard character. It selects all the elements on the pages.
+
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+* {  
+   color: green;  
+   font-size: 20px;  
+}   
+</style>  
+</head>  
+<body>  
+<h2>This is heading</h2>  
+<p>This style will be applied on every paragraph.</p>  
+<p id="para1">Me too!</p>  
+<p>And me!</p>  
+</body>  
+</html>
+```    
+
+**5) CSS Group Selector**
+The grouping selector is used to select all the elements with the same style definitions.
+
+Grouping selector is used to minimize the code. Commas are used to separate each selector in grouping.
+
+Let's see the CSS code without group selector.
+```css
+h1 {  
+    text-align: center;  
+    color: blue;  
+}  
+h2 {  
+    text-align: center;  
+    color: blue;  
+}  
+p {  
+    text-align: center;  
+    color: blue;  
+}
+```
+
+As you can see, you need to define CSS properties for all the elements. It can be grouped in following ways:
+
+```css
+h1,h2,p {  
+    text-align: center;  
+    color: blue;  
+}
+```
+
+Let's see the full example of CSS group selector.
+
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+h1, h2, p {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1>Hello Javatpoint.com</h1>  
+<h2>Hello Javatpoint.com (In smaller font)</h2>  
+<p>This is a paragraph.</p>  
+</body>  
+</html>
+```
 
 ##### Q6. Differentiate logical tags from physical tags?
 ##### A6.
@@ -3508,80 +3689,999 @@ Elements previous to this property is functional and do not change their propert
 
 ---
 
-##### Q1.
+##### Q1. What is CSS?
 ##### A1.
+CSS summarizes the design of an HTML webpage. It’s a language where we can set the behavior of an HTML webpage. 
+It clarifies how the HTML content is going to be shown on screen.
 
-##### Q2.
+##### Q2. Name all of the modules which are used in the current version of CSS.
 ##### A2.
+There are several modules in CSS as stated below:
+* Selectors
+* Box Model
+* Backgrounds and Borders
+* Text Effects
+* 2D/3D Transformations
+* Animations
+* Multiple Column Layout
+* User Interface.
 
-##### Q3.
+This is the problem that CSS Modules solve. Let's look at the official definition of a [CSS Module](https://github.com/css-modules/css-modules):
+
+> A CSS Module is a CSS file in which all class names and animation names are scoped locally by default.
+>
+
+The key words here are **scoped locally**. With CSS Modules, your CSS class names become similar to local variables in JavaScript.
+
+By the way, a 'CSS Module' is just a `.css` file. You call it a 'CSS Module' if you plan on using it with a CSS Modules compiler.
+
+Let's visualize what we have so far:
+
+![CSS-Module-1-image](./assets/CSS-Module-1.PNG)
+
+A CSS Module goes into the compiler, and CSS comes out the other side.
+
+> Where do you get a CSS Modules compiler? If you are using Webpack, you already have one.
+>
+> Just add the "?modules" option to "css-loader".
+>
+> For an example, see: [github.com/css-modules/webpack-demo](github.com/css-modules/webpack-demo)
+>
+
+To use a CSS Module with React you would add the CSS to your web page and import the JavaScript object into your component.
+Let's add that to the diagram:
+
+![CSS-Module-2-image](./assets/CSS-Module-2.PNG)
+
+**Conclusion**
+
+On big projects, this approach really pays off.
+
+The real joy of working with CSS Modules is this:
+
+> Whenever I start a new component, I know that there are no global styles that will interfere with my work.
+>
+
+Still confused? Maybe you learn better with examples? 
+[Check out CSS Modules by example](https://www.javascriptstuff.com/css-modules-by-example/). I run you through a list of the most common scenarios you'll encounter with CSS Modules, and I show you exactly how the CSS Modules compiler will behave in each instance.
+
+##### Q3. Select between CSS2 and CSS3.
 ##### A3.
+CSS3 is divided into two different sections, which are known as a module.
+Whereas in CSS2, that which accedes into one file with all the information in it.
 
-##### Q4.
+CSS3 modules are supported nearly on every browser, and on the flip side, 
+modules of CSS and CSS2 aren’t supported in every browser.
+
+In CSS3, we will discover that many graphics related characteristics are introduced 
+like Border-radius or even box-shadow, flexbox.
+
+In CSS3, a user can use precise multiple desktop images on a page by using 
+properties such as background-image, background-position, and background-repeat styles.
+
+##### Q4. Cite different types of CSS.
 ##### A4.
+Response: There are three types of CSS, as mentioned under:
 
-##### Q5.
+* **External:** All these are written in separate files.
+* **Internal:** All these are cited on top of the webpage code record.
+* **Inline:** All these are written right alongside the text.
+
+##### Q5. Why is an external style sheet useful?
 ##### A5.
+External style sheet is very useful as we write all of the styling codes in one file, and it may be used everywhere 
+by simply referring to the connection of that external style sheet file.
 
-##### Q6.
+If we make any changes in that external file, then the changes can also be observed on the page. 
+Thus, it is quite useful and makes your work easy while working on bigger files.
+
+##### Q6. What are the uses of an embedded style sheet?
 ##### A6.
+Response: Embedded style sheet gives us the privilege to define styles in 1 place in an HTML document.
+We can create numerous classes utilizing an embedded style sheet to use on multiple label kinds of a web page, 
+and also there is no extra downloading required for importing the info.
 
-##### Q7.
+Following is the example of embed CSS based on the above syntax:
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <style media = "all">
+         body {
+            background-color: orange;
+         }
+         h1 {
+            color: yellow;
+            margin-left: 30px;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>This is a heading</h1>
+      <p>This is a paragraph.</p>
+   </body>
+</html>
+```
+
+| Attribute | Value | Description |
+| :- | :- | :- |
+| Type | `text/css` | Specifies the style sheet language as a content-type (MIME type). This is required attribute. |
+| media | screen<br/>tty<br/>tv<br/>projection<br/>handheld<br/>print<br/>braille<br/>aural<br/>all | Specifies the device the document will be displayed on. |
+
+##### Q7. How to use CSS selector?
 ##### A7.
+A CSS selector is the first part of a CSS Rule. It is a pattern of elements and other terms that tell the browser 
+which HTML elements should be selected to have the **CSS property values inside the rule applied to them**.
 
-##### Q8.
+**CSS selectors** are used to _select_ _the_ _content_ _you_ _want_ _to_ _style_.
+Selectors are the part of CSS rule set. CSS selectors select HTML elements according to its id, class, type, attribute etc.
+
+There are several different types of selectors in CSS.
+
+1. CSS Element Selector
+2. CSS Id Selector
+3. CSS Class Selector
+4. CSS Universal Selector
+5. CSS Group Selector
+
+**1) CSS Element Selector**
+The element selector selects the HTML element by name.
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+p{  
+    text-align: center;  
+    color: blue;  
+}   
+</style>  
+</head>  
+<body>  
+<p>This style will be applied on every paragraph.</p>  
+<p id="para1">Me too!</p>  
+<p>And me!</p>  
+</body>  
+</html>
+```
+
+**2) CSS Id Selector**
+The id selector selects the id attribute of an HTML element to select a specific element. 
+An id is always unique within the page so it is chosen to select a single, unique element.
+
+It is written with the hash character (`#`), followed by the id of the element.
+
+Let's take an example with the id "para1".
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+#para1 {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<p id="para1">Hello Javatpoint.com</p>  
+<p>This paragraph will not be affected.</p>  
+</body>  
+</html>    
+```
+
+**3) CSS Class Selector**
+The class selector selects HTML elements with a specific class attribute. It is used with a period character. 
+(full stop symbol) followed by the class name.
+
+Note: A class name should not be started with a number.
+Let's take an example with a class "center".
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+.center {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1 class="center">This heading is blue and center-aligned.</h1>  
+<p class="center">This paragraph is blue and center-aligned.</p>   
+</body>  
+</html>
+```  
+
+---
+
+**CSS Class Selector for specific element**
+
+If you want to specify that only one specific HTML element should be affected then you should use the element name 
+with class selector.
+
+Let's see an example.
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+p.center {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1 class="center">This heading is not affected</h1>  
+<p class="center">This paragraph is blue and center-aligned.</p>   
+</body>  
+</html>   
+```
+
+**4) CSS Universal Selector**
+The universal selector is used as a wildcard character. It selects all the elements on the pages.
+
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+* {  
+   color: green;  
+   font-size: 20px;  
+}   
+</style>  
+</head>  
+<body>  
+<h2>This is heading</h2>  
+<p>This style will be applied on every paragraph.</p>  
+<p id="para1">Me too!</p>  
+<p>And me!</p>  
+</body>  
+</html>
+```    
+
+**5) CSS Group Selector**
+The grouping selector is used to select all the elements with the same style definitions.
+
+Grouping selector is used to minimize the code. Commas are used to separate each selector in grouping.
+
+Let's see the CSS code without group selector.
+```css
+h1 {  
+    text-align: center;  
+    color: blue;  
+}  
+h2 {  
+    text-align: center;  
+    color: blue;  
+}  
+p {  
+    text-align: center;  
+    color: blue;  
+}
+```
+
+As you can see, you need to define CSS properties for all the elements. It can be grouped in following ways:
+
+```css
+h1,h2,p {  
+    text-align: center;  
+    color: blue;  
+}
+```
+
+Let's see the full example of CSS group selector.
+
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+h1, h2, p {  
+    text-align: center;  
+    color: blue;  
+}  
+</style>  
+</head>  
+<body>  
+<h1>Hello Javatpoint.com</h1>  
+<h2>Hello Javatpoint.com (In smaller font)</h2>  
+<p>This is a paragraph.</p>  
+</body>  
+</html>
+```
+
+##### Q8. What is Tweening in CSS.
 ##### A8.
+Tweening is not a term that's used too often in CSS. As you discovered it has its roots in computer animation.
+Rather than telling the program exactly how to render each frame, the animator would tell the program what 
+position the objects are in at two "keyframes" and the program would figure out how to transition the objects 
+between those two points.
 
-##### Q9.
+In CSS we usually use the term "animate", but the concepts are the same. MDN has a good introduction [here](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations).
+This simple example (from the article) demonstrates how to make a `<p>` element slide in from off the right edge 
+of the browser window:
+
+```css
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+```
+
+**Uses: It's mainly used for producing cartoons.**
+
+##### Q9. Define CSS picture scripts.
 ##### A9.
+CSS image broadcasts are a group of images that are put into a single picture.
+It lowers the load period and request number into the server while projecting multiple images into one web page.
 
-##### Q10.
+##### Q10. Explain the term **Responsive Web Design**.
 ##### A10.
+**Responsive Web Design** is a technique in which we design and develop a web page based on the consumer activities 
+and requirements, which are based on various elements like the size of the screen, portability of the web page on the 
+different devices, etc. 
+It is carried out by using different elastic designs and grids.
 
-##### Q11.
+##### Q11. What are **CSS counters**?
 ##### A11.
+**CSS counters** are all variables that can be incremented by CSS principles that inspector monitor how many times the 
+variable was used.
 
-##### Q12.
+##### Q12. What's **CSS specificity**?
 ##### A12.
+**CSS specificity** is a score or position that decides which style declaration needs to be accustomed to a component.
 
-##### Q13.
+There are four classes in CSS which authorize the specificity level of this selector.
+
+* **Inline style.**
+* **IDs.**
+* **Groups, Characteristics, and pseudo-classes.**
+* **Components and pseudo-elements.**
+
+##### Q13. How do we calculate **specificity**?
 ##### A13.
+To calculate **specificity** we will begin with 0, then we must add 1000 for every single ID, and we must include 10 
+to the attributes, classes, or pseudo-classes with every element name or pseudo-element and after we have to add them.
 
-##### Q14.
+##### Q14. How do we make a rounded corner by using CSS?
 ##### A14.
+We can make a rounded corner by using the property `border-radius`. We can employ this land to any component.
 
-##### Q15.
+Example:
+```css
+#example-one {
+  border-radius: 10px;
+  background: #BADA55;
+}
+#example-two {
+  border-radius: 10px;
+  border: 3px solid #BADA55;
+}
+```
+
+Result:
+![CSS-Rounded-Corner-image](./assets/CSS-Rounded-Corner.PNG)
+
+[More on CSS Border Radius](https://css-tricks.com/almanac/properties/b/border-radius/)
+
+##### Q15. How will you add `border images` to an HTML element?
 ##### A15.
+CSS allows you to display a smooth transformation between 2 or more than two defined colors.
+There are two types of gradients that are present in CSS. They are:
+* **Linear Gradient**
+* **Radial Gradient**
+* **Conic Gradient**
 
-##### Q16.
+**Example-1 - Without border image :**
+First, consider a box class that establishes some dimensions and centers the content:
+```css
+.box {
+  width: 400px;
+  height: 200px;
+  max-width: 100%;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+```
+Next, use this class in a div element:
+```html
+<div class="box">
+  Example box without a border.
+</div>
+```
+Now, you can create a new with-border class:
+```css
+.with-border {
+  border-color: black;
+  border-style: solid;
+  border-width: 30px;
+}
+```
+Then, add it to the markup:
+```html
+<div class="box with-border">
+  Example box with a border.
+</div>
+``` 
+This code will render the following:
+![CSS-No-Border-Image-image](./assets/CSS-No-Border-Image.PNG)
+
+**Example-2 - Using border image :**
+First, create a new with-border-image class:
+```css
+.with-border-image {
+  border-style: solid;
+  border-width: 20px;
+  border-image-source: url(/url/to/some/fancy/image.jpg);
+  border-image-slice: 60 30;
+}
+```
+
+You'll notice that there's still needs to be a regular border applied to the element because the border image replaces 
+the regular border style.
+
+`border-image-source` specifies the source image, which can be a URL to a raster or vector-based image (SVG) or a data URI.
+
+`border-image-slice` refers to a slicing process that divides an image into nine regions. By defining up to four values, 
+you dictate which part of the images will repeat as part of the border.
+
+Then, add it to the markup:
+
+```html
+<div class="box with-border-image">
+  Example box with a border image.
+</div>
+```
+ 
+This code will render the following:
+
+![CSS-Border-Image-image](./assets/CSS-Border-Image.PNG)
+
+**Using the Shorthand Property**
+There is a shorthand property to specify the values for both `border-image-source` and `border-image-slice`
+all at once: `border-image`.
+
+Recall how the previous example used separate properties:
+
+```css
+.with-border-image {
+  border-style: solid;
+  border-width: 20px;
+  border-image-source: url(/url/to/some/fancy/image.jpg);
+  border-image-slice: 60 30;
+}
+```
+ 
+This is the same example rewritten with the shorthand property:
+
+```css
+.with-border-image {
+  border-style: solid;
+  border-width: 20px;
+  border-image: url(/url/to/some/fancy/image.jpg) 60 30;
+}
+```
+ 
+These values are equivalent.
+
+**There are three types of gradients that are supported: linear, radial, and conic. With gradients, you will need to specify a border-image-slice value of 1.**
+
+**Example-3 - Using border image with Linear Gradient :**
+Here is an example of a **linear gradient**:
+
+```css
+.with-linear-gradient {
+  border-style: solid;
+  border-width: 10px;
+  border-image: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1;
+}
+```
+ 
+Add this to your markup. This code will render the following:
+
+![CSS-Border-Image-Linear-Gradient-image](./assets/CSS-No-Border-Image-Linear-Gradient.PNG)
+
+You now have an element with a linear gradient using `linear-gradient`.
+
+**Example-4 - Using border image with Radial Gradient :**
+Here is an example of a **radial gradient**:
+
+```css
+.with-radial-gradient {
+  border-style: solid;
+  border-width: 10px;
+  border-image: radial-gradient(rgb(0,143,104), rgb(250,224,66)) 1;
+}
+```
+ 
+Add this to your markup. This code will render the following:
+
+![CSS-Border-Image-Radial-Gradient-image](./assets/CSS-No-Border-Image-Radial-Gradient.PNG)
+
+You now have an element with a border image and using `radial-gradient`.
+
+**Example-5 - Using border image with Conic Gradient :**
+Here is an example of a **conic gradient**:
+
+```css
+.with-conic-gradient {
+  border-style: solid;
+  border-width: 10px;
+  border-image: conic-gradient(red, yellow, lime, aqua, blue, magenta, red) 1;
+}
+```
+ 
+Add this to your markup. This code will render the following:
+
+![CSS-Border-Image-Conic-Gradient-image](./assets/CSS-No-Border-Image-Conic-Gradient.PNG)
+
+You now have an element with a border image and using `conic-gradient`.
+
+##### Q16. What is CSS flexbox?
 ##### A16.
+It allows you to design a flexible, reactive design structure without having any float or positioning property of CSS. To utilize CSS flexbox, you want to define a bend container initially.
 
-##### Q17.
+##### Q17. Write all the properties of the flexbox.
 ##### A17.
+There are numerous properties of this flexbox that are employed in the HTML webpage.
+They are:
+* **`flex-direction`**
+* **`flex-wrap`**
+* **`flex-flow`**
+* **`justify-content`**
+* **`align-items`**
+* **`align-content`**
 
-##### Q18.
+##### Q18. How to align image vertically in a division that spans vertically on the whole webpage?
 ##### A18.
+It can be accomplished by using the syntax `verticle-align: middle` from the component as well as we can bind 
+the two text spans around with a different span, and after this, we have to utilize `verticle-align: middl`e in 
+the content `#icon`.
 
-##### Q19.
+##### Q19. What's the distinction between `margin` and `padding`?
 ##### A19.
+The **CSS properties, margin and padding**, are both aspects of spacing of an element and it’s content. 
+**Margin** is the outside spacing of an HTML element from other elements. 
+**Padding** is the spacing of the inside content from the perimeters of the element. Both are very commonly 
+used and each one can be expressed collectively in terms of the sides of an HTML element. However, they 
+can also be used to define the spacing of only one side. Also, both of these properties have a shorthand 
+for defining the spacing of each side.
 
-##### Q20.
+**CSS Margin Property**
+As mentioned, the margin property gives an invisible border around an element. This property is very useful because it can prevent overcrowding. Time for an example.
+
+Example:
+```html
+<style type="text/css">
+    div.special
+    {
+        width:200px;
+		border-style: solid;
+		border-width:thin;
+		border-color:#000;
+		margin:30px 20px 10px 25px;
+	}
+</style>
+<div class=”special”> Sample Text </div>
+```
+Result:
+![CSS-Margin-Property-image](./assets/CSS-Margin-Property.PNG)
+
+I have already set the width property and given it a border so that you can better understand this illustration.
+All right, so what’s with the 4 measurements? The margin property when defined in shorthand is top right bottom left.
+So, top is 30px, right is 20px, bottom is 10px, and left is 25px.
+
+**CSS Padding Property**
+
+Example:
+```html
+<style type="text/css">
+    div.special2
+    {
+        width:200px;
+        border-style: solid;
+        border-width:thin;
+        border-color:#000;
+        padding:30px 20px 10px 25px;
+    }
+</style>
+<div class="special2">
+    Sample Text
+</div>
+```
+Result:
+![CSS-Padding-Property-image](./assets/CSS-Padding-Property.PNG)
+
+Now, we see the difference between margin and padding. Obviously, our div was bigger in the padding example. 
+This is because the CSS property padding creates spacing between the div element and its contents. 
+Clearly, this makes the div larger because of the extra internal spacing.
+
+##### Q20. What is the use of the Box Model in CSS?
 ##### A20.
+In CSS, the box design is a box that binds all the HTML elements, and it contains features 
+like margins, border, padding, and the actual content.
+By using a box model, we'll get the ability to add the borders all over the components, and we could even 
+define the space between the components.
 
-##### Q21.
+##### Q21. How do we add icons to the webpage?
 ##### A21.
+We could add icons to the HTML webpage by using an icon library like `font-awesome`.
+We must add the title of the specified icon category to some inline HTML element.
 
-##### Q22.
+##### Q22. What is a CSS pseudo-class?
 ##### A22.
+A **pseudo-class** is a **selector** that selects elements that are in a specific state, e.g. they are the first element of their 
+type, or they are being hovered over by the mouse pointer. They tend to act as if you had applied a class to some part of 
+your document, often helping you cut down on excess classes in your markup, and giving you more flexible, maintainable code.
 
-##### Q23.
+Pseudo-classes are keywords that start with a colon `:`
+
+> `:pseudo-class-name`
+>
+
+**Simple pseudo-class example**
+Let's look at a simple example. If we wanted to make the first paragraph in an article larger and bold, 
+we could add a class to that paragraph and then add CSS to that class, as shown in the first example below:
+![CSS-Pseudo-Class-1-image](./assets/CSS-Pseudo-Class-1.PNG)
+```css
+.first {
+    font-size: 120%;
+    font-weight: bold;
+}
+```
+```html
+<article>
+    <p class="first">Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo
+            melon azuki bean garlic.</p>
+
+    <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard
+            greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+</article>
+```
+
+However, this could be annoying to maintain — what if a new paragraph got added to the top of the document?
+We'd need to move the class over to the new paragraph. Instead of adding the class, 
+we could use the `:first-child` pseudo-class selector — this will _**always**_ target the first child element in the article, 
+and we will no longer need to edit the HTML (this may not always be possible anyway, 
+maybe due to it being generated by a CMS.)
+
+![CSS-Pseudo-Class-2-image](./assets/CSS-Pseudo-Class-2.PNG)
+```css
+article p:first-child {
+    font-size: 120%;
+    font-weight: bold;
+}
+```
+```html
+<article>
+    <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo
+            melon azuki bean garlic.</p>
+
+    <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard
+            greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+</article>
+```
+
+All pseudo-classes behave in this same kind of way. They target some bit of your document that is in a certain state, 
+behaving as if you had added a class into your HTML. Take a look at some other examples on MDN:
+
+* [:last-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:last-child)
+* [:only-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child)
+* [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid)
+
+> **Note:** It is valid to write pseudo-classes and elements without any element selector preceding them. 
+> In the example above, you could write :first-child and the rule would apply to any element that is the first child 
+> of an `<article>` element, not just a paragraph first child — `:first-child` is equivalent to 
+> `*:first-child`. However, usually you want more control than that, so you need to be more specific.
+>
+
+**User-action pseudo classes**
+
+Some **pseudo-classes** only apply when the user interacts with the document in some way. 
+These **user-action pseudo-classes**, sometimes referred to as **dynamic pseudo-classes**, act as if a class had been 
+added to the element when the user interacts with it. Examples include:
+
+* [:hover](https://developer.mozilla.org/en-US/docs/Web/CSS/:hover) — mentioned above; this only applies if the user moves their pointer over an element, typically a link.
+* [:focus](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus) — only applies if the user focuses the element using keyboard controls.
+
+** `:hover` Example:
+HTML
+```html
+<a href="#">Try hovering over this link.</a>
+```
+CSS
+```css
+a {
+  background-color: powderblue;
+  transition: background-color .5s;
+}
+
+a:hover {
+  background-color: gold;
+}
+```
+RESULT
+![CSS-User-Defined-Pseudo-Class-hover-image](./assets/CSS-User-Defined-Pseudo-Class-hover.PNG)
+
+** `:focus` Example:
+HTML
+```html
+<div><input class="red-input" value="I'll be red when focused."></div>
+<div><input class="blue-input" value="I'll be blue when focused."></div>
+```
+CSS
+```css
+.red-input:focus {
+  background: yellow;
+  color: red;
+}
+
+.blue-input:focus {
+  background: yellow;
+  color: blue;
+}
+```
+RESULT
+![CSS-User-Defined-Pseudo-Class-focus-image](./assets/CSS-User-Defined-Pseudo-Class-focus.PNG)
+
+##### Q23. What is a **pseudo-element** in CSS?
 ##### A23.
+Pseudo-elements behave in a similar way to pseudo-classes. However, they act as if you had added a whole new HTML element 
+into the markup, rather than applying a class to existing elements. Pseudo-elements start with a double colon `::`.
 
-##### Q24.
+`::pseudo-element-name`
+
+> **Note:** Some early pseudo-elements used the single colon syntax, so you may sometimes see this in code or examples.
+> Modern browsers support the early pseudo-elements with single- or double-colon syntax for backwards compatibility.
+>
+
+For example, if you wanted to select the first line of a paragraph you could wrap it in a `<span>` element and use an 
+element selector; however, that would fail if the number of words you had wrapped were longer or shorter 
+than the parent element's width. As we tend not to know how many words will fit on a line — as that will change 
+if the screen width or font-size changes — it is impossible to robustly do this by adding HTML.
+
+The `::first-line` pseudo-element selector will do this for you reliably — if the number of words increases or decreases 
+it will still only select the first line.
+
+![CSS-Pseudo-Element-image](./assets/CSS-Pseudo-Element.PNG)
+
+```css
+article p::first-line {
+    font-size: 120%;
+    font-weight: bold;
+}
+```
+
+```html
+<article>
+    <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo
+            melon azuki bean garlic.</p>
+
+    <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard
+            greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+</article>
+```
+
+It acts as if a `<span>` was magically wrapped around that first formatted line, and updated each time the line length changed.
+
+You can see that this selects the first line of both paragraphs.
+
+##### Q24. Provide an example of combining pseudo-class with a pseudo-element?
 ##### A24.
 
-##### Q25.
+If you wanted to make the first line of the first paragraph bold you could chain the `:first-child` and `::first-line` 
+selectors together. Try editing the previous live example so it uses the following CSS. We are saying that we want 
+to select the first line, of the first `<p>` element, which is inside an `<article>` element.
+
+> ```css
+> article p:first-child::first-line {
+>   font-size: 120%;
+>   font-weight: bold;
+> }
+> ```
+>
+
+**Special pseudo-elements**
+
+There are a couple of special pseudo-elements, which are used along with the content property to insert content 
+into your document using CSS.
+
+You could use these to insert a string of text, such as in the live example below. Try changing the text value of 
+the content property and see it change in the output. You could also change the `::before` pseudo-element to `::after` 
+and see the text inserted at the end of the element instead of the beginning.
+
+![CSS-Special-Pseudo-Elements-image](./assets/CSS-Special-Pseudo-Elements.PNG)
+
+```css
+.box::before {
+    content: "This should show before the other content."
+}   
+```
+```html
+<p class="box">Content in the box in my HTML page.</p>
+```
+
+Inserting strings of text from CSS isn't really something we do very often on the web however, 
+as that text is inaccessible to some screen readers and might be hard for someone to find and edit in the future.
+
+A more valid use of these pseudo-elements is to insert an icon, for example the little arrow added in the example below, 
+which is a visual indicator that we wouldn't want read out by a screenreader:
+
+![CSS-Special-Pseudo-Elements-2-image](./assets/CSS-Special-Pseudo-Elements-2.PNG)
+
+```css
+.box::after {
+    content: " ➥"
+}   
+```
+```html
+<p class="box">Content in the box in my HTML page.</p>
+```
+
+These pseudo-elements are also frequently used to insert an empty string, which can then be styled just like any 
+element on the page.
+
+In this next example, we have added an empty string using the `::before` pseudo-element. We have set this to 
+`display:` block in order that we can style it with a width and height. We then use CSS to style it just like 
+any element. You can play around with the CSS and change how it looks and behaves.
+
+![CSS-Special-Pseudo-Elements-3-image](./assets/CSS-Special-Pseudo-Elements-3.PNG)
+
+```css
+.box::before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+    border: 1px solid black;
+}   
+```
+```html
+<p class="box">Content in the box in my HTML page.</p>
+```
+
+The use of the `::before` and `::after` pseudo-elements along with the content property is referred to as 
+**"Generated Content"** in CSS, and you will often see this technique being used for various tasks. 
+A great example is the site [CSS Arrow Please](https://www.cssarrowplease.com/), which helps you to generate 
+an arrow with CSS. Look at the CSS as you create your arrow and you will see the `::before` and `::after` pseudo-elements 
+in use. Whenever you see these selectors, look at the content property to see what is being added to the document.
+
+**Reference Section:**
+
+There are a large number of pseudo-classes and pseudo-elements, and it is useful to have a list to refer to.
+Below are tables listing them, with links to their reference pages on MDN.
+Use this as a reference to see the kinds of things that are available for you to target.
+
+**Pseudo-classes**
+| Selector | Description |
+| :- | :- |
+| `:active` | Matches when the user activates (for example clicks on) an element. |
+| `:any-link` | Matches both the :link and :visited states of a link. |
+| `:blank` | Matches an <input> element whose input value is empty. |
+| `:checked` | Matches a radio button or checkbox in the selected state. |
+| `:current` | Matches the element, or an ancestor of the element, that is currently being displayed. |
+| `:default` | Matches the one or more UI elements that are the default among a set of similar elements. |
+| `:dir` | Select an element based on its directionality (value of the HTML dir attribute or CSS direction property). |
+| `:disabled` | Matches user interface elements that are in an disabled state. |
+| `:empty` | Matches an element that has no children except optionally white space. |
+| `:enabled` | Matches user interface elements that are in an enabled state. |
+| `:first` | In Paged Media, matches the first page. |
+| `:first-child` | Matches an element that is first among its siblings. |
+| `:first-of-type` | Matches an element which is first of a certain type among its siblings. |
+| `:focus` | Matches when an element has focus. |
+| `:focus-visible` | Matches when an element has focus and the focus should be visible to the user. |
+| `:focus-within` | Matches an element with focus plus an element with a descendent that has focus. |
+| `:future` | Matches the elements after the current element. |
+| `:hover` | Matches when the user hovers over an element. |
+| `:indeterminate` | Matches UI elements whose value is in an indeterminate state, usually checkboxes. |
+| `:in-range` | Matches an element with a range when its value is in-range. |
+| `:invalid` | Matches an element, such as an <input>, in an invalid state. |
+| `:lang` | Matches an element based on language (value of the HTML lang attribute). |
+| `:last-child` | Matches an element which is last among its siblings. |
+| `:last-of-type` | Matches an element of a certain type that is last among its siblings. |
+| `:left` | In Paged Media, matches left-hand pages. |
+| `:link` | Matches unvisited links. |
+| `:local-link` | Matches links pointing to pages that are in the same site as the current document. |
+| `:is()` | Matches any of the selectors in the selector list that is passed in. |
+| `:not` | Matches things not matched by selectors that are passed in as a value to this selector. |
+| `:nth-child` | Matches elements from a list of siblings — the siblings are matched by a formula of the form an+b (e.g. `2n + 1` would match elements `1`, `3`, `5`, `7`, etc. All the odd ones.)
+| `:nth-of-type` | Matches elements from a list of siblings that are of a certain type (e.g. `<p>` elements) — the siblings are matched by a formula of the form `an+b` (e.g. `2n + 1` would match that type of element, numbers `1`, `3`, `5`, `7`, etc. All the odd ones.)
+| `:nth-last-child` | Matches elements from a list of siblings, counting backwards from the end. The siblings are matched by a formula of the form `an+b` (e.g. `2n + 1` would match the last element in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+| `:nth-last-of-type` | Matches elements from a list of siblings that are of a certain type (e.g. `<p>` elements), counting backwards from the end. The siblings are matched by a formula of the form `an+b` (e.g. `2n + 1` would match the last element of that type in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+| `:only-child` | Matches an element that has no siblings. |
+| `:only-of-type` | Matches an element that is the only one of its type among its siblings. |
+| `:optional` | Matches form elements that are not required. |
+| `:out-of-range` | Matches an element with a range when its value is out of range. |
+| `:past` | Matches the elements before the current element. |
+| `:placeholder-shown` | Matches an input element that is showing placeholder text. |
+| `:playing` | Matches an element representing an audio, video, or similar resource that is capable of being "played" or "paused", when that element is "playing". |
+| `:paused` | Matches an element representing an audio, video, or similar resource that is capable of being "played" or "paused", when that element is "paused". |
+| `:read-only` | Matches an element if it is not user-alterable. |
+| `:read-write` | Matches an element if it is user-alterable. |
+| `:required` | Matches form elements that are required. |
+| `:right` | In Paged Media, matches right-hand pages. |
+| `:root` | Matches an element that is the root of the document. |
+| `:scope` | Matches any element that is a scope element. |
+| `:valid` | Matches an element such as an <input> element, in a valid state. |
+| `:target` | Matches an element if it is the target of the current URL (i.e. if it has an ID matching the current URL fragment). |
+| `:visited` | Matches visited links. |
+
+**Pseudo-elements**
+| Selector | Description |
+| :- | :- |
+| `::after` | Matches a stylable element appearing after the originating element's actual content. |
+| `::before` | Matches a stylable element appearing before the originating element's actual content. |
+| `::first-letter` | Matches the first letter of the element. |
+| `::first-line` | Matches the first line of the containing element. |
+| `::grammar-error` | Matches a portion of the document containing a grammar error as flagged by the browser. |
+| `::marker` | Matches the marker box of a list item, which typically contains a bullet or number. |
+| `::selection` | Matches the portion of the document that has been selected. |
+| `::spelling-error` | Matches a portion of the document containing a spelling error as flagged by the browser. |
+
+##### Q25. What is CSS opacity?
 ##### A25.
+The `opacity` property sets the opacity level for an element.
+
+The opacity-level describes the transparency-level, where 
+* 1 is not transparent at all,
+* 0.5 is 50% see-through, and, 
+* 0 is completely transparent.
+
+![CSS-Opacity-image](./assets/CSS-Opacity.PNG)
+
+**Note:** When using the `opacity` property to add transparency to the background of an element, all of its 
+child elements become transparent as well. This can make the text inside a fully transparent element hard to read. 
+If you do not want to apply opacity to child elements, use RGBA color values instead.
+
+##### Q26. Is it possible to use CSS3 animations without having the animations tween between frames?
+##### A26.
+
+Yes it is possible using [steps()](https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function#The_steps()_class_of_timing-functions).
+
+It is a simple yet powerful way for animating sprites. Below there's an animation of old Duke waving.
+```css
+@keyframes wink {
+    from { background-position: 0px; }
+    to { background-position: -500px; }
+}
+
+.hi {
+    width: 50px;
+    height: 72px;
+    background-image: url("http://i.stack.imgur.com/1Ad8o.png");
+    margin: 0 auto;      
+    animation: wink .8s steps(10, end) infinite;
+}
+```
+```html
+<img src="http://i.stack.imgur.com/1Ad8o.png">
+<div class="hi"></div>
+```
+
+![CSS3-Animations-image](./assets/CSS3-Animations.PNG)
+
+There's a demo you can play with on [cssdeck](http://cssdeck.com/item/302/css-image-sprite-animations-with-steps-function).
 
 ---
 
