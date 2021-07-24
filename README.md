@@ -5817,80 +5817,170 @@ border:5px solid #fff;
 
 ---
 
-##### Q1.
+##### Q1. What is CSS?
 ##### A1.
+CSS is a standard for applying style to HTML elements. This styling includes margins, positioning, fonts, colors, and so forth. The styling can apply to the complete document or be granular and apply to a specific element. Theoretically, the use of CSS promotes the separation of content and design, allowing the designer to focus on how a Web application will look while the developer(s) concentrate on the structure and functionality.
 
-##### Q2.
+The main part of CSS is a rule. A rule consists of a selector (i.e., what will be styled) followed by a declaration (i.e., the style to be applied) that is broken into one or more properties and associated styles. In the following example, h1 is the selector, followed by the color property and the style of blue.
+
+```css
+h1 {color: blue;}
+```
+
+##### Q2. What does the cascading portion of CSS mean?
 ##### A2.
+Cascading refers to cascading order. It is a system of sorting the various CSS declarations to avoid conflicts. The process begins with a search for all declarations that apply to specific elements; it ends if no match is found. Cascading occurs if multiple styles are defined for an element. In general, values will be applied from the more specific style sheet. This could be its own article, so please refer to my CSS 101 TechRepublic post for more details.
 
-##### Q3.
+Note: CSS properties take precedence of HTML attributes, but the HTML attributes will be used when/if a browser does not support CSS.
+
+##### Q3. Is CSS case-sensitive?
 ##### A3.
+The CSS standard is not case-sensitive, but if an XHTML doctype is used, then CSS class names will be case-sensitive in some browsers. In addition, items like font families, image URLs, and other direct references with the style sheet can be case-sensitive. To be safe, you should stick with lower-case to avoid confusion or unexpected problems.
 
-##### Q4.
+##### Q4. What are different ways to apply styles to a Web page?
 ##### A4.
+There are four ways to integrate CSS into a Web page (some consider items three and four the same):
 
-##### Q5.
+**1. Inline:** HTML elements may have CSS applied to them via the STYLE attribute.
+**2. Embedded:** CSS may be embedded in a Web page by placing the code in a STYLE element within the HEAD element.
+**3. Linked:** CSS may be placed in an external file (a simple text file containing CSS) and linked via the link element.
+**4. Imported:** Another way to utilize external CSS files via @import.
+
+##### Q5. What is an ID selector?
 ##### A5.
+An ID selector is a name assigned to a specific style. In turn, it can be associated with one HTML element with the 
+assigned ID. Within CSS, ID selectors are defined with the `#` character followed by the selector name. 
+The name can contain characters a-z, A-Z, digits 0-9, period, hyphen, escaped characters, and so forth.
 
-##### Q6.
+The following snippet shows the CSS `example1` defined followed by the use of an HTML element's ID attribute, 
+which pairs it with the CSS selector.
+
+```css
+#example1: {background: blue;}
+```
+```html
+<p id="example1">...</p>
+```
+
+##### Q6. What is a class?
 ##### A6.
+A class is a style (i.e., a group of CSS attributes) that can be applied to one or more HTML elements. 
+This means it can apply to instances of the same element or instances of different elements to which the 
+same style can be attached. Classes are defined in CSS using a period followed by the class name. 
+It is applied to an HTML element via the class attribute and the class name.
 
-##### Q7.
+The following snippet shows a class defined, and then it being applied to an HTML DIV element.
+
+```css
+.classexample {font-family: Helvetica; font-size: 20; background: black;}
+```
+```html
+<div class="classexample">....</div>
+```
+
+Also, you could define a style for all elements with a defined class. This is demonstrated with the following code 
+that selects all P elements with the column class specified.
+
+```css
+p.column {font-color: black;}
+```
+
+##### Q7. What is the difference between an ID selector and CLASS?
 ##### A7.
+An ID selector identifies and sets style to only one occurrence of an element, while CLASS can be attached 
+to any number of elements.
 
-##### Q8.
+##### Q8. What is contextual selector?
 ##### A8.
+Contextual selector addresses specific occurrence of an element. It is a string of individual selectors separated 
+by white space (search pattern), where only the last element in the pattern is addressed providing it matches the 
+specified context.
 
-##### Q9.
+##### Q9. What is grouping?
 ##### A9.
+When more than one selector shares the same declaration, they may be grouped together via a comma-separated list; 
+this allows you to reduce the size of the CSS (every bit and byte is important) and makes it more readable. 
+The following snippet applies the same background to the first three heading elements.
 
-##### Q10.
+```css
+h1, h2, h3 {background: red;}
+```
+
+##### Q10. What are child selectors?
 ##### A10.
+A child selector is used when you want to match an element that is the child of another specific element. 
+The parent and child selectors are separated by spaces. The following selector locates an unordered list element 
+within a paragraph element and makes a text within that element bold.
 
-##### Q11.
+```css
+p > ul {font-weight: bold;}
+```
+
+##### Q11. What are pseudo classes?
 ##### A11.
+Pseudo classes allow you to identify HTML elements on characteristics (as opposed to their name or attributes). 
+The classes are specified using a colon to separate the element name and pseudo class. A good example is the 
+`:link` and `:visited` pseudo classes for the HTML A element. Another good example is first-child, which finds 
+an element's first child element.
 
-##### Q12.
+The following CSS makes all visited links red and green, the actual link text becomes yellow when the mouse 
+pointer is positioned over it, and the text of the first element of a paragraph is bold.
+
+```css
+a:link {font-color: red;}
+a:visited {font-color: green;}
+
+a:hover {font-color: yellow;}
+p.first-child {font-weight: bold;}
+```
+
+##### Q12. What does the following CSS do?
 ##### A12.
+```css
+p {font-family: Verdana, Arial, Helvetica;}
+```
 
-##### Q13.
+The CSS sets the font for the `p` element. If available in the browser, Verdana is used. 
+If Verdana is not available, Arial is used. If Arial is not an option, Helvetica is utilized.
+
+##### Q13. How do you include comments in CSS?
 ##### A13.
+Anything placed between `/*` and `*/` in CSS is considered a comment. Comments are ignored by the browser.
 
-##### Q14.
+##### Q14. Have you utilized any CSS libraries or frameworks?
 ##### A14.
+The answer to this question will not be standard, but it gives you an idea of a candidate's familiarity with the landscape. 
+Possible answers include the YUI Library or YAML, but there are plenty more out there.
 
-##### Q15.
+Popular CSS frameworks in 2021:
+**1. [Tailwind CSS](https://tailwindcss.com/) -** Tailwind CSS is a utility-first CSS framework that is different from other best CSS frameworks like Bulma, Bootstrap where you get pre-designed components, which you can use as a base for further development. It does not come with a predefined template but allows you to incorporate your unique style quickly.
+**2. [Bootstrap](https://getbootstrap.com/) -** Bootstrap is considered to be one of the best CSS frameworks due to its responsive design. It was developed by Twitter and released in the year 2011. HTML, SASS, and Javascript are all configured into the Bootstrap framework. For mobile devices, there is no need for a separate layout for mobile view – add the required classes, and the website will adjust to the viewport size depending on the device.
+                                                Most web developers choose them for [front-end frameworks](https://www.lambdatest.com/blog/how-do-software-engineers-choose-which-front-end-framework-to-use/). In general, Bootstrap is primarily responsible for CSS’s popularity as a framework alternative for web development. 
+**3. [Pure CSS](https://purecss.io/) -** Pure CSS is another popular CSS framework. Pure CSS is built on Normalize.css and developed by Yahoo. It comprises a set of small, responsive CSS modules that you can use in every web project. Websites that are intuitive, faster, and visually appealing can be quickly built.
+**4. [Bulma CSS](https://bulma.io/) -** Bulma is another popular CSS Framework based on flexbox. It is a 100% responsive open-source CSS library and includes a variety of predefined components. Bulma utilizes a system known as tiles to build grids, which makes the page sleek and smooth. It has a lightweight structure that allows you to import only the elements you want to use in your modern web design.
+**5. [Foundation CSS](https://get.foundation/) -** Foundation is yet another popular CSS framework. It is a sophisticated frontend CSS framework that includes HTML, CSS, SASS, and Javascript. Foundation is developed with a mobile-first approach and is highly responsive, best suited for large web applications that need a design host.
+**6. [Skeleton CSS](http://getskeleton.com/) -** Skeleton is a super-light or boilerplate CSS framework designed for the development of responsive and [mobile friendly websites](https://www.lambdatest.com/mobile-friendly-tester). Skeleton includes all of the standard components for [responsive web design](https://www.lambdatest.com/blog/responsive-web-design-all-you-need-to-know/), such as the grid, aside from its small size. Skeleton split the entire web page into several grids of 12 columns. Skeleton is a good CSS framework that is best suited for small websites and one-page web apps.
+**7. [Materialize CSS](https://materializecss.com/) -** Materialize CSS is another popular CSS framework. It is a CSS UI component library developed by Google with CSS, Javascript and HTML. It is also known as Material Design. It has several interactive components that help accelerate development and provide a good user experience. Animations offer visual input for users and make the development team work more manageable.
+**8. [Tachyons](https://tachyons.io/) -** Tachyons is another popular CSS framework. It is a lightweight, responsive CSS toolkit (utility first design) that claims to be ‘built for designing’. Going by the name ‘Tachyons’ means ‘a hypothetical particle that travels faster than light. This library will surely make a developer think of it as a good option for lightning-fast execution.
+**9. [Semantic UI](https://semantic-ui.com/) -** Semantic UI is another one of the good CSS frameworks released in 2013 by Jack Lukic. It contains pre-built semantic components that are super helpful in creating a beautiful and responsive layout using human-friendly HTML syntax.
+**10. [UIKit](https://getuikit.com/) -** UIKit is regarded as one of the best CSS frameworks. It is a lightweight, open-source and modular front-end framework for developing fast and powerful web interfaces. UIKit framework is simple to learn and is used to build user interfaces for iOS and Android-based web applications. It includes all of the necessary elements such as labels, buttons, table views, etc. There are several ready-to-use themes available, and you can implement them by modifying the relevant SASS or LESS file.
+**11. [Primer CSS](https://primer.style/) -** Primer is a CSS framework created by Github, now it is open source and is accessible for the public to use in their projects. It uses colour, typography, and spacing consistently and systematically. Along with its excellent features and functionalities, it is also clear and concise. Therefore, it is regarded as one of the good CSS frameworks among both developers and non-developers.
+**12. [Ant Design](https://ant.design/) -** Ant Design is regarded as one of the best CSS frameworks. It is used in JavaScript and ReactJS libraries. Since the Ant Design framework has 24 columns, you can now tailor the visible areas. With its various filled and outline icons, it fulfils many app requirements.
+**13. [Miligram CSS](https://milligram.io/) -** Milligram also comes under the category of good CSS frameworks. It is a lightweight CSS framework with a vast developer community. Milligram is terrific as you can start from scratch when designing your interfaces, and it has been built to improve efficiency and productivity. However, given the features within, it is very flexible; it comes with a collection of web development assets to satisfy your needs.
+
+
+
+##### Q15. What do you see in the future of Web design?
 ##### A15.
+This is an open-ended question that is purely subjective, but I want to hear the candidate discuss the 
+explosion of non-standard devices such as phones, video game consoles, and so forth. These new platforms 
+are changing how sites are designed. The candidate gets extra credit if they drop the phrase **"responsive design"**.
 
-##### Q16.
+##### Q16. Are you pro or against Flash?
 ##### A16.
-
-##### Q17.
-##### A17.
-
-##### Q18.
-##### A18.
-
-##### Q19.
-##### A19.
-
-##### Q20.
-##### A20.
-
-##### Q21.
-##### A21.
-
-##### Q22.
-##### A22.
-
-##### Q23.
-##### A23.
-
-##### Q24.
-##### A24.
-
-##### Q25.
-##### A25.
+The argument for and against Adobe Flash continues as HTML5 offers better and leaner ways to do the same thing, 
+so this question allows you to hear the candidate's feeling on the subject and lets you know how well they keep 
+up with industry buzz or trends.
 
 ---
 
