@@ -1,0 +1,8 @@
+You should take 20-30 minutes to finish implementing efficient solution to the problem.
+
+Then after 3 days, I got rejected after I contacted my recruiter about the result. My advice to anyone interviewing with Facebook:
+a) you either get 1 easy and 1 medium level question. In such cases, you should finish coding easy level question in max 15 mins and medium level in 20-30 mins.
+b) or they might ask you 1 Hard question which you should solve in 35-45 mins.
+c) or you might get 2 medium problems. 20-25 mins each.
+
+Best of luck

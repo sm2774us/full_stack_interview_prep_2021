@@ -1,0 +1,27 @@
+## 4. Design:
+
+Design Google search
+Some question related to caching and balancing. Not exactly the "design twitter" type of question, but expect to talk about different components, latency, throughput, consistency and availability.
+A remote server is not responding. Debug the issue. Needed to cover entire TCP/IP stack(fragmentation/icmp/etc) + machine metrics (vmstat,iostat,strace etc). Describe virtual memory in terms of demand paging.
+2 machines are connected, suddenly 1 machine is responding slowly. Why ?
+We had a good discussion in which we discussed everything under the sun, from NFS being bad to Networking being wrong to Kernel running out of resources(buffer-cache/inodes/virtual memory). Interviewer was interested to know the commands that i would use (strace, lsof, readlink, cat /proc/pid etc).
+Copy some resource from N sources to M sinks. where N could be < 10 and M could be 10k/Millions etc.
+Design File Storage System. Like Dropbox, Google Drive
+Not any fancy one like design Twitter or Uber. More on scheduling service side and i designed using SQL appraoch. Discussed concuurency issues, Table schemas, composite keys etc.
+Design recommendation of celebrities to user on Instagram
+Design search for Twitter
+Design a Content publishing site with privacy restrictions.
+System Design of Uber. He liked my design. He was really nice guy, i felt he was interested in my success.
+Design a type ahead features for a website. We discussed various data structures, advantage /disadvantages. Lot of different cases, scenario to handle etc.
+Design instagram client side.
+Design a leetcode contest, leadership board system
+Design Instagram
+Design keyword search in FB Posts
+There are music providers like spotify, apple music etc. Design a service for these providers to display top 10 songs played by each user. Was aked to write ER tables and API's.
+Design a system like Hacker Rank for a programming contest and their ranking.
+
+https://leetcode.com/discuss/interview-question/1002218/Facebook-or-Google-or-Top-System-Design-Interview-Questions-(Part-1)
+https://leetcode.com/discuss/interview-question/1042229/Facebook-or-Google-or-Top-System-Design-Interview-Questions-(Part-2)
+https://leetcode.com/discuss/interview-question/719253/Design-Facebook-%3A-System-Design-Interview
+https://leetcode.com/discuss/interview-question/124657/Facebook-or-System-Design-or-A-web-crawler-that-will-crawl-Wikipedia
+Found this above list in this LeetCode Post - https://leetcode.com/discuss/interview-question/1140451/Helpful-list-of-LeetCode-Posts-on-System-Design-at-Facebook-Google-Amazon-Uber-Microsoft

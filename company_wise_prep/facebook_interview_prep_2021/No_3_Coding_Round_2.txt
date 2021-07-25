@@ -1,0 +1,32 @@
+## 3. Coding Round 2:
+https://leetcode.com/problems/valid-number/
+You have an API to check if is it possible to move left, right, up, down and one more method to check if current position is the last one. Find the shortest way to the last position. You don't have any data structure - only API.
+https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+https://leetcode.com/problems/group-shifted-strings/
+https://leetcode.com/problems/task-scheduler/
+Calculate tax if Salary and Tax Brackets are given as list in the form
+[ [10000, 0.3],[20000, 0.2], [30000, 0.1], [null, .1]]
+null being rest of the salary
+Is there a way to reach (0,0) from a mXn matrix to (m-1,n-1) position and give the path.
+https://leetcode.com/problems/simplify-path/
+n-ary Tree with each node having a boolean flag. Traverse all the nodes with only boolean flag = True. Return the total distance traveled from root to all those nodes.
+https://leetcode.com/problems/product-of-array-except-self/
+https://leetcode.com/discuss/interview-question/432086/Facebook-or-Phone-Screen-or-Task-Scheduler/394783
+https://leetcode.com/problems/find-all-anagrams-in-a-string
+https://leetcode.com/problems/is-graph-bipartite
+https://leetcode.com/problems/merge-sorted-array
+https://leetcode.com/problems/maximum-subarray
+https://leetcode.com/problems/serialize-and-deserialize-binary-tree
+https://leetcode.com/problems/remove-invalid-parentheses/
+https://leetcode.com/problems/subarray-sum-equals-k/
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
+https://leetcode.com/problems/custom-sort-string
+https://leetcode.com/problems/read-n-characters-given-read4
+https://leetcode.com/problems/remove-invalid-parentheses
+https://leetcode.com/problems/palindrome-permutation
+https://leetcode.com/problems/max-consecutive-ones-iii
+https://leetcode.com/problems/range-sum-of-bst
+https://leetcode.com/problems/exclusive-time-of-functions
+https://leetcode.com/problems/search-in-rotated-sorted-array/
+https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
