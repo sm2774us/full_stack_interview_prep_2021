@@ -8512,15 +8512,38 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 
 ---
 
-| a | b |
-| :- | :- |
-| 1 | 1.1 |
-|   | --- |
-|   | 1.2 |
-|   | --- |
-|   | 1.3 |
-|   | --- |
-|   | 1.4 |
+
+<table>
+  <caption>Favorite and Least Favorite Things</caption>
+  <tr>
+    <th></th>
+	<th></th>
+	<th>Bob</th>
+	<th>Alice</th>
+  </tr>
+  <tr>
+    <th rowspan="2">Favorite</th>
+    <th>Color</th>
+    <td>Blue</td>
+	<td>Purple</td>
+  </tr>
+  <tr>
+    <th>Flavor</th>
+	<td>Banana</td>
+	<td>Chocolate</td>
+  </tr>
+  <tr>
+    <th rowspan="2">Least Favorite</th>
+	<th>Color</th>
+	<td>Yellow</td>
+	<td>Pink</td>
+  </tr>
+  <tr>
+	<th>Flavor</th>
+	<td>Mint</td>
+	<td>Walnut</td>
+  </tr>
+</table>
 
 ---
 
