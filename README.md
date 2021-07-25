@@ -54,12 +54,12 @@ you are not as gung-ho about web design as you thought you were.
 - [Top 25 CSS Interview Questions and Answers for Experienced](https://github.com/sm2774us/full_stack_interview_prep_2021#i-top-25-css-interview-questions-and-answers-for-experienced)
 - [CSS questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#j-css-questions-and-answers-for-freshers-and-experienced-developers)
 - [CSS Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#k-css-questions-and-answers)
-- [Questions and Exercises About CSS](https://github.com/sm2774us/full_stack_interview_prep_2021#m-top-50-csscascading-style-sheet-questions-covering-the-most-of-tricky-css-moments)
-- [Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments](https://github.com/sm2774us/full_stack_interview_prep_2021#m-top-50-csscascading-style-sheet-questions-covering-the-most-of-tricky-css-moments)
+- [Questions and Exercises About CSS](https://github.com/sm2774us/full_stack_interview_prep_2021#l-questions-and-exercises-about-css)
+- [The 30 CSS Selectors You Must Memorize](https://github.com/sm2774us/full_stack_interview_prep_2021#m-the-30-css-selectors-you-must-memorize)
 
-### Sass
+### C) Sass
 
-- [Top 17 Sass Questions from Career Guru](http://career.guru99.com/top-17-sass-interview-questions/)
+- [Top 17 Sass Questions from Career Guru](https://github.com/sm2774us/full_stack_interview_prep_2021#n-top-17-sass-interview-questions)
 
 ---
 
@@ -3375,6 +3375,22 @@ Some of the advantages are:
 ##### A4.
 It is a pre-planned library, which permits easier and more values complaint webpage styling, using CSS language.
 
+Popular CSS frameworks in 2021:
+**1. [Tailwind CSS](https://tailwindcss.com/) -** Tailwind CSS is a utility-first CSS framework that is different from other best CSS frameworks like Bulma, Bootstrap where you get pre-designed components, which you can use as a base for further development. It does not come with a predefined template but allows you to incorporate your unique style quickly.
+**2. [Bootstrap](https://getbootstrap.com/) -** Bootstrap is considered to be one of the best CSS frameworks due to its responsive design. It was developed by Twitter and released in the year 2011. HTML, SASS, and Javascript are all configured into the Bootstrap framework. For mobile devices, there is no need for a separate layout for mobile view – add the required classes, and the website will adjust to the viewport size depending on the device.
+                                                Most web developers choose them for [front-end frameworks](https://www.lambdatest.com/blog/how-do-software-engineers-choose-which-front-end-framework-to-use/). In general, Bootstrap is primarily responsible for CSS’s popularity as a framework alternative for web development. 
+**3. [Pure CSS](https://purecss.io/) -** Pure CSS is another popular CSS framework. Pure CSS is built on Normalize.css and developed by Yahoo. It comprises a set of small, responsive CSS modules that you can use in every web project. Websites that are intuitive, faster, and visually appealing can be quickly built.
+**4. [Bulma CSS](https://bulma.io/) -** Bulma is another popular CSS Framework based on flexbox. It is a 100% responsive open-source CSS library and includes a variety of predefined components. Bulma utilizes a system known as tiles to build grids, which makes the page sleek and smooth. It has a lightweight structure that allows you to import only the elements you want to use in your modern web design.
+**5. [Foundation CSS](https://get.foundation/) -** Foundation is yet another popular CSS framework. It is a sophisticated frontend CSS framework that includes HTML, CSS, SASS, and Javascript. Foundation is developed with a mobile-first approach and is highly responsive, best suited for large web applications that need a design host.
+**6. [Skeleton CSS](http://getskeleton.com/) -** Skeleton is a super-light or boilerplate CSS framework designed for the development of responsive and [mobile friendly websites](https://www.lambdatest.com/mobile-friendly-tester). Skeleton includes all of the standard components for [responsive web design](https://www.lambdatest.com/blog/responsive-web-design-all-you-need-to-know/), such as the grid, aside from its small size. Skeleton split the entire web page into several grids of 12 columns. Skeleton is a good CSS framework that is best suited for small websites and one-page web apps.
+**7. [Materialize CSS](https://materializecss.com/) -** Materialize CSS is another popular CSS framework. It is a CSS UI component library developed by Google with CSS, Javascript and HTML. It is also known as Material Design. It has several interactive components that help accelerate development and provide a good user experience. Animations offer visual input for users and make the development team work more manageable.
+**8. [Tachyons](https://tachyons.io/) -** Tachyons is another popular CSS framework. It is a lightweight, responsive CSS toolkit (utility first design) that claims to be ‘built for designing’. Going by the name ‘Tachyons’ means ‘a hypothetical particle that travels faster than light. This library will surely make a developer think of it as a good option for lightning-fast execution.
+**9. [Semantic UI](https://semantic-ui.com/) -** Semantic UI is another one of the good CSS frameworks released in 2013 by Jack Lukic. It contains pre-built semantic components that are super helpful in creating a beautiful and responsive layout using human-friendly HTML syntax.
+**10. [UIKit](https://getuikit.com/) -** UIKit is regarded as one of the best CSS frameworks. It is a lightweight, open-source and modular front-end framework for developing fast and powerful web interfaces. UIKit framework is simple to learn and is used to build user interfaces for iOS and Android-based web applications. It includes all of the necessary elements such as labels, buttons, table views, etc. There are several ready-to-use themes available, and you can implement them by modifying the relevant SASS or LESS file.
+**11. [Primer CSS](https://primer.style/) -** Primer is a CSS framework created by Github, now it is open source and is accessible for the public to use in their projects. It uses colour, typography, and spacing consistently and systematically. Along with its excellent features and functionalities, it is also clear and concise. Therefore, it is regarded as one of the good CSS frameworks among both developers and non-developers.
+**12. [Ant Design](https://ant.design/) -** Ant Design is regarded as one of the best CSS frameworks. It is used in JavaScript and ReactJS libraries. Since the Ant Design framework has 24 columns, you can now tailor the visible areas. With its various filled and outline icons, it fulfils many app requirements.
+**13. [Miligram CSS](https://milligram.io/) -** Milligram also comes under the category of good CSS frameworks. It is a lightweight CSS framework with a vast developer community. Milligram is terrific as you can start from scratch when designing your interfaces, and it has been built to improve efficiency and productivity. However, given the features within, it is very flexible; it comes with a collection of web development assets to satisfy your needs.
+
 ##### Q5. What does CSS selector mean?
 ##### A5.
 A CSS selector is the first part of a CSS Rule. It is a pattern of elements and other terms that tell the browser 
@@ -5968,8 +5984,6 @@ Popular CSS frameworks in 2021:
 **12. [Ant Design](https://ant.design/) -** Ant Design is regarded as one of the best CSS frameworks. It is used in JavaScript and ReactJS libraries. Since the Ant Design framework has 24 columns, you can now tailor the visible areas. With its various filled and outline icons, it fulfils many app requirements.
 **13. [Miligram CSS](https://milligram.io/) -** Milligram also comes under the category of good CSS frameworks. It is a lightweight CSS framework with a vast developer community. Milligram is terrific as you can start from scratch when designing your interfaces, and it has been built to improve efficiency and productivity. However, given the features within, it is very flexible; it comes with a collection of web development assets to satisfy your needs.
 
-
-
 ##### Q15. What do you see in the future of Web design?
 ##### A15.
 This is an open-ended question that is purely subjective, but I want to hear the candidate discuss the 
@@ -5988,72 +6002,1854 @@ up with industry buzz or trends.
 
 ---
 
-##### Q1.
+**Exercises To Do**
+
+Seeing people’s actual work is just as important as what they say. Seeing people work their through exercises live 
+might be even more important. These are some exercises that aren’t particularly difficult and anybody with 
+CSS experience should be able to do. Watching/listening to them do it could be invaluable. 
+Collab Mode on CodePen is kinda perfect for that (just saying).
+
+---
+
+##### Q1. Create This Button { Idea taken from [Mobify's CodePen account](https://codepen.io/mobify/pen/GtqKj)
 ##### A1.
+I saw this idea on Mobify’s CodePen account. Give people an image of a button, and tell them:
 
-##### Q2.
+> Using CSS properties alone, recreate this button:
+>
+
+![CSS-recreate-a-button-using-CSS-alone-image](./assets/CSS-recreate-a-button-using-CSS-alone.PNG)
+
+This would be a great test of the candidate’s CSS3 skills. 
+This button is loaded with that kind of stuff. Things interviewers are looking for:
+
+* How did you handle [multiple borders](https://css-tricks.com/snippets/css/multiple-borders/)? `box-shadow` is probably the best way here.
+* Did you use `text-transform: uppercase`; for the text? That would be best.
+* How did you handle the stars? Pseudo elements would be a good candidate there. Did you use unicode? Icon font?
+* Did you catch the subtle `text-shadow`?
+* How did you split the background in the main part of the button? a linear-gradient with no fade would be a good technique there. Or `box-shadow`.
+* Were you [careful](https://css-tricks.com/public-service-announcement-careful-with-your-nested-border-radii/) with the nested `border-radius`?
+
+This stuff is hard to fake. You can either do it and talk about it, or you can’t.
+
+One possible solution:
+
+```css
+/*
+ * References: 
+ * https://codepen.io/mobify/pen/VYyBNR 
+ * https://stackoverflow.com/questions/41574855/how-to-add-two-stars-in-css-through-after
+ */
+/*
+    
+    INSTRUCTIONS
+
+    Using CSS properties alone, recreate this button: 
+
+        https://i.imgur.com/gnZnY.png. 
+
+    Spend no longer than 15 minutes on it, we don't 
+    expect it to be a perfect match. It's open book, 
+    feel free to hit Google but be prepared to 
+    explain your solution.
+
+*/
+button {
+  /* Text */
+  text-transform: uppercase;
+  color: #555;
+  font-weight: bold;
+  font-size:26px;
+  font-family: arial;
+  letter-spacing: -1px;
+  text-shadow: 0 1px 0 #DEDEDE;
+  /* button box */
+  height:60px;
+  padding:0 30px;
+  border: 1px solid #ABABAB;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px #616161, 0 0 0 6px #CBCBCB, 0 0 0 8px #fff, 0 0 0 10px #666, 0 5px 7px 7px #D1D1D1, inset 0 28px 0 rgba(255,255,255, .2);
+  /* Background*/
+  background: linear-gradient(to bottom, #e3e3e3 0%, #d2d2d2 50%, #c6c6c6 51%, #adadad 100%);
+  /* Position*/
+  position: relative;
+}
+
+/* Pseudo Elements*/
+button::before, 
+button::after {
+  content: "✭";
+}
+button::before {
+  margin-right: 15px;
+}
+button::after {
+  margin-left: 15px;
+}
+```
+
+```html
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Recreate the Given Button</h1>
+    <button>Checkout</button>      
+  </body>
+</html>
+```
+
+##### Q2. Fix The Sidebar
 ##### A2.
+The [right sidebar](https://codepen.io/chriscoyier/pen/ClGcF) here has fallen down below the content. Show me some different ways you could fix that.
 
-##### Q3.
+Even though the two columns are 75% and 25% wide and floated opposite ways, the sidebar has fallen.
+The reason is because the columns don't actually add up to 100% – they add up to more than that due to the padding.
+There is a number of ways to fix it:
+
+* Using `box-sizing: border-box;` on the appropriate elements is the most efficient fix.
+* Using `calc()` on the widths to remove the `1rem` padding is another way.
+* Putting the padding on an added internal wrapper element instead of the columns is a fix that will work 
+  with very deep browser support.
+* Adjusting the numbers to make the math work is another way. For instance making the widths of the columns 
+  4% narrower and using 2% for the padding instead.
+
+There are other ways. The more solutions you can think of, the more creative and versatile a problem solver you are.
+
+##### Q3. Make this fixed width design fluid.
 ##### A3.
+[Here's a design](https://codepen.io/chriscoyier/pen/lDJmf). It's a fixed 800px wide. 
+Do your best at making it fit the screen more appropriately at any screen size.
 
-##### Q4.
+This is just one ingredient to responsive design (which you should probably at least be familiar with) 
+but it's an important one. It can help prove out can think spatially and make reasoned choices about layout. 
+The interviw is looking for the following:
+
+* Changing the pixel widths to percentages (how did you handle the math?)
+* Did you do anything special for large screens or just small?
+* Did you attempt to use a responsive images solution?
+* Does the new design retain the hierarchy of importance inherit to the original?
+* Did you come back with questions? (Lots of things to ask here, including what other resources might be available.)
+* Did you test it? (To make sure it actually works, and find things like missing meta tags.)
+
+##### Q4. Replace this logo markup with an image.
 ##### A4.
+<a href="/" class="logo">Company</a>
+Accessible and semantic image replacement has been a CSS topic for a lot of years and the "best way" has morphed over the years. 
+Asking them to show you how it could be done a number of ways would be a way to get insight into how long they've really 
+been working with CSS. Not only is it directly an important thing to know how to do, knowing how to do it multiple 
+ways demonstrates the depth of their internal toolbox.
 
-##### Q5.
+The report card consists of five major categories:
+
+* **CSS ON / Images ON**
+Represents browsers in their normal states. All techniques should pass this test, since that’s the whole point.
+* **CSS ON / Images OFF**
+Represents browsing with regular stylesheets applied but images turned off. This is rare but a possibility (folks with bandwidth concerns…) This is the most difficult test. Since most of these techniques go to various lengths to hide text, when the images are turned off that means that nothing is displayed which ain’t good. Displaying text only here is considered a pass.
+* **CSS OFF / Images ON**
+Represents browsing with no stylesheets being applied. Most techniques default to regular web text here which isn’t exactly a fail, but since images may still be turned on, I don’t consider it a pass either.
+* **CSS OFF / Images OFF**
+Represents browsing with both images turned off and no stylesheets applied. Defaulting to text here is considered a pass.
+* **Extra Unnecessary Markup**
+Having to add markup for the sole purpose of image replacement is not ideal. Does not achieve true separation from content and design.
+
+**Technique #1**
+
+```html
+<h1 id="technique-one">
+  <span>Company</span>
+</h1>
+```
+
+```css
+h1#technique-one {
+  width: 250px;
+  height: 25px;
+  background-image: url(logo.gif);
+}
+h1#technique-one span {
+  display: none;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-1-image](./assets/CSS-replace-logo-markup-with-an-image-technique-1.PNG)
+
+More information: This technique is referred to as FIR or ["Fahrner Image Replacement"](http://www.stopdesign.com/articles/replace_text/). 
+Much has been written about this including an [A List Apart article](http://www.alistapart.com/articles/fir/) about it’s problems 
+with accessibility as well as an article from David Shea [defending it](http://www.digital-web.com/articles/in_defense_of_fahrner_image_replacement/). 
+The premise here is to use a span to wrap the text inside the header and use that span to hide the text. 
+It works, but using display: none will hide the text from screen readers (and presumably search bots, not good).
+
+**Technique #2**
+
+```html
+<h1 class="technique-two">
+  Company
+</h1>
+```
+
+```css
+h1.technique-two {
+  width: 2350px; height: 75px;
+  background: url("images/header-image.jpg") top right;
+  margin: 0 0 0 -2000px;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-2-image](./assets/CSS-replace-logo-markup-with-an-image-technique-2.PNG)
+
+**More information:** Radu Darvas is credited with this technique. Basically this technique creates a giant box that 
+goes way off the screen to the left. The text, being left-justified, cannot be seen. The image is placed in the top 
+left of this box. It works, but it has the common problem of failing with CSS ON / Images OFF. I can also see this 
+giant box thing being a problem in more complex layouts, besides being just generally less efficient than some 
+other techniques.
+
+**Technique #3**
+
+```html
+<h1 class="technique-three">
+  CSS-Tricks
+</h1>
+```
+```css
+h1.technique-three {
+  width: 350px; 
+  height: 75px;
+  background: url("images/header-image.jpg");
+  text-indent: -9999px;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-3-image](./assets/CSS-replace-logo-markup-with-an-image-technique-3.PNG)
+
+**More information:** This technique is credited to Mike Rundle and referred to as the Phark Method. 
+This is probably the most widely used technique today. At the time of this writing, it is certainly the one 
+I use most often. There is even a [T-Shirt](https://css-tricks.com/9-awesome-css-themed-t-shirts/) based on 
+this one (2nd up from the bottom). 
+
+> The premise is deliciously simple: replace block with background image, kick text off page with indent.
+>
+
+It’s effective and keeps screen readers happy. It only fails the elusive CSS ON / Images OFF issue. 
+A variation on this technique is to use [negative letter spacing instead](http://www.stuffandnonsense.co.uk/archives/examples/malarkey-method-example.html), 
+which purports to resolve problems with triggering huge unwanted scrollbars in some browsers.
+
+**Technique #4**
+
+```html
+<h1 class="technique-four">
+  <a href="#">
+    <img src="images/header-image.jpg" alt="CSS-Tricks" />
+  </a>
+</h1>
+```
+```css
+h1.technique-four {
+	width: 350px; height: 75px;
+	background: url("images/header-image.jpg");
+	text-indent: -9999px;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-4-image](./assets/CSS-replace-logo-markup-with-an-image-technique-4.PNG)
+
+
+**More information:** I'm not sure the origin of this technique, but it's basically an extension of the Phark technique. 
+Instead of bumping text off the screen you are bumping an image off the screen. This has the distinct advantage of 
+still showing an image when CSS is OFF and images are ON, and also has ALT text for [508 compliance](http://www.webaim.org/standards/508/checklist). 
+This technique still fails with CSS ON / Images OFF. I give credit to Volkan for pointing out this is the technique 
+that [Smashing Magazine](http://www.smashingmagazine.com/) is using in their header. One concern over this technique 
+is whether or not it is effective SEO, specifically, if ALT text is just as good as regular web text. An extension of 
+this technique would be to include regular web text inside the anchor link as well. Both the text and the image would 
+get bumped off the page with the text-indent and it would alleviate the SEO concerns, but then you'd get "double text" 
+with both images OFF and CSS OFF.
+
+**Technique #5**
+
+```html
+<h1 class="technique-five">
+  <img src="images/blank.gif" alt="CSS-Tricks" />
+  <span>CSS-Tricks</span>
+</h1>
+```
+```css
+h1.technique-five {
+	width: 350px; height: 75px;
+	background: url("images/header-image.jpg");
+}
+h1.technique-five span {
+	display: none;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-5-image](./assets/CSS-replace-logo-markup-with-an-image-technique-5.PNG)
+
+
+**More information:** Radu Darvas is also credited with this technique. By including a single-pixel transparent GIF image 
+to the markup, you can restore ALT text with images turned off. This allows text to be displayed with CSS ON / Images OFF (!). 
+Very effective, but adding the shim GIF is quite the blow to semantics. Also, with both CSS and Images OFF you get 
+"double text", meaning both the alt text and the regular header text.
+
+**Technique #6**
+
+```html
+<h1 class="technique-six">
+  CSS-Tricks
+</h1>
+```
+```css
+h1.technique-six {
+	width: 350px;
+	padding: 75px 0 0 0;
+	height: 0;
+	background: url("images/header-image.jpg") no-repeat;
+	overflow: hidden;
+}
+```
+![CSS-replace-logo-markup-with-an-image-technique-6-image](./assets/CSS-replace-logo-markup-with-an-image-technique-6.PNG)
+
+**More information:** This technique is credited to simultaneous discovery by [Seamus Leahy](http://moronicbajebus.com/wordpress/wp-content/cssplay/image-replacement/) and [Stuart Langridge](http://www.kryogenix.org/code/browser/lir/).
+This technique creates a box which will render with a height generated solely by top padding. 
+By setting overflow to hidden, text will automatically be hidden but the box will be properly sized for a background image. 
+This is accessibility-friendly and fairly effective, but fails in the CSS OFF / Images ON test as well as requires a 
+box model hack for older versions of IE.
+
+**Technique #7**
+
+```html
+<h1 class="technique-seven">
+	<span>CSS-Tricks</span>
+</h1>
+```
+```css
+h1.technique-seven {
+	width: 350px; height: 75px;
+	background: url("images/header-image.jpg") no-repeat;
+}
+h1.technique-seven span {
+	display: block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+```
+
+![CSS-replace-logo-markup-with-an-image-technique-7-image](./assets/CSS-replace-logo-markup-with-an-image-technique-7.PNG)
+
+**More information:** Credited to Leon Dwyer. This technique is able to hide the text by putting it inside a box 0px wide 
+and 0px tall with hidden overflow. Because it doesn’t use the display attribute to hide the text, it’s safe for screen 
+readers.
+
+**Technique #8**
+
+```html
+<h1 class="technique-eight">
+  <span></span>CSS-Tricks
+</h1>
+```
+```css
+h1.technique-eight {
+	width: 350px; height: 75px;
+	position: relative;
+}
+h1.technique-eight span {
+	background: url("images/header-image.jpg");
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+```
+
+![CSS-replace-logo-markup-with-an-image-technique-8-image](./assets/CSS-replace-logo-markup-with-an-image-technique-8.PNG)
+
+
+**More information:** This technique is credited to [Levin Alexander](http://levinalex.net/files/20030809/alternatefir.html). 
+In this technique, instead of pushing the text off the page or otherwise hiding it, the background image just 
+**sits on top** of the text. This is the only other technique besides #5 which passes the CSS ON / Images OFF test. 
+One problem with this technique is that if your background image uses transparency, the text will show through. 
+Also, while not included in the original writeup of this technique, I would suggest hiding the overflow so that 
+if the text size is bumped up large enough that it breaks out of the box it won’t show.
+
+**Technique #9**
+
+```html
+<h1 class="technique-nine">
+  CSS-Tricks
+</h1>
+```
+```css
+h1.technique-nine {
+  width: 350px; height: 75px;
+  background: url("images/header-image.jpg") no-repeat;
+  font-size: 1px;
+  color: white;
+}
+```
+
+![CSS-replace-logo-markup-with-an-image-technique-9-image](./assets/CSS-replace-logo-markup-with-an-image-technique-9.PNG)
+
+**More information:** This technique is credited to [Russ Weakley](http://maxdesign.com.au/presentation/headings-as-images/#option4). With this technique, simply setting the text to an ultra-tiny 
+1px size and matching it’s color to the background color of the image, you don’t even need to hide it. 
+While this technique makes a lot of sense accessibility wise, it has it’s own problems. Like most of the others, 
+it doesn’t work with CSS ON / Images OFF. Even at the 1px size, the text is still visible, so this will only work 
+on flat color backgrounds where it can blend in perfectly. I also have my suspicions that there may be some 
+SEO penalties for this, both for the very small font-size and for matching background-color and color.
+
+**Even more information…**
+
+* As usual, there is also a [javascript solution](http://particletree.com/features/css-rules-for-image-replacement/).
+* There is a technique for doing this with [inline-blocks instead of blocks](http://www.evotech.net/blog/2007/09/css-image-replacement-method/).
+* If the only reason you are using this is to _change_ _the_ _font_, you’d be better off using `@font-face`.
+* Google Webmaster Tools [has an article](https://www.google.com/support/webmasters/bin/answer.py?answer=66353) about this 
+  which doesn't specifically cover image replacement but reading between the lines, it seems like a reasonable amount of 
+  usage of this technique will have no negatives.
+* Critique on why to mark your logo up as an `image` and not an `<h1>` - [Your logo is an image, not an <h1>](https://csswizardry.com/2010/10/your-logo-is-an-image-not-a-h1/).
+* [Image Replacement Museum](https://css-tricks.com/the-image-replacement-museum/)
+
+##### Q5. Google how you would find out what the default value for backface-visibility is.
 ##### A5.
 
-##### Q6.
+Being able to Google something quickly and efficiently is a huge part of any developers job. 
+Are they deft at it? Did they find the right answer? Did they go to a specific trusted source in the results page?
+
+**Answer**
+The `backface-visibility` property defines whether or not the back face of an element should be visible when facing the user.
+
+> The `back face` of an element is a mirror image of the front face being displayed.
+>
+> This property is useful when an element is rotated. 
+>
+> It lets you choose if the user should see the back face or not.
+
+**So, Answer is Google will be displayed mirrored image.**
+
+##### Q6. What is the "Box Model" in CSS? Which CSS properties are a part of it?
 ##### A6.
+The CSS box model is fundamental to understanding layout and sizing and such. It's made up of:
 
-##### Q7.
+* Width and height (or in the absence of that, default values and the content inside)
+* Padding
+* Border
+
+![CSS-Box-Model-Diagram-image](./assets/CSS-Box-Model-Diagram.PNG)
+
+Margin is related but not technically a part of it. I would give extra points for knowing/mentioning that, but not take away and points for including it.
+
+##### Q7. What are Sass, Less, and Stylus? Why do people use them? How does something like Compass relate to Sass?
 ##### A7.
+They are CSS preprocessors. They are an abstraction layer on top of CSS. They are a special syntax/language 
+that compile down into CSS. They make managing CSS easier, with things like variables and mixins to handle 
+vendor prefixes (among other things). They make doing best practices easier, like concatenating and compressing CSS.
 
-##### Q8.
+Bonus points for knowing how they differ and/or having experience using them. More bonus points for knowing what 
+things like Compass, Bourbon, LESSHat, Nib, etc are and how they relate.
+
+##### Q8. Name some online resources that you reference when having CSS issues.
 ##### A8.
+Being good at googling problems you are having is a valuable job skill. There isn't any shame in it. 
+There is shame in spinning your wheels because "you should know this." If you don't have time to do the Googling 
+exercise above, just asking about resources can be telling.
 
-##### Q9.
+Google is a pretty good answer (since it's true and we all know it). But being able to name some specific sites 
+is a good indicator they have done it a bunch and are familiar with the places they land and know their favorites. 
+Stuff like [MDN (Mozilla Developer Network)](https://developer.mozilla.org/en-US/) is a good answer.
+
+##### Q9. Describe what a "reset" CSS file does and how it's useful. Are you familiar with normalize.css? Do you understand how they differ?
 ##### A9.
+Resets are so wildly common in CSS that anyone who is a front end developer type has surely used them. 
+Do they do so blindly or do they know why? The reason is essentially that different browsers have different 
+default styling for elements, and if you don't deal with that at all, you risk designers looking unnecessarily 
+different in different browsers and possibly more dramatic breaking problems.
 
-##### Q10.
+[Normalize](https://necolas.github.io/normalize.css/) you might call a CSS reset alternative. Instead of wiping out all styles, it delivers a set of reasonable defaults. 
+It doesn't unset things that are already consistent across browsers and reasonable (e.g. bold headers). 
+In that way it does some less than a reset. It also does some more than a reset in that it handles quirks 
+you may never consider, like HTML5 audio element inconsistencies or line-height inconsistencies when you use sub and sup 
+elements.
+
+##### Q10. What are the various techniques for clearing floats?
 ##### A10.
+[Floats](https://css-tricks.com/all-about-floats/) are still incredibly common. As this is published, still probably 
+the most cross-browser consistent way to build layout and grids. Anyone who has worked with them is aware of float 
+collapsing. That is, floated element do not add to the height of a parent element. So for example if a parent element 
+contained only floated elements, it would collapse to zero height. You can deal with that like:
 
-##### Q11.
+* Use a clearfix (bonus points for micro clearfix).
+* Float the parent as well.
+* Use an overflow property other than "visible" on the parent (bonus points for listing downsides like cutting off shadows).
+
+Bonus points for "create a [new block formatting context](http://www.yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts/)". 
+Possibly negative points for something like: 
+```html
+<br style="clear: both;">
+```
+
+![do-they-understand-bidrectional-clearing-in-css-image](./assets/do-they-understand-bidrectional-clearing-in-css.PNG)
+
+As a bonus question, you could ask them to compare using inline-block and floats for building a grid. 
+Good answer: there are problems either way. With inline-block you need to deal with the whitespace issue. 
+With floats you need to deal with clearing.
+
+##### Q11. What are sprites and why would use them? How do you go about creating them? What are possible alternatives to sprites?
 ##### A11.
+[Sprites are](https://css-tricks.com/css-sprites/) essentially multiple images combined into one. 
+Performance is the reason that they are used. Generally speaking, the slowest thing a website can do is request a resource. 
+The fewer requests a site needs to make, the faster it is. Fast = good. 
+Combining what would be many requests into one = good.
 
-##### Q12.
+![CSS-Sprites-image](./assets/CSS-Sprites.PNG)
+
+Asking how they make sprites would just seal the deal that they are actually very familiar with them. 
+Manually creating sprites is certainly a possibility but it isn't very efficent. 
+There are helper tools like: 
+* [SpriteCow](https://css-tricks.com/video-screencasts/105-using-spritecow/)
+* [SpriteMe](http://spriteme.org/)
+* [Spriting with Compass](http://compass-style.org/help/tutorials/spriting/), or 
+* [Grunticon](https://github.com/filamentgroup/grunticon).
+
+It's always interesting to hear a real workflow approach.
+Example workflow:
+* [Workflow for creating SVG sprites with NPM scripts](https://olegvaraksin.medium.com/workflow-for-creating-svg-sprites-with-npm-scripts-7cae7014619)
+* [CSS Sprites: Creating PNG Sprites and Using with CSS](https://w3bits.com/css-sprites/)
+
+Sprites are [raster images](https://en.wikipedia.org/wiki/Raster_graphics). When asking about alternatives, good answers might be related to the fact that sprites are often 
+for icons and icons often don't need to be raster. [SVG Stacks](http://simurai.com/post/20251013889/svg-stacks), [Icon Fonts](https://css-tricks.com/flat-icons-icon-fonts/), [Unicode](http://copypastecharacter.com/)…
+
+Still more resources on CSS Sprites:
+* [Image sprites or data URIs? Icon fonts or SVGs? A Grunt workflow for the 'gold' standard](https://benfrain.com/image-sprites-data-uris-icon-fonts-v-svgs/)
+
+##### Q12. What are some accessibility concerns that come up in CSS?
 ##### A12.
+[Hidden content](https://css-tricks.com/places-its-tempting-to-use-display-none-but-dont/) is a big one here. 
+It's only acceptable to use `display: none;` if you're both trying to hide things visually and the content itself.
 
-##### Q13.
+CSS controls colors so color [accessibility](http://colorfilter.wickline.org/) is relevant. 
+[Focus styles](http://a11yproject.com/posts/never-remove-css-outlines/) are also important and directly controlled by CSS.
+
+There is a lot more accessibility stuff that is related to HTML and JavaScript, so mentioning that stuff is great, 
+but I think it's interesting to target the question solely on CSS to force focused thinking.
+
+##### Q13. What is the difference between `inline`, `inline-block`, and `block`?
 ##### A13.
+Bonus points for bringing up specific details like the fact that you can't transform inline elements.
 
-##### Q14.
+** a. `inline`**
+> Displays an element as an inline element. Any height and width properties will have no effect.
+>
+
+![CSS-Inline-image](./assets/CSS-Inline.PNG)
+
+The `display` property specifics the display behavior of an element. It’s a must know for controlling the layout of an 
+element. There’s a bunch of property values. But let’s start off with the essential `inline`.
+
+This one displays the element inline or on the same line. In other words, inline elements do NOT start on a new line 
+and only takes up as much width as its content. So, if you try to set any width and height, it will have NO effects.
+
+![CSS-Inline-Code-Example-image](./assets/CSS-Inline-Code-Example.PNG)
+
+> `inline` elements
+>
+
+Here are a few elements that have a default `inline` property:
+* `span`
+* `a`
+* `img`
+
+And most of the formatting tags are also are inherently `inline`:
+* `em`
+* `strong`
+* `i`
+* `small`
+
+** b. `inline-block`**
+> Displays an element as an inline-level block container. You CAN set height and width values.
+>
+
+![CSS-Inline-Block-image](./assets/CSS-Inline-Block.PNG)
+
+Alright, let's move on to `inline-block`. It's essentially the same thing as `inline`, except that you can set 
+height and width values.
+
+![CSS-Inline-Block-Code-Example-image](./assets/CSS-Inline-Block-Code-Example.PNG)
+
+** c. `block`**
+> Check the length of the string.
+>
+
+![CSS-Block-image](./assets/CSS-Block.PNG)
+
+So far, we talked about `inline`. Now let's switched to the opposite of it, `block`. 
+Remember `inline` elements appears on the same line. Well, `block` starts on a NEW line and takes up the 
+full width available. So that means block elements will occupy the entire width of its parent element.
+
+> `block` elements
+>
+
+Here are a few elements that have a default `block` property:
+* `div`
+* `h1`
+* `p`
+* `li`
+* `section`
+
+**Explained in non-dev terms**
+Imagine if you're attending a concert, you have rows of seats, right. If you assign 
+your friend with an `inline` seat, they will sit next to you. So the thing with `inline` seats, 
+it's that they all are the same physical chair.You can't manipulate the chair to make it larger or smaller. 
+One size fits all they call it!
+
+Now your friend Jennifer wants to join you, but because she is the daughter of the owner of the stadium. 
+She gets assigned an `inline-block` seat. Well, she still gets to sit next to you. Cause she's "inline" 
+with you (bad pun, lol 😂) and of course you want her to sit next to you. However, because she is the daughter 
+of the stadium owner, her mom wants to make sure she's comfortable. So she gives her a special seat, where her chair 
+is customized and can be adjusted to make it bigger or smaller. Nepotism at its finest 🤫
+
+Your classmate Angelina is also attending the concert. Now your friend Jennifer doesn't really like her. 
+So she tells her mom to assign her a `block` seat. That way Angelina is not seated next to you. 
+Instead she sits in the next row.
+
+**Final Solution**
+> **inline** The element doesn’t start on a new line and only occupy just the width it requires.
+> You can’t set the width or height.
+>
+
+> **inline-block** It’s formatted just like the inline element, where it doesn’t start on a new line. 
+> BUT, you can set width and height values.
+>
+
+> **block** The element will start on a new line and occupy the full width available. 
+> And you can set width and height values.
+>
+
+![CSS-Inline-InlineBlock-and-Block-Explanations-image](./assets/CSS-Inline-InlineBlock-and-Block-Explanations.PNG)
+
+Here's a visual of how all those `diplay` elements look like:
+
+![CSS-Inline-InlineBlock-and-Block-Visual-image](./assets/CSS-Inline-InlineBlock-and-Block-Visual.PNG)
+
+Now, in your technical interview, you might get a variation on this questions:
+
+* What's the difference between `inline` vs `block`
+* What's the difference between `inline` vs `inline-block`
+
+But no matter what variation, you should be able to address them! Good luck with your interview 👍
+
+**Resources:**
+* [w3schools: display](https://www.w3schools.com/cssref/pr_class_display.asp)
+* [w3schools: display layout](https://www.w3schools.com/cssref/pr_class_display.asp)
+* [w3schools: HTML Text Formatting](https://www.w3schools.com/html/html_formatting.asp)
+* [MDN web docs: Inline Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements)
+* [CSS Tricks: display](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements)
+* [Inline vs Inline-Block Display in CSS](https://alligator.io/css/display-inline-vs-inline-block/)
+
+
+##### Q14. Explain Cross browser CSS coding?
 ##### A14.
+Internet Explorer, Mozilla and Google Chrome all use different rendering engines. 
+Particularly, CSS and HTML are not displayed identically across all browsers. As a result, a website may appear slightly off, or sometimes very off, when viewed in different browsers. There is still no definitive, ideal solution to problems such as different screen sizes, restricted bandwidth (in cases of mobile browsing), performance on high-resolution (“retina”) displays, and so on. Websites need cross browser compatibility but maybe not to every single web browser out there.
 
-##### Q15.
+**Cross-browser Testing Checklist:**
+
+What we need to test under browser testing:
+
+**1)** CSS validation
+**2)** HTML or XHTML validation
+**3)** Page validations with and without JavaScript enabled
+**4)** Ajax and JQeury functionality
+**5)** Font size validation
+**6)** Page layout in different resolutions
+**7)** All images and alignment
+**8)** Header and footer sections
+**9)** Page content alignment to center, LHS or RHS
+**10)** Page styles
+**11)** Date formats
+**12)** Special characters with HTML character encoding
+**13)** Page zoom-in and zoom-out functionality
+
+**Efficient crossbrowser CSS development starts with techniques and good practices listed few of them below:**
+
+* JavaScript solutions that can help us serve responsive websites to older browsers lacking CSS3 support: **Respond.js**, **Modernizr**, and **adaptive.960.js**.
+  - **respond.js –** which enables the older browser versions to understand and execute CSS3 media queries
+  - **Modernizr –** it is a small JavaScript library that detects the availability of native implementations for next-generation web technologies, i.e. features that stem from the HTML5 and CSS3 specifications
+* Use Internet Explorer First – sites should be developed in “modern” web-browsers, with standards first and then be tweaked for buggy versions of Internet Explorer.
+* Use a CSS Reset or NORMALIZE – Every browser has different default CSS rules that they follow. This is why you use CSS reset stylesheet to make sure your browsers follow the same basic rules and behave consistently. You want to add one of these as the first stylesheet in order to reset unless you use a framework which will already have one.
+* Conditional Comments – Conditional comments allow you to link style sheets for different browsers, which is especially helpful when it comes to design challenges that are common with Internet Explorer.
+* CrossBrowserTesting – gives you access to do this in over 1,500 browsers, so you never have to wonder what users are seeing when they visit your page from a different machine
+* Use Vendor Prefixes and Fallbacks The following is a list of vendor prefixes for each of the popular browsers.
+  - **-webkit-** (Chrome, Safari, newer versions of Opera)
+  - **-moz-** (Firefox)
+  - **-o-** (Old versions of Opera)
+  - **-ms-** (Internet Explorer))
+* Clear Floats
+* Check CSS Display Types
+* Validate Your CSS
+* Use Cross-Browser Plugins
+* Use Testing Tools
+
+**References :**
+
+* [https://speckyboy.com/cross-browser-css-styling-tips/](https://speckyboy.com/cross-browser-css-styling-tips/)
+* [https://www.smashingmagazine.com/2010/06/the-principles-of-cross-browser-css-coding/](https://www.smashingmagazine.com/2010/06/the-principles-of-cross-browser-css-coding/)
+* [https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Introduction](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Introduction)
+* [https://www.catswhocode.com/blog/15-techniques-and-tools-for-cross-browser-css-coding](https://www.catswhocode.com/blog/15-techniques-and-tools-for-cross-browser-css-coding)
+
+##### Q15. What tools do you use for cross-browser testing?
 ##### A15.
+They should have some kind of strategy. Perhaps a web-based tool like BrowserStack. 
+Perhaps a VM based tool like Virtual Box. Perhaps different actual computers.
 
-##### Q16.
+Part of the job of front end design is making sure things work everywhere they can (based on decided-upon support). 
+You don't have to love it, but you can't hate it. "This right here, this is the job. What kind of work were you expecting?"
+
+**Answer**
+
+**List of the latest and the best Cross Browser Testing Tools for your website Browser Compatibility Testing on different browsers and Operating Systems:**
+
+* [CrossBrowserTesting.com](https://crossbrowsertesting.com/?utm_medium=referral&utm_source=smartbear.com&utm_campaign=prodnav) – Interactively test and debug on live remote devices, view your website on multiple browsers at once by taking automated, or run automated using Selenium, Appium, or your other favorite frameworks.
+* [LambdaTest](https://crossbrowsertesting.com/?utm_medium=referral&utm_source=smartbear.com&utm_campaign=prodnav) – cloud-based cross-browser testing platform that helps you to perform compatibility testing of your web app or websites easily.
+* [Experitest](https://experitest.com/cross-browser-testing/) – Automate your cross-browser testing by running Selenium and Appium tests on 1,000+ browser types, versions, and operating systems.
+* [Ranorex Studio](https://www.ranorex.com/ranorex-studio-test-automation/) – all-in-one solution for web application and cross-browser testing. Automate tests for a broad variety of web technologies and frameworks including HTML5, Java and JavaScript websites, Salesforce, Flash and Flex applications, and many more
+* [TestComplete](https://smartbear.com/product/testcomplete/cross-browser-testing-tool/) – Automate browser testing process for browser compatibility checks on different browsers and operating systems.
+* [Browsershots](http://browsershots.org/) – allow you to test a website in any browser and operating system. This is a widely used browser compatibility testing tool because of its features and available customizations.
+* [Turbo Browser Sandbox](https://turbo.net/browsers) – allows you to use almost all the top web browsers without installing on your machine.
+* [IE NetRenderer](https://turbo.net/browsers) – free online browser compatibility check tool to test websites on almost all versions of Microsoft Internet Explorer.
+* [Browsera](http://www.browsera.com/) -best tool to test cross-browser layouts and scripting errors for your website.
+* [IETester](http://www.browsera.com/) – allow you to test your website on the latest IE versions at the same time using one application
+* [EndTest](https://endtest.io/) – allows you to automate repetitive tests across browsers without having to write code in the way that you might need to with something like Selenium
+* [BrowserStack Live](https://endtest.io/) – You can test your website on Android and iOS real devices using their cloud platform. This tool is also useful for testing websites on different operating systems and real mobile devices.
+* [Browserling](https://endtest.io/) – for interactive browser testing.
+
+**Automated Cross Browser Testing Workflow**
+[Learning How to Set Up Automated, Cross-browser JavaScript Unit Testing](https://philipwalton.com/articles/learning-how-to-set-up-automated-cross-browser-javascript-unit-testing/)
+[How To Get Started With Automated Browser Testing?](https://www.lambdatest.com/blog/get-started-with-automated-browser-testing/)
+
+##### Q16. What are some of your favorite web design workflow tools?
 ##### A16.
+What code editor to they like? Where do they go for inspiration? What experience with version control do they have? 
+What was QA like where they have worked? Support? What different deployment methods have they worked with? 
+Do they know Photoshop or another visual design software alternative? Are the comfortable with the terminal?
 
-##### Q17.
+Those are just some examples, it's interesting to hear about any software they use to get the jobs done. 
+Getting a sense of the tools they use (and better, the tools they like) is interesting. 
+Bonus points: a sense of excitement about some of the tools.
+
+**Popular Code Editors for Web Design**
+
+**1)** [Sublime Text 3](http://www.sublimetext.com/) : The best code editor all-round – but you'll have to pay for it.
+  * **Price:** $80 (free indefinite preview) | **Platform:** Windows, Mac OS, Linux | **Developer:** Sublime HQ
+  * [+] Lightweight and speedy
+  * [+] Extremely extendable
+  * [-] Not free
+  * [-] Nagging popup
+**2)** [Visual Studio Code](https://code.visualstudio.com/) : The most fully featured, well-rounded code editor.
+  * **Price:** Free | **Platform:** Windows, Mac OS, Linux | **Developer:** Microsoft
+  * [+] Good for complex, larger projects
+  * [+] Very robust
+  * [+] Built-in Git support
+  * [-] Slow to start up
+**3)** [Codespaces](https://github.com/features/codespaces) : A new browser-based code editor from Microsoft and Github.
+  * **Price:** Free | **Platform:** Browser | **Developer:** Microsoft
+  * [+] Work from anywhere
+  * [+] Good for collaboration
+  * [+] Functions offline
+  * [-] New and untested
+**4)** [Atom](https://atom.io/) : The best free code editor, with a friendly UI.
+  * **Price:** Free | **Platform:** Windows, Mac OS, Linux | **Developer:** Github
+  * [+] Integrated with Git and GitHub
+  * [+] Quick and reliable
+  * [-] Slow to launch
+  * [-] Historical performance issues
+**5)** [Brackets](http://brackets.io/) : The best code editor for new users.
+  * **Price:** Free | **Platform:** Windows, Mac OS, Linux | **Developer:** Adobe
+  * [+] Simple customisation options
+  * [+] Pleasant looking UI
+  * [+] Especially suited to macOS
+  * [-] Some performance issues
+
+##### Q17. Say you found a rendering problem on one of your sites in Internet Explorer 8, which you have decided you are supporting. How would you approach fixing it?
 ##### A17.
+This would be an alternative question to asking generally about cross browser testing. More specific. Perhaps a more difficult alternative question would be to replace IE 8 with something like "A Google Nexus running Android 2.3." Would they find a simulator? Would they seek out a design lab? Would they ask the company for an allowance for devices for testing, with some kind of smart plan? Would they find a friend with one?
 
-##### Q18.
+##### Q18. What is responsive design all about?
 ##### A18.
+It's about making websites work wherever the web is. Different devices with different sizes and different capabilities. 
+Responsive design is about taking one code base and making it work for all of them. 
+Part of that is media queries and different visuals. 
+Part of that is different resources (e.g. different JavaScript to handle touch vs click or different images to 
+accommodate the screen).
 
-##### Q19.
+##### Q19. Have you ever worked with a grid layout? What are your thoughts on that?
 ##### A19.
+* Why did they need a grid? How did they build the grid? 
+* Was it home grown or did they use a grid tool? 
+* Did they like the grid tool? What kind of class names did they use? 
+* Did they go mobile-first or desktop-first? 
+* Was a help or a hinderance? 
+* Do they reach for the grid automatically on any project?
 
-##### Q20.
+##### Q20. What are the benefits of SVG?
 ##### A20.
+[SVG](https://css-tricks.com/using-svg/) is an image format that is vector based. It's an efficient format for that (small file sizes). 
+You can scale them and they retain their sharpness at any size (bonus points for mentioning raster might 
+have the upper hand at tiny sizes). You can affect parts of them with CSS and JavaScript as well as SVG 
+specific filters that can do things like blurring.
 
-##### Q21.
+##### Q21. Have you ever created a print stylesheet for a website?
 ##### A21.
+Kind of indicative that they've "gone the extra mile" with websites before. What approach did they take? 
+How did they test it?
+
+##### Q22. Say you were tasked with coding a design that used non-standard web fonts, how would you go about it?
+##### A22.
+A non-leading way to get them to talk about `@font-face` and how it works. Talking about how it works as a 
+core CSS technology is great, as well as talking about services that provide the fonts and can make it easier 
+e.g. [Google Fonts](https://fonts.google.com/), [Typekit](https://fonts.adobe.com/typekit), [Font Deck](http://fontdeck.com/), 
+[Cloud Typography](https://www.typography.com/webfonts) { AKA, [Hoefler&Co](https://www.typography.com/) }, etc.
+
+Bonus points for obscure knowledge like the history of `@font-face` syntax or Firefox's issue with cross-origin fonts.
+
+**Firefox doesn't allow cross-domain fonts**
+
+---
+
+**The scenario**
+The font icon loads successfully on Chrome but not on Firefox
+
+![firefox-does-not-allow-cross-domain-fonts-image](./assets/firefox-does-not-allow-cross-domain-fonts.PNG)
+
+In this case, using the iconic font, the `<i class="icon-user"></i>` should generate an user icon. 
+And it does for most of the browsers, excepting Mozilla Firefox.
+
+```html
+<!doctype html>
+<html>
+<head>
+  <title>...</title>
+  <link rel="stylesheet" href="https://www.example.com/style.css">
+</head>
+<body>
+  <i class="icon-user"></i>
+</body>
+</html>
+```
+
+The _style.css_ would contain all necessary [@font-face](https://catalin.red/css3-font-face-or-how-to-use-a-custom-font-for-your-website) declarations for the iconic font.
+
+**The problem**
+
+It seems that, for security reasons, Firefox simply doesn’t allow you to use by default a font that is not hosted on 
+your domain, not even on your subdomain. The CDN based websites can be also affected in this case.
+
+> Web fonts are subject to the same domain restriction (font files must be on the same domain as the page using them) 
+> unless HTTP access controls are used to relax this restriction.
+>
+> from MDN’s docs on [CSS @font-face](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
+>
+
+**The solution**
+After some investigations, I found out the workaround: set an `Access-Control-Allow-Origin` header to the font.
+
+```
+<FilesMatch "\.(ttf|otf|eot|woff)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+```
+
+Add the snippet above to a `.htaccess` file within the same folder as the font file.
+
+Also, if you are using Nginx as your webserver you will need to include the code below in your virtual host file:
+
+```
+location ~* \.(eot|otf|ttf|woff)$ {
+  add_header Access-Control-Allow-Origin *;
+}
+```
+
+**Best-case scenario:** set this header and get rid of this problem.
+
+**Worst-case scenario:** you’re using Amazon Web Services. In this case, you should know that, at this time, you’re not allowed to specify the `Access-Control-Allow-Origin` header for your files. Read more about AWS Cross-Origin Resource Sharing (CORS) in their [developer docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html).
+
+In this case, you can:
+
+* Serve the fonts from another cloud service, that supports cross-origin file serving or where you can easily set the `Access-Control-Allow-Origin` header.
+* Encode the font as a Base64 string.
+
+##### Q23. Explain to me what's going on in this CSS selector:
+##### A23.
+CSS
+```css
+[role=navigation] > ul a:not([href^=mailto]) {
+
+}
+```
+
+This selects anchor links that are not email links that are decedents of an unordered list that is the direct child 
+of any element with a role attribute of ‘navigation`.
+
+**Being able to verbalize a selector is proof you understand them and evidence they can communicate complex tech subjects.**
+
+---
+
+#### M: The 30 CSS Selectors You Must Memorize
+
+---
+
+**Basic Selectors**
+
+---
+
+##### Q1. `*`
+##### A1.
+```css
+* {
+ margin: 0;
+ padding: 0;
+}
+```
+
+Let's knock the obvious ones out, for the beginners, before we move on to the more advanced selectors.
+
+The star symbol will target every single element on the page. Many developers will use this trick to zero 
+out the margins and padding. While this is certainly fine for quick tests, I'd advise you never to use 
+this in production code. It adds too much weight on the browser, and is unnecessary.
+
+The `*` can also be used with child selectors.
+
+```css
+#container * {
+ border: 1px solid black;
+}
+```
+
+This will target every single element that is a child of the `#container` div. Again, try not to use this 
+technique very much, if ever.
+
+##### Q2. `#X`
+##### A2.
+```css
+#container {
+   width: 960px;
+   margin: auto;
+}
+```
+
+Prefixing the hash symbol to a selector allows us to target by `id`. This is easily the most common usage; however, be cautious when using `id` selectors.
+
+> Ask yourself: do I absolutely need to apply an id to this element in order to target it?
+>
+
+`id` selectors are rigid and don't allow for reuse. If possible, first try to use a tag name, one of the new HTML5 elements, or even a pseudo-class.
+
+##### Q3. `.X`
+##### A3.
+```css
+.error {
+  color: red;
+}
+```
+
+This is a `class` selector. The difference between `id`s and `class`es is that, with the latter, you can target 
+multiple elements. Use classes when you want your styling to apply to a group of elements. Alternatively, use 
+`id`s to find a needle in a haystack, and style only that specific element.
+
+##### Q4. `X`
+##### A4.
+```css
+a { color: red; }
+ul { margin-left: 0; }
+```
+
+What if you want to target all elements on a page, according to their type, rather than an `id` or `class` name?
+Keep it simple, and use a type selector. If you need to target all unordered lists, use `ul {}`.
+
+---
+
+**Summary - of `basic selectors` we have learned so far:**
+
+HTML
+```html
+<h2>* Selector</h2>
+<div class="universal-selector">
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1</li>
+      <li> List Item 2</li>
+   </ul>
+
+   <ul>
+      <li> List Item 3</li>
+      <li> List Item 4</li>
+   </ul>   
+</div>
+
+<h2>#X Selector</h2>
+<div id="id-selector">
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1</li>
+      <li> List Item 2</li>
+   </ul>
+
+   <ul>
+      <li> List Item 3</li>
+      <li> List Item 4</li>
+   </ul>   
+</div>
+
+<h2>.X Selector</h2>
+<div id="x-container">
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1</li>
+      <li> List Item 2</li>
+   </ul>
+
+   <ul>
+      <li class="warning">Something went Wrong </li>
+      <li> List Item 4</li>
+   </ul>   
+</div>
+
+<h2>X Selector</h2>
+<div class="xtype-selector">
+<div id="xtype-container">
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1</li>
+      <li> List Item 2</li>
+   </ul>
+
+   <ul>
+      <li class="warning">Something went Wrong </li>
+      <li> List Item 4</li>
+   </ul>   
+</div>
+
+<p> Paragraph outside of div </p>
+</div>
+```
+
+CSS
+```css
+* {
+  font-family: 'Lato';
+}
+
+h2 {
+  margin: 4rem 0 0 0;
+}
+
+div.universal-selector * { border: 1px dotted black; }
+
+div#id-selector {
+  background: #e3e3e3;
+}
+
+div#x-container li.warning {
+  color: red;
+} 
+
+div.xtype-selector div {
+  border: 1px solid black;
+}
+```
+
+![CSS-Star-Selector-image](./assets/CSS-Star-Selector.PNG)
+
+![CSS-#X-Selector-image](./assets/CSS-#X-Selector.PNG)
+
+![CSS-.X-Selector-image](./assets/CSS-.X-Selector.PNG)
+
+![CSS-X-Selector-](./assets/CSS-X-Selector.PNG)
+
+---
+
+**Combinator Selectors**
+
+---
+
+##### Q5. `X Y`
+##### A5.
+```css
+li a {
+  text-decoration: none;
+}
+```
+
+The next most common selector is the `descendant` selector. When you need to be more specific with your selectors, 
+you use these. For example, what if, rather than targeting all anchor tags, you only need to target the anchors 
+which are within an unordered list? This is specifically when you'd use a descendant selector.
+
+> **Pro-tip:** If your selector looks like `X Y Z A B.error`, you're doing it wrong. 
+> Always ask yourself if it's absolutely necessary to apply all of that weight.
+>
+
+##### Q6. `X + Y`
+##### A6.
+```css
+ul + p {
+   color: red;
+}
+```
+
+This is referred to as an adjacent selector. It will select _only_ the element that is immediately preceded by the former element. In this case, only the first paragraph after each ul will have red text.
+
+##### Q7. `X > Y`
+##### A7.
+```css
+div#container > ul {
+  border: 1px solid black;
+}
+```
+
+The difference between the standard `X Y` and `X > Y` is that the latter will only select direct children. For example, consider the following markup.
+
+```html
+<div id="container">
+   <ul>
+      <li> List Item
+        <ul>
+           <li> Child </li>
+        </ul>
+      </li>
+      <li> List Item </li>
+      <li> List Item </li>
+      <li> List Item </li>
+   </ul>
+</div>
+```
+
+A elector of `#container > ul` will only target the `ul`s which are direct children of the `div` with an `id` of `container`. It will not target, for instance, the `ul` that is a child of the first `li`.
+
+For this reason, there are performance benefits in using the child combinator. In fact, it's recommended particularly when working with JavaScript-based CSS selector engines.
+
+##### Q8. `X ~ Y`
+##### A8.
+```css
+ul ~ p {
+   color: red;
+}
+```
+
+This sibling combinator is similar to `X + Y`, but it's less strict. While an **adjacent selector** (`ul + p`) will only 
+select the first element that is immediately preceded by the former selector, this one is more generalized. 
+It will select, referring to our example above, any `p` elements, as long as they follow a `ul`.
+
+---
+
+**Summary - of `combinator selectors` we have learned so far:**
+
+HTML
+```html
+<h2>X Y Selector</h3>
+<div class="xy-selector">
+<div id="xy-container">
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1</li>
+      <li> List Item 2</li>
+   </ul>
+
+   <ul>
+      <li class="warning">Something went Wrong </li>
+      <li> List Item 4</li>
+   </ul>   
+</div>
+
+<p> Paragraph outside of div </p>
+</div>
+
+<h2>X + Y Selector</h2>
+<div id="adj-container">
+  <ul>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X > Y Selector</h2>
+
+<div id="direct-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X ~ Y Selector</h2>
+<div id="sib-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+```
+
+CSS
+```css
+* {
+  font-family: "Lato";
+}
+
+h2 {
+  margin: 4rem 0 0 0;
+}
+
+div.xy-selector div p {
+  color: red;
+}
+
+div#adj-container ul + p {
+  color: red;
+}
+
+div#direct-container > ul {
+  border: 1px solid black;
+}
+
+div#sib-container ul ~ p {
+  color: red;
+}
+```
+
+![CSS-X Y-Selector-image](./assets/CSS-X Y-Selector.PNG)
+
+![CSS-X+Y-Selector-image](./assets/CSS-X+Y-Selector.PNG)
+
+![CSS-X-greater-than-Y-Selector-image](./assets/CSS-X-greater-than-Y-Selector.PNG)
+
+![CSS-X~Y-Selector-image](./assets/CSS-X~Y-Selector.PNG)
+
+---
+
+**Attribute Selectors**
+
+---
+
+##### Q9. `X[title]`
+##### A9.
+```css
+a[title] {
+   color: green;
+}
+```
+
+Referred to as an _attributes_ _selector_, in our example above, this will only select the anchor tags that have a `title` attribute. Anchor tags which do not will not receive this particular styling. But what if you need to be more specific? Check out the next example!
+
+##### Q10. `X[href="foo"]`
+##### A10.
+```css
+a[href="https://code.tutsplus.com"] {
+  color: #83b348; /* Envato green */
+}
+```
+
+The snippet above will style all anchor tags which link to https://code.tutsplus.com; they'll receive our branded green color. All other anchor tags will remain unaffected.
+
+> Note that we're wrapping the value in quotes. Remember to also do this when using a JavaScript CSS selector engine. When possible, always use CSS3 selectors over unofficial methods.
+>
+
+This works well, although it's a bit rigid. What if the link does indeed direct to Envato Tuts+, but maybe the path is code.tutsplus.com rather than the full URL? In those cases, we can use a bit of the regular expressions syntax.
+
+##### Q11. `X[href*="foo"]`
+##### A11.
+```css
+a[href*="tutsplus"] {
+  color: #83b348; /* Envato green */
+}
+```
+
+There we go; that's what we need. The star designates that the proceeding value must appear _somewhere_ in the attribute's value. That way, this covers **tutsplus.com**, **code.tutsplus.com**, and even **webdesign.tutsplus.com**.
+
+Keep in mind that this is a broad statement. What if the anchor tag linked to some non-Envato site with the string **tutsplus** in the URL? When you need to be more specific, use `^` and `$`, to reference the beginning and end of a string, respectively.
+
+##### Q12. `X[href^="http"]`
+##### A12.
+```css
+a[href^="http"] {
+   background: url(path/to/external/icon.png) no-repeat;
+   padding-left: 10px;
+}
+```
+
+Ever wonder how some websites are able to display a little icon next to the links which are external? I'm sure you've seen these before; they're nice reminders that the link will direct you to an entirely different website.
+
+This is a cinch with the carat symbol. It's most commonly used in regular expressions to designate the beginning of a string. If we want to target all anchor tags that have an `href` which begins with `http`, we could use a selector similar to the snippet shown above.
+
+> Notice that we're not searching for `https://`; that's unnecessary, and doesn't account for the URLs that begin with `http://`.
+>
+
+Now, what if we wanted to instead style all anchors which link to, say, a photo? In those cases, let's search for the end of the string.
+
+##### Q13. `X[href$=".jpg"]`
+##### A13.
+```css
+a[href$=".jpg"] {
+   color: red;
+}
+```
+
+Again, we use a regular expressions symbol, `$`, to refer to the end of a string. In this case, we're searching for all 
+anchors which link to an image—or at least a URL that ends with `.jpg`. Keep in mind that this won't capture 
+GIF and PNG images.
+
+##### Q14. `X[data-*="foo"]`
+##### A14.
+```css
+a[data-filetype="image"] {
+   color: red;
+}
+```
+
+How do we compensate for all of the various image types? Well, we could create multiple selectors, such as:
+
+```css
+a[href$=".jpg"],
+a[href$=".jpeg"],
+a[href$=".png"],
+a[href$=".gif"] {
+   color: red;
+}
+```
+
+But that's a pain, and it's inefficient. Another possible solution is to use custom attributes. 
+What if we added our own `data-filetype` attribute to each anchor that links to an image?
+
+```html
+<a href="path/to/image.jpg" data-filetype="image"> Image Link </a>
+```
+
+Then, with that hook in place, we can use a standard attributes selector to target only those anchors.
+
+```css
+a[data-filetype="image"] {
+   color: red;
+}
+```
+
+##### Q15. `X[foo~="bar"]`
+##### A15.
+```css
+a[data-info~="external"] {
+   color: red;
+}
+ 
+a[data-info~="image"] {
+   border: 1px solid black;
+}
+```
+
+Here's a special one that'll impress your friends. Not too many people know about this trick. The tilde (`~`) symbol 
+allows us to target an attribute which has a space-separated list of values.
+
+Going along with our custom attribute from number 15, above, we could create a `data-info` attribute, 
+which can receive a space-separated list of anything we need to make note of. In this case, we'll make note of 
+external links and links to images—just for the example.
+
+```html
+<a href="path/to/image.jpg" data-info="external image"> Click Me, Fool </a>
+```
+
+With that markup in place, now we can target any tags that have either of those values, by using the `~` attributes selector trick.
+
+```css
+/* Target data-info attr that contains the value "external" */
+a[data-info~="external"] {
+   color: red;
+}
+ 
+/* And which contain the value "image" */
+a[data-info~="image"] {
+  border: 1px solid black;
+}
+```
+
+Pretty nifty, huh?
+
+---
+
+**Summary - of `attribute selectors` we have learned so far:**
+
+HTML
+```html
+<h2>X[title] Selector</h2>
+<div id="aatr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X[href="foo"] Selector</h2>
+
+<div id="batr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X[href*="nettuts"] Selector</h2>
+<div id="catr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>a[href^="http"] Selector</h2>
+<div id="datr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X[href$=".jpg"] Selector</h2>
+<div id="eatr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X[foo~="bar"] Selector</h2>
+<div id="fatr-container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> <a href="http://d2o0t5hpnwv4c1.cloudfront.net/817_rubyNewbies1/preivew.png" data-filetype="image">PNG Image</a> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg" data-filetype="image">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+```
+
+CSS
+```css
+* {
+  font-family: "Lato";
+}
+
+h2 {
+  margin: 4rem 0 0 0;
+}
+
+div#aatr-container a[title] {
+  color: green;
+}
+
+div#batr-container a[href="http://net.tutsplus.com"] {
+  color: #1f6053;
+}
+
+div#catr-container a[href*="tuts"] {
+  color: #1f6053; /* nettuts green */
+} 
+
+div#datr-container a[href^="http"] {
+  color: red;
+}  
+
+div#eatr-container a[href$=".jpg"] {
+  color: red;
+} 
+
+div#fatr-container a[data-filetype="image"] {
+  color: red;
+}
+```
+
+![CSS-X-title-Selector-image](./assets/CSS-X-title-Selector.PNG)
+
+![CSS-X-href-foo-Selector-image](./assets/CSS-X-href-foo-Selector.PNG)
+
+![CSS-X-href-wildcard-nettuts-Selector-image](./assets/CSS-X-href-wildcard-nettuts-Selector.PNG)
+
+![CSS-a-href-begins-with-http-Selector-image](./assets/CSS-a-href-begins-with-http-Selector.PNG)
+
+![CSS-a-href-ends-with-jpg-Selector-image](./assets/CSS-a-href-ends-with-jpg-Selector.PNG)
+
+---
+
+**Pseudo Selectors**
+
+---
+
+##### Q16. `X:visited` **and** `X:link`
+##### A16.
+```css
+a:link { color: red; }
+a:visited { color: purple; }
+```
+
+We use the `:link` pseudo-class to target all anchor tags which have yet to be clicked on.
+
+Alternatively, we also have the `:visited` pseudo class, which, as you'd expect, allows us to apply specific styling to only the anchor tags on the page which _have_ been clicked on, or "visited".
+
+##### Q17. `X:checked`
+##### A17.
+```css
+input[type=radio]:checked {
+   border: 1px solid black;
+}
+```
+
+This pseudo class will only target a user interface element that has been checked—like a radio button or checkbox. It's as simple as that.
+
+##### Q18. `X:after`
+##### A18.
+The `before` and `after` pseudo classes are great. Every day, it seems, people are finding new and creative ways to use them effectively. They simply generate content around the selected element.
+
+Many were first introduced to these classes when they encountered the clear-fix hack.
+
+```css
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+ 
+.clearfix { 
+   *display: inline-block; 
+   _height: 1%;
+}
+```
+
+This hack uses the `:after` pseudo class to append a space after the element, and then clear it. 
+It's an excellent trick to have in your tool bag, particularly in the cases when the `overflow: hidden;` 
+method isn't possible.
+
+For another creative use of this, [refer to my quick tip on creating shadows](https://net.tutsplus.com/tutorials/html-css-techniques/quick-tip-getting-clever-with-css3-shadows/?_ga=2.28659129.422207757.1627010163-1063878658.1627010163).
+
+> According to the CSS3 Selectors specification, you should technically use the pseudo element syntax of two colons `::`. 
+> However, to remain compatible, the user-agent will accept a single colon usage as well. 
+>
+
+##### Q19. `X:hover`
+##### A19.
+```css
+div:hover {
+  background: #e3e3e3;
+}
+```
+
+Oh come on. You know this one. The official term for this is "user action pseudo class". 
+It sounds confusing, but it really isn't. Want to apply specific styling when a user hovers over an element? 
+This will get the job done!
+
+> Keep in mind that older versions of Internet Explorer don't respond when the `:hover` pseudo class is applied 
+> to anything other than an anchor tag.
+>
+
+You'll most often use this selector when applying, for example, a `border-bottom` to anchor tags, when hovered over.
+
+a:hover {
+  border-bottom: 1px solid black;
+}
+
+> **Pro-tip:** `border-bottom: 1px solid black;` _looks_ _better_ _than_ `text-decoration: underline;`.
+
+##### Q20. `X:not(selector)`
+##### A20.
+```css
+div:not(#container) {
+   color: blue;
+}
+```
+ 
+The negation pseudo class is particularly helpful. Let's say I want to select all `div`s, except for the one which has an id of `container`. The snippet above will handle that task perfectly.
+
+Or, if I wanted to select every single element (not advised) except for paragraph tags, we could do:
+ 
+```css
+*:not(p) {
+  color: green;
+}
+```
+
+##### Q21. `X::pseudoElement`
+##### A21.
+```css
+p::first-line {
+   font-weight: bold;
+   font-size: 1.2em;
+}
+```
+
+We can use pseudo elements (designated by `::`) to style fragments of an element, such as the first line or the first letter. Keep in mind that these must be applied to block-level elements in order to take effect.
+
+> A pseudo-element is composed of two colons: `::`
+>
+
+**Target the First Letter of a Paragraph**
+
+```css
+p::first-letter {
+   float: left;
+   font-size: 2em;
+   font-weight: bold;
+   font-family: cursive;
+   padding-right: 2px;
+}
+```
+
+This snippet is an abstraction that will find all paragraphs on the page, and then sub-target only the first letter of that element.
+
+This is most often used to create newspaper-like styling for the first letter of an article.
+
+**Target the First Line of a Paragraph**
+
+```css
+p::first-line {
+   font-weight: bold;
+   font-size: 1.2em;
+}
+```
+
+Similarly, the `::first-line` pseudo element will, as expected, style the first line of the element only.
+
+"For compatibility with existing style sheets, user agents must also accept the previous one-colon notation 
+for pseudo-elements introduced in CSS levels 1 and 2 (namely, `:first-line`, `:first-letter`, `:before` and `:after`). 
+This compatibility is not allowed for the new pseudo-elements introduced in this specification."—[W3C Selectors Specs](https://www.w3.org/TR/css3-selectors/).
+
+---
+
+**Summary - of `pseudo selectors` we have learned so far:**
+
+HTML
+```html
+<h2>X:visited and X:link</h2>
+<div id="xvl-container">
+<p>Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod <a href="http://net.tutsplus.com">tempor</a> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<h2>X:checked</h2>
+
+<div id="xchk-container">
+<form>
+  <input type="radio" name="rad" value="Radio Button">
+  <label for="rad"> Radio Button</label>
+</form>
+</div>
+
+<h2>X:not(selector)</h2>
+<div id="xnot-container">
+<div id="container">
+  <ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <ul>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> <a href="http://d2o0t5hpnwv4c1.cloudfront.net/817_rubyNewbies1/preivew.png" data-filetype="image">PNG Image</a> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg" data-info="external image">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+
+<div> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </div>
+</div>
+
+<h2>X::pseudoElement</h2>
+<div id="xpsel-container">
+<ul>
+	 <li> List Item
+	 <ul>
+		<li> Child </li>
+	 </ul>
+	 </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+	 <li> List Item </li>
+  </ul>
+
+  <ul>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+	 <li>
+		<a href="#"> Anchor Tag </a>
+	 </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor.  Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor.  Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> <a href="http://d2o0t5hpnwv4c1.cloudfront.net/817_rubyNewbies1/preivew.png" data-filetype="image">PNG Image</a> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg" data-info="external image">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+
+<div> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </div>
+</div>
+```
+
+CSS
+```css
+* {
+  font-family: "Lato";
+}
+
+h2 {
+  margin: 4rem 0 0 0;
+}
+
+div#xvl-container a:link { color: red; }
+div#xvl-container a:visited { color: green; }
+
+div#xchk-container input[type=radio]:checked + label {
+  color: blue;
+}
+
+div#xnot-container div:not(#container) {
+  color: blue;
+}
+
+div#xnot-container * *:not(p) {
+  color: green;
+}
+
+div#xpsel-container p::first-line {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+div#xpsel-container p::first-letter {
+  float: left;
+  font-weight: bold;
+  font-family: cursive;
+  font-size: 2em;
+  padding-right: 2px;
+}
+```
+
+![CSS-X-visited-and-X-link-Selector-image](./assets/CSS-X-visited-and-X-link-Selector.PNG)
+![CSS-X-checked-Selector-image](./assets/CSS-X-checked-Selector.PNG)
+![CSS-X-not-Selector-image](./assets/CSS-X-not-Selector.PNG)
+![CSS-X-pseudo-element-image](./assets/CSS-X-pseudo-element.PNG)
+
+---
+
+**Nth Child and Type Selectors**
+
+---
 
 ##### Q22.
 ##### A22.
-
 ##### Q23.
 ##### A23.
 
@@ -6063,85 +7859,23 @@ up with industry buzz or trends.
 ##### Q25.
 ##### A25.
 
+##### Q26.
+##### A26.
+
+##### Q27.
+##### A27.
+
+##### Q28.
+##### A28.
+
+##### Q29.
+##### A29.
+
+##### Q30.
+##### A30.
+
 ---
 
-#### M: Top 50 CSS(Cascading Style Sheet) Questions covering the most of tricky CSS moments
-
----
-
-##### Q1.
-##### A1.
-
-##### Q2.
-##### A2.
-
-##### Q3.
-##### A3.
-
-##### Q4.
-##### A4.
-
-##### Q5.
-##### A5.
-
-##### Q6.
-##### A6.
-
-##### Q7.
-##### A7.
-
-##### Q8.
-##### A8.
-
-##### Q9.
-##### A9.
-
-##### Q10.
-##### A10.
-
-##### Q11.
-##### A11.
-
-##### Q12.
-##### A12.
-
-##### Q13.
-##### A13.
-
-##### Q14.
-##### A14.
-
-##### Q15.
-##### A15.
-
-##### Q16.
-##### A16.
-
-##### Q17.
-##### A17.
-
-##### Q18.
-##### A18.
-
-##### Q19.
-##### A19.
-
-##### Q20.
-##### A20.
-
-##### Q21.
-##### A21.
-
-##### Q22.
-##### A22.
-
-##### Q23.
-##### A23.
-
-##### Q24.
-##### A24.
-
-##### Q25.
-##### A25.
+**Summary - of `Nth Child and Type Selectors` we have learned so far:**
 
 ---
