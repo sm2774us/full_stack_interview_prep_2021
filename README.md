@@ -7838,8 +7838,11 @@ div#xpsel-container p::first-letter {
 ```
 
 ![CSS-X-visited-and-X-link-Selector-image](./assets/CSS-X-visited-and-X-link-Selector.PNG)
+
 ![CSS-X-checked-Selector-image](./assets/CSS-X-checked-Selector.PNG)
+
 ![CSS-X-not-Selector-image](./assets/CSS-X-not-Selector.PNG)
+
 ![CSS-X-pseudo-element-image](./assets/CSS-X-pseudo-element.PNG)
 
 ---
