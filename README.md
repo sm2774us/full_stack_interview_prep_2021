@@ -59,7 +59,7 @@ you are not as gung-ho about web design as you thought you were.
 
 ### C) Sass
 
-- [Top 40 Sass & Less Interview Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#n-top-40-sass--less-interview-questions-and-answers)
+- [Top 40 Sass & Less Interview Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#top-40-sass--less-interview-questions-and-answers)
 
 ---
 
