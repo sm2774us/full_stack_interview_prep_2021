@@ -1,9 +1,0 @@
-[submodule "curated_list_of_75_leetcode_questions"]
-	path = curated_list_of_75_leetcode_questions
-	url = https://github.com/sm2774us/curated_list_of_75_leetcode_questions.git
-[submodule "facebook_interview_prep_2021"]
-	path = facebook_interview_prep_2021
-	url = https://github.com/sm2774us/facebook_interview_prep_2021
-[submodule "amazon_interview_prep_2021"]
-	path = amazon_interview_prep_2021
-	url = https://github.com/sm2774us/amazon_interview_prep_2021
