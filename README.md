@@ -44,18 +44,18 @@ you are not as gung-ho about web design as you thought you were.
 * [16 Essential HTML5 Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#16-essential-html5-questions)
 * [28 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#28-helpful-html--html5-questions--answers)
 * [40 important HTML interview questions with answers](https://github.com/sm2774us/full_stack_interview_prep_2021#40-important-html-interview-questions-with-answers)
-* [HTML questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#e-html-questions-and-answers-for-freshers-and-experienced-developers)
-* [Top 60 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#f-top-60-html-questions)
-* [Common HTML questions for freshers](https://github.com/sm2774us/full_stack_interview_prep_2021#g-common-html-questions-for-freshers)
+* [HTML questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#html-questions-and-answers-for-freshers-and-experienced-developers)
+* [Top 60 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#top-60-html-questions)
+* [Common HTML questions for freshers](https://github.com/sm2774us/full_stack_interview_prep_2021#common-html-questions-for-freshers)
 
 ### B) CSS
 
-- [25 helpful CSS questions and answers](https://github.com/sm2774us/full_stack_interview_prep_2021#h-25-helpful-css-questions-and-answers)
-- [Top 25 CSS Interview Questions and Answers for Experienced](https://github.com/sm2774us/full_stack_interview_prep_2021#i-top-25-css-interview-questions-and-answers-for-experienced)
-- [CSS questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#j-css-questions-and-answers-for-freshers-and-experienced-developers)
-- [CSS Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#k-css-questions-and-answers)
-- [Questions and Exercises About CSS](https://github.com/sm2774us/full_stack_interview_prep_2021#l-questions-and-exercises-about-css)
-- [The 30 CSS Selectors You Must Memorize](https://github.com/sm2774us/full_stack_interview_prep_2021#m-the-30-css-selectors-you-must-memorize)
+- [25 helpful CSS questions and answers](https://github.com/sm2774us/full_stack_interview_prep_2021#25-helpful-css-questions-and-answers)
+- [Top 25 CSS Interview Questions and Answers for Experienced](https://github.com/sm2774us/full_stack_interview_prep_2021#top-25-css-interview-questions-and-answers-for-experienced)
+- [CSS questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#css-questions-and-answers-for-freshers-and-experienced-developers)
+- [CSS Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#css-questions-and-answers)
+- [Questions and Exercises About CSS](https://github.com/sm2774us/full_stack_interview_prep_2021#questions-and-exercises-about-css)
+- [The 30 CSS Selectors You Must Memorize](https://github.com/sm2774us/full_stack_interview_prep_2021#the-30-css-selectors-you-must-memorize)
 
 ### C) Sass
 
@@ -156,7 +156,7 @@ you are not as gung-ho about web design as you thought you were.
 #### A: HTML
 ---
 
-#### A: 10 Typical HTML Exercises
+#### 10 Typical HTML Exercises
 
 ---
 
@@ -387,7 +387,7 @@ A typical use is to highlight every instance of the keyword or keywords searched
 
 ---
 
-#### B: 16 Essential HTML5 Questions
+#### 16 Essential HTML5 Questions
 
 ---
 
@@ -785,7 +785,7 @@ Whether you learned your web development skills through online self-study or thr
 
 ---
 
-#### D: 40 important HTML interview questions with answers
+#### 40 important HTML interview questions with answers
 
 ---
 
@@ -2508,7 +2508,7 @@ will be defined as the nested frameset. The following code explains it further:
 
 ---
 
-#### F: Top 60 HTML Questions
+#### Top 60 HTML Questions
 
 ---
 
@@ -2888,7 +2888,7 @@ Following are the important, new data types offered by HTML5:
 
 ---
 
-#### G: Common HTML questions for freshers
+#### Common HTML questions for freshers
 
 ---
 
@@ -3342,7 +3342,7 @@ Example:
 
 ---
 
-#### H: 25 helpful CSS questions and answers
+#### 25 helpful CSS questions and answers
 
 ---
 
@@ -3700,7 +3700,7 @@ Elements previous to this property is functional and do not change their propert
 
 ---
 
-#### I: Top 25 CSS Interview Questions and Answers for Experienced
+#### Top 25 CSS Interview Questions and Answers for Experienced
 
 ---
 
@@ -4700,7 +4700,7 @@ There's a demo you can play with on [cssdeck](http://cssdeck.com/item/302/css-im
 
 ---
 
-#### J: CSS questions and answers for freshers and experienced developers
+#### CSS questions and answers for freshers and experienced developers
 
 ---
 
@@ -5828,7 +5828,7 @@ border:5px solid #fff;
 
 ---
 
-#### K: CSS Questions and Answers
+#### CSS Questions and Answers
 
 ---
 
@@ -5997,7 +5997,7 @@ up with industry buzz or trends.
 
 ---
 
-#### L: Questions and Exercises About CSS
+#### Questions and Exercises About CSS
 
 ---
 
@@ -6886,7 +6886,7 @@ of any element with a role attribute of ‘navigation`.
 
 ---
 
-#### M: The 30 CSS Selectors You Must Memorize
+#### The 30 CSS Selectors You Must Memorize
 
 ---
 
@@ -8382,7 +8382,7 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 
 ---
 
-#### N: Top 40 Sass & Less Interview Questions and Answers
+#### Top 40 Sass & Less Interview Questions and Answers
 
 ---
 
