@@ -59,7 +59,7 @@ you are not as gung-ho about web design as you thought you were.
 
 ### C) Sass
 
-- [Top 17 Sass Questions from Career Guru](https://github.com/sm2774us/full_stack_interview_prep_2021#n-top-17-sass-interview-questions)
+- [Top 40 Sass & Less Interview Questions and Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#n-top-40-sass--less-interview-questions-and-answers)
 
 ---
 
@@ -67,8 +67,7 @@ you are not as gung-ho about web design as you thought you were.
 
 ### JavaScript
 
-* [JavaScript Essentials](https://javascript.info/)
-* [Master JavaScript Series](https://github.com/getify/You-Dont-Know-JS)
+* [The Modern JavaScript Tutorial](https://github.com/sm2774us/full_stack_interview_prep_2021#o-the-modern-javascript-tutorial)
 * [10 Questions Every JavaScript Developer Should Know](https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95)
 * [21 Essential JavaScript Questions from best mentors all over the world](https://www.codementor.io/javascript/tutorial/21-essential-javascript-tech-interview-practice-questions-answers)
 * [25 Essential JavaScript Questions from top 3% developers company](http://www.toptal.com/javascript/interview-questions)
@@ -8380,3 +8379,132 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 ![CSS-X-only-of-type-Selector-image](./assets/CSS-X-only-of-type-Selector.PNG)
 
 ![CSS-X-first-of-type-Selector-image](./assets/CSS-X-first-of-type-Selector.PNG)
+
+---
+
+#### N: Top 40 Sass & Less Interview Questions and Answers
+
+---
+
+##### Q1.
+##### A1.
+
+##### Q2.
+##### A2.
+
+##### Q4.
+##### A4.
+
+##### Q5.
+##### A5.
+
+##### Q6.
+##### A6.
+
+##### Q7.
+##### A7.
+
+##### Q8.
+##### A8.
+
+##### Q9.
+##### A9.
+
+##### Q10.
+##### A10.
+
+##### Q11.
+##### A11.
+
+##### Q12.
+##### A12.
+
+##### Q13.
+##### A13.
+
+##### Q14.
+##### A14.
+
+##### Q15.
+##### A15.
+
+##### Q16.
+##### A16.
+
+##### Q17.
+##### A17.
+
+##### Q18.
+##### A18.
+
+##### Q19.
+##### A19.
+
+##### Q20.
+##### A20.
+ 
+##### Q21.
+##### A21.
+
+##### Q22.
+##### A22.
+##### Q23.
+##### A23.
+
+##### Q24.
+##### A24.
+
+##### Q25.
+##### A25.
+
+##### Q26.
+##### A26.
+
+##### Q27.
+##### A27.
+
+##### Q28.
+##### A28.
+
+##### Q29.
+##### A29.
+
+##### Q30.
+##### A30.
+
+##### Q31.
+##### A31.
+
+##### Q32.
+##### A32.
+
+##### Q33.
+##### A33.
+
+##### Q34.
+##### A34.
+
+##### Q35.
+##### A35.
+
+##### Q36.
+##### A36.
+
+##### Q37.
+##### A37.
+
+##### Q38.
+##### A38.
+
+##### Q39.
+##### A39.
+
+##### Q40.
+##### A40.
+
+---
+
+#### N: Top 40 Sass & Less Interview Questions and Answers
+
+---
+
