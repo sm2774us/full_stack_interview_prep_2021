@@ -7053,7 +7053,7 @@ div.xtype-selector div {
 
 ![CSS-Star-Selector-image](./assets/CSS-Star-Selector.PNG)
 
-![CSS-#X-Selector-image](./assets/CSS-#X-Selector.PNG)
+![CSS-hash-X-Selector-image](./assets/CSS-hash-X-Selector.PNG)
 
 ![CSS-.X-Selector-image](./assets/CSS-.X-Selector.PNG)
 
@@ -7235,7 +7235,7 @@ div#sib-container ul ~ p {
 }
 ```
 
-![CSS-X Y-Selector-image](./assets/CSS-X Y-Selector.PNG)
+![CSS-X-space-Y-Selector-image](./assets/CSS-X-space-Y-Selector.PNG)
 
 ![CSS-X+Y-Selector-image](./assets/CSS-X+Y-Selector.PNG)
 
