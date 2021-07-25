@@ -40,10 +40,10 @@ you are not as gung-ho about web design as you thought you were.
 
 ### A) HTML
 
-* [10 Typical HTML Exercises](https://github.com/sm2774us/full_stack_interview_prep_2021#a-10-typical-html-exercises)
-* [16 Essential HTML5 Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#b-16-essential-html5-questions)
-* [28 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#c-28-helpful-html--html5-questions--answers)
-* [40 important HTML interview questions with answers](https://github.com/sm2774us/full_stack_interview_prep_2021#d-40-important-html-interview-questions-with-answers)
+* [10 Typical HTML Exercises](https://github.com/sm2774us/full_stack_interview_prep_2021#10-typical-html-exercises)
+* [16 Essential HTML5 Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#16-essential-html5-questions)
+* [28 Helpful HTML & HTML5 Questions & Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#28-helpful-html--html5-questions--answers)
+* [40 important HTML interview questions with answers](https://github.com/sm2774us/full_stack_interview_prep_2021#40-important-html-interview-questions-with-answers)
 * [HTML questions and answers for freshers and experienced developers](https://github.com/sm2774us/full_stack_interview_prep_2021#e-html-questions-and-answers-for-freshers-and-experienced-developers)
 * [Top 60 HTML Questions](https://github.com/sm2774us/full_stack_interview_prep_2021#f-top-60-html-questions)
 * [Common HTML questions for freshers](https://github.com/sm2774us/full_stack_interview_prep_2021#g-common-html-questions-for-freshers)
@@ -8386,132 +8386,340 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 
 ---
 
-##### Q1.
+##### Q1. Explain what is Sass? How it can be used?
 ##### A1.
+Sass stands for **S**yntactically **A**wesome **S**tyle**S**heets and was created by Hampton Catlin. 
+It is an extension of CSS3, adding nested rules, mixins, variables, selector inheritance, etc.
 
-##### Q2.
+Sass can be used in three ways
+
+* As a command line tool
+* As a standalone Ruby module
+* As a plugin for any Rack-enabled framework
+
+##### Q2. List out the key features for Sass?
 ##### A2.
+Key features for Sass include
 
-##### Q4.
+* Full CSS3-compatible
+* Language extensions such as nesting, variables, and mixins
+* Many useful functions for manipulating colors and other values
+* Advanced features like control directives for libraries
+* Well-formatted, customizable output
+
+##### Q3. List out the Data Types that SassScript supports?
+##### A3.
+SassScript supports seven main data types
+
+**1.** Numbers ( eg; 1,5 ,10px)
+**2.** Strings of texts ( g., “foo”, ‘bar’, etc.)
+**3.** Colors (blue, #04a3f9)
+**4.** Booleans (true or false)
+**5.** Nulls (e.g; null)
+**6.** List of values, separated by space or commas (g., 1.5em, Arial, Helvetica etc.)
+**7.** Maps from one value to another (g., ( key 1: value1, key 2: Value 2))
+
+##### Q4. Explain how to define a variable in Sass?
 ##### A4.
+Variables in Sass begin with a (**`$`**) sign and variable assignment is done with a colon(**`:`**).
 
-##### Q5.
+##### Q5. Explain what is the difference between Sass and SCSS?
 ##### A5.
+The difference between Sass and SCSS is that,
 
-##### Q6.
+* Sass is a CSS pre-processor with syntax advancements and an extension of CSS3
+* Sass has two syntax
+* The first syntax is "SCSS" and it uses the .scss extension
+* The other syntax is indented syntax or just "Sass" and it uses the .sass extension
+* While Sass has loose syntax with white space and no semicolons, the SCSS resembles more to CSS
+* Any CSS valid document can be converted to Sass by simply changing the extension from **`.css`** to **`.scss`**.
+
+##### Q6. What Selector Nesting in Sass is used for?
 ##### A6.
+In Sass, selector nesting offers a way for stylesheet authors to compute long selectors by nesting shorter selectors within each other.
 
-##### Q7.
+##### Q7. Explain what is the `@extend` function used for in Sass?
 ##### A7.
+In Sass, the `@extend` directive provides a simple way to allow a selector to inherit the styles of another one. 
+It aims at providing a way for a selector A to extend the styles from a selector B. When doing so, the selector A 
+will be added to selector B so they both share the same declarations. 
+`@extend` prevents code bloat by grouping selectors that share the same style into one rule.
 
-##### Q8.
+##### Q8. Explain what is the use of the `@import` function in Sass?
 ##### A8.
+The `@import` function in Sass
 
-##### Q9.
+* Extends the CSS import rule by enabling import of SCSS and Sass files
+* All imported files are merged into a single outputted CSS file
+* Can virtually mix and match any file and be certain of all your styles
+* `@import` takes a filename to import
+
+##### Q9. Why **`SASS`** is considered better than **`LESS`**?
+
 ##### A9.
 
-##### Q10.
+* Saas allows you to write reusable methods and use logic statements, e., loops, and conditionals.
+* Saas user can access Compass library and use some awesome features like dynamic sprite map generation, legacy browser hacks and cross-browser support for CSS3 features.
+* Compass also allows you to add an external framework like Blueprint, Foundation or Bootstrap on top.
+* In LESS, you can write a basic logic statement using a 'guarded mixin', which is equivalent to Sass if statements.
+* In LESS, you can loop through numeric values using recursive functions while Sass allows you to iterate any kind of data.
+* In Sass, you can write your own handy functions
+
+##### Q10. Explain what is the use of Mixin function in Sass? What is the meaning of DRY-ing out a mixin?
 ##### A10.
+Mixin allows you to define styles that can be re-used throughout the stylesheet without needing to resort to 
+non-semantic classes like `.float-left`.
 
-##### Q11.
+**DRY-ing** out of a **mixin** means splitting it into **dynamic** and **static** parts. 
+* The **dynamic mixin** is the one that the user actually going to call, and 
+* The **static mixin** is the pieces of information that would otherwise get duplicated
+
+##### Q11. Explain what Sass Maps is and what is the use of Sass Maps?
 ##### A11.
+Sass map is a structured data in a hierarchical way and not just a bunch of variables. 
+It can help in organizing the code. Some great use of Sass are
 
-##### Q12.
+* It is very useful when dealing with layers of elements in your project
+* It can be helpful in color management when there is long list of different color and shade
+* Use icon map for various social media icons for example: facebook: '\e607' or twitter: '\e602'
+* Unlike other programming libraries, Sass map will consist only of code that is going to be used
+
+##### Q12. Explain how Sass comments are different from regular CSS?
 ##### A12.
+Syntax for comments in regular CSS starts with **`/* comments… */`**, while in SASS there are two type of comment, 
+the single line comments **`//`** and the multiline CSS comments with **`/* */`**.
 
-##### Q13.
+##### Q13. Does Sass support inline comments?
 ##### A13.
+Single line comments **`//`** will be removed by the `.scss` pre-processor and won't appear in your `.css` file.
 
-##### Q14.
+While the comment `*/` are valid CSS, and will be preserved between the translation from `.scss` to your `.css` file
+
+##### Q14. How interpolation is used in Sass?
 ##### A14.
+In Sass, you can define an element in a variable and interpolate it inside the Sass code.  It is useful when you 
+keep your modules in separate files.
 
-##### Q15.
+##### Q15. Explain when can you use the `%placeholders` in Sass?
 ##### A15.
+**`%placeholders`** in Sass is useful when you want to write styles that were meant to be extended, but you don't 
+want the base styles to be seen in output CSS styles
 
-##### Q16.
+##### Q16. Is it possible to nest variables within variables in Sass?
 ##### A16.
+Interpolation of variables names is not possible currently in Sass. However, you may use interpolation of placeholders.
 
-##### Q17.
+##### Q17. What are Sass cons and pros?
 ##### A17.
+**Sass Advantages**
 
-##### Q18.
+* Sass facilitates you to write clean, easy and less CSS in a programming construct.
+* It contains fewer codes so you can write CSS quicker.
+* It is more stable, powerful, and elegant because it is an extension of CSS. So, it is easy for designers and developers to work more efficiently and quickly.
+* It is compatible with all versions of CSS. So, you can use any available CSS libraries.
+* It provides nesting so you can use nested syntax and useful functions like color manipulation, math functions, and other values.
+* Sass is easy to learn especially for them who has a background of Python, Ruby or Coffescript and place using functions, writing mixins
+* CSS can be easily converted to Sass
+* Throughout the project, you don't have to repeat similar CSS statements using @extend attribute
+* It allows to define variables that are usable throughout the entire project
+* It keeps your responsive project more organized
+
+**Sass disadvantages**
+
+* The developer must have enough time to learn new features present in this preprocessor before using it.
+* Using Sass may cause losing benefits of the browser’s built-in element inspector.
+* Code has to be compiled
+* Difficult Troubleshooting
+
+##### Q18. Explain what is LESS?
 ##### A18.
+LESS is dynamic style sheet producing language. LESS is a CSS pre-processors and extends CSS with dynamic behaviour. 
+It allows for variables, mixins, operations and functions. LESS runs on server side and client side both.
 
-##### Q19.
+##### Q19. Explain how to create LESS file and where to store it and compile it?
 ##### A19.
+Creating or storing LESS file is similar to creating/storing CSS file. A new LESS file can be created with a .less extension, 
+or you can rename existing .css file to .less file. You can write LESS code with existing CSS code.
 
-##### Q20.
+The best way of creating it inside `~/content/` or `~/Styles/` folder
+
+##### Q20. In what ways LESS can be used?
 ##### A20.
- 
-##### Q21.
+
+* Via npm LESS can be used on the command line.
+* Download as a script file for the browser.
+* Used with third party tools.
+
+##### Q21. How is a variable is represented in LESS?
 ##### A21.
+LESS allows variables to be defined. In LESS, the variable is represented with a **`@`** sign. 
+While, variable assignment is done with a **`:`** (colon) sign. 
+The values of the variables are inserted into the CSS output file as well as minified file.
 
-##### Q22.
+##### Q22. Explain how Mixins is useful?
 ##### A22.
-##### Q23.
+Mixins enable embedding all the properties of a class into another class by including the class name as one 
+of its properties. It is just like variables but for whole classes.
+
+##### Q23. Explain how can set code in a watch mode when you run LESS.js in an HTML5 browser?
 ##### A23.
+If you run LESS.js in an HTML5 browser, it will use local storage to cache the generated CSS. However, from the developer point of view they cannot see the changes they made instantly. In order to see your changes instantly, you can load program in development and watch mode by following JavaScript
 
-##### Q24.
+```html
+<script type= "text/javascript">
+less.env = "development ";
+less.watch();
+</script>
+```
+
+##### Q24. Explain what is the meaning of nesting in LESS programming?
 ##### A24.
+Nesting in LESS is clustering of statements inside other statements, so it forms a group of related code. 
+In other words when we add a code snippet and add another code inside it, then that code snippet is called nesting.
 
-##### Q25.
+##### Q25. Mention what are the color channel functions used in LESS?
 ##### A25.
+* hue
+* saturation
+* hsvhue
+* saturation
+* hswalue
+* red
+* green
+* blue
+* alpha
+* luma
+* luminance
 
-##### Q26.
+##### Q26. Explain what is data-uri in LESS?
 ##### A26.
+In CSS, Data URI's is one of the best technique, it allows developers to avoid external image referencing and 
+instead embed them directly into a stylesheet. Data URIs are the excellent way to reduce HTTP requests
 
-##### Q27.
+##### Q27. Explain what "Source Map Less Inline"?
 ##### A27.
+The " Source Map Less Inline" option indicates that we should include all of the CSS files into the sourcemap. Which means that you only need your map file to get to your original source.
 
-##### Q28.
+##### Q28. Explain what is the use of Extend "all" in LESS?
 ##### A28.
+When you specify all keyword last in an extend argument, it tells LESS to match that selector as part of another selector.
 
-##### Q29.
+##### Q29. Explain what is "StrictImports" in LESS?
 ##### A29.
+The strictImports controls whether the compiler will allow a `@import` inside of either `@media` blocks or other selector blocks
 
-##### Q30.
+##### Q30. List out the differences between LESS and Sass?
 ##### A30.
+Each style-sheet language is good in their perspective and use; however there are few differences in their usage.
 
-##### Q31.
+| LESS | Sass |
+| :- | :- |
+| – LESS uses JavaScript and processed at client-side | – Sass is coded in Ruby and thus processed to server-side |
+| – Variable names are prefaced with the **`@`** symbol |– Variable name are prefaced with **`$`** symbol |
+| – LESS does not inherit multiple selectors with one set of properties |– Sass inherits multiple selectors with one set of properties |
+| – LESS does not work with "unknown" units neither it returns syntax error notification for incompatible units or maths related syntax error |– Sass allows you to work with "unknown" units also returns a syntax error notification for incompatible units |
+
+##### Q31. What are the similarities between LESS and Sass?
 ##### A31.
+Between LESS and Sass the similarities are
 
-##### Q32.
+* Namespaces
+* Color functions
+* Mixins and parametric mixins
+* Nesting capabilities
+* JavaScript evaluations
+
+##### Q32. Explain what is the use of `&combinator` ?
 ##### A32.
+`&combinator` concatenates nested selector with the parent selector. It is useful for Pseudo classes 
+such as `:hover` and `:focus`
 
-##### Q33.
+##### Q33. Explain what is the use of operations in LESS?
 ##### A33.
+Operations can be used for performing functions like
 
-##### Q34.
+* Simple Mathematical operators: +, – , *, /
+* Color functions
+* Math functions
+* Any size or color variable can be operated upon
+
+##### Q34. Explain what is the use of Escaping?
 ##### A34.
+The use of escaping in LESS
 
-##### Q35.
+* When you need to output CSS that is not valid CSS syntax
+* Proprietary syntax not recognized by LESS
+* LESS compiler will throw an error if not used
+* Simple prefix with `~` symbol and put in quotes
+
+##### Q35. What does LESS elements contain?
 ##### A35.
+Less elements contain commonly used mixins like
 
-##### Q36.
+* **`.gradient`**
+* **`.rounded`**
+* **`.opacity`**
+* **`.box-shadow`**
+* **`.inner-shadow`**
+
+##### Q36. List out alternatives for LESS?
 ##### A36.
+* SASS: Syntactically Awesome Stylesheets
+* SCSS: Version-2 of SASS
+* Stylus
 
-##### Q37.
+##### Q37. Explain how you can invoke the compiler from the command line?
 ##### A37.
+You can invoke the compiler from the command line in LESS as
 
-##### Q38.
+```bash
+$ lessc styles.less
+```
+
+This will output the compiled CSS to stdout; you may then redirect it to a file of your choice
+
+```bash
+$ lessc styles.less > styles.css
+```
+
+##### Q38. What is the use of **`e()`** function?
 ##### A38.
+With the help of **`e()`** function you can escape a value so that it passes straight through to the compiled CSS, 
+without being noticed by the LESS compiler.
 
-##### Q39.
+##### Q39. Explain how you can pre-compile LESS into CSS?
 ##### A39.
+To pre-compile LESS into CSS you can use
 
-##### Q40.
+* Run less.js using Node.js : By using the Node.js JavaScript framework you can run the less.js script outside the browser
+* Use lessphp: For the implementation of the LESS compiler written in PHP, lessphp is used
+* Use online Compiler: Use online compiler for quick compilation of LESS code without installing a compiler
+* Less. app (for Mac users): Less.app is a free tool for Mac users, this tool auto compiles them into CSS files
+
+##### Q40. Explain how merge function is used in LESS?
 ##### A40.
+For aggregating values from multiple properties into a space or comma separated list under a single property LESS is used. 
+It is useful for properties such as transform and background
+
+##### Q41. How can you create a loop structures in LESS?
+##### A41.
+A mixin can call itself in LESS. Such recursive mixins, when combined with Pattern matching and Guard Expressions, 
+can be used to create various iterative/loop structures.
+
+##### Q42. Why do we need parametric mixins in LESS?
+##### A42.
+Parametric mixins are same like standard mixins. The only difference is that parametric mixins take parameters like functions in JavaScript. After determining parameters to the mixins, you get more control over mixins.
+
+**Cons:**
+
+* White space sensitive
+* No inline rules
 
 ---
 
-#### N: Top 40 Sass & Less Interview Questions and Answers
+#### The Modern JavaScript Tutorial
 
 ---
-
-#### O: The Modern JavaScript Tutorial
-
----
-
 
 <table>
   <caption>Favorite and Least Favorite Things</caption>
@@ -8547,5 +8755,66 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 
 ---
 
+#### 10 Questions Every JavaScript Developer Should Know
+
+---
+
+#### 21 Essential JavaScript Questions from best mentors all over the world
+
+---
+
+#### 25 Essential JavaScript Questions from top 3% developers company
+
+---
+
+#### 5 More JavaScript Exercises
+
+---
+
+#### 5 Typical JavaScript Exercises
+
+---
+
+#### Development hiring managers and potential interviewees may find these sample JavaScript proficiency Q&As and code snippets useful
+
+---
+
+#### JavaScript 101 Question
+
+---
+
+#### JavaScript Questions have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of JavaScript
+
+---
+
+#### JS: Basics and Tricky Questions
+
+---
+
+#### JS: Algorithm
+
+---
+
+#### Some basic javascript coding challenges and questions
+
+---
+
+#### Some JavaScript exercises
+
+---
+
+#### Ten Questions I've Been Asked, Most More Than Once, Over Six Technical JavaScript / Front-End Engineer Job Interviews
+
+---
+
+#### Top 85 JavaScript Questions
+
+---
+
+#### Cake JavaScript Questions
+
+---
+
+#### The Best Frontend JavaScript Questions (written by a Frontend Engineer)
 
 ---
