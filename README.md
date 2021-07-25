@@ -7851,34 +7851,532 @@ div#xpsel-container p::first-letter {
 
 ---
 
-##### Q22.
+##### Q22. `X:nth-child(n)`
 ##### A22.
-##### Q23.
+```css
+li:nth-child(3) {
+   color: red;
+}
+```
+
+Remember the days when we had no way to target specific elements in a stack? The `nth-child` pseudo class solves that!
+
+Please note that `nth-child` accepts an integer as a parameter, but this is not zero-based. 
+If you wish to target the second list item, use `li:nth-child(2)`.
+
+We can even use this to select a variable set of children. 
+For example, we could do `li:nth-child(4n)` to select every fourth list item.
+
+##### Q23. `X:nth-last-child(n)`
 ##### A23.
+```css
+li:nth-last-child(2) {
+   color: red;
+}
+```
 
-##### Q24.
+What if you had a huge list of items in a `ul`, and you only needed to access, say, the third to last item? 
+Rather than doing `li:nth-child(397)`, you could instead use the `nth-last-child` pseudo class.
+
+This technique works almost identically to number 16 above. The difference is that it begins at the end of 
+the collection, and works its way back.
+
+##### Q24. `X:nth-of-type(n)`
 ##### A24.
+```css
+ul:nth-of-type(3) {
+   border: 1px solid black;
+}
+```
 
-##### Q25.
+There will be times when, rather than selecting a `child`, you instead need to select according to the type of element.
+
+Imagine markup that contains five unordered lists. If you wanted to style only the third `ul`, and didn't have a unique 
+`id` to hook into, you could use the `nth-of-type(n)` pseudo class. In the snippet above, only the third `ul` will have a 
+border around it.
+
+##### Q25. `X:nth-last-of-type(n)`
 ##### A25.
+```css
+ul:nth-last-of-type(3) {
+   border: 1px solid black;
+}
+```
 
-##### Q26.
+And yes, to remain consistent, we can also use `nth-last-of-type` to begin at the end of the selectors list and work our way back to target the desired element.
+
+##### Q26. `X:first-child`
 ##### A26.
+```css
+ul li:first-child {
+   border-top: none;
+}
+```
 
-##### Q27.
+This structural pseudo class allows us to target only the first child of the element's parent. You'll often use this to remove borders from the first and last list items.
+
+For example, let's say you have a list of rows, and each one has a `border-top` and a `border-bottom`. Well, with that arrangement, the first and last item in that set will look a bit odd.
+
+Many designers apply classes of `first` and `last` to compensate for this. Instead, you can use these pseudo classes.
+
+##### Q27. `X:last-child`
 ##### A27.
+```css
+ul > li:last-child {
+   color: green;
+}
+```
 
-##### Q28.
+The opposite of `first-child`, `last-child` will target the last item of the element's parent.
+
+**`last-child` Selector Example**
+
+Let's build a simple example to demonstrate one possible use of these classes. We'll create a styled list item.
+
+```html
+<ul>
+   <li> List Item </li>
+   <li> List Item </li>
+   <li> List Item </li>
+</ul>
+```
+
+For the markup, there's nothing special: just a simple list.
+
+Here's the CSS:
+
+```css
+ul {
+ width: 200px;
+ background: #292929;
+ color: white;
+ list-style: none;
+ padding-left: 0;
+}
+ 
+li {
+ padding: 10px;
+ border-bottom: 1px solid black;
+ border-top: 1px solid #3c3c3c;
+}
+```
+
+This styling will set a background, remove the browser default padding on the ul, and apply borders to each li to provide a bit of depth.
+
+![CSS-X-last-child-image](./assets/CSS-X-last-child.PNG)
+
+> To add depth to your lists, apply a `border-bottom` to each `li` that is a shade or two darker than the `li`'s 
+> background color. Next, apply a `border-top` which is a couple of shades lighter.
+>
+
+The only problem, as shown in the image above, is that a border will be applied to the very top and bottom of the 
+unordered list—which looks odd. Let's use the `:first-child` and `:last-child` pseudo classes to fix this.
+
+```css
+li:first-child {
+    border-top: none;
+}
+ 
+li:last-child {
+   border-bottom: none;
+}
+```
+
+![CSS-X-first-and-last-child-image](./assets/CSS-X-first-and-last-child.PNG)
+
+There we go; that fixes it!
+
+##### Q28. `X:only-child`
 ##### A28.
+```css
+div p:only-child {
+   color: red;
+}
+```
 
-##### Q29.
+Truthfully, you probably won't find yourself using the `only-child` pseudo class too often. Nonetheless, it's available, should you need it.
+
+It allows you to target elements which are the _only_ child of its parent. For example, referencing the snippet above, only the paragraph that is the only child of the `div` will be colored red.
+
+Let's assume the following markup.
+
+```html
+<div><p> My paragraph here. </p></div>
+ 
+<div>
+   <p> Two paragraphs total. </p>
+   <p> Two paragraphs total. </p>
+</div>
+```
+
+In this case, the second `div`'s paragraphs will not be targeted; only the first `div`. 
+As soon as you apply more than one child to an element, the `only-child` pseudo class ceases to take effect.
+
+##### Q29. `X:only-of-type`
 ##### A29.
+```css
+li:only-of-type {
+   font-weight: bold;
+}
+```
 
-##### Q30.
+This structural pseudo class can be used in some clever ways. It will target elements that do not have any 
+siblings within its parent container. As an example, let's target all `ul`s which have only a single list item.
+
+First, ask yourself how you would accomplish this task. You could do ul `li`, but this would target _all_ list items. 
+The only solution is to use `only-of-type`.
+
+```css
+ul > li:only-of-type {
+   font-weight: bold;
+}
+```
+
+##### Q30. `X:first-of-type`
 ##### A30.
+The `first-of-type` pseudo class allows you to select the first siblings of its type.
+
+**A Test**
+To better understand this, let's have a test. Copy the following markup into your code editor:
+
+```html
+<div>
+   <p> My paragraph here. </p>
+   <ul>
+      <li> List Item 1 </li>
+      <li> List Item 2 </li>
+   </ul>
+ 
+   <ul>
+      <li> List Item 3 </li>
+      <li> List Item 4 </li>
+   </ul>   
+</div>
+```
+
+Now, without reading further, try to figure out how to target only "List Item 2". 
+When you've figured it out (or given up), read on.
+
+**Solution 1**
+There are a variety of ways to solve this test. We'll review a handful of them. Let's begin by using `first-of-type`.
+
+```css
+ul:first-of-type > li:nth-child(2) {
+   font-weight: bold;
+}
+```
+
+This snippet essentially says, to find the first unordered list on the page, then find only the immediate children, 
+which are list items. Next, filter that down to only the second list item in that set.
+
+**Solution 2**
+Another option is to use the adjacent selector.
+
+```css
+p + ul li:last-child {
+   font-weight: bold;
+}
+```
+
+In this scenario, we find the `ul` that immediately proceeds the `p` tag, and then find the very last child of the element.
+
+Solution 3
+We can be as obnoxious or as playful as we want with these selectors.
+
+```css
+ul:first-of-type li:nth-last-child(1) {
+   font-weight: bold;   
+}
+```
+
+This time, we grab the first `ul` on the page, and then find the very first list item, but starting from the bottom! 
 
 ---
 
 **Summary - of `Nth Child and Type Selectors` we have learned so far:**
 
 ---
+HTML
+```html
+<h2>X:nth-child(n)</h2>
+<div id="xnch-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+        <li> Child </li>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <ul>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> <a href="http://d2o0t5hpnwv4c1.cloudfront.net/817_rubyNewbies1/preivew.png" data-filetype="image">PNG Image</a> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg" data-info="external image">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X:nth-last-child(n)</h2>
+
+<div id="xnlch-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+        <li> Child </li>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <ul>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+  </ul>
+
+  <p> Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. Lorem ipsum dolor sit amet, <a href="http://www.google.com" data-info="external" title="Some title">consectetur</a> adipisicing elit, sed do <a href="http://nettuts.com">Nettuts</a> tempor. </p>
+  <p> <a href="http://d2o0t5hpnwv4c1.cloudfront.net/817_rubyNewbies1/preivew.png" data-filetype="image">PNG Image</a> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+  <p> Lorem ipsum <a href="http://net.tutsplus.com">Nettuts+</a> sit amet, consectetur "<a href="http://d2o0t5hpnwv4c1.cloudfront.net/839_git/preview.jpg" data-info="external image">Getting Good with Git</a>" elit, sed do eiusmod tempor. </p>
+</div>
+
+<h2>X:nth-of-type(n)</h2>
+<div id="xntp-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+        <li> Child </li>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <ul>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li> List Items </li>
+    <li> List Items </li>
+    <li> List Items </li>
+  </ul>
+</div>
+
+<h2>X:nth-last-of-type(n)</h2>
+<div id="xnltp-container">
+  <ul>
+    <li> List Item
+      <ul>
+        <li> Child </li>
+        <li> Child </li>
+        <li> Child </li>
+      </ul>
+    </li>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+
+  <ul>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+    <li>
+      <a href="#"> Anchor Tag </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li> List Items </li>
+    <li> List Items </li>
+    <li> List Items </li>
+  </ul>
+</div>
+
+<h2>X:first-child and X:last-child</h2>
+<div id="xflch-container">
+  <ul>
+    <li> List Item </li>
+    <li> List Item </li>
+    <li> List Item </li>
+  </ul>
+</div>
+
+<h2>X:only-child</h2>
+<div id="xoch-container">
+  <div>
+    <p> My paragraph here. </p>
+  </div>
+  <div>
+    <p> Two paragraphs total. </p>
+    <p> Two paragraphs total. </p>
+  </div>
+</div>
+
+<h2>X:only-of-type</h2>
+<div id="xot-container">
+  <div>
+    <p> My paragraph here. </p>
+    <ul>
+      <li> List Item </li>
+      <li> List Item </li>
+    </ul>
+  </div>
+  <div>
+    <p> Two paragraphs total. </p>
+    <p> Two paragraphs total. </p>
+    <ul>
+      <li> List Item </li>
+    </ul>
+  </div>
+</div>
+
+<h2>X:first-of-type</h2>
+<div id="xfot-container">
+  <div>
+    <p> My paragraph here. </p>
+    <ul>
+       <li> List Item 1</li>
+       <li> List Item 2</li>
+    </ul>
+    <ul>
+       <li> List Item 3</li>
+       <li> List Item 4</li>
+    </ul>   
+  </div>
+</div>
+```
+
+CSS
+```css
+* {
+  font-family: "Lato";
+}
+
+h2 {
+  margin: 4rem 0 0 0;
+}
+
+div#xnch-container li:nth-child(2) {
+  color: red;
+}
+
+div#xnlch-container li:nth-last-child(2) {
+  color: red;
+}
+
+div#xntp-container ul:nth-of-type(3) {
+   border: 1px solid black;
+}
+
+div#xnltp-container ul:nth-last-of-type(3) {
+   border: 1px solid black;
+} 
+
+div#xflch-container ul {
+  background: #292929;
+  color: white;
+  list-style: none;
+  padding-left: 0;
+}
+
+ div#xflch-container li {
+   padding: 10px;
+   border-bottom: 1px solid black;
+   border-top: 1px solid #3c3c3c;
+}
+
+div#xflch-container li:first-child {
+    border-top: none;
+}
+
+div#xflch-container li:last-child {
+   border-bottom: none;
+}
+
+div#xoch-container div p:only-child {
+  color: red;
+}
+
+div#xot-container div p:only-of-type {
+  color: red;
+}
+
+div#xot-container li:only-of-type {
+  font-weight: bold;
+}
+
+div#xfot-container ul:first-of-type > li:nth-child(2) {
+  font-weight: bold;
+}
+```
+
+![CSS-X-nth-child-Selector-image](./assets/CSS-X-nth-child-Selector.PNG)
+
+![CSS-X-nth-last-child-Selector-image](./assets/CSS-X-nth-last-child-Selector.PNG)
+
+![CSS-X-nth-of-type-n-Selector-image](./assets/CSS-X-nth-of-type-n-Selector.PNG)
+
+![CSS-X-nth-last-of-type-n-Selector-image](./assets/CSS-X-nth-last-of-type-n-Selector.PNG)
+
+![CSS-X-nth-last-of-type-n-Selector-image](./assets/CSS-X-nth-last-of-type-n-Selector.PNG)
+
+![CSS-X-first-child-and-X-last-child-Selectors-image](./assets/CSS-X-first-child-and-X-last-child-Selectors.PNG)
+
+![CSS-X-only-child-Selector-image](./assets/CSS-X-only-child-Selector.PNG)
+
+![CSS-X-only-of-type-Selector-image](./assets/CSS-X-only-of-type-Selector.PNG)
+
+![CSS-X-first-of-type-Selector-image](./assets/CSS-X-first-of-type-Selector.PNG)
