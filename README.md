@@ -8728,34 +8728,39 @@ Parametric mixins are same like standard mixins. The only difference is that par
 ---
 
 <table>
-  <caption>Favorite and Least Favorite Things</caption>
+  <caption>The Modern JavaScript Tutorial</caption>
   <tr>
     <th></th>
 	<th></th>
-	<th>Bob</th>
-	<th>Alice</th>
+	<th>Link</th>
   </tr>
   <tr>
-    <th rowspan="2">Favorite</th>
-    <th>Color</th>
-    <td>Blue</td>
-	<td>Purple</td>
+    <th rowspan="4"><strong>PART 1 - The JavaScript language</strong></th>
+    <th>1.1 An Introduction to JavaScript</th>
+    <td></td>
   </tr>
   <tr>
-    <th>Flavor</th>
-	<td>Banana</td>
-	<td>Chocolate</td>
+    <th>1.2 Manuals and specifications</th>
+	<td></td>
   </tr>
+  <tr>
+    <th>1.3 Code editors</th>
+	<td></td>
+  </tr>
+  <tr>
+    <th>1.4 Developer Console</th>
+	<td></td>
+  </tr>
+  
+  
   <tr>
     <th rowspan="2">Least Favorite</th>
 	<th>Color</th>
 	<td>Yellow</td>
-	<td>Pink</td>
   </tr>
   <tr>
 	<th>Flavor</th>
 	<td>Mint</td>
-	<td>Walnut</td>
   </tr>
 </table>
 
