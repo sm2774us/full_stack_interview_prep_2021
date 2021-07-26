@@ -2,7 +2,6 @@
 
 ## Important Resources
 * [Amazon-Online-Assesment-Guide](./Amazon_Online_Assessment_Guide.pdf)
-* [Facebook Phone Interview Questions](https://leetcode.com/discuss/interview-question/790428/Facebook-Phone-Interview-Questions)
 * [Amazon Online Assesment Questions](https://leetcode.com/discuss/interview-question/1183360/Amazon-Online-Assesment-Questions)
 * [Amazon Interview Questions - LeetCode List](https://leetcode.com/list/xyknlrg2/)
 * [Import and Useful Links from all over the LeetCode](https://leetcode.com/discuss/general-discussion/665604/important-and-useful-links-from-all-over-the-leetcode)

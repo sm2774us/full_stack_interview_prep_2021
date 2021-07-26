@@ -87,12 +87,25 @@ you are not as gung-ho about web design as you thought you were.
 
 ## B) Data Structures & Algorithms
 
+- [Data Structures - Notes](./cs_fundamentals/Data_Structures/Notes/README.md)
+- [`Data Structures and Algorithms using Python` by Rance D. Necaise](./cs_fundamentals/Data_Structures/Data_Structures_and_Algorithms_Using_Python_The_Book_And_Source_Code/Data%20Structures%20and%20Algorithms%20Using%20Python.pdf)
+- [Algorithms - Notes](./cs_fundamentals/Algorithms/Notes/README.md)
+- [`Grokking Algorithms - An illustrated guide for programmers and other curious people` by Aditya Y. Bhargava](./cs_fundamentals/Algorithms/Grokking_Algorithms_The_Book_and_Source_Code/Grokking%20Algorithms%20-%20An%20illustrated%20guide%20for%20programmers%20and%20other%20curious%20people.pdf)
 - [EKAlgorithms contains some well known CS algorithms & data structures](https://github.com/EvgenyKarkan/EKAlgorithms)
 - [Five programming problems every Software Engineer should be able to solve in less than 1 hour](http://www.shiftedup.com/2015/05/07/five-programming-problems-every-software-engineer-should-be-able-to-solve-in-less-than-1-hour)
 - [Top 10 Algorithms for Coding Interview](http://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/)
 - [Top 50 Data Structure Questions from Career Guru](http://career.guru99.com/top-50-data-structure-interview-questions/)
 
-## C) Coding exercises
+## C) LeetCode
+
+- [LeetCode - Curated List of 75 Problems](./curated_list_of_75_leetcode_questions/README.md)
+
+## D) Company-wise Preparation
+
+- [Amazon](./company_wise_prep/amazon_interview_prep_2021/README.md)
+- [Facebook](./curated_list_of_75_leetcode_questions/README.md)
+
+## E) Coding exercises
 
 - [Common questions and puzzles solved in a number of languages](https://github.com/mre/the-coding-interview)
 
