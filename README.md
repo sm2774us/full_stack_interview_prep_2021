@@ -67,7 +67,7 @@ you are not as gung-ho about web design as you thought you were.
 
 ### A) JavaScript
 
-* [The Modern JavaScript Tutorial](https://github.com/sm2774us/full_stack_interview_prep_2021#the-modern-javascript-tutorial)
+* [The Modern JavaScript Tutorial](https://javascript.info/)
 * [10 Questions Every JavaScript Developer Should Know](https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95)
 * [21 Essential JavaScript Questions from best mentors all over the world](https://www.codementor.io/javascript/tutorial/21-essential-javascript-tech-interview-practice-questions-answers)
 * [25 Essential JavaScript Questions from top 3% developers company](http://www.toptal.com/javascript/interview-questions)
@@ -8716,105 +8716,5 @@ Parametric mixins are same like standard mixins. The only difference is that par
 
 * White space sensitive
 * No inline rules
-
----
-### PHASE - 2
----
-#### A: JavaScript
----
-
-#### The Modern JavaScript Tutorial
-
----
-
-<table>
-  <caption>The Modern JavaScript Tutorial</caption>
-  <tr>
-    <th></th>
-	<th></th>
-	<th>Link</th>
-  </tr>
-  <tr>
-    <th rowspan="4"><strong>PART 1 - The JavaScript language</strong></th>
-    <th>1.1 An Introduction to JavaScript</th>
-    <td><a href="./javascript_tutorial/1_an_introduction/1.1_an_introduction_to_javascript/README.md">CONTENT</a></td>
-  </tr>
-  <tr>
-    <th>1.2 Manuals and specifications</th>
-	<td></td>
-  </tr>
-  <tr>
-    <th>1.3 Code editors</th>
-	<td></td>
-  </tr>
-  <tr>
-    <th>1.4 Developer Console</th>
-	<td></td>
-  </tr>  
-</table>
-
----
-
-#### 10 Questions Every JavaScript Developer Should Know
-
----
-
-#### 21 Essential JavaScript Questions from best mentors all over the world
-
----
-
-#### 25 Essential JavaScript Questions from top 3% developers company
-
----
-
-#### 5 More JavaScript Exercises
-
----
-
-#### 5 Typical JavaScript Exercises
-
----
-
-#### Development hiring managers and potential interviewees may find these sample JavaScript proficiency Q&As and code snippets useful
-
----
-
-#### JavaScript 101 Question
-
----
-
-#### JavaScript Questions have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of JavaScript
-
----
-
-#### JS: Basics and Tricky Questions
-
----
-
-#### JS: Algorithm
-
----
-
-#### Some basic javascript coding challenges and questions
-
----
-
-#### Some JavaScript exercises
-
----
-
-#### Ten Questions I've Been Asked, Most More Than Once, Over Six Technical JavaScript / Front-End Engineer Job Interviews
-
----
-
-#### Top 85 JavaScript Questions
-
----
-
-#### Cake JavaScript Questions
-
----
-
-#### The Best Frontend JavaScript Questions (written by a Frontend Engineer)
 
 ---
