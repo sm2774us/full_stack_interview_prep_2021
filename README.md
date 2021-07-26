@@ -8737,7 +8737,7 @@ Parametric mixins are same like standard mixins. The only difference is that par
   <tr>
     <th rowspan="4"><strong>PART 1 - The JavaScript language</strong></th>
     <th>1.1 An Introduction to JavaScript</th>
-    <td></td>
+    <td><a href="./javascript_tutorial/1_an_introduction/1.1_an_introduction_to_javascript/README.md"></a></td>
   </tr>
   <tr>
     <th>1.2 Manuals and specifications</th>
@@ -8750,18 +8750,7 @@ Parametric mixins are same like standard mixins. The only difference is that par
   <tr>
     <th>1.4 Developer Console</th>
 	<td></td>
-  </tr>
-  
-  
-  <tr>
-    <th rowspan="2">Least Favorite</th>
-	<th>Color</th>
-	<td>Yellow</td>
-  </tr>
-  <tr>
-	<th>Flavor</th>
-	<td>Mint</td>
-  </tr>
+  </tr>  
 </table>
 
 ---
