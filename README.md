@@ -65,9 +65,9 @@ you are not as gung-ho about web design as you thought you were.
 
 # Phase 2
 
-### JavaScript
+### A) JavaScript
 
-* [The Modern JavaScript Tutorial](https://github.com/sm2774us/full_stack_interview_prep_2021#o-the-modern-javascript-tutorial)
+* [The Modern JavaScript Tutorial](https://github.com/sm2774us/full_stack_interview_prep_2021#the-modern-javascript-tutorial)
 * [10 Questions Every JavaScript Developer Should Know](https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95)
 * [21 Essential JavaScript Questions from best mentors all over the world](https://www.codementor.io/javascript/tutorial/21-essential-javascript-tech-interview-practice-questions-answers)
 * [25 Essential JavaScript Questions from top 3% developers company](http://www.toptal.com/javascript/interview-questions)
@@ -85,14 +85,14 @@ you are not as gung-ho about web design as you thought you were.
 * [Cake JavaScript Questions](https://www.interviewcake.com/javascript-interview-questions)
 * [The Best Frontend JavaScript Questions (written by a Frontend Engineer)](https://performancejs.com/post/hde6d32/The-Best-Frontend-JavaScript-Interview-Questions-(written-by-a-Frontend-Engineer))
 
-## Data Structures & Algorithms
+## B) Data Structures & Algorithms
 
 - [EKAlgorithms contains some well known CS algorithms & data structures](https://github.com/EvgenyKarkan/EKAlgorithms)
 - [Five programming problems every Software Engineer should be able to solve in less than 1 hour](http://www.shiftedup.com/2015/05/07/five-programming-problems-every-software-engineer-should-be-able-to-solve-in-less-than-1-hour)
 - [Top 10 Algorithms for Coding Interview](http://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/)
 - [Top 50 Data Structure Questions from Career Guru](http://career.guru99.com/top-50-data-structure-interview-questions/)
 
-## Coding exercises
+## C) Coding exercises
 
 - [Common questions and puzzles solved in a number of languages](https://github.com/mre/the-coding-interview)
 
@@ -152,6 +152,8 @@ you are not as gung-ho about web design as you thought you were.
 * [SQL Questions that have been designed specially to get you acquainted with the nature of questions you may encounter during your for the subject of SQL](http://www.tutorialspoint.com/sql/sql_interview_questions.htm)
 * [Top 20 SQL Questions with Answers](http://dwbi.org/database/sql/72-top-20-sql-interview-questions-with-answers)
 
+---
+### PHASE - 1
 ---
 #### A: HTML
 ---
@@ -3337,9 +3339,7 @@ Example:
 >
 
 ---
-
 ### B: CSS
-
 ---
 
 #### 25 helpful CSS questions and answers
@@ -8381,6 +8381,8 @@ div#xfot-container ul:first-of-type > li:nth-child(2) {
 ![CSS-X-first-of-type-Selector-image](./assets/CSS-X-first-of-type-Selector.PNG)
 
 ---
+#### C: SASS
+---
 
 #### Top 40 Sass & Less Interview Questions and Answers
 
@@ -8715,6 +8717,10 @@ Parametric mixins are same like standard mixins. The only difference is that par
 * White space sensitive
 * No inline rules
 
+---
+### PHASE - 2
+---
+#### A: JavaScript
 ---
 
 #### The Modern JavaScript Tutorial
