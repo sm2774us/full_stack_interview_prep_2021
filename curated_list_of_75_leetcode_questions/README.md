@@ -10478,7 +10478,8 @@ fun main(args: Array<String>) {
 | 0124  | [Binary Tree Maximum Path Sum](#lc-124binary-tree-maximum-path-sum) | https://leetcode.com/problems/binary-tree-maximum-path-sum/ | _O(n)_ | _O(h)_ | Hard     |              |                        |
 | 0102  | [Binary Tree Level Order Traversal](#lc-102binary-tree-level-order-traversal) | https://leetcode.com/problems/binary-tree-level-order-traversal/ | _O(n)_ | _O(n)_ | Easy  |  |                        |
 | 0297  | [Serialize and Deserialize Binary Tree](#lc-297serialize-and-deserialize-binary-tree) | https://leetcode.com/problems/serialize-and-deserialize-binary-tree/ | _O(n)_ | _O(h)_ | Hard | LintCode | DFS |
-| 0572  | [Subtree of Another Tree](#lc-572subtree-of-another-tree) | https://leetcode.com/problems/construct-string-from-binary-tree/  | _O(m * n)_ | _O(h)_ | Easy     |              |                        |
+| 0606  | [Construct String from Binary Tree](#lc-606construct-string-from-binary-tree) | https://leetcode.com/problems/construct-string-from-binary-tree/  |  _O(n)_ | _O(h)_ | Easy   |    |                   |
+| 0572  | [Subtree of Another Tree](#lc-572subtree-of-another-tree) | https://leetcode.com/problems/subtree-of-another-tree/  | _O(n)_ | _O(n+m)_ | Easy     |              |                        |
 | 0105  | [Construct Binary Tree from Preorder and Inorder Traversal](#lc-105construct-binary-tree-from-preorder-and-inorder-traversal) | https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ | _O(n)_ | _O(n)_ | Medium | | |
 | 0098  | [Validate Binary Search Tree](#lc-98validate-binary-search-tree) | https://leetcode.com/problems/validate-binary-search-tree/ | _O(n)_  | _O(1)_  | Medium     |              |                        |
 | 0230  | [Kth Smallest Element in a BST](#lc-230kth-smallest-element-in-a-bst) | https://leetcode.com/problems/kth-smallest-element-in-a-bst/ | _O(max(h, k))_ | _O(min(h, k))_ | Medium |    |                 |
@@ -10799,13 +10800,100 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 ####  [LC-124:Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 ##### Solution Explanation:
 ```
+This problem requires quite a bit of quirky thinking steps. Take it slow until you fully grasp it.
+
+Basics
+==========================
+```
+![lc-124-solution-explanation-image-1](./assets/lc-124-solution-explanation-image-1.PNG)
+```
+
+Base Cases
+==========================
+```
+![lc-124-solution-explanation-image-2](./assets/lc-124-solution-explanation-image-2.PNG)
+```
+Important Observations
+==========================
+  * These important observations are very important to understand Line 9 and Line 10 in the code.
+      [x] For example, in the code (Line 9), we do something like max(get_max_gain(node.left), 0). The important part is: why do we take maximum value between 0 and maximum gain we can get from left branch? Why 0?
+      [x] Check the two images below first.
+```
+![lc-124-solution-explanation-image-3](./assets/lc-124-solution-explanation-image-3.PNG)
+![lc-124-solution-explanation-image-4](./assets/lc-124-solution-explanation-image-4.PNG)
+```
+      [x] The important thing is "We can only get any sort of gain IF our branches are not below zero. If they are below zero, why do we even bother considering them? Just pick 0 in that case. Therefore, we do 
+	      max(<some gain we might get or not>, 0)..
+
+Going down the recursion stack for one example:
+```
+![lc-124-solution-explanation-image-5](./assets/lc-124-solution-explanation-image-5.PNG)
+![lc-124-solution-explanation-image-6](./assets/lc-124-solution-explanation-image-6.PNG)
+![lc-124-solution-explanation-image-7](./assets/lc-124-solution-explanation-image-7.PNG)
+```
+  * Because of this, we do Line 12 and Line 13. It is important to understand the different between looking for the maximum path INVOLVING the current node in process and what we return for the node which starts the recursion stack. 
+    Line 12 and Line 13 takes care of the former issue and Line 15 (and the image below) takes care of the latter issue.
+```
+![lc-124-solution-explanation-image-8](./assets/lc-124-solution-explanation-image-8.PNG)
+```
+  * Because of this fact, we have to return like Line 15. For our example, for node 1, which is the recursion call that 
+    node 3 does for max(get_max_gain(node.left), 0), node 1 cannot include both node 6 and node 7 for a path to include 
+	node 3. Therefore, we can only pick the max gain from left path or right path of node 1.
 ```
 ##### Complexity Analysis:
 ```
+SC: O(n)
+================
+Space complexity is O(1) if you ignore the recursion call stack, since we use fixed amount of variables. 
+Otherwise space complexity could be O(n) for a skewed tree in worst case. 
+
+
+TC: O(n)
+================
+For time complexity, since we will be visiting all the nodes at least once it is O(n)
 ```
 ```python
+import math
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        max_path = -math.inf # placeholder to be updated
+        def get_max_gain(node):
+            nonlocal max_path # This tells that max_path is not a local variable
+            if node is None:
+                return 0
+
+            gain_on_left = max(get_max_gain(node.left), 0) # Read the part important observations ( Line #9 )
+            gain_on_right = max(get_max_gain(node.right), 0) # Read the part important observations ( Line #10 )
+
+ 		    current_max_path = node.val + gain_on_left + gain_on_right # Read first three images of going down the recursion stack ( Line #12 )
+ 		    max_path = max(max_path, current_max_path) # Read first three images of going down the recursion stack ( Line #13 )
+
+            return node.val + max(gain_on_left, gain_on_right) # Read the last image of going down the recursion stack ( Line #15 )
+
+    get_max_gain(root) # Starts the recursion chain
+    return max_path
 ```
 ```kotlin
+fun maxPathSum(root: TreeNode?): Int {
+    var max = Int.MIN_VALUE
+    
+    fun recursion(root: TreeNode?): Int {
+        if (root == null) return 0
+        
+        val l = recursion(root.left)
+        val r = recursion(root.right)
+        
+        val lmax = maxOf(l + root.`val`, root.`val`)
+        val rmax = maxOf(r + root.`val`, root.`val`)
+        
+        max = maxOf(max, maxOf(l + r + root.`val`, maxOf(lmax, rmax)))
+
+        return maxOf(root.`val`, maxOf(lmax, rmax))
+    }
+    
+    recursion(root)
+    return max
+}
 ```
 
 <br/>
@@ -10815,15 +10903,106 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 <br/>
 
 ####  [LC-102:Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
-##### Solution Explanation:
+##### Solution Explanation
 ```
+# ----------------------------------------------------
+# Approach-1: Breadth First Search
+# ----------------------------------------------------
+
+ * Using BFS, at any instant only L1 and L1+1 nodes are in the queue.
+ * When we start the while loop, we have L1 nodes in the queue.
+ * for _ in range(len(q)) allows us to dequeue L1 nodes one by one and add L2 children one by one.
+ * Time complexity: O(N). Space Complexity: O(N)
+
+# ----------------------------------------------------
+# Approach-2: Depth First Search
+# ----------------------------------------------------
+
+ * Use a variable to track level in the tree and use simple Pre-Order traversal
+ * Add sub-lists to result as we move down the levels
+ * Time Complexity: O(N)
+ * Space Complexity: O(N) + O(h) for stack space
+
 ```
-##### Complexity Analysis:
+##### Complexity Analysis
 ```
+# ----------------------------------------------------
+# Approach-1: Breadth First Search
+# ----------------------------------------------------
+
+TC: O(N)
+SC: O(N)
+
+# ----------------------------------------------------
+# Approach-2: Depth First Search
+# ----------------------------------------------------
+
+TC: O(N)
+SC: O(N) + O(h) for stack space
+
 ```
 ```python
-```
-```kotlin
+# ----------------------------------------------------
+# Approach-1: Breadth First Search
+# ----------------------------------------------------
+#TC: O(N)
+#SC: O(N)
+
+from collections import deque
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        q, result = deque(), []
+        if root:
+            q.append(root)
+        while len(q):
+            level = []
+            for _ in range(len(q)):
+                x = q.popleft()
+                level.append(x.val)
+                if x.left:
+                    q.append(x.left)
+                if x.right:
+                    q.append(x.right)
+            result.append(level)
+        return result
+
+# ----------------------------------------------------
+# Approach-2: Depth First Search
+# ----------------------------------------------------
+#TC: O(N)
+#SC: O(N) + O(h) for stack space
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        result = []
+        self.helper(root, 0, result)
+        return result
+    
+    def helper(self, root, level, result):
+        if root is None:
+            return
+        if len(result) <= level:
+            result.append([])
+        result[level].append(root.val)
+        self.helper(root.left, level+1, result)
+        self.helper(root.right, level+1, result)
 ```
 
 <br/>
@@ -10835,13 +11014,245 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 ####  [LC-297:Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
 ##### Solution Explanation:
 ```
+# --------------------------------------
+# Approach 1 ( Level Order for encoding )
+#              BFS
+#              DFS ( Iterative and Recursive )
+# --------------------------------------
+Use level-order traversal to encode ( to match LeetCode's serialization format ).
+
+Time complexity for both serialize and deserialize are O(n), where n is the number of nodes in the binary tree.
+
+# --------------------------------------
+# Approach 2 ( Using Native Serialization )
+# --------------------------------------
+Efficient for large integers which can be packed into 4 bytes.
+
+Serializes the tree in to following format:
+
+<val><size_of_left_tree><size_of_right_tree><left_data><right_data>
+
+So constant 12 bytes (4 + 4 + 4) followed by arbiatry sized byte sequences one each for left and right subtree.
+
+Time complexity for both serialize and deserialize are O(n), where n is the number of nodes in the binary tree.
 ```
 ##### Complexity Analysis:
 ```
+N = the number of nodes in the binary tree.
+
+For both solutions:
+
+TC : O(N)
+SC : O(N)
 ```
 ```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+# --------------------------------------
+# Approach 1 ( Level Order for encoding )
+#              BFS
+#              DFS ( Iterative and Recursive )
+# --------------------------------------
+# N = the number of nodes in the binary tree.
+# --------------------------------------
+# TC : O(N)
+# SC : O(N)
+#
+# BFS
+class Codec:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return "#"
+        queue = [root]
+        res = [str(root.val)]
+        while queue:
+            res += [str(node.val) if node else "#" for root in queue for node in (root.left,root.right)]
+            queue = [node for root in queue for node in (root.left, root.right) if node]
+        return ",".join(res)
+
+    def deserialize(self, data):
+        if data == "#":
+            return None
+        d = iter(data.split(","))
+        root = TreeNode(int(next(d)))
+        queue = [root]
+        while queue:
+            for node in queue:
+                left = next(d)
+                node.left = TreeNode(int(left)) if left!="#" else None
+                right = next(d)
+                node.right = TreeNode(int(right)) if right!="#" else None
+            queue = [node for root in queue for node in (root.left, root.right) if node]
+        return root
+
+# Recursive DFS
+class Codec:   
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return "#"
+        s = "{},{},{}".format(root.val, self.serialize(root.left), self.serialize(root.right))
+        return s
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        d = iter(data.split(','))
+        def helper(d):
+            root = next(d)
+            if root == "#":
+                return None
+            root = TreeNode(root)
+            root.left = helper(d)
+            root.right = helper(d)
+            return root
+        return helper(d) 
+		
+# Iterative DFS
+class Codec:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        if not root:
+            return "#"
+        s = "{},{},{}".format(root.val, self.serialize(root.left), self.serialize(root.right))
+        return s
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        if data == "#":
+            return None
+        
+        root = TreeNode(int(d[0]))
+        stack = [[root,0]]
+        for i in d[1:]:
+            t = TreeNode(int(i)) if i !="#" else None
+            if stack:
+                last, status = stack[-1]
+                if status == 0:
+                    last.left = t
+                    stack[-1][1] += 1
+                else:
+                    last.right = t
+                    stack.pop()
+            if t:
+                stack.append([t,0])
+        return root
+
+# --------------------------------------
+# Approach 2 ( Using Native Serialization )
+# --------------------------------------
+# N = the number of nodes in the binary tree.
+# --------------------------------------
+# TC : O(N)
+# SC : O(N)
+import struct
+
+class Codec:
+    def serialize(self, root):
+        if not root:
+            return ''
+        left = self.serialize(root.left)
+        right = self.serialize(root.right)
+        return struct.pack('iii{0}s{1}s'.format(len(left), len(right)),
+                           root.val, len(left), len(right), left, right)
+
+    def deserialize(self, data):
+        if not data:
+            return None
+        val, left_size, right_size = struct.unpack('iii', data[:12])
+        left_data, right_data = struct.unpack(
+            '{0}s{1}s'.format(
+                left_size,
+                right_size,
+            ), data[12:])
+        root = TreeNode(val)
+        root.left, root.right = self.deserialize(left_data), self.deserialize(right_data)
+        return root
+
+# --------------------------------------
+# --------------------------------------
+# Your Codec object will be instantiated and called as such:
+# ser = Codec()
+# deser = Codec()
+# ans = deser.deserialize(ser.serialize(root))
 ```
 ```kotlin
+// Kotline BFS Solution
+// TC : O(N)
+// SC : O(N)
+class Codec() {
+	// Encodes a URL to a shortened URL.
+    fun serialize(root: TreeNode?): String {
+        val q = LinkedList<TreeNode?>()
+        q.offer(root)
+        
+        val res = StringBuilder()
+        var lastPos = 0
+        while (!q.isEmpty()) {
+            val node = q.poll()
+            if (node == null) {
+                res.append("null")
+            } else {
+                res.append(node.`val`)
+                lastPos = res.length
+                q.offer(node.left)
+                q.offer(node.right)                
+            }
+            res.append(",")
+        }
+        return res.substring(0..lastPos - 1)
+    }
+
+    // Decodes your encoded data to tree.
+    fun deserialize(data: String): TreeNode? {
+        if (data.isEmpty()) return null
+        val list = data.split(",")
+        val root = TreeNode(list[0].toInt())
+        val q = ArrayDeque<TreeNode>()
+        q.offer(root)
+        
+        var i = 1
+        while (i < list.size && !q.isEmpty()) {
+            val node = q.poll()
+            if (i < list.size && list[i] != "null") {
+                node.left = TreeNode(list[i].toInt())
+                q.offer(node.left)
+            }
+            i++
+            if (i < list.size && list[i] != "null") {
+                node.right = TreeNode(list[i].toInt())
+                q.offer(node.right)
+            }
+            i++           
+        }
+        return root
+    }
+}
 ```
 
 <br/>
@@ -10850,16 +11261,162 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 </div>
 <br/>
 
-####  [LC-572:Subtree of Another Tree](https://leetcode.com/problems/construct-string-from-binary-tree/)
+#### [LC-606:Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/)
 ##### Solution Explanation:
 ```
+We do this recursively.
+
+  * If the tree is empty, we return an empty string.
+  * We record each child as '(' + (string of child) + ')'
+  * If there is a right child but no left child, we still need to record '()' instead of empty string.
 ```
 ##### Complexity Analysis:
 ```
+# Solution-1: Recursive Solution
+O(T): O(n)
+O(S): O(h)
+
+# Solution-2: Iterative Solution
+O(T): O(n)
+O(S): O(n)
 ```
 ```python
+# Solution-1: Recursive Solution
+class Solution:
+    def tree2str(self, t: TreeNode) -> str:
+        if not t: return ''
+        rst = f"{t.val}"
+        l = self.tree2str(t.left)
+        r = self.tree2str(t.right)
+        if not l and not r: return rst
+        #as long as it has next level, append left branch no matter what it is
+        rst += f"({l})"
+        #append right branch if and only if right branch has solid value
+        if r: rst += f"({r})"
+        return rst
+
+# Solution-2: Iterative Solution
+class Solution:
+    def tree2str(self, t: TreeNode) -> str:
+        rst, s = '', [t] if t else []
+        while s:
+            node = s.pop()
+            #only left child can possibly be empty, because right child is strictly checked
+            if not node: rst += '('; continue
+            elif node == ")": rst += ')'; continue
+                
+            rst += f"({node.val}"
+            if not node.left and not node.right: continue
+                
+            #from here, it is if node.left or node.right, i prefer shallow indentation
+            if node.right:
+                s.append(')')
+                s.append(node.right)
+            #right child is strictly checked while left child has no check at all
+            s.append(')')
+            s.append(node.left)
+        return rst[1:]
 ```
 ```kotlin
+class Solution {
+    fun tree2str(t: TreeNode?): String {
+        return when {
+            t == null -> ""
+            t.left == null && t.right == null -> t.`val`.toString()
+            t.left == null && t.right != null -> String.format("%d()(%s)", t.`val`, tree2str(t.right))
+            t.left != null && t.right == null -> String.format("%d(%s)", t.`val`, tree2str(t.left))
+            else -> String.format("%d(%s)(%s)", t.`val`, tree2str(t.left), tree2str(t.right))
+        }
+    }
+}
+```
+
+####  [LC-572:Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
+##### Solution Explanation:
+```
+We do this recursively.
+
+  * If the tree is empty, we return an empty string.
+  * We record each child as '(' + (string of child) + ')'
+  * If there is a right child but no left child, we still need to record '()' instead of empty string.
+```
+##### Complexity Analysis:
+```
+Tree s is traversed in a preorder traversal. 
+When the generator reaches a node with the same value as the root of t, we start traversing t. 
+Now s and t are being traversed in parallel and the nodes are being compared by equalNodes 
+(this function checks if two nodes are equal by comparing their value and left and right children). 
+The while loop will stop if the generator for t (tCurr) returns None, or if the generator for s returns None 
+(in which case tCurr will NOT be none and the function will return False).
+```
+```python
+class Solution:
+    def checkSubTree(self, t1: TreeNode, t2: TreeNode) -> bool:
+        def preorder(node):
+            if node:
+                yield node
+                yield from preorder(node.left)
+                yield from preorder(node.right)
+
+        for n in preorder(t1):
+            if n.val == t2.val:
+                if all(a.val==b.val for a, b in zip(preorder(n), preorder(t2))):
+                    return True
+        return False
+		
+# More verbose solution w/o using built-ins
+class Solution:
+    def checkSubTree(self, t1: TreeNode, t2: TreeNode) -> bool:
+        def preOrder(root):
+            if root:
+                yield root
+                for node in preOrder(root.left): yield node
+                for node in preOrder(root.right): yield node
+                    
+        def equalNodes(sCurr, tCurr):
+            if sCurr.val != tCurr.val or \
+                sCurr.left and not tCurr.left or \
+                tCurr.left and not sCurr.left or \
+                tCurr.right and not sCurr.right or \
+                sCurr.right and not tCurr.right or \
+                sCurr.left and sCurr.left.val != tCurr.left.val or \
+                sCurr.right and sCurr.right.val != tCurr.right.val:
+                return False
+            return True
+        
+        sIter, tIter = preOrder(s), preOrder(t)
+        sCurr, tCurr = next(sIter,None), next(tIter,None) 
+        while sCurr and tCurr:
+            if equalNodes(sCurr,tCurr):
+                sCurr, tCurr = next(sIter,None), next(tIter,None)
+            else:
+                if tCurr == t:
+                    sCurr = next(sIter,None)
+                else:
+                    tIter = preOrder(t)
+                    tCurr = next(tIter,None)
+        return tCurr == None
+```
+```kotlin
+class Solution {
+    fun isSubtree(s: TreeNode?, t: TreeNode?): Boolean {
+        return when {
+            s == null && t == null -> true
+            s == null && t != null -> false
+            s != null && t == null -> false
+            else -> isSameTree(s, t) || isSubtree(s?.left, t) || isSubtree(s?.right, t)
+        }
+    }
+
+    private fun isSameTree(s: TreeNode?, t: TreeNode?): Boolean {
+        return when {
+            s == null && t == null -> true
+            s == null && t != null -> false
+            s != null && t == null -> false
+            else -> s?.`val` == t?.`val` && isSameTree(s?.left, t?.left) && isSameTree(s?.right, t?.right)
+        }
+    }
+}
 ```
 
 <br/>
@@ -10871,13 +11428,91 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 ####  [LC-105:Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 ##### Solution Explanation:
 ```
+Idea:
+==========================
+For this solution, we can take advantage of the order of nodes in the preorder and inorder traversals. A preorder traversal is [node, left, right] while an inorder traversal is [left, node, right].
+
+Idea:
+==========================
+For this solution, we can take advantage of the order of nodes in the preorder and inorder traversals. A preorder traversal is [node, left, right] while an inorder traversal is [left, node, right].
+
+We know that the root node for a tree is the first element of the preorder array (P). We also know that every element to the left of the root element in the inorder array (I) is on the left subtree, and everything to the right of the root element in I is on the right subtree.
+
+Since we know the length of the left and right subtrees by finding the root in I, and since we know the order of the left and right subtrees in P, we can use that to determine the location of the root node in P for each of the two subtrees.
+
+With this information, we can define a recursive helper function (splitTree) that will split the tree into two and then recursively do the same for each subtree.
+```
+![lc-105-solution-explanation](./assets/lc-105-solution-explanation.gif)
+```
+In order to make this work, we just need to pass left and right limits (ileft, iright) defining the subarray of the current subtree in I, as well as the index (pix) of the root node of the subtree in P.
+
+At this point, we could iterate forward through I until we found out the location (imid) of the root node each time, but that would push this solution to a time complexity of O(N^2).
+
+Instead, we can make a prelimanary index map (M) of the values in I, so that we can look up the value for imid in O(1) time in each recursion. This will lower the time complexity to O(N) at the cost of a space complexity of O(N).
+
+In the example in the graphic above, where P = [8,2,7,1,9,3,6] and I = [7,2,1,8,3,9,6], the root would be 8, so we know that imid (its location in I) is 3, and since we still are using the full array, ileft = 0 and iright = I.length-1, or 6. This means that the left subtree is imid - ileft = 3 elements long ([7,2,1] to the left of 8 in I) and the right subtree is iright - imid = 3 elements long ([3,9,6] to the right of 8 in I).
+
+We can apply those dimensions from I to figure out the ranges of those subtrees in P, as well. The left subtree will start right after the root in P (pix + 1), and the right subtree will start once the left subtree ends (pix + 1 + (imid - ileft).
+
+At each recursion, if imid = ileft, then there are no nodes in the left subtree, so we shouldn't call a recursion for that side. The same applies to the right side if imid = iright.
 ```
 ##### Complexity Analysis:
 ```
+Time Complexity: O(N) where N is the length of P and I
+Space Complexity: O(N) for M
 ```
 ```python
+class Solution:
+    def buildTree(self, P: List[int], I: List[int]) -> TreeNode:
+        M = {I[i]: i for i in range(len(I))}
+        return self.splitTree(P, M, 0, 0, len(P)-1)
+    
+    def splitTree(self, P: List[int], M: dict, pix: int, ileft: int, iright: int) -> TreeNode:
+        rval = P[pix]
+        root, imid = TreeNode(rval), M[rval]
+        if imid > ileft:
+            root.left = self.splitTree(P, M, pix+1, ileft, imid-1)
+        if imid < iright:
+            root.right = self.splitTree(P, M, pix+imid-ileft+1, imid+1, iright)
+        return root
 ```
 ```kotlin
+/**
+ * Example:
+ * var ti = TreeNode(5)
+ * var v = ti.`val`
+ * Definition for a binary tree node.
+ * class TreeNode(var `val`: Int) {
+ *     var left: TreeNode? = null
+ *     var right: TreeNode? = null
+ * }
+ */
+class Solution {
+    
+    var ind = 0
+    
+    fun build(pre: IntArray, inOr: IntArray, l: Int, r: Int, map: MutableMap<Int, Int>): TreeNode? {
+        if (ind >= inOr.size) return null
+        val index = map[pre[ind]] as Int
+        if (index == -1 || index > r || index < l) return null
+        
+        val root = TreeNode(pre[ind])
+        ind++
+        root.left = build(pre, inOr, l, index - 1, map)
+        root.right = build(pre, inOr, index + 1, r, map)
+        
+        return root
+    }
+    
+    fun buildTree(preorder: IntArray, inorder: IntArray): TreeNode? {
+        val map = mutableMapOf<Int, Int>()
+        for (i in 0 until inorder.size) {
+            map[inorder[i]] = i
+        }
+        
+        return build(preorder, inorder, 0, inorder.size - 1, map)
+    }
+}
 ```
 
 <br/>
@@ -10889,13 +11524,63 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 ####  [LC-98:Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 ##### Solution Explanation:
 ```
+# InOrder Traversal using Morris Traversal Algorithm
+-----------------------------------------------------
+If we do an inorder traversal of the nodes and find that they are increasing,
+then the tree will be a binary tree (we could prove this by showing that if the
+tree is not a BST then the inorder will not be increasing)
+
+We can do an inorder traversal of the tree in O(1) space with the Morris inorder
+traversal. This implementation of an inorder traversal makes use of the empty
+right pointers at the far right of subtrees to store the recursion stack.
+
 ```
 ##### Complexity Analysis:
 ```
+TC: O(N)
+SC: O(1)
 ```
 ```python
-```
-```kotlin
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def morris(self, node):
+        while node:
+            if not node.left:
+                yield node.val
+                node = node.right
+            else:
+                pre = node.left
+                while pre.right and pre.right is not node:
+                    pre = pre.right
+                
+                if pre.right is node:
+                    yield node.val
+                    node = node.right
+                    pre.right = None
+                else:
+                    pre.right = node
+                    node = node.left
+					
+	def isValidBST(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        values = self.morris(root)
+        prev = next(values)
+		# innocent until proven guilty
+        result = True
+        
+        for value in values:
+			# Make sure that the values are still increasing
+            result = result and prev < value
+            prev = value
+        
+        return result	
 ```
 
 <br/>
@@ -10905,15 +11590,140 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 <br/>
 
 ####  [LC-230:Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+##### Data Structure and Algorithm Learning Points:
+###### How to traverse the tree
+There are two general strategies to traverse a tree:
+* Depth First Search (DFS)
+  In this strategy, we adopt the depth as the priority, so that one would start from a root 
+  and reach all the way down to certain leaf, and then back to root to reach another branch.
+
+  The DFS strategy can further be distinguished as preorder, inorder, and postorder 
+  depending on the relative order among the root node, left node and right node.
+
+* Breadth First Search (BFS)
+
+  We scan through the tree level by level, following the order of height, from top to bottom.
+  The nodes on higher level would be visited before the ones with lower levels.
+
+On the following figure the nodes are numerated in the order you visit them,
+please follow 1-2-3-4-5 to compare different strategies.
+
+![lc-230-kth-smallest-elements-in-a-BST-DS_and_Algo-learning-points-1](./assets/lc-230-kth-smallest-elements-in-a-BST-DS_and_Algo-learning-points-1.png)
+##### Python3 Learning Points
+Introduced with [PEP 255](https://www.python.org/dev/peps/pep-0255), generator functions are a special kind of function  that 
+return a [lazy iterator](https://en.wikipedia.org/wiki/Lazy_evaluation).
+These are objects that you can loop over like a [list](https://realpython.com/python-lists-tuples/).
+However, unlike lists, lazy iterators do not store their contents in memory.
 ##### Solution Explanation:
 ```
+Hint: To solve the problem, one could use the property of BST : inorder traversal of BST is an array sorted in the ascending order.
+-------------------------------
+
+# --------------------------------------
+# Approach 1: lazy in order traversal using an iterator with early stopping - condensed.
+# --------------------------------------
+
+It's a very straightforward approach with O(k) time complexity.
+The idea is to build an inorder traversal of BST which is an array sorted in the ascending order.
+Now the answer is the (k - 1)th element of this array.
+```
+![lc-230-kth-smallest-elements-in-a-BST-image-2](./assets/lc-230-kth-smallest-elements-in-a-BST-image-2.png)
+```
+
+# --------------------------------------
+# Approach 2: morris in order traversal
+# --------------------------------------
+
+
+Reference: https://www.educative.io/edpresso/what-is-morris-traversal
 ```
 ##### Complexity Analysis:
 ```
 ```
 ```python
-```
-```kotlin
+# --------------------------------------
+# Approach 1: lazy in order traversal using an iterator with early stopping - condensed.
+# --------------------------------------
+
+# TC: O(k)
+# SC: O(1)
+#
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        # lazy in order traversal using an iterator with early stopping
+        def traverse(node: TreeNode):
+            if not node:
+                return
+            yield from traverse(node.left)
+            yield node.val
+            yield from traverse(node.right)
+
+        for i, val in enumerate(traverse(root)):
+            if k - i == 1:
+                return val
+
+    # even more condensed
+    def kthSmallest(self, root: TreeNode, k: int) -> int:  # O(k) time and O(1) space
+        # lazy in order traversal using an iterator with early stopping - condensed
+        def traverse(node: TreeNode):
+            yield from (*traverse(node.left), node.val, *traverse(node.right)) if node else ()
+
+        return next(val for i, val in enumerate(traverse(root), 1) if not k - i)
+
+
+# --------------------------------------
+# Approach 1: lazy in order traversal using an iterator with early stopping - condensed.
+# --------------------------------------
+
+# TC: O(k)
+# SC: O(1)
+#
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+
+    def kthSmallest(self, root: TreeNode, k: int) -> int:  # O(k) time and O(1) space
+        # Morris traversal
+        node = root
+        while node:
+            if not node.left:
+                k -= 1
+                if k == 0:
+                    return node.val
+                node = node.right
+            else:
+                rightmost = node
+                node = temp = node.left
+                while temp.right:
+                    temp = temp.right
+                rightmost.left = None
+                temp.right = rightmost
+
+    # even more condensed
+    def kthSmallest(self, root: TreeNode, k: int) -> int:  # O(k) time and O(1) space
+        # Morris traversal - condensed
+        node, val = root, None
+        while k:
+            if not node.left:
+                val, node, k = node.val, node.right, k - 1
+            else:
+                rightmost, node, temp = node, node.left, node.left
+                while temp.right:
+                    temp = temp.right
+                rightmost.left, temp.right = None, rightmost
+        return val
 ```
 
 <br/>
@@ -10941,15 +11751,83 @@ fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
 <br/>
 
 ####  [LC-208:Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
-##### Solution Explanation:
+##### Solution Explanation
 ```
-```
-##### Complexity Analysis:
-```
+If we look at the following trie example, we notice that "APPLE" and "APPLY" are inserted as word (they are prefixes as well). However, "APP" is not a word, it is only a prefix. What diffrentiates "word" and "prefix" is the "is_word" flag in TrieNode class. Therefore, we can implement both search and startsWith methods together using dfs (going deep down until word/prefix is found).
+
+A
+|
+P
+|
+P
+|
+L
+| \
+E  Y
+trie.insert("APPLE")
+trie.insert("APPLY")
+trie.search("APPLE") // returns true
+trie.search("APP") // returns false
+trie.startsWith("APP") // returns true
 ```
 ```python
-```
-```kotlin
+import collections
+
+class TrieNode(object):
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)  # Defines an empty dictionary whose "type" of "values" is TrieNode.
+        self.is_word = False # determines if word is completed (end of word)
+
+class Trie(object):
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        current = self.root
+        for letter in word:
+            current = current.children[letter]
+        current.is_word = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the trie.
+        """
+        node = self.root
+        return self.dfs(word, node)
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        node = self.root
+        return self.dfs(prefix, node, False)
+    
+    def dfs(self, string, node, is_word_given=True):
+		# if is_word_given is True: we are looking for word
+		# if is_word_given is False: we are looking for prefix
+	
+		# the common part of search and startsWith
+        for i, c in enumerate(string):
+            if c not in node.children: return False
+            node = node.children[c]
+
+		# if we run "search", is_word determines the result
+		# if we run "startsWith", we return True as long as "if c not in node.children: return False" does not happen
+		 return node.is_word if is_word_given else True  
+
+if __name__ == "__main__":
+    trie = Trie()
+    trie.insert("APPLE")
+    trie.insert("APPLY")
+    trie.search("APPLE") # returns true
+    trie.search("APP") # returns false
+    trie.startsWith("APP") # returns true
 ```
 
 <br/>
