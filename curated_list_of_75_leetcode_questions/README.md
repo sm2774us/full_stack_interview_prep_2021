@@ -915,8 +915,8 @@ class Solution:
 | 0238  | [Product of Array Except Self](#lc-238product-of-array-except-self) | https://leetcode.com/problems/product-of-array-except-self/                   | _O(n)_ | _O(1)_ | Medium     | LintCode     |                        |
 | 0053  | [Maximum Subarray](#lc-53maximum-subarray) | https://leetcode.com/problems/maximum-subarray/                               | _O(n)_ | _O(1)_ | Medium     |              | `Kadane's Algorithm`   |
 | 0152  | [Maximum Product Subarray](#lc-152maximum-product-subarray) | https://leetcode.com/problems/maximum-product-subarray/                       | _O(n)_ | _O(1)_ | Medium     |              |                        |
-| 0153  | [Find Minimum in Rotated Sorted Array](#lc-153find-minimum-in-rotated-sorted-array) | https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/           | _O(logn)_ | _O(1)_ | Medium  |              |                        |
-| 0033  | [Search in Rotated Sorted Array](#lc-33search-in-rotated-sorted-array) | https://leetcode.com/problems/search-in-rotated-sorted-array/                 | _O(logn)_ | _O(1)_ | Medium  | CTCI         |                        |
+| 0153  | [Find Minimum in Rotated Sorted Array Solution 1](#lc-153find-minimum-in-rotated-sorted-array-solution-1) | https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/           | _O(logn)_ | _O(1)_ | Medium  |              |                        |
+| 0033  | [Search in Rotated Sorted Array Solution 1](#lc-33search-in-rotated-sorted-array-solution-1) | https://leetcode.com/problems/search-in-rotated-sorted-array/                 | _O(logn)_ | _O(1)_ | Medium  | CTCI         |                        |
 | 0015  | [3 Sum](#lc-153-sum) | https://leetcode.com/problems/3sum/)                                          | _O(n^2)_  | _O(1)_ | Medium  |              | Two Pointers           |
 | 0011  | [Container With Most Water](#lc-11container-with-most-water) | https://leetcode.com/problems/container-with-most-water/                      | _O(n)_ | _O(1)_ | Medium     |              |                        |
 
@@ -1782,7 +1782,7 @@ fun main(args: Array<String>) {
 </div>
 <br/>
 
-#### [LC-153:Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+#### [LC-153:Find Minimum in Rotated Sorted Array Solution 1](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 ##### Solution Explanation:
 ```
 Binary Search Algorithm
@@ -2037,7 +2037,7 @@ fun main(args: Array<String>) {
 </div>
 <br/>
 
-#### [LC-33:Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+#### [LC-33:Search in Rotated Sorted Array Solution 1](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 ##### Solution Explanation:
 ```
 Binary Search Algorithm
@@ -6892,7 +6892,7 @@ fun minMeetingRooms(intervals: Array<Interval>): Int {
 | 0206  | [Reverse Linked List](#lc-206reverse-linked-list) | https://leetcode.com/problems/reverse-linked-list/                            | O(n)   | O(1)    | Easy       |              |                        |
 | 0141  | [Linked List Cycle](#lc-141linked-list-cycle) | https://leetcode.com/problems/linked-list-cycle/                              | O(n)   | O(1)    | Easy       |              |                        |
 | 0021  | [Merge Two Sorted Lists](#lc-21merge-two-sorted-lists) | https://leetcode.com/problems/merge-two-sorted-lists/                         | O(n)   | O(1)    | Easy       |              |                        |
-| 0023  | [Merge k Sorted Lists](#lc2-3merge-k-sorted-lists) | https://leetcode.com/problems/merge-k-sorted-lists/                           | O(nlogk) | O(1)  | Hard       |              | Heap, Divide and Conquer |
+| 0023  | [Merge k Sorted Lists Solution 1](#lc23-merge-k-sorted-lists-solution-1) | https://leetcode.com/problems/merge-k-sorted-lists/                           | O(nlogk) | O(1)  | Hard       |              | Heap, Divide and Conquer |
 | 0019  | [Remove Nth Node From End of List](#lc-19remove-nth-node-from-end-of-list) | https://leetcode.com/problems/remove-nth-node-from-end-of-list/               | O(n)   | O(1)    | Medium     |              |                        |
 | 0143  | [Reorder List](#lc-143reorder-list) | https://leetcode.com/problems/reorder-list/                                   | O(n)   | O(1)    | Medium     |              |                        |
 
@@ -7573,7 +7573,7 @@ fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
 </div>
 <br/>
 
-#### [LC-23:Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+#### [LC-23:Merge k Sorted Lists Solution 1](https://leetcode.com/problems/merge-k-sorted-lists/)
 ##### Data Structure Learning Points - What is a Priority Queue ?
 ```
 In computer science, a priority queue is an abstract data type similar to a regular queue or stack data structure in which each element additionally 
@@ -11334,20 +11334,20 @@ class Solution {
 ####  [LC-572:Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
 ##### Solution Explanation:
 ```
-We do this recursively.
+Tree s is traversed in a preorder traversal. 
 
-  * If the tree is empty, we return an empty string.
-  * We record each child as '(' + (string of child) + ')'
-  * If there is a right child but no left child, we still need to record '()' instead of empty string.
+When the generator reaches a node with the same value as the root of t, we start traversing t. 
+
+Now s and t are being traversed in parallel and the nodes are being compared by equalNodes 
+(this function checks if two nodes are equal by comparing their value and left and right children). 
+
+The while loop will stop if the generator for t (tCurr) returns None, or if the generator for s returns None 
+(in which case tCurr will NOT be none and the function will return False).
 ```
 ##### Complexity Analysis:
 ```
-Tree s is traversed in a preorder traversal. 
-When the generator reaches a node with the same value as the root of t, we start traversing t. 
-Now s and t are being traversed in parallel and the nodes are being compared by equalNodes 
-(this function checks if two nodes are equal by comparing their value and left and right children). 
-The while loop will stop if the generator for t (tCurr) returns None, or if the generator for s returns None 
-(in which case tCurr will NOT be none and the function will return False).
+TC: O(n)
+SC: O(n+m)
 ```
 ```python
 class Solution:
@@ -11735,13 +11735,114 @@ class Solution:
 ####  [LC-235:Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 ##### Solution Explanation:
 ```
+Solution-1: Iterate in BST
+==============================
+  * Let large = max(p.val, q.val), small = min(p.val, q.val).
+  * We keep iterate root in our BST:
+    [x] If root.val > large then both node p and q belong to the left subtree, go to left by root = root.left.
+    [x] If root.val < small then both node p and q belong to the right subtree, go to right by root = root.right.
+    [x] Now, small < root.val < large (all node.val are unique), the current root is the LCA between q and p.
 ```
+![lc-235-solution-explanation-image](./assets/lc-235-solution-explanation.PNG)
 ##### Complexity Analysis:
 ```
+Complexity:
+==============================
+Time: O(H), where H is the heigh of Binary Tree.
+Space: O(1)
 ```
 ```python
+# Solution-1: Iterate in BST
+# ==============================
+# TC: O(H)
+# SC: O(1)
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        small = min(p.val, q.val)
+        large = max(p.val, q.val)
+        while root:
+            if root.val > large:  # p, q belong to the left subtree
+                root = root.left
+            elif root.val < small:  # p, q belong to the right subtree
+                root = root.right
+            else:  # Now, small <= root.val <= large -> This is the LCA between p and q
+                return root
+        return None
 ```
-```kotlin
+##### Solution Explanation:
+```
+Solution 2: Find LCA of general Binary Tree
+==============================
+  * There are two other solutions, which take O(N) in Time Complexity to find the LCA between p and q in the general Binary Tree, please check out this article: 
+    236. Lowest Common Ancestor of a Binary Tree => https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/1306476.
+
+
+Article => 236. Lowest Common Ancestor of a Binary Tree => https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/1306476.
+==============================
+Solution 1: Depth First Search
+==============================
+
+  * Please note that p and q always exist in the tree.
+  * When dfs from the root down to its children, if current root == p or root == q then current root is the their LCA.
+  * If left subtree contains one of descendant (p or q) and right subtree contains the remaining descendant (q or p) then the root is their LCA.
+  * If left subtree contains both p and q then return left as their LCA.
+  * If right subtree contains both p and q then return right as their LCA.
+
+For a clear explanation, you can check video title "Lowest Common Ancestor Binary Tree" by "Tushar Roy" on Youtube.
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root == None or root == p or root == q: return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left != None and right != None: return root
+        if left != None: return left
+        return right
+
+Complexity:
+==============================
+
+  * Time: O(N), where N is number of nodes in the Binary Tree.
+  * Space: O(H), where H is the heigh of Binary Tree.
+
+Solution 2: Find Parent and Level of nodes
+==============================
+
+  * Using dfs to find parent and level of nodes.
+  * Make p and q go to the same level that is if level[p] < level[q] then jump q to parents level[q] - level[p] times else jump p.
+  * Jump both p and q util they meet at thier LCA.
+  * Return their LCA.
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        def jumpParent(u, steps):
+            while steps > 0:
+                u = parent[u]
+                steps -= 1
+            return u
+
+        def dfs(u, p, depth):
+            if u == None: return
+            parent[u] = p
+            level[u] = depth
+            dfs(u.left, u, depth + 1)
+            dfs(u.right, u, depth + 1)
+
+        parent = dict()
+        level = dict()
+        dfs(root, None, 0)
+        if level[p] < level[q]:  # Make node p and node q the same level
+            q = jumpParent(q, level[q] - level[p])
+        else:
+            p = jumpParent(p, level[p] - level[q])
+        while q != p:  # Jump util their LCA
+            q = parent[q]
+            p = parent[p]
+        return q
+
+Complexity:
+==============================
+Time & Space: O(N), where N is number of nodes in the Binary Tree.
 ```
 
 <br/>
@@ -11839,6 +11940,16 @@ if __name__ == "__main__":
 ####  [LC-211:Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
 ##### Solution Explanation:
 ```
+In this problem, we need to use Trie data structure. For more details go to the problem 208. Implement Trie (Prefix Tree).
+
+So, what we have here?
+
+TrieNode class with two values: dictionary of children and flag, if this node is end of some word.
+Now, we need to implement addWord(self, word) function: we add symbol by symbol, and go deepere and deeper in our Trie. In the end we note our node as end node.
+Now, about search(self, word) function. Here we use dfs(node, i) with backtracking, because we can have symbol . in our word (here node is link to Trie node and i is index of letter in word). So we need to check all options: we go to all possible children and call dfs recursively. If we found not ., but just some letter, we check if we have this letter as children, and if we have, we go deeper. If we are out of letters, that is i == len(word), we return True if current end_node is equal to 1 and false in opposite case. Finally, we return False if we can not go deeper, but we still have letters.
+Now, we just return dfs(self.root, 0).
+Complexity: Easy part is space complexity, it is O(M), where M is sum of lengths of all words in our Trie. This is upper bound: in practice it will be less than M and it depends, how much words are intersected. The worst time complexity is also O(M), potentially we can visit all our Trie, if we have pattern like ...... For words without ., time complexity will be O(h), where h is height of Trie. For words with several letters and several ., we have something in the middle.
+
 ```
 ##### Complexity Analysis:
 ```
@@ -11857,13 +11968,112 @@ if __name__ == "__main__":
 ####  [LC-212:Word Search II](https://leetcode.com/problems/word-search-ii/)
 ##### Solution Explanation:
 ```
+In this problem, we need to use Trie data structure. For more details go to the problem 208. Implement Trie (Prefix Tree).
+
+So, what we have here?
+
+TrieNode class with two values: dictionary of children and flag, if this node is end of some word.
+Now, we need to implement addWord(self, word) function: we add symbol by symbol, and go deepere and deeper in our Trie. In the end we note our node as end node.
+Now, about search(self, word) function. Here we use dfs(node, i) with backtracking, because we can have symbol . in our word (here node is link to Trie node and i is index of letter in word). So we need to check all options: we go to all possible children and call dfs recursively. If we found not ., but just some letter, we check if we have this letter as children, and if we have, we go deeper. If we are out of letters, that is i == len(word), we return True if current end_node is equal to 1 and false in opposite case. Finally, we return False if we can not go deeper, but we still have letters.
+Now, we just return dfs(self.root, 0).
 ```
 ##### Complexity Analysis:
 ```
+Complexity: Easy part is space complexity, it is O(M), where M is sum of lengths of all words in our Trie. 
+This is upper bound: in practice it will be less than M and it depends, how much words are intersected. 
+
+The worst time complexity is also O(M), potentially we can visit all our Trie, if we have pattern like ...... 
+For words without . (i.e., the period sign), time complexity will be O(h), where h is height of Trie. 
+For words with several letters and several . (i.e., period signs), 
+we have something in the middle.
+
+SC: O(M)
+TC: O(M)
+where, M = sum of length of all words in our Trie.
 ```
 ```python
+# SC: O(M)
+# TC: O(M)
+# where, M = sum of length of all words in our Trie.
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.end_node = 0
+        
+class WordDictionary:
+    def __init__(self):
+        self.root = TrieNode()      
+
+    def addWord(self, word: str) -> None:
+        root = self.root
+        for symbol in word:
+            root = root.children.setdefault(symbol, TrieNode())
+        root.end_node = 1
+        
+    def search(self, word: str) -> bool:
+        def dfs(node, i):
+            if i == len(word): return node.end_node
+               
+            if word[i] == ".":
+                for child in node.children:
+                    if dfs(node.children[child], i+1): return True
+                    
+            if word[i] in node.children:
+                return dfs(node.children[word[i]], i+1)
+            
+            return False
+    
+        return dfs(self.root, 0)
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
 ```
 ```kotlin
+    /** Initialize your data structure here. */
+    class TrieNode() {
+        val children = Array<TrieNode?>(26) { null }
+        var isWord = false
+    }
+
+    val trieTree = TrieNode()
+
+    /** Adds a word into the data structure. */
+    fun addWord(word: String) {
+        var p = trieTree
+
+        for (w in word) {
+            val i = w - 'a'
+            if (p.children[i] == null) p.children[i] = TrieNode()
+            p = p.children[i]!!
+        }
+
+        p.isWord = true
+    }
+
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    fun search(word: String): Boolean {
+        fun dfs(p: TrieNode?, start: Int): Boolean {
+            if (p == null) return false
+
+            if (start == word.length) return p.isWord
+            
+            if (word[start] == '.') {
+                for (i in 0..25) {
+                    if (dfs(p.children[i], start + 1)) {
+                        return true
+                    }
+                }
+                return false
+            } else {
+                val i = word[start] - 'a'
+                return dfs(p.children[i], start + 1)
+            }
+        }
+        
+        return dfs(trieTree, 0)
+    }
 ```
 
 <br/>
@@ -11876,20 +12086,102 @@ if __name__ == "__main__":
 ## Heap/Priority Queue
 | #     | Title	                                         | url                                                                           | Time   | Space   | Difficulty | Tag	        | Note                            |
 | ----- | ---------------------------------------------- | ----------------------------------------------------------------------------- | ------ | ------- | ---------- | ------------ | ------------------------------- |
-| 0023  | [Merge k Sorted Lists](#lc23-merge-k-sorted-lists) | https://leetcode.com/problems/merge-k-sorted-lists/                       | _O(nlogk)_ | _O(1)_  | Hard       |              | Heap, Divide and Conquer        |
+| 0023  | [Merge k Sorted Lists Solution 2](#lc23-merge-k-sorted-lists-solution-2) | https://leetcode.com/problems/merge-k-sorted-lists/                       | _O(nlogk)_ | _O(1)_  | Hard       |              | Heap, Divide and Conquer        |
 | 0347  | [Top K Frequent Elements](#lc-347top-k-frequent-elements) | https://leetcode.com/problems/top-k-frequent-elements/             | _O(n)_   | _O(n)_    | Medium     |              | Quick Select, Heap, Bucket Sort |
 | 0295  | [Find Median from Data Stream](#lc-295find-median-from-data-stream) | https://leetcode.com/problems/find-median-from-data-stream/ | _O(nlogn)_ | _O(n)_  | Hard       | EPI, LintCode | BST, Heap                      |
 
-####  [LC-23:Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-##### Solution Explanation:
+####  [LC-23:Merge k Sorted Lists Solution 1](https://leetcode.com/problems/merge-k-sorted-lists/)
+##### Data Structure Primer -- Difference between **heap** and **priority queue**
+```
+I have seen lots of solutions confuse priority queue with heap. I find a good link and list the talk below.
+
+Concept:
+
+1. Heap is a kind of data structure. It is a name for a particular way of storing data that makes certain operations very efficient. We can use a tree or array to describe it.
+
+   18
+  /	\
+ 10	 16
+/ \   / \
+9  5  8  12
+
+18, 10, 16, 9, 5, 8, 12
+
+2.Priority queue is an abstract datatype. It is a shorthand way of describing a particular interface and behavior, and says nothing about the underlying implementation.
+
+A heap is a very good data structure to implement a priority queue. The operations which are made efficient by the heap data structure are the operations that the priority queue interface needs.
 ```
 ```
-##### Complexity Analysis:
-```
-```
-```python
-```
-```kotlin
+Algorithm:
+Collect numbers from all lists and sort them. Then create a brand new linked list from the sorted numbers.
+
+Implementation (99.47%):
+
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        values = []
+        for node in lists:
+            while node:
+                values.append(node.val)
+                node = node.next 
+        head = node = ListNode(None) #dummy head 
+        for x in sorted(values):
+            node.next = ListNode(x)
+            node = node.next 
+        return head.next
+
+Analysis:
+Time complexity O(Nklog(Nk), where k is number of lists and N is the length of each list;
+Space complexity O(Nk)
+
+Algorithm:
+Loop through all k lists simultaneously and only advance the one with least value. The min node is tracked in a heap.
+
+Implementation (104ms, 81.11%):
+
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        pq = [(x.val, i, x) for i, x in enumerate(lists) if x]
+        heapify(pq)
+        dummy = node = ListNode()
+        while pq: 
+            _, i, x = heappop(pq)
+            node.next = node = x
+            if x.next: heappush(pq, (x.next.val, i, x.next))
+        return dummy.next 
+Analysis:
+Time complexity O(Nklogk) where there are k lists and each has N nodes
+Space complexity O(Nk)
+
+Algorithm:
+Divide the k lists into groups and progressively merge adjacent pairs into a bigger list.
+
+Implementation (104ms, 81.11%):
+
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        """divide & conquer"""
+        if not lists: return None #edge case 
+        
+        def merge2Lists(l1, l2):
+            head = node = ListNode(None) #dummy head 
+            while l1 and l2: 
+                if l1.val > l2.val: l1, l2 = l2, l1
+                node.next = l1
+                node = node.next
+                l1 = l1.next 
+            node.next = l1 if l1 else l2
+            return head.next 
+        
+        d = 1 #step 
+        while d < len(lists): 
+            for i in range(0, len(lists)-d, 2*d): 
+                lists[i] = merge2Lists(lists[i], lists[i+d])
+            d *= 2
+        return lists[0]
+Analysis:
+Time complexity O(Nklogk) where there are k lists and each has N nodes
+Space complexity O(Nk)
 ```
 
 <br/>
@@ -11901,31 +12193,196 @@ if __name__ == "__main__":
 ####  [LC-347:Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
 ##### Solution Explanation:
 ```
+=================================================================================================================================================================
+Solution Approach:
+=================================================================================================================================================================
+Make Heap
+max_heap = [(-val, key) for key, val in dic.items()]
+Why -val?
+Inside Python is the defined Min-heap, the method of finding Max-heap in StackOverFlow, which is more in line with my lazy style: Link,set Value directly to -Value.heapify
+
+Find K
+Just put the biggest few pops out of Heap, remember that the pop out here is, nokeyval
+
+for i in range(k):
+    res.append(heapq.heappop(max_heap)[1])
+return res   
 ```
 ##### Complexity Analysis:
 ```
+TC: O(nlogk)
+SC: O(n + k)
 ```
 ```python
+import heapq
+from collections import Counter
+from typing import List
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        res = []
+		# Build frequency table
+        dic = Counter(nums)
+		# Construct max heap
+        max_heap = [(-val, key) for key, val in dic.items()]
+        heapq.heapify(max_heap)
+		# Fetch the top K and append to the result list by doing heappop
+        for i in range(k):
+            res.append(heapq.heappop(max_heap)[1])
+        return res 
 ```
 ```kotlin
-```
+import java.util.Comparator
+import java.util.HashMap
+import java.util.PriorityQueue
 
-<br/>
-<div align="right">
-    <b><a href="#algorithms">⬆️ Back to Top</a></b>
-</div>
-<br/>
+// Kotlin minHeap
+
+fun topKFrequent(nums: IntArray, k: Int): IntArray {
+    val map = HashMap<Int, Int>()
+    val pq = PriorityQueue<Int>(Comparator { a, b ->
+                        map[a]!!.compareTo(map[b]!!) })
+
+    for (n in nums)
+        map[n] = (map[n] ?: 0) + 1
+
+    for (m in map) {
+        pq.offer(m.key)
+        if (pq.size > k)
+            pq.poll()
+    }
+
+    return pq.toIntArray()
+}
+
+// Kotlin quick select
+
+fun topKFrequent(nums: IntArray, k: Int): IntArray {
+    val freq = HashMap<Int, Int>()
+    for (n in nums) freq[n] = freq.getOrDefault(n, 0) + 1
+    val arr = freq.keys.toIntArray()
+
+    fun partition(start: Int, end: Int): Int {
+        var l = start; var r = end
+        var pivot = start
+        while (l <= r) {
+            while (l <= r && freq[arr[l]]!! <= freq[arr[pivot]]!!) l++
+            while (l <= r && freq[arr[r]]!! > freq[arr[pivot]]!!) r--
+            if (l < r) arr[l] = arr[r].also { arr[r] = arr[l] }
+        }
+        arr[r] = arr[pivot].also { arr[pivot] = arr[r] }
+        return r
+    }
+
+    fun quickSelect(start: Int, end: Int, k: Int) {
+        if (start >= end) return
+        val pi = partition(start, end)
+        if (pi < k) quickSelect(pi + 1, end, k)
+        else if (pi > k) quickSelect(start, pi - 1, k)
+    }
+
+    quickSelect(0, arr.size - 1, arr.size - k)
+    return arr.sliceArray(arr.size - k..arr.size - 1)
+}
+```
 
 ####  [LC-295:Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) 
+##### Problem Description:
+```
+The median is the middle value in an ordered integer list. If the size of the list is even, 
+there is no middle value and the median is the mean of the two middle values.
+
+For example, for arr = [2,3,4], the median is 3.
+For example, for arr = [2,3], the median is (2 + 3) / 2 = 2.5.
+Implement the MedianFinder class:
+
+MedianFinder() initializes the MedianFinder object.
+void addNum(int num) adds the integer num from the data stream to the data structure.
+double findMedian() returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
+```
 ##### Solution Explanation:
 ```
+=================================================================================================================================================================
+Solution Approach:
+=================================================================================================================================================================
+The invariant of the algorithm is two heaps, small and large, each represent half of the current list.
+The length of smaller half is kept to be n / 2 at all time and the length of the larger half is either n / 2 or n / 2 + 1 depend on n's parity.
+
+This way we only need to peek the two heaps' top number to calculate median.
+
+Any time before we add a new number, there are two scenarios, (total n numbers, k = n / 2):
+
+(1) length of (small, large) == (k, k)
+(2) length of (small, large) == (k, k + 1)
+After adding the number, total (n + 1) numbers, they will become:
+
+(1) length of (small, large) == (k, k + 1)
+(2) length of (small, large) == (k + 1, k + 1)
+Here we take the first scenario for example, we know the large will gain one more item and small will remain the same size,
+but we cannot just push the item into large. 
+What we should do is we push the new number into small and pop the maximum item from small then push it into large
+(all the pop and push here are heappop and heappush). By doing this kind of operations for the two scenarios we can keep our invariant.
+
+Therefore to add a number, we have 3 O(log n) heap operations. Luckily the heapq provided us a function "heappushpop" 
+which saves some time by combine two into one. The document says:
+
+Push item on the heap, then pop and return the smallest item from the heap. 
+The combined action runs more efficiently than heappush() followed by a separate call to heappop().
+
+Alltogether, the add operation is O(logn), The findMedian operation is O(1).
+
+Note that the heapq in python is a min heap, thus we need to invert the values in the smaller half to mimic a "max heap".
+
+A further observation is that the two scenarios take turns when adding numbers, thus it is possible to combine the two into one.
 ```
 ##### Complexity Analysis:
 ```
+TC: O(log(n))
+SC: O(1)
 ```
 ```python
+from heapq import *
+
+class MedianFinder:
+    def __init__(self):
+        self.small = []  # the smaller half of the list, max heap (invert min-heap)
+        self.large = []  # the larger half of the list, min heap
+
+    def addNum(self, num):
+        if len(self.small) == len(self.large):
+            heappush(self.large, -heappushpop(self.small, -num))
+        else:
+            heappush(self.small, -heappushpop(self.large, num))
+
+    def findMedian(self):
+        if len(self.small) == len(self.large):
+            return float(self.large[0] - self.small[0]) / 2.0
+        else:
+            return float(self.large[0])
 ```
 ```kotlin
+import java.util.Comparator
+import java.util.PriorityQueue
+
+class MedianFinder() {
+
+    /** initialize your data structure here. */
+    val smaller = PriorityQueue<Int>(Comparator { a, b -> b - a })
+    val larger  = PriorityQueue<Int>()
+
+    fun addNum(num: Int) {
+        if (smaller.isEmpty() || num <= smaller.peek()) smaller.offer(num)
+        else larger.offer(num)
+        if (smaller.size > larger.size + 1) larger.offer(smaller.poll())
+        else if (larger.size > smaller.size) smaller.offer(larger.poll())
+    }
+
+    fun findMedian(): Double {
+        val even = (larger.size + smaller.size) % 2 == 0
+        return if (even) (larger.peek() + smaller.peek()) / 2.0
+               else smaller.peek().toDouble()
+    }
+}
 ```
 
 <br/>
@@ -11938,18 +12395,81 @@ if __name__ == "__main__":
 | #     | Title	                                         | url                                                                           | Time   | Space   | Difficulty | Tag	        | Note                  |
 | ----- | ---------------------------------------------- | ----------------------------------------------------------------------------- | ------ | ------- | ---------- | ------------ | --------------------- |
 | 0035  | [Search Insert Position](#lc35-search-insert-position) | https://leetcode.com/problems/search-insert-position/                 | _O(logn)_ | _O(1)_   | Medium     |              |                       |
-| 0153  | [Find Minimum in Rotated Sorted Array](#lc153-find-minimum-in-rotated-sorted-array) | https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/ | _O(logn)_ | _O(1)_   | Medium     |              |                       |
-| 0033  | [Search in Rotated Sorted Array](#lc33-search-in-rotated-sorted-array) | https://leetcode.com/problems/search-in-rotated-sorted-array/ | _O(logn)_ | _O(1)_   | Medium     | CTCI         |                       |
-| 1011  | [Capacity To Ship Packages Within D Days](#lc1011-capacity-to-ship-packages-within-d-days) | https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/ | _O(nlogr)_ | _O(1)_ | Medium     |              |                       |
+| 0153  | [Find Minimum in Rotated Sorted Array Solution 2](#lc153-find-minimum-in-rotated-sorted-array-solution-2) | https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/ | _O(logn)_ | _O(1)_   | Medium     |              |                       |
+| 0033  | [Search in Rotated Sorted Array Solution 2](#lc33-search-in-rotated-sorted-array-solution-2) | https://leetcode.com/problems/search-in-rotated-sorted-array/ | _O(logn)_ | _O(1)_   | Medium     | CTCI         |                       |
+| 1011  | [Capacity To Ship Packages Within D Days](#lc1011-capacity-to-ship-packages-within-d-days) | https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/ | _O(nlogn)_ | _O(1)_ | Medium     |              |                       |
 
 ####  [LC-35:Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+##### Binary Search Primer:
+```
+Before We Begin
+Have you ever wondered when to use while(lo<hi) while(lo <= hi) ?
+Have you ever wondered when to use left = mid + 1 left = mid right = mid + 1 right = mid ?
+Have you ever wondered why your binary search algorithm stuck in an infinity loop?
+Well, at least I did all that, and if you are like me this article is for you.
+
+*I'm not writing this article to have people "remember" the code, instead, I want use this article to introduce people a gateway of solving binary search problems.
+*Some of the content are sourced from here(Chinese). Much thanks to the original author.
+
+The Idea
+Set lo and hi boundary, compute mid index
+Compare target with mid , adjust lo & hi accordingly
+```
+![lc-35-solution-explanation](./images/lc-35-solution-explanation.gif)
 ##### Solution Explanation:
 ```
+This is a very simple binary search. (Surprisingly, all the binary search solutions I found here are much longer than mine.)
+The first solution only works when there is no duplicate. In this case, we return mid whenever nums[mid]==target. 
+The second solution deals with the case where duplicates are allowed.
+
+Note that it would exit the while loop ONLY when target is not in nums. 
+When this happens, the if and else statement in the last loop will also adjust l so we simply return l at the end.
 ```
 ##### Complexity Analysis:
 ```
+SC: 
+TC: O(log(n))
 ```
 ```python
+# For input without duplicates:
+def searchInsert(self, nums, target):
+    l , r = 0, len(nums)-1
+    while l <= r:
+        mid=(l+r)//2
+        if nums[mid]== target:
+            return mid
+        if nums[mid] < target:
+            l = mid+1
+        else:
+            r = mid-1
+    return l
+
+# For input with duplicates, we only need a little bit modification:
+def searchInsert(self, nums: List[int], target: int) -> int:
+    l , r = 0, len(nums)-1
+    while l <= r:
+        mid=(l+r)//2
+		# or,
+		# mid = l+(r-l)//2
+        if nums[mid] < target:
+            l = mid+1
+        else:
+            if nums[mid]== target and nums[mid-1]!=target:
+                return mid
+            else:
+                r = mid-1
+    return l
+	
+# For input with duplicates (More Concise Solution)
+def searchInsert(self, nums: List[int], target: int) -> int:
+	l, r = 0, len(nums)-1
+	while l <= r:
+		mid = l+(r-l)//2
+		# or,
+		# mid = (l+r)//2
+		if nums[mid]>=target: r=mid-1
+		else: l=mid+1
+	return l
 ```
 ```kotlin
 ```
@@ -11960,16 +12480,253 @@ if __name__ == "__main__":
 </div>
 <br/>
 
-####  [LC-153:Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+####  [LC-153:Find Minimum in Rotated Sorted Array Solution 2](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 ##### Solution Explanation:
 ```
+Binary Search Algorithm
+=================================================================================================================================================================
+
+Algorithm
+
+1. Find the mid element of the array.
+
+2. If mid element > first element of array this means that we need to look for the inflection point on the right of mid.
+
+3. If mid element < first element of array this that we need to look for the inflection point on the left of mid.
+
+          6 > 4
+     +-------------+
+     |             |
+    \|/            |
+ +---*--+------+---*--+------+------+------+
+ |   4  |   5  |   6  |   7  |   2  |   3  |
+ +------+------+------+------+------+------+
+   Left           Mid                 Right
+                     ---------------------->
+
+In the above example mid element 6 is greater than first element 4. Hence we continue our search for the inflection point to the right of mid.
+
+4 . We stop our search when we find the inflection point, when either of the two conditions is satisfied:
+
+nums[mid] > nums[mid + 1] Hence, mid+1 is the smallest.
+
+nums[mid - 1] > nums[mid] Hence, mid is the smallest.
+
+                          +------+
+                          |      |
+                         \|/     |
+ +------+------+------+---*--+---*--+------+
+ |   4  |   5  |   6  |   7  |   2  |   3  |
+ +------+------+------+------+------+------+
+                        Left    Mid   Right
+
+In the above example. With the marked left and right pointers. 
+The mid element is 2. The element just before 2 is 7 and 7>2 i.e. nums[mid - 1] > nums[mid]. 
+Thus we have found the point of inflection and 2 is the smallest element.
+
+Detailed Algorithm
+-----------------------
+
+1) set left and right bounds
+2) left and right both converge to the minimum index; DO NOT use left <= right because that would loop forever
+  2.1) find the middle value between the left and right bounds (their average);
+       can equivalently do: mid = left + (right - left) // 2,
+       if we are concerned left + right would cause overflow (which would occur
+       if we are searching a massive array using a language like Java or C that has
+       fixed size integer types)
+  2.2) the main idea for our checks is to converge the left and right bounds on the start
+       of the pivot, and never disqualify the index for a possible minimum value.
+  2.3) in normal binary search, we have a target to match exactly,
+       and would have a specific branch for if nums[mid] == target.
+       we do not have a specific target here, so we just have simple if/else.
+  2.4) if nums[mid] > nums[right]
+    2.4.1) we KNOW the pivot must be to the right of the middle:
+           if nums[mid] > nums[right], we KNOW that the
+           pivot/minimum value must have occurred somewhere to the right
+           of mid, which is why the values wrapped around and became smaller.
+    2.4.2) example:  [3,4,5,6,7,8,9,1,2]
+           in the first iteration, when we start with mid index = 4, right index = 9.
+           if nums[mid] > nums[right], we know that at some point to the right of mid,
+           the pivot must have occurred, which is why the values wrapped around
+           so that nums[right] is less then nums[mid]
+    2.4.3) we know that the number at mid is greater than at least
+           one number to the right, so we can use mid + 1 and
+           never consider mid again; we know there is at least
+           one value smaller than it on the right
+  2.5) if nums[mid] <= nums[right]
+    2.5.1) here, nums[mid] <= nums[right]:
+           we KNOW the pivot must be at mid or to the left of mid:
+           if nums[mid] <= nums[right], we KNOW that the pivot was not encountered
+           to the right of middle, because that means the values would wrap around
+           and become smaller (which is caught in the above if statement).
+           this leaves the possible pivot point to be at index <= mid.
+
+    2.5.2) example: [8,9,1,2,3,4,5,6,7]
+           in the first iteration, when we start with mid index = 4, right index = 9.
+           if nums[mid] <= nums[right], we know the numbers continued increasing to
+           the right of mid, so they never reached the pivot and wrapped around.
+           therefore, we know the pivot must be at index <= mid.
+
+    2.5.3) we know that nums[mid] <= nums[right].
+           therefore, we know it is possible for the mid index to store a smaller
+           value than at least one other index in the list (at right), so we do
+           not discard it by doing right = mid - 1. it still might have the minimum value.
+
+3) at this point, left and right converge to a single index (for minimum value) since
+   our if/else forces the bounds of left/right to shrink each iteration:
+
+4) when left bound increases, it does not disqualify a value
+   that could be smaller than something else (we know nums[mid] > nums[right],
+   so nums[right] wins and we ignore mid and everything to the left of mid).
+
+5) when right bound decreases, it also does not disqualify a
+   value that could be smaller than something else (we know nums[mid] <= nums[right],
+   so nums[mid] wins and we keep it for now).
+
+6) so we shrink the left/right bounds to one value,
+   without ever disqualifying a possible minimum.
 ```
 ##### Complexity Analysis:
 ```
+Time  : O(log(N))
+========================
+Same as Binary Search O(log(N))
+
+Space : O(1)
+========================
 ```
 ```python
+from typing import List
+
+def findMin(nums: List[int]) -> int:
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    # set left and right bounds
+    left, right = 0, len(nums)-1
+
+    # left and right both converge to the minimum index;
+    # DO NOT use left <= right because that would loop forever
+    while left < right:
+        # find the middle value between the left and right bounds (their average);
+        # can equivalently do: mid = left + (right - left) // 2,
+        # if we are concerned left + right would cause overflow (which would occur
+        # if we are searching a massive array using a language like Java or C that has
+        # fixed size integer types)
+        #mid = (left + right) // 2
+        mid = left + (right - left) // 2
+            
+        # the main idea for our checks is to converge the left and right bounds on the left
+        # of the pivot, and never disqualify the index for a possible minimum value.
+
+        # in normal binary search, we have a target to match exactly,
+        # and would have a specific branch for if nums[mid] == target.
+        # we do not have a specific target here, so we just have simple if/else.
+            
+        if nums[mid] > nums[right]:
+            # we KNOW the pivot must be to the right of the middle:
+            # if nums[mid] > nums[right], we KNOW that the
+            # pivot/minimum value must have occurred somewhere to the right
+            # of mid, which is why the values wrapped around and became smaller.
+
+            # example:  [3,4,5,6,7,8,9,1,2] 
+            # in the first iteration, when we left with mid index = 4, right index = 9.
+            # if nums[mid] > nums[right], we know that at some point to the right of mid,
+            # the pivot must have occurred, which is why the values wrapped around
+            # so that nums[right] is less then nums[mid]
+
+            # we know that the number at mid is greater than at least
+            # one number to the right, so we can use mid + 1 and
+            # never consider mid again; we know there is at least
+            # one value smaller than it on the right
+            left = mid + 1
+        else:
+            # here, nums[mid] <= nums[right]:
+            # we KNOW the pivot must be at mid or to the left of mid:
+            # if nums[mid] <= nums[right], we KNOW that the pivot was not encountered
+            # to the right of middle, because that means the values would wrap around
+            # and become smaller (which is caught in the above if statement).
+            # this leaves the possible pivot point to be at index <= mid.
+                
+            # example: [8,9,1,2,3,4,5,6,7]
+            # in the first iteration, when we left with mid index = 4, right index = 9.
+            # if nums[mid] <= nums[right], we know the numbers continued increasing to
+            # the right of mid, so they never reached the pivot and wrapped around.
+            # therefore, we know the pivot must be at index <= mid.
+
+            # we know that nums[mid] <= nums[right].
+            # therefore, we know it is possible for the mid index to store a smaller
+            # value than at least one other index in the list (at right), so we do
+            # not discard it by doing right = mid - 1. it still might have the minimum value.
+            right = mid
+
+    # at this point, left and right converge to a single index (for minimum value) since
+    # our if/else forces the bounds of left/right to shrink each iteration:
+
+    # when left bound increases, it does not disqualify a value
+    # that could be smaller than something else (we know nums[mid] > nums[right],
+    # so nums[right] wins and we ignore mid and everything to the left of mid).
+
+    # when right bound decreases, it also does not disqualify a
+    # value that could be smaller than something else (we know nums[mid] <= nums[right],
+    # so nums[mid] wins and we keep it for now).
+
+    # so we shrink the left/right bounds to one value,
+    # without ever disqualifying a possible minimum
+    return nums[left]
+
+if __name__ == "__main__":
+    #Input: nums = [3,4,5,1,2]
+    #Output: 1
+    #Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+    nums = [3,4,5,1,2]
+    print(findMin(nums))
+
+### Uncommented concise solution
+from typing import List
+
+def findMin(nums: List[int]) -> int:
+    left, right = 0, len(nums)-1
+    while left < right:
+        mid = left + (right - left) // 2            
+        if nums[mid] > nums[right]:
+            left = mid + 1
+        else:
+            right = mid
+
+    return nums[left]
+
+if __name__ == "__main__":
+    #Input: nums = [3,4,5,1,2]
+    #Output: 1
+    #Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+    nums = [3,4,5,1,2]
+    print(findMin(nums))
 ```
 ```kotlin
+fun findMin(nums: IntArray): Int {
+    var left = 0
+    var right = nums.size - 1
+    while (left < right) {
+        //var mid = (right + left) / 2
+        var mid = left + (right - left) / 2
+        if (nums[mid] >= nums[left] && nums[mid] > nums[right]) {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+    }
+    return nums[left]
+}
+
+fun main(args: Array<String>) {
+    //Input: nums = [3,4,5,1,2]
+    //Output: 1
+    //Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+    val nums = intArrayOf(3,4,5,1,2)
+    println(findMin(nums))
+}
 ```
 
 <br/>
@@ -11978,16 +12735,98 @@ if __name__ == "__main__":
 </div>
 <br/>
 
-####  [LC-33:Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | 
+####  [LC-33:Search in Rotated Sorted Array Solution 2](https://leetcode.com/problems/search-in-rotated-sorted-array/) | 
 ##### Solution Explanation:
 ```
+Binary Search Algorithm
+=================================================================================================================================================================
+Idea:
+--------------------------
+We have an ascending array, which is rotated at some pivot.
+Let's call the rotation the inflection point. (IP)
+One characteristic the inflection point holds is: arr[IP] > arr[IP + 1] and arr[IP] > arr[IP - 1]
+So if we had an array like: [7, 8, 9, 0, 1, 2, 3, 4] the inflection point, IP would be the number 9.
+
+One thing we can see is that values until the IP are ascending. And values from IP + 1 until end are also ascending (binary search, wink, wink).
+Also the values from [0, IP] are always bigger than [IP + 1, n].
+
+Intuition:
+--------------------------
+We can perform a Binary Search.
+If A[mid] is bigger than A[left] we know the inflection point will be to the right of us, meaning values from a[left]...a[mid] are ascending.
+
+So if target is between that range we just cut our search space to the left.
+Otherwise go right.
+
+The other condition is that A[mid] is not bigger than A[left] meaning a[mid]...a[right] is ascending.
+In the same manner we can check if target is in that range and cut the search space correspondingly.
 ```
 ##### Complexity Analysis:
 ```
+Time Complexity : O(log(N))
+========================
+Same as Binary Search O(log(N))
+
+Space Complexity : O(1)
+========================
 ```
 ```python
+from typing import List
+
+def search(nums: List[int], target: int) -> int:
+    n = len(nums)
+    left, right = 0, n - 1
+    if n == 0: return -1
+        
+    while left <= right:
+        mid = left + (right - left) // 2
+        if nums[mid] == target: return mid
+            
+        # inflection point to the right. Left is strictly increasing
+        if nums[mid] >= nums[left]:
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+                    
+        # inflection point to the left of me. Right is strictly increasing
+        else:
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+            
+        return -1
+
+if __name__ == "__main__":
+    #Input: nums = [4,5,6,7,0,1,2], target = 0
+    #Output: 4
+    nums = [4,5,6,7,0,1,2]
+    target = 0
+    print(search(nums, target))
 ```
 ```kotlin
+fun search(nums: IntArray, target: Int): Int {
+    var left = 0
+    var right = nums.size - 1
+    while (left <= right) {
+        val mid = left + (right - left) / 2
+        when {
+            nums[mid] == target -> return mid
+            nums[left] <= nums[mid] -> if (target in nums[left] .. nums[mid]) right = mid - 1 else left = mid + 1
+            nums[mid] <= nums[right] -> if (target in nums[mid] .. nums[right]) left = mid + 1 else right = mid - 1
+        }
+    }
+    return -1
+}
+
+fun main(args: Array<String>) {
+    //Input: nums = [4,5,6,7,0,1,2], target = 0
+    //Output: 4
+    val nums = intArrayOf(4,5,6,7,0,1,2)
+    val target = 0
+    println(search(nums, target))
+}
 ```
 
 <br/>
@@ -11999,11 +12838,57 @@ if __name__ == "__main__":
 ####  [LC-1011:Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
 ##### Solution Explanation:
 ```
+The intuition for this problem, stems from the fact that
+
+a) Without considering the limiting limiting D days, if we are to solve, the answer is simply max(a)
+b) If max(a) is the answer, we can still spend O(n) time and greedily find out how many partitions it will result in.
+
+[1,2,3,4,5,6,7,8,9,10], D = 5
+
+For this example, assuming the answer is max(a) = 10, disregarding D,
+we can get the following number of days:
+[1,2,3,4] [5] [6] [7] [8] [9] [10]
+
+So by minimizing the cacpacity shipped on a day, we end up with 7 days, by greedily chosing the packages for a day limited by 10.
+
+To get to exactly D days and minimize the max sum of any partition, we do binary search in the sum space which is bounded by [max(a), sum(a)]
+
+Binary Search Update:
+One thing to note in Binary Search for this problem, is even if we end up finding a weight, that gets us to days partitions, 
+we still want to continue the space on the minimum side, because, there could be a better minimum sum that still passes <= D paritions.
+
+In the code, this is achieved by:
+
+if res <= D:
+     hi = mid
+With this check in place, when we narrow down on one element, lo == hi, we will end up with exactly the minimum sum that leads to <= D partitions.
 ```
 ##### Complexity Analysis:
 ```
+TIME COMPLEXITY  : O(NlogN)
+SPACE COMPLEXITY : O(1)
+
+where, N = length of weights array
 ```
 ```python
+from typing import List
+class Solution:
+    def shipWithinDays(self, weights: List[int], D: int) -> int:
+        lo, hi = max(weights), sum(weights)   
+        while lo < hi:
+            mid = (lo + hi) // 2
+            tot, res = 0, 1
+            for wt in weights:
+                if tot + wt > mid:
+                    res += 1
+                    tot = wt
+                else:
+                    tot += wt
+            if res <= D:
+                hi = mid
+            else:
+                lo = mid+1
+        return lo	
 ```
 ```kotlin
 ```
@@ -12024,11 +12909,91 @@ if __name__ == "__main__":
 ####  [LC-50:Pow(x, n)](https://leetcode.com/problems/powx-n/)
 ##### Solution Explanation:
 ```
-```
-##### Complexity Analysis:
-```
-```
-```python
+Solution 1: Jump double step
+============================================================
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0: return 1
+        if n < 0:
+            x = 1 / x
+            n = -n
+        step = 1
+        ans = x
+        while step * 2 <= n:
+            ans *= ans
+            step *= 2
+        return ans * self.myPow(x, n - step)
+		
+============================================================
+Complexity:
+============================================================
+Time: O(logN)
+Space: O(1)
+
+============================================================
+Solution 2: Half pow
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0: return 1
+        if n < 0: return self.myPow(1/x, -n)
+        half = self.myPow(x, n//2)
+        if n % 2 == 0:
+            return half * half
+        return half * half * x
+
+============================================================
+Complexity:
+============================================================
+Time: O(logN)
+Space: O(1)
+============================================================
+
+Follow-up Question: Find nth root of a number
+Problem statement:
+
+Many times, we need to re-implement basic functions without using any standard library functions already implemented. For example, when designing a chip that requires very little memory space.
+
+In this question we’ll implement a function root that calculates the n’th root of a number. The function takes a nonnegative number x and a positive integer n, and returns the positive n’th root of x within an error of 0.001 (i.e. suppose the real root is y, then the error is: |y-root(x,n)| and must satisfy |y-root(x,n)| < 0.001).
+
+Examples:
+input: x = 7, n = 3
+output: 1.913
+
+input: x = 9, n = 2
+output: 3
+
+def root(x, n):
+    left = 0.0
+    right = x
+    epsilon = 1e-4
+
+    def powEfficient(x, n, upBound):  # Cal x^n, up to upBound
+        if n == 0: return 1
+        half = powEfficient(x, n // 2, upBound)
+        if half > upBound: return half
+        if n % 2 == 0:
+            return half * half
+        return half * half * x
+
+    while right - left > epsilon:
+        mid = left + (right - left) / 2
+        mul = powEfficient(mid, n, x)
+        if mul <= x:  # Update answer -> Try better answer by searching in the right side
+            left = mid
+        else:
+            right = mid
+    return left
+
+print(root(7, 3))
+print(root(9, 2))
+
+============================================================
+Complexity:
+
+Time: O(logX * logN)
+Space: O(1)
+============================================================
 ```
 
 <br/>
@@ -12040,11 +13005,55 @@ if __name__ == "__main__":
 ####  [LC-779:K-th Symbol in Grammar](https://leetcode.com/problems/k-th-symbol-in-grammar/)
 ##### Solution Explanation:
 ```
+First one is by recursion with index and level
+Second one is by rule of output and observation
+
+Solution - 1: Implementation by recursion:
+======================================================
+```
+![lc-779-solution-explanation](./assets/lc-779-solution-explanation.PNG)
+```
+Solution - 2: Implementation by the rule of ouput:
+======================================================
+
+Observation:
+
+Output value is decided by the number of 1s in binary representation of (K-1)
+
+If binary representation of K-1 has odd 1s, then output value is 1
+If binary representation of K-1 has even 1s, then output value is 0
 ```
 ##### Complexity Analysis:
 ```
+TC: O(N)
+SC: O(1)
 ```
 ```python
+# Solution - 1: Implementation by recursion:
+# ======================================================
+class Solution:
+    def kthGrammar(self, N: int, K: int) -> int:
+        
+        if N == 1:
+            # Base case:
+            return 0
+        
+        else:
+            # General case:
+            if K % 2 == 0:
+                
+                # even index of current level is opposite of parent level's [(K+1)//2]
+                return 0 if self.kthGrammar(N-1, (K+1)//2) else 1
+            else:
+                # odd index of current level is the same as parent level's [(K+1)//2]
+                return 1 if self.kthGrammar(N-1, (K+1)//2) else 0
+				
+# Solution - 2: Implementation by the rule of ouput:
+# ======================================================
+class Solution:
+    def kthGrammar(self, N: int, K: int) -> int:
+        
+        return bin(K-1).count('1') % 2
 ```
 
 <br/>
@@ -12056,11 +13065,47 @@ if __name__ == "__main__":
 ####  [LC-776:Split BST](https://leetcode.com/problems/split-bst/)
 ##### Solution Explanation:
 ```
+Recursion
+=============================
+
+Intuition and Algorithm
+=============================
+The root node either belongs to the first half or the second half. Let's say it belongs to the first half.
+
+Then, because the given tree is a binary search tree (BST), the entire subtree at root.left must be in the first half. However, the subtree at root.right may have nodes in either halves, so it needs to be split.
+
+```
+![lc-776-solution-explanation-image-1](./assets/lc-776-solution-explanation-image-1.PNG)
+```
+In the diagram above, the thick lines represent the main child relationships between the nodes, while the thinner colored lines represent the subtrees after the split.
+
+Lets say our secondary answer bns = split(root.right) is the result of such a split. Recall that bns[0] and bns[1] will both be BSTs on either side of the split. The left half of bns must be in the first half, and it must be to the right of root for the first half to remain a BST. The right half of bns is the right half in the final answer.
+```
+![lc-776-solution-explanation-image-2](./assets/lc-776-solution-explanation-image-2.PNG)
+```
+The diagram above explains how we merge the two halves of split(root.right) with the main tree, and illustrates the line of code root.right = bns[0] in the implementations.
 ```
 ##### Complexity Analysis:
 ```
+Complexity Analysis
+=====================
+Time Complexity: O(N), where N is the number of nodes in the input tree, as each node is checked once.
+
+Space Complexity: O(N).
 ```
 ```python
+class Solution(object):
+    def splitBST(self, root, V):
+        if not root:
+            return None, None
+        elif root.val <= V:
+            bns = self.splitBST(root.right, V)
+            root.right = bns[0]
+            return root, bns[1]
+        else:
+            bns = self.splitBST(root.left, V)
+            root.left = bns[1]
+            return bns[0], root
 ```
 
 <br/>
@@ -12078,11 +13123,68 @@ if __name__ == "__main__":
 ####  [LC-3:Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 ##### Solution Explanation:
 ```
+Sliding window
+We use a dictionary to store the character as the key, the last appear index has been seen so far as value.
+seen[charactor] = index
+
+move the pointer when you met a repeated character in your window.
+
+indext    0    1    2    3   4   5   6   7
+string    a    c    b    d   b   a   c   d
+          ^                  ^
+          |                  |
+		left               right
+		seen = {a : 0, c : 1, b : 2, d: 3} 
+		# case 1: seen[b] = 2, current window  is s[0:4] , 
+		#        b is inside current window, seen[b] = 2 > left = 0. Move left pointer to seen[b] + 1 = 3
+		seen = {a : 0, c : 1, b : 4, d: 3} 
+indext    0    1    2    3   4   5   6   7
+string    a    c    b    d   b   a   c   d
+						 ^   ^
+					     |   |
+				      left  right		
+indext    0    1    2    3   4   5   6   7
+string    a    c    b    d   b   a   c   d
+					     ^       ^
+					     |       |
+				       left    right		
+		# case 2: seen[a] = 0,which means a not in current window s[3:5] , since seen[a] = 0 < left = 3 
+		# we can keep moving right pointer.
 ```
 ##### Complexity Analysis:
 ```
+* Time complexity :O(n).
+n is the length of the input string.
+It will iterate n times to get the result.
+
+* Space complexity: O(m)
+m is the number of unique characters of the input.
+We need a dictionary to store unique characters.
 ```
 ```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        seen = {}
+        l = 0
+        output = 0
+        for r in range(len(s)):
+            """
+            If s[r] not in seen, we can keep increasing the window size by moving right pointer
+            """
+            if s[r] not in seen:
+                output = max(output,r-l+1)
+            """
+            There are two cases if s[r] in seen:
+            case1: s[r] is inside the current window, we need to change the window by moving left pointer to seen[s[r]] + 1.
+            case2: s[r] is not inside the current window, we can keep increase the window
+            """
+            else:
+                if seen[s[r]] < l:
+                    output = max(output,r-l+1)
+                else:
+                    l = seen[s[r]] + 1
+            seen[s[r]] = r
+        return output
 ```
 
 <br/>
@@ -12094,11 +13196,30 @@ if __name__ == "__main__":
 ####  [LC-209:Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
 ##### Solution Explanation:
 ```
+The result is initialized as res = n + 1.
+One pass, remove the value from sum s by doing s -= A[j].
+If s <= 0, it means the total sum of A[i] + ... + A[j] >= sum that we want.
+Then we update the res = min(res, j - i + 1).
+Finally we return the result res.
 ```
 ##### Complexity Analysis:
 ```
+TC: O(N)
+SC: O(1)
 ```
 ```python
+# TC: O(N)
+# SC: O(1)
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        i, res = 0, len(nums) + 1
+        for j in range(len(nums)):
+            s -= nums[j]
+            while s <= 0:
+                res = min(res, j - i + 1)
+                s += nums[i]
+                i += 1
+        return res % (len(nums) + 1)
 ```
 
 <br/>
@@ -12117,13 +13238,102 @@ if __name__ == "__main__":
 
 ####  [LC-46:Permuations](https://leetcode.com/problems/permutations/)
 ##### Solution Explanation:
-```
-
-```
-##### Complexity Analysis:
-```
-```
+![lc-46-solution-explanation-image-1](./assets/lc-46-solution-explanation-image-1.PNG)
+![lc-46-solution-explanation-image-2](./assets/lc-46-solution-explanation-image-2.PNG)
+![lc-46-solution-explanation-image-3](./assets/lc-46-solution-explanation-image-3.PNG)
+![lc-46-solution-explanation-image-4](./assets/lc-46-solution-explanation-image-4.PNG)
+![lc-46-solution-explanation-image-5](./assets/lc-46-solution-explanation-image-5.PNG)
+![lc-46-solution-explanation-image-6](./assets/lc-46-solution-explanation-image-6.PNG)
+![lc-46-solution-explanation-image-7](./assets/lc-46-solution-explanation-image-7.PNG)
+![lc-46-solution-explanation-image-8](./assets/lc-46-solution-explanation-image-8.PNG)
+![lc-46-solution-explanation-image-9](./assets/lc-46-solution-explanation-image-9.PNG)
+![lc-46-solution-explanation-image-10](./assets/lc-46-solution-explanation-image-10.PNG)
+![lc-46-solution-explanation-image-11](./assets/lc-46-solution-explanation-image-11.PNG)
+![lc-46-solution-explanation-image-12](./assets/lc-46-solution-explanation-image-12.PNG)
+![lc-46-solution-explanation-image-13](./assets/lc-46-solution-explanation-image-13.PNG)
+![lc-46-solution-explanation-image-14](./assets/lc-46-solution-explanation-image-14.PNG)
+![lc-46-solution-explanation-image-15](./assets/lc-46-solution-explanation-image-15.PNG)
+![lc-46-solution-explanation-image-16](./assets/lc-46-solution-explanation-image-16.PNG)
+![lc-46-solution-explanation-image-17](./assets/lc-46-solution-explanation-image-17.PNG)
+![lc-46-solution-explanation-image-18](./assets/lc-46-solution-explanation-image-18.PNG)
 ```python
+# Approach 1: Recursive with backtracking (implicit stack)
+# Time: O(N*N!)
+# Space: O(N!)
+from typing import List
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+	    # helper
+	    def recursive(nums, perm=[], res=[]):
+		    if not nums: # -- NOTE [1] 
+			    res.append(perm[::]) #  -- NOTE [2] 
+
+		    for i in range(len(nums)): # [1,2,3]
+			    newNums = nums[:i] + nums[i+1:]
+			    perm.append(nums[i])
+			    recursive(newNums, perm, res) # - recursive call will make sure I reach the leaf
+			    perm.pop() # -- NOTE [3] 
+		    return res
+        return recursive(nums)
+
+# Approach 2: Recursive without backtracking (implicit stack)
+# Time: O(N*N!)
+# Space: O(N!)
+from typing import List
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        if not nums: 
+            res.append(perm[::]) 
+
+        for i in range(len(nums)): 
+            newNums = nums[:i] + nums[i+1:]
+            # perm.append(nums[i]) # --- instead of appending to the same variable
+            newPerm = perm + [nums[i]] # --- new copy of the data/variable
+            permute(newNums, newPerm, res) 
+            # perm.pop()  # --- no need to backtrack
+        return res
+    return permute(nums)
+
+# Approach 3 : DFS Iterative with Explicit Stack
+# Time: O(E+V) which is the same as => O(N*N!)
+# Space: O(N!)
+from typing import List
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+	    stack = [(nums, [])]   # -- nums, path (or perms)
+	    res = []
+	    while stack:
+		    nums, path = stack.pop()
+		    if not nums:
+			    res.append(path)
+		    for i in range(len(nums)):   # -- NOTE [4]
+			    newNums = nums[:i] + nums[i+1:]
+			    stack.append((newNums, path+[nums[i]]))  # --  just like we used to do (path + [node.val]) in tree traversal
+	    return res
+
+# NOTE [4]
+# The difference between itertaive tree/graph traversal we did before and this one is that
+# in most tree/graph traversals we are given the DS (tree/graph/edges) whereas here we have to build the nodes before we # traverse them
+# Generating the nodes is very simple, we Each node will be (nums, pathSofar)
+
+# Approach 4 : BFS Iterative with a queue
+# Time: O(E+V) which is the same as => O(N*N!)
+# Space: O(N!)
+from collections import deque
+from typing import List
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+	    q = deque()
+	    q.append((nums, []))  # -- nums, path (or perms)
+	    res = []
+	    while q:
+		    nums, path = q.popleft()
+		    if not nums:
+			    res.append(path)
+		    for i in range(len(nums)):
+			    newNums = nums[:i] + nums[i+1:]
+			    q.append((newNums, path+[nums[i]]))
+	    return res
 ```
 
 <br/>
@@ -12135,11 +13345,39 @@ if __name__ == "__main__":
 ####  [LC-78:Subsets](https://leetcode.com/problems/subsets/)
 ##### Solution Explanation:
 ```
+This is a classic backtracking problem. Every back tracking problem can be solved by using the "choose"-> "explore" -> "unchoose" strategy.
+"Choosing" is based on the decision tree specific to the problem. Look at the image attached.
+```
+![lc-78-solution-explanation](./assets/lc-78-solution-explanation.PNG)
+```
+At every level, the decision is whether to include the first element from the remaining set into the chosen set. Based on the decision, further exploration follows.
 ```
 ##### Complexity Analysis:
 ```
+Time Complexity: O(2 ^ n) :: where , n --> nums.size()
+Space Complexity: O(n).
 ```
 ```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def explore(chosen, remaining, res):
+            if not remaining:
+                res.append(chosen[:])
+                return
+            d = remaining.pop(0)
+            #choose
+            chosen.append(d)
+            #explore
+            explore(chosen, remaining, res)
+            chosen.pop()
+            explore(chosen, remaining, res)
+            #unchoose
+            remaining.insert(0, d)
+        
+        res = []
+        chosen = []
+        explore(chosen, nums, res)
+        return res
 ```
 
 <br/>
@@ -12151,11 +13389,137 @@ if __name__ == "__main__":
 ####  [LC-39:Combination Sum](https://leetcode.com/problems/combination-sum/)
 ##### Solution Explanation:
 ```
+# --------------------------------------
+# Approach-1 : DFS (w/ Backtracking)
+# --------------------------------------
+Combination questions can be solved with dfs most of the time. I'm following caikehe's approach. Also, if you want to fully understand this concept and backtracking, try to finish this post and do all the examples.
+
+We have an array [1, 2, ..., n], if k == 0, meaning combination of zero numbers which is nothing (lines #7, 8, 9), right? Return [[]].
+
+def combine(self, n, k):
+    res = [] #1
+    self.dfs(range(1,n+1), k, 0, [], res) #2
+    return res #3
+    
+def dfs(self, nums, k, index, path, res):  #4
+	print('index is:', index)
+    print('path is:', path)
+    if k == 0:  #7
+        res.append(path)  #8
+        return # backtracking  #9 
+    for i in range(index, len(nums)):  #10
+        self.dfs(nums, k-1, i+1, path+[nums[i]], res)  #11
+		
+Lines #1, 2, 3 are the main function, where you initialize res = []. Also, you call the dfs function to find all the combinations, and finally, you return the res. The dfs function is the main part of the code. Lines #7, 8 were explained before. dfsfuction goes into deeper levels until these two lines get activated. Keep reading.
+
+Let's do an example for the rest! I define levels as the number of times dfs gets called recursively before moving on in the for loop of line #10.
+
+---- Level 0 (input: nums, k=2, index = 0, path = [], res = []).
+The idea of dfs is that it starts from first entry of nums = [1, 2, ..., n]. At first, nums[0] gets chosen in line #10, it calls the dfs again in line #11 with updated inputs and goes basically one level deeper to choose the second number in the combination (note that his combination would look something like [1, ...], right? nums doesn't change, but since we have already chosen one entry, variables get updated k = k - 1. Also, since we're already chosen entry 0, index variable becomes i = i +1 to go one step deeper.
+
+---- Level 1 (input: nums, k=1, index = 1, path = [1], res = []).
+Now, in line #10, the range changes. It starts from 1 to len(nums). It goes in and calls dfs one more time.
+
+--- Level 2 (input: nums, k=0, index = 2, path = [1,2]], res = []).
+This time it gets stuck in line #7, and appends path to res. Now, res = [[1,2]].
+
+Does this make sense?
+
+All these level just return one combination, right? ( res = [[1,2]]). Remember going into deeper levels happened when we were in line #10 and called dfs for the first time in line #11, and then for the second time in level 1, and we ended up in level 2 and got stuck in line #7. Now, we go back one step to level 1 and move on in line #10. This time, i = 1 and index = 2. Again we go back to level 2 and return path = [1,3]. This will be appended to res to get to res = [[1,2],[1,3]]. Finally, we exhaust all indices in level 1. We end up with res = [[1,2],[1,3],[1,4]]. We go up one level, to level 0. Move on in line #10, this time, we'll get to path = [[2,3],[2,4]], and will update res = [[1,2],[1,3],[1,3],[2,3],[2,4]]. We keep going to get the final combination, we're done.
+
+If you want to fully understand how this works, try to print some variables at the start of your dfs function. I printed index and path and this is the outcome.
+
+index is: 0
+path is: []
+index is: 1
+path is: [1]
+index is: 2
+path is: [1, 2]
+index is: 3
+path is: [1, 3]
+index is: 4
+path is: [1, 4]
+index is: 2
+path is: [2]
+index is: 3
+path is: [2, 3]
+index is: 4
+path is: [2, 4]
+index is: 3
+path is: [3]
+index is: 4
+path is: [3, 4]
+index is: 4
+path is: [4]
+
+Final output: [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]
+Another way of doing this without the index variable is:
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        self.dfs(range(1,n+1), k, [], res)
+        return res
+        
+    def dfs(self, nums, k, path, res):
+        if k == 0:
+            res.append(path)
+            return res
+        
+        if len(nums) >= k:
+            for i in range(len(nums)):
+                self.dfs(nums[i+1:], k-1, path+[nums[i]], res)
+        return
+That's it!
+
+# --------------------------------------
+# Approach-2 : Dynamic Programming
+# --------------------------------------
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        dp = [[[]]] + [[] for _ in range(target)]
+        for candidate in candidates:
+            for i in range(candidate, target + 1):
+                dp[i] += [sublist + [candidate] for sublist in dp[i - candidate]]
+        return dp[target]
 ```
 ##### Complexity Analysis:
 ```
 ```
 ```python
+# --------------------------------------
+# Approach-1 : DFS
+# --------------------------------------
+from typing import List
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        self.dfs(range(1,n+1), k, [], res)
+        return res
+        
+    def dfs(self, nums, k, path, res):
+        if k == 0:
+            res.append(path)
+            return res
+        
+        if len(nums) >= k:
+            for i in range(len(nums)):
+                self.dfs(nums[i+1:], k-1, path+[nums[i]], res)
+        return
+
+# --------------------------------------
+# Approach-2 : Dynamic Programming
+# --------------------------------------
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        dp = [[[]]] + [[] for _ in range(target)]
+        for candidate in candidates:
+            for i in range(candidate, target + 1):
+                dp[i] += [sublist + [candidate] for sublist in dp[i - candidate]]
+        return dp[target]
 ```
 
 <br/>
@@ -12165,13 +13529,110 @@ if __name__ == "__main__":
 <br/>
 
 ####  [LC-22:Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+##### Problem Description:
+![lc-22-problem-description-image](./assets/lc-22-problem-description-image.png)
+##### Learning Points (Catalan Numbers):
+```
+A famous ancient question in this context is:
+"How many distinct arrangements of n pairs of left-right parentheses are there all of which close?"
+The answer to this question is called the n-th Catalan number, C(n).
+Here are the first few answers:
+  * C(1)=1         ( )
+  * C(2)=2         ()() and (())
+  * C(3)=5         ()()(), ()(()), (())(), (()()) and ((()))
+
+
+Generating all combinations of well formed parentheses is a typical example of catalan numbers.
+You can use the links at the bottom here if you are not aware of the catalan numbers since they
+are at the heart of the exercise.
+Let time complexity for the generating all combinations of well-formed parentheses is f(n),
+then,
+f(n) = g(n) * h(n) where g(n) is the time complexity for calculating nth catalan number,
+and h(n) is the time required to copy this combination to result array.
+
+Therefore, f(n) = catalan(n) * O(n) which is O((4^n/n^1.5)*(n)).
+Broadly saying just remember that this is a typical example of catalan number
+and it's time complexity is similar to how catalan(n) is got.
+Further readings in to catalan numbers:
+
+https://en.wikipedia.org/wiki/Catalan_number
+https://www.youtube.com/watch?v=GlI17WaMrtw
+https://www.youtube.com/watch?v=eoofvKI_Okg
+```
 ##### Solution Explanation:
 ```
+# --------------------------------------
+# Backtracking Solution:
+# --------------------------------------
+The idea is to have a empty string, and put “(” and “)” in one by one.
+We put “(” in first. In total there are n “(”. We can keep adding “(” in until we used up all the “(”.
+Then we start adding “)” in. To keep the resulting string well-formed, we only add in “)” 
+when the number of existing “(” exceeds the number of “)” in the current string:
+```
+![lc-22-generate-parentheses-image-1](./assets/lc-22-generate-parentheses-image-1.jpeg)
+```
+When current string length == 2*n, we got an answer. Therefore we record it, 
+and return to previous step to search for other possible combinations.
+```
+##### Code Analysis
+```
+At first sight, it looks complicated to get a clear view of how it backtracks, specifically where the “return” returns to.
+At least I struggled for a while.
+
+I didn’t give up. In the end, I successfully get this tree, which clearly shows how the program goes.
+It turned out, back tracking is just DFS, or in my opinion, traverse a tree:
+```
+![lc-22-generate-parentheses-image-2](./assets/lc-22-generate-parentheses-image-2.jpeg)
+```
+Note that the tree is not full, because our two if-cases cut some of the tree branches.
 ```
 ##### Complexity Analysis:
 ```
+My Analysis:
+---------------------------------
+Time Complexity: The tree has a max height of 2n, therefore the max nodes the tree has is 2^ 2n. 
+Therefore the time complexity is O(2^ 2n)=O(4^n).
+
+Space Complexity: We have 2^(2n-1) leaves at most, therefore, the time complexity is O(4^n).
+Clearly, my analysis over estimated the total tree nodes, and the number of leaves.
+
+Leetcode Analysis:
+---------------------------------
+The tree is not full, and the number of leaves actually can be described by n-th Catalan number, which is bounded by 4^n /(n ^ 3/2).
+
+Time Complexity: since each sequence at most back tracks 2n steps, time complexity is n-th Catalan number*2n, which gives O( 4^n / (n^ 1/2) ).
+Space Complexity: since each sequence takes at most 2*n space, the answer list takes at most n-th Catalan number*2n space, which gives O( 4^n / (n^ 1/2) ).
+---------------------------------
+
+TC: O( 4^n / (n^ 1/2) )
+SC: O( 4^n / (n^ 1/2) )
 ```
+##### References:
+[Crack Leetcode 22: Generate Parentheses](https://christinalalay.medium.com/crack-leetcode-22-generate-parentheses-895de3a677c7)
 ```python
+# TC: O( 4^n / (n^ 1/2) )
+# SC: O( 4^n / (n^ 1/2) )
+from typing
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        """
+		:type n: int
+		:rtype: List[str]
+		"""
+		res = []
+		self.generateHelper(res, n, 0, 0, "")
+		return res
+		
+    def generateHelper(self, res, n, left, right, temp):
+        if len(temp) == 2*n:
+            res.append(temp)
+            return
+        else:
+            if left < n:
+                self.generateHelper(res, n, left+1, right, temp+"(")
+            if right < left:
+                self.generateHelper(res, n, left, right+1, temp+")")
 ```
 
 <br/>
