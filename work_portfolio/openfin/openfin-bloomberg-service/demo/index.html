@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Bloomberg Service API Test</title>
+
+    <link rel="stylesheet" href="css/roboto.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/milligram.css" />
+
+    <style>
+        pre {
+            font-size: smaller;
+            max-height: 240px;
+            min-height: 240px;
+            overflow: scroll;
+        }
+
+        td {
+            padding: 0.2rem 1.5rem;
+        }
+    </style>
+    <script type="module" src="js/session-test.js"></script>
+    <script type="module" src="js/request-response-test.js"></script>
+    <script type="module" src="js/subscription-test.js"></script>
+    <script type="module">
+        import blpApi from "../client/bloomberg-blpapi-service.js";
+        window.blpApi = blpApi;
+    </script>
+    <script type="module">
+        import terminalApi from "../client/bloomberg-terminalapi-service.js";
+        window.terminalApi = terminalApi;
+    </script>
+</head>
+<body class="container">
+    <session-test></session-test>
+    <hr/>
+    <request-response-test></request-response-test>
+    <hr/>
+    <subscription-test></subscription-test>
+</body>
+</html>

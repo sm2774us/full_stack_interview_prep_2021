@@ -1,0 +1,31 @@
+﻿@import './variables.scss';
+@import './launcher.scss';
+@import './blotter.scss';
+@import './tiles.scss';
+@import './chart.scss';
+
+body, #root, #tileContainer {
+    background-color: $body-background;
+    font-size: 12px;
+}
+
+select {
+    color: black !important;
+}
+
+input[type='text'] {
+    color: black;
+}
+
+.Loader {
+    text-align: center
+}
+
+.LoaderImage {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.Text {
+    color: $standard-accent-text-color;
+}

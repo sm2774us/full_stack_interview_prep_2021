@@ -1,0 +1,18 @@
+{
+  "name": "provider",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "provider",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "hadouken-js-adapter": "^1.43.1"
+  }
+}

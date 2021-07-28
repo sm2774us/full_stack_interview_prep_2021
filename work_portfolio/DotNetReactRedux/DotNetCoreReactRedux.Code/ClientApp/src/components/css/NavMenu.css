@@ -1,0 +1,65 @@
+﻿html {
+    font-size: 14px;
+    background-color: #1d3947 !important;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html { font-size: 16px; }
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 40px;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    background-color: #212529;
+    overflow-x: hidden;
+    padding-top: 0px;
+}
+
+li.nav-item, a.nav-link {
+    margin-left: -5px;
+    height:40px
+}
+
+body {
+    background-color: #1d3947 !important;
+    overflow: hidden !important;
+}
+
+.main {
+    margin-left: 40px !important; /* Same as the width of the sidenav */
+    font-size: 28px !important; /* Increased text to enable scrolling */
+    padding: 0px 10px !important;
+    background-color: #1d3947 !important;
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav { padding-top: 0px; }
+}
+
+.mainHeader, .subHeader, .para {
+    margin: 0 auto;
+    width: 90%;
+    color: white;
+    font-family: Segoe UI;
+}
+
+.mainHeader {
+    font-size: 20px;
+}
+
+.subHeader {
+    font-size: 12px;
+}
+
+para {
+    font-size: 10px;
+}
+

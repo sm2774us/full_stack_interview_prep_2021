@@ -1,0 +1,29 @@
+{
+  "startup_app": {
+    "name": "Bloomberg Service Manager",
+    "description": "Bloomberg Service Manager",
+    "url": "https://openfin.github.io/bloomberg-service/provider/index.html",
+    "uuid": "Bloomberg-Service-Manager",
+    "autoShow": false,
+    "permissions": {
+      "System": {
+        "launchExternalProcess": true
+      }
+    }
+  },
+  "runtime": {
+    "arguments": "",
+    "version": "11.69.42.29"
+  },
+  "appAssets": [
+    {
+      "src": "https://openfin.github.io/bloomberg-service/provider/assets/OpenFin.BloombergService.zip",
+      "alias": "bloomberg-service",
+      "target": "OpenFin.BloombergService.exe",
+      "args": "",
+      "version": "0.1.0",
+      "forceDownload": true
+    }
+  ],
+  "shortcut": {}
+}

@@ -1,0 +1,53 @@
+﻿@import './job/job.scss';
+@import './variables.scss';
+
+
+
+body {
+    background-color: $body-background;
+    font-size:12px;
+}
+
+
+.form-control {
+    height:30px;
+    font-size:small;
+}
+
+.outer-well {
+    margin : 20px;
+}
+
+.submittable-form-inner {
+    margin-left : -15px;
+    margin-top : 10px;
+    margin-right : 10px;
+    margin-bottom : 10px;
+}
+
+
+
+.leftFloat {
+    float:left;
+}
+
+.factTable {
+    margin-top: 30px;
+}
+
+
+#div1 {
+    background-color: deeppink;
+}
+
+#comet {
+    display: none;
+}
+
+.displayNone {
+    display: none;
+}
+
+.displayBlock {
+    display: block;
+}

@@ -1,0 +1,50 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+/* Naming convention based on: https://cloud.google.com/apis/design/naming_convention */
+
+package grpc.dotnet.notifications.v1;
+
+//option csharp_namespace = "Grpc.Dotnet.Notifications.V1";
+
+//package Notifications;
+
+service NotificationService {
+	// Sends notification to given users
+	rpc SendEmail(SendEmailRequest) returns (google.protobuf.Empty) {}
+	rpc SendPush(SendPushRequest) returns (google.protobuf.Empty) {}
+}
+
+message SendEmailRequest {
+	string body_type = 1;
+	Subject subject = 2;
+	Body body = 3;
+	repeated Recipient recipients = 4;
+
+	message Subject {
+		string text = 1;
+	}
+
+	message Body {
+		string text = 1;
+	}
+
+	message Recipient {
+		string email = 1;
+		string name = 2;
+	}
+}
+
+message SendPushRequest {
+    Message message = 1;
+    repeated Recipient recipients = 2;
+
+	message Recipient {
+		string name = 1;
+	}
+
+	message Message {
+		string text = 1;
+	}
+}

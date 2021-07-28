@@ -1,0 +1,46 @@
+﻿.graph-container {
+    background-color: #1d3947;
+    overflow: scroll;
+    
+}
+
+.graph-holder {
+    margin: 0 auto;
+    height: 410px;
+    width: 90%;
+    margin-top: 30px;
+    border: 2px solid white;
+}
+
+.force-graph-scroll {
+    margin: 0 auto;
+    width: 98% !important;
+    height: 98% !important;
+    padding: 10px;
+}
+
+
+.node {
+    stroke: orange;
+    fill: whitesmoke;
+    stroke-width: 1.5px;
+}
+
+.link {
+    stroke: steelblue;
+    stroke-opacity: 1;
+}
+
+.label {
+    font-size: 10px;
+    fill: white;
+}
+
+.thumb-horizontal, .thumb-vertical {
+    color: white;
+}
+
+.close-button {
+    float: right;
+    margin-right: 5px;
+}

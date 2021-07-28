@@ -1,0 +1,30 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET   /                                        controllers.HomeController.index()
+
+
+# Registration page
+POST  /registration/save/passenger             controllers.RegistrationController.savePassengerRegistration()
+POST  /registration/save/driver                controllers.RegistrationController.saveDriverRegistration()
+
+
+# Login page
+POST  /login/validate                          controllers.LoginController.validateLogin()
+
+
+# Rating page
+POST  /rating/submit/new                       controllers.RatingController.submitNewRating()
+GET   /rating/byemail                          controllers.RatingController.ratingByEmail()
+
+
+# JOb page
+POST  /job/submit                              controllers.JobController.submitJob()
+GET   /job/streamedJob                         controllers.JobController.streamedJob()
+
+
+# Map static resources from the /public
+# folder to the /assets URL path
+GET   /assets/*file                            controllers.Assets.at(path="/public", file)

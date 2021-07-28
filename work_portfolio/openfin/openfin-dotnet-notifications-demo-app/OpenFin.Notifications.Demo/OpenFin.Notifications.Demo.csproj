@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Openfin.Notifications" Version="0.12.3" />
+    <PackageReference Include="OpenfinDesktop" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="body.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="body.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

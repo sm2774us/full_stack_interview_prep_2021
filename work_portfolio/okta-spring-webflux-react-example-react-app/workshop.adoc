@@ -1,0 +1,1282 @@
+= Workshop: Full Stack Reactive with React and Spring WebFlux
+
+This is a cheat sheet for Matt Raible's Full Stack Reactive with React and Spring WebFlux workshop. This cheat sheet contains the bare minimum steps you'll need to build the example app.
+
+This workshop is based on the following blog post series:
+
+1. https://developer.okta.com/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
+2. https://developer.okta.com/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
+3. https://developer.okta.com/blog/2018/09/25/spring-webflux-websockets-react[Full Stack Reactive with Spring WebFlux, WebSockets, and React]
+
+You can also watch https://www.youtube.com/watch?v=1xpwYe154Ys[a screencast] to see all the code created in this series.
+
+== Agenda
+
+* **13:00** Talk: Intro to Reactive Programming and Spring WebFlux
+* **13:30** Lab: Build a Reactive API with Spring WebFlux
+* **15:00** Talk: Intro to React and Streaming Data Options
+* **15:30** Lab: Build a React UI with Streaming Data
+
+NOTE: The brackets at the end of each step indicate the alias's or IntelliJ Live Templates to use. You can find the template definitions at https://github.com/mraible/idea-live-templates[mraible/idea-live-templates].
+
+== Get Started
+
+You'll need to install a few prerequisites to complete the labs in this workshop:
+
+* https://adoptopenjdk.com[Java 11] (hint: use https://sdkman.io/[SDKMAN!])
+* https://httpie.org/[HTTPie]
+* https://nodejs.org[Node 11]
+
+== Part I: Build Reactive APIs with Spring WebFlux
+
+Follow the steps below or read https://developer.okta.com/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux] for a more thorough tutorial.
+
+=== Spring WebFlux API
+
+. Use https://start.spring.io[start.spring.io] to create an app with `data-mongodb-reactive`, `webflux`, `devtools`, and `lombok`
+
+  http https://start.spring.io/starter.zip dependencies==data-mongodb-reactive,webflux,devtools,lombok -d
+
+. Install MongoDB. If you're on a Mac, you can use `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`. Start it by running `mongod` in a terminal window.
+
+. Add `Profile`, `ProfileRepository`, and `SampleDataInitializer` [`webflux-entity`, `webflux-repo`, `webflux-data`]
+
+.`src/main/java/com/example/demo/Profile.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Profile {
+
+    @Id
+    private String id;
+
+    private String email;
+}
+----
+====
+
+.`src/main/java/com/example/demo/ProfileRepository.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+
+interface ProfileRepository extends ReactiveMongoRepository<Profile, String> {
+}
+----
+====
+
+.`src/main/java/com/example/demo/SampleDataInitializer.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
+
+import java.util.UUID;
+
+@Log4j2
+@Component
+@org.springframework.context.annotation.Profile("demo")
+class SampleDataInitializer implements ApplicationListener<ApplicationReadyEvent> {
+
+    private final ProfileRepository repository;
+
+    public SampleDataInitializer(ProfileRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        repository
+            .deleteAll()
+            .thenMany(
+                reactor.core.publisher.Flux
+                    .just("A", "B", "C", "D")
+                    .map(name -> new Profile(UUID.randomUUID().toString(), name + "@email.com"))
+                    .flatMap(repository::save)
+            )
+            .thenMany(repository.findAll())
+            .subscribe(profile -> log.info("saving " + profile.toString()));
+    }
+}
+----
+====
+[start=4]
+. Start and see list of profiles in console: `SPRING_PROFILES_ACTIVE=demo mvn spring-boot:run`
+
+TIP: If you prefer to use an IDE to run your app, you'll need to https://projectlombok.org/setup/overview[install a Lombok plugin] for it.
+
+[start=5]
+. Create `ProfileService` [`webflux-service`]
+
+.`src/main/java/com/example/demo/ProfileService.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Log4j2
+@Service
+class ProfileService {
+
+    private final ApplicationEventPublisher publisher;
+    private final ProfileRepository repository;
+
+    ProfileService(ApplicationEventPublisher publisher, ProfileRepository repository) {
+        this.publisher = publisher;
+        this.repository = repository;
+    }
+
+    public Flux<Profile> all() {
+        return this.repository.findAll();
+    }
+
+    public Mono<Profile> get(String id) {
+        return this.repository.findById(id);
+    }
+
+    public Mono<Profile> update(String id, String email) {
+        return this.repository
+                .findById(id)
+                .map(p -> new Profile(p.getId(), email))
+                .flatMap(this.repository::save);
+    }
+
+    public Mono<Profile> delete(String id) {
+        return this.repository
+                .findById(id)
+                .flatMap(p -> this.repository.deleteById(p.getId()).thenReturn(p));
+    }
+
+    public Mono<Profile> create(String email) {
+        return this.repository
+                .save(new Profile(null, email));
+                //.doOnSuccess(entity -> this.publisher.publishEvent(new ProfileCreatedEvent(entity)));
+    }
+}
+----
+====
+
+[start=6]
+. Create `ProfileRestController` with a `/profiles` endpoint [`webflux-controller`]
+
+.`src/main/java/com/example/demo/ProfileRestController.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.reactivestreams.Publisher;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
+import java.net.URI;
+
+@RestController
+@RequestMapping(value = "/profiles", produces = MediaType.APPLICATION_JSON_VALUE)
+@org.springframework.context.annotation.Profile("classic")
+class ProfileRestController {
+
+    private final MediaType mediaType = MediaType.APPLICATION_JSON_UTF8;
+    private final ProfileService profileService;
+
+    ProfileRestController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
+
+    @GetMapping
+    Publisher<Profile> getAll() {
+        return this.profileService.all();
+    }
+
+
+    @GetMapping("/{id}")
+    Publisher<Profile> getById(@PathVariable("id") String id) {
+        return this.profileService.get(id);
+    }
+
+    @PostMapping
+    Publisher<ResponseEntity<Profile>> create(@RequestBody Profile profile) {
+        return this.profileService
+            .create(profile.getEmail())
+            .map(p -> ResponseEntity.created(URI.create("/profiles/" + p.getId()))
+                .contentType(mediaType)
+                .build());
+    }
+
+    @DeleteMapping("/{id}")
+    Publisher<Profile> deleteById(@PathVariable String id) {
+        return this.profileService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    Publisher<ResponseEntity<Profile>> updateById(@PathVariable String id, @RequestBody Profile profile) {
+        return Mono.just(profile)
+            .flatMap(p -> this.profileService.update(id, p.getEmail()))
+            .map(p -> org.springframework.http.ResponseEntity
+                .ok()
+                .contentType(this.mediaType)
+                .build());
+    }
+}
+----
+====
+
+[start=7]
+. Restart server with classic profile: `SPRING_PROFILES_ACTIVE=classic mvn spring-boot:run`
+
+. Restart and confirm http://localhost:8080/profiles works in your browser and with HTTPie
+
+  http POST :8080/profiles email='matt.raible@okta.com'
+  http PUT :8080/profiles/1 email='matt.raible@okta.com'
+  http DELETE :8080/profiles/1
+
+. Create `ProfileCreatedEvent`, `ProfileCreatedEventPublisher` [`webflux-event`, `webflux-publisher`]
+
+.`src/main/java/com/example/demo/ProfileCreatedEvent.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.ApplicationEvent;
+
+public class ProfileCreatedEvent extends ApplicationEvent {
+
+    public ProfileCreatedEvent(Profile source) {
+        super(source);
+    }
+}
+----
+====
+
+.`src/main/java/com/example/demo/ProfileCreatedEventPublisher.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ReflectionUtils;
+import reactor.core.publisher.FluxSink;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.function.Consumer;
+
+@Component
+class ProfileCreatedEventPublisher implements
+    ApplicationListener<ProfileCreatedEvent>,
+    Consumer<FluxSink<ProfileCreatedEvent>> {
+
+    private final Executor executor;
+    private final BlockingQueue<ProfileCreatedEvent> queue =
+        new LinkedBlockingQueue<>();
+
+    ProfileCreatedEventPublisher(Executor executor) {
+        this.executor = executor;
+    }
+
+    @Override
+    public void onApplicationEvent(ProfileCreatedEvent event) {
+        this.queue.offer(event);
+    }
+
+     @Override
+    public void accept(FluxSink<ProfileCreatedEvent> sink) {
+        this.executor.execute(() -> {
+            while (true) {
+                try {
+                    ProfileCreatedEvent event = queue.take();
+                    sink.next(event);
+                }
+                catch (InterruptedException e) {
+                    ReflectionUtils.rethrowRuntimeException(e);
+                }
+            }
+        });
+    }
+}
+----
+====
+
+[start=10]
+. Create `WebSocketConfiguration` for executor bean [`webflux-websocket`]
+
+.`src/main/java/com/example/demo/WebSocketConfiguration.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import ObjectMapper;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.HandlerMapping;
+import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.reactive.socket.WebSocketHandler;
+import org.springframework.web.reactive.socket.WebSocketMessage;
+import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
+import reactor.core.publisher.Flux;
+
+import java.util.Collections;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+@Log4j2
+@Configuration
+class WebSocketConfiguration {
+
+    @Bean
+    Executor executor() {
+        return Executors.newSingleThreadExecutor();
+    }
+
+    @Bean
+    HandlerMapping handlerMapping(WebSocketHandler wsh) {
+        return new SimpleUrlHandlerMapping() {
+            {
+                setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
+                setOrder(10);
+            }
+        };
+    }
+
+    @Bean
+    WebSocketHandlerAdapter webSocketHandlerAdapter() {
+        return new WebSocketHandlerAdapter();
+    }
+
+    @Bean
+    WebSocketHandler webSocketHandler(
+        ObjectMapper objectMapper,
+        ProfileCreatedEventPublisher eventPublisher
+    ) {
+
+        Flux<ProfileCreatedEvent> publish = Flux
+            .create(eventPublisher)
+            .share();
+
+        return session -> {
+
+            Flux<WebSocketMessage> messageFlux = publish
+                .map(evt -> {
+                    try {
+                        return objectMapper.writeValueAsString(evt.getSource());
+                    }
+                    catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(str -> {
+                    log.info("sending " + str);
+                    return session.textMessage(str);
+                });
+
+            return session.send(messageFlux);
+        };
+    }
+}
+----
+====
+
+[start=11]
+. Create `ProfileHandler`, `ProfileEndpointConfiguration`, and `CaseInsensitiveRequestPredicate` [`webflux-handler`, `webflux-endpoint`, `webflux-predicate`]
+
+.`src/main/java/com/example/demo/ProfileHandler.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.reactivestreams.Publisher;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.net.URI;
+
+@Component
+class ProfileHandler {
+    private final ProfileService profileService;
+
+    ProfileHandler(ProfileService profileService) {
+        this.profileService = profileService;
+    }
+
+    Mono<ServerResponse> getById(ServerRequest r) {
+        return defaultReadResponse(this.profileService.get(id(r)));
+    }
+
+    Mono<ServerResponse> all(ServerRequest r) {
+        return defaultReadResponse(this.profileService.all());
+    }
+
+    Mono<ServerResponse> deleteById(ServerRequest r) {
+        return defaultReadResponse(this.profileService.delete(id(r)));
+    }
+
+    Mono<ServerResponse> updateById(ServerRequest r) {
+        Flux<Profile> id = r.bodyToFlux(Profile.class)
+                .flatMap(p -> this.profileService.update(id(r), p.getEmail()));
+        return defaultReadResponse(id);
+    }
+
+    Mono<ServerResponse> create(ServerRequest request) {
+        Flux<Profile> flux = request
+                .bodyToFlux(Profile.class)
+                .flatMap(toWrite -> this.profileService.create(toWrite.getEmail()));
+        return defaultWriteResponse(flux);
+    }
+
+    private static Mono<ServerResponse> defaultWriteResponse(Publisher<Profile> profiles) {
+        return Mono.from(profiles)
+                .flatMap(p -> ServerResponse
+                        .created(URI.create("/profiles/" + p.getId()))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .build()
+                );
+    }
+
+    private static Mono<ServerResponse> defaultReadResponse(Publisher<Profile> profiles) {
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .body(profiles, Profile.class);
+    }
+
+    private static String id(ServerRequest r) {
+        return r.pathVariable("id");
+    }
+}
+----
+====
+
+.`src/main/java/com/example/demo/ProfileEndpointConfiguration.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicate;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
+
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+
+@Configuration
+class ProfileEndpointConfiguration {
+
+    @Bean
+    RouterFunction<ServerResponse> routes(ProfileHandler handler) {
+        return route(i(GET("/profiles")), handler::all)
+                .andRoute(i(GET("/profiles/{id}")), handler::getById)
+                .andRoute(i(DELETE("/profiles/{id}")), handler::deleteById)
+                .andRoute(i(POST("/profiles")), handler::create)
+                .andRoute(i(PUT("/profiles/{id}")), handler::updateById);
+    }
+
+    private static RequestPredicate i(RequestPredicate target) {
+        return new CaseInsensitiveRequestPredicate(target);
+    }
+}
+----
+====
+
+.`src/main/java/com/example/demo/CaseInsensitiveRequestPredicate.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.http.server.PathContainer;
+import org.springframework.web.reactive.function.server.RequestPredicate;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.support.ServerRequestWrapper;
+
+import java.net.URI;
+
+public class CaseInsensitiveRequestPredicate implements RequestPredicate {
+
+    private final RequestPredicate target;
+
+    CaseInsensitiveRequestPredicate(RequestPredicate target) {
+        this.target = target;
+    }
+
+    @Override
+    public boolean test(ServerRequest request) {
+        return this.target.test(new LowerCaseUriServerRequestWrapper(request));
+    }
+
+    @Override
+    public String toString() {
+        return this.target.toString();
+    }
+}
+
+class LowerCaseUriServerRequestWrapper extends ServerRequestWrapper {
+
+    LowerCaseUriServerRequestWrapper(ServerRequest delegate) {
+        super(delegate);
+    }
+
+    @Override
+    public URI uri() {
+        return URI.create(super.uri().toString().toLowerCase());
+    }
+
+    @Override
+    public String path() {
+        return uri().getRawPath();
+    }
+
+    @Override
+    public PathContainer pathContainer() {
+        return PathContainer.parsePath(path());
+    }
+}
+----
+====
+
+[start=12]
+. Restart and confirm http://localhost:8080/profiles works in your browser and with HTTPie
+
+. Create `static/ws.html` to show event notifications [`webflux-ws`]
+
+.`src/main/resources/static/ws.html`
+[%collapsible]
+====
+[source,html]
+----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Profile notification client
+    </title>
+</head>
+<body>
+<script>
+  var socket = new WebSocket('ws://localhost:8080/ws/profiles');
+  socket.addEventListener('message', function (event) {
+    window.alert('message from server: ' + event.data);
+  });
+</script>
+</body>
+</html>
+----
+====
+[start=14]
+. Restore `doOnSuccess` in `ProfileService`, open in your browser http://localhost:8080/ws.html, and run `create.sh` in a terminal window
+
+.`create.sh`
+[%collapsible]
+====
+[source,bash]
+----
+#!/bin/bash
+port=${1:-8080}
+
+curl -H"content-type: application/json" -d'{"email":"random"}' http://localhost:${port}/profiles
+----
+====
+
+[start=15]
+. Create `ServerSentEventController` [`webflux-sse`] and try `http :8080/sse/profiles -S`
+
+.`src/main/java/com/example/demo/ServerSentEventController.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+
+@RestController
+public class ServerSentEventController {
+    private final Flux<ProfileCreatedEvent> events;
+    private final ObjectMapper objectMapper;
+
+    public ServerSentEventController(ProfileCreatedEventPublisher eventPublisher, ObjectMapper objectMapper) {
+        this.events = Flux.create(eventPublisher).share();
+        this.objectMapper = objectMapper;
+    }
+
+    @GetMapping(path = "/sse/profiles", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> profiles() {
+        return this.events.map(pce -> {
+            try {
+                return objectMapper.writeValueAsString(pce);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+}
+----
+====
+
+== Part II: Build a React UI with Streaming Data
+
+Follow the steps below or read https://developer.okta.com/blog/2018/09/25/spring-webflux-websockets-react[Full Stack Reactive with Spring WebFlux, WebSockets, and React] for a more thorough tutorial.
+
+=== Create React App
+
+. Run `npx create-react-app react-app --typescript`; view app with `npm start`
+
+. Modify `App.tsx` and add `componentDidMount()` to fetch profiles [`react-fetch`]
+
+.`src/App.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+
+  componentDidMount() {
+    this.setState({isLoading: true});
+
+    fetch('//localhost:3000/profiles')
+      .then(response => response.json())
+      .then(data => this.setState({profiles: data, isLoading: false}));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+
+        </header>
+      </div>
+    );
+  }
+}
+
+export default App;
+----
+====
+
+[start=3]
+. Create interfaces: `Profile`, `AppProps`, and `AppState`; add constructor and initialize state [`react-constructor`]
+
+.`src/App.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+interface Profile {
+  id: string;
+  email: string;
+}
+
+interface AppProps {
+
+}
+
+interface AppState {
+  isLoading: boolean;
+  profiles: Array<Profile>;
+}
+----
+====
+
+[start=4]
+. Add constructor and initialize state [`react-constructor`]
+
+.`src/App.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+class App extends Component<AppProps, AppState> {
+
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = {
+      profiles: [],
+      isLoading: false
+    };
+  }
+  ...
+}
+----
+====
+
+[start=5]
+. Change `render()` to show profiles [`react-loading` and `react-list`]
+
+.`src/App.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+render() {
+  const {profiles, isLoading} = this.state;
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <div>
+          <h2>Profile List</h2>
+          {profiles.map((profile: Profile) =>
+            <div key={profile.id}>
+              {profile.email}
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
+  );
+}
+----
+====
+
+[start=6]
+. Configure proxy for React in `package.json`, restart the app, and view the list of profiles
+
+  "proxy": "http://localhost:8080"
+
+. Create `ProfileList.tsx` and copy code from `App.tsx`; change `App.tsx` to use `<ProfileList/>`
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+import React, { Component } from 'react';
+
+interface Profile {
+  id: string;
+  email: string;
+}
+
+interface ProfileListProps {
+
+}
+
+interface ProfileListState {
+  isLoading: boolean;
+  profiles: Array<Profile>;
+}
+
+class ProfileList extends Component<ProfileListProps, ProfileListState> {
+
+  constructor(props: ProfileListProps) {
+    super(props);
+
+    this.state = {
+      profiles: [],
+      isLoading: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({isLoading: true});
+
+    fetch('//localhost:3000/profiles')
+      .then(response => response.json())
+      .then(data => this.setState({profiles: data, isLoading: false}));
+  }
+
+  render() {
+    const {profiles, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    return (
+      <div>
+        <h2>Profile List</h2>
+        {profiles.map((profile: Profile) =>
+          <div key={profile.id}>
+            {profile.email}
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default ProfileList;
+----
+====
+
+=== React App with Streaming Data
+
+. Modify `ProfileList.tsx` to fetch data every second [`react-interval`]
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+private interval: any;
+async fetchData() {
+  this.setState({isLoading: true});
+
+  const response = await fetch('http://localhost:3000/profiles');
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
+}
+
+async componentDidMount() {
+  await this.fetchData();
+  this.interval = setInterval(() => this.fetchData(), 1000);
+}
+
+componentWillUnmount() {
+  clearInterval(this.interval);
+}
+----
+====
+
+[start=2]
+. Create and run `create-stream.sh`
+
+.`create-stream.sh`
+[%collapsible]
+====
+[source,bash]
+----
+#!/bin/bash
+port=${1:-8080}
+count=0
+
+profile () {
+  ((count++))
+  echo "posting #${count}"
+  http POST http://localhost:${port}/profiles email="random${count}"
+  if [ $count -gt 120 ]
+  then
+    echo "count is $count, ending..."
+    break
+  fi
+}
+
+while sleep 1; do profile; done
+----
+====
+
+[start=3]
+. Use RxJS: install rxjs first! [`react-rxjs`]
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+import { interval } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
+...
+
+  async componentDidMount() {
+    this.setState({isLoading: true});
+
+    const request = interval(1000).pipe(
+      startWith(0),
+      switchMap(async () =>
+        fetch('http://localhost:3000/profiles')
+          .then((response) => response.json())
+      ));
+
+    request.subscribe(data => {
+      this.setState({profiles: data, isLoading: false});
+    })
+  }
+----
+====
+
+[start=4]
+. Use WebSocket [`react-websocket`]
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+async componentDidMount() {
+  this.setState({isLoading: true});
+
+  const response = await fetch('http://localhost:3000/profiles');
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
+
+  const socket = new WebSocket('ws://localhost:3000/ws/profiles');
+  socket.addEventListener('message', async (event: any) => {
+    const profile = JSON.parse(event.data);
+    this.state.profiles.push(profile);
+    this.setState({profiles: this.state.profiles});
+  });
+}
+----
+====
+
+[start=5]
+. Create `src/setupProxy.js` to set up proxy for WebSockets [`react-proxy`] and restart
+
+.`src/setupProxy.js`
+[%collapsible]
+====
+[source,js]
+----
+const proxy = require("http-proxy-middleware");
+
+module.exports = app => {
+  app.use(proxy("/ws", {target: "http://localhost:8080", ws: true}))
+}
+----
+====
+
+[start=6]
+. Use EventSource with SSE [`react-eventsource`] and restart React app
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+async componentDidMount() {
+  this.setState({isLoading: true});
+
+  const response = await fetch('http://localhost:3000/profiles');
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
+
+  const eventSource = new EventSource('http://localhost:8080/sse/profiles');
+  eventSource.onopen = (event: any) => console.log('open', event);
+  eventSource.onmessage = (event: any) => {
+    const profile = JSON.parse(event.data).source;
+    this.state.profiles.push(profile);
+    this.setState({profiles: this.state.profiles});
+  };
+  eventSource.onerror = (event: any) => console.log('error', event);
+}
+----
+====
+
+[start=7]
+. Add `@CrossOrigin` in `ServerSentEventController` and restart Spring Boot app
+
+=== Authentication with Okta
+
+. Add Spring Security OIDC as dependencies [`ss-maven`]
+
+.`pom.xml`
+[%collapsible]
+====
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-resource-server</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-jose</artifactId>
+</dependency>
+----
+====
+
+[start=2]
+. Create OIDC app in Okta; add properties to `application.yml` [`ss-application`]
+
+.`src/main/resources/application.yml`
+[%collapsible]
+====
+[source,yml]
+----
+oidc:
+  issuer-uri: https://{yourOktaDomain}/oauth2/default
+  client-id: {yourClientId}
+  client-secret: {yourClientSecret}
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri: ${oidc.issuer-uri}
+        registration:
+          okta:
+            client-id: ${oidc.client-id}
+            client-secret: ${oidc.client-secret}
+      resourceserver:
+        jwt:
+          issuer-uri: ${oidc.issuer-uri}
+----
+====
+
+[start=3]
+. Try to load http://localhost:8080/profiles in your browser, you should be redirected to log in
+
+. Create `SecurityConfiguration.java` for resource server and CORS [`ss-config`]
+
+.`src/main/java/com/example/demo/SecurityConfiguration.java`
+[%collapsible]
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import java.util.Collections;
+
+@EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
+public class SecurityConfiguration {
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        // @formatter:off
+        return http
+                .csrf()
+                    .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
+                    .and()
+                .authorizeExchange()
+                    .pathMatchers("/ws/**").permitAll()
+                    .anyExchange().authenticated()
+                    .and()
+                .oauth2Login()
+                    .and()
+                .oauth2ResourceServer()
+                    .jwt().and().and().build();
+        // @formatter:on
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+        configuration.setAllowedMethods(Collections.singletonList("GET"));
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+}
+----
+====
+
+[start=5]
+. Add Okta's React SDK using OktaDev Schematics
+
+  npm install @oktadev/schematics
+  schematics @oktadev/schematics:add-auth
+
+. View changes in `App.tsx` and new `Home.tsx` file
+
+. Add `<ProfileList auth={this.props.auth}/>` in `Home.tsx`
+
+. Add CSS to `App.css` to make buttons more visible [`react-css`]
+
+  .Buttons {
+    margin-top: 10px;
+  }
+
+  .Buttons button {
+    font-size: 1em;
+  }
+
+. Restart, show app and Loading... view error in your developer console
+
+. Update `ProfileList` to add an authorization header  [`react-token`]
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+async componentDidMount() {
+  this.setState({isLoading: true});
+
+  const response = await fetch('http://localhost:8080/profiles', {
+    headers: {
+      Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+    }
+  });
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
+}
+----
+====
+
+[start=11]
+. Modify `WebSocketConfiguration.java` to only return an ID.
+
+.`src/main/java/com/example/demo/WebSocketConfiguration.java`
+[%collapsible]
+====
+[source,java]
+----
+return session -> {
+
+    Flux<WebSocketMessage> messageFlux = publish.map(evt -> {
+        try {
+            Profile profile = (Profile) evt.getSource();
+            Map<String, String> data = new HashMap<>();
+            data.put("id", profile.getId());
+            return objectMapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }).map(str -> {
+        log.info("sending " + str);
+        return session.textMessage(str);
+    });
+
+    return session.send(messageFlux);
+};
+----
+====
+
+[start=12]
+. Modify `ProfileList` to fetch a profile by ID when added. [`react-websocket2`]
+
+.`src/ProfileList.tsx`
+[%collapsible]
+====
+[source,tsx]
+----
+async componentDidMount() {
+  this.setState({isLoading: true});
+  const headers = {
+    headers: {Authorization: 'Bearer ' + await this.props.auth.getAccessToken()} // <1>
+  };
+
+  const response = await fetch('http://localhost:8080/profiles', headers); // <2>
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
+
+  const socket = new WebSocket('ws://localhost:8080/ws/profiles');
+  socket.addEventListener('message', async (event: any) => {
+    const message = JSON.parse(event.data);
+    const request = await fetch(`http://localhost:8080/profiles/${message.id}`, headers); // <3>
+    const profile = await request.json();
+    this.state.profiles.push(profile);
+    this.setState({profiles: this.state.profiles});
+  });
+}
+----
+====
+
+[start=13]
+. Create an access token using https://oidcdebugger.com[OIDC Debugger]
+
+. Modify `./create-stream.sh` to use the access token and show profiles being added.
+
+.`create-stream.sh`
+[%collapsible]
+====
+[source,bash]
+----
+#!/bin/bash
+port=${1:-8080}
+count=0
+accessToken=<your access token>
+
+profile () {
+  ((count++))
+  echo "posting #${count}"
+  http POST http://localhost:${port}/profiles email="random${count}" "Authorization: Bearer ${accessToken}"
+  if [ $count -gt 120 ]
+  then
+    echo "count is $count, ending..."
+    break
+  fi
+}
+
+while sleep 1; do profile; done
+----
+====
+
+[start=15]
+. Fini!
+
+Questions or comments? Please send a message to https://twitter.com/mraible[@mraible] on Twitter, or ask your question on https://developer.okta.com/blog/2018/09/25/spring-webflux-websockets-react[this blog post].

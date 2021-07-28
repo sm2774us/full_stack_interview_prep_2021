@@ -1,0 +1,24 @@
+{
+  "startup_app": {
+    "name": "Bloomberg-API-Demo",
+    "description": "Bloomberg-API-Demo",
+    "url": "https://openfin.github.io/bloomberg-service/demo/index.html",
+    "uuid": "Bloomberg-API-Demo",
+    "autoShow": true
+  },
+  "runtime": {
+    "arguments": "",
+    "version": "11.69.42.29"
+  },
+  "shortcut": {
+    "company": "OpenFin",
+    "description": "OpenFin Bloomberg Demo",
+    "name": "OpenFin Bloomberg Demo"
+  },
+  "services": [
+    {
+      "name": "bloomberg",
+      "manifestUrl": "https://openfin.github.io/bloomberg-service/provider/app.json"
+    }
+  ]
+}
