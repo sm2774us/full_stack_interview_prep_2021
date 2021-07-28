@@ -233,6 +233,175 @@ The following code excerpts show the methods that render two charts of different
 
 This code is self-describing and requires to provide data-binding information and defines some of the properties.
 
+## Where can I find the code?
+The code can be found in the GitHub repository => [https://github.com/sm2774us/full_stack_interview_prep_2021/tree/main/work_portfolio/openfin/openfin-and-wijmo-js-components-old](https://github.com/sm2774us/full_stack_interview_prep_2021/tree/main/work_portfolio/openfin/openfin-and-wijmo-js-components-old)
+
+## OpenFin Platforms Overview
+OpenFin Platforms introduces the new abstraction Views. It made possible to separate content from windows. Content (a web application) is loaded into an OpenFin View which is then attached to a window. Views have no windowing functionality of their own. They must be attached to a window, and given bounds relative to that window, in order to display their content. Views are possible to be configured in different arrangements: columns/rows, tabs and grid.
+
+As stated in OpenFin documentation, OpenFin Platforms application has the following architecture:
+
+* A Platform Controller that exposes functionality for coordinating views and windows.
+* One or more child windows of the controller, which may or may not have a layout of views. A collection of windows is referred to as a snapshot.
+* One or more views, which provide content. They reside as part of a window's layout.
+
+## Migrating to a Single OpenFin App
+The main concern was to move to the single app manifest. The fragment below describes the default snapshot used to define pre-configured workspace in the new Stock Portfolio App:
+
+```json
+"snapshot": {         
+        "windows": [ 
+            { 
+                "layout": { 
+                    "content": [ 
+                        { 
+                            "type": "column", 
+                            "content": [ 
+                                { 
+                                    "type": "row", 
+                                    "content": [ 
+                                        { 
+                                            "type": "component", 
+                                            "componentName": "view", 
+                                            "componentState": { 
+                                                "name": "component_stock_portfolio", 
+                                                "url": "http://localhost:4200" 
+                                            } 
+                                        }, 
+                                        { 
+                                            "type": "component", 
+                                            "componentName": "view", 
+                                            "componentState": { 
+                                                "name": "component_stock_changes_chart", 
+                                                "url": "http://localhost:4300/#/changes" 
+                                            } 
+                                        } 
+                                    ] 
+                                }, 
+                                { 
+                                    "type": "row", 
+                                    "content": [ 
+                                        { 
+                                            "type": "component", 
+                                            "componentName": "view", 
+                                            "componentState": { 
+                                                "name": "component_stock_trading", 
+                                                "url": "http://localhost:3300" 
+                                            } 
+                                        } 
+                                    ] 
+                                } 
+                            ] 
+                        }                         
+                    ] 
+                } 
+            }, 
+            { 
+                "layout": { 
+                    "content": [ 
+                        { 
+                            "type": "column", 
+                            "content": [ 
+                                { 
+                                    "type": "component", 
+                                    "componentName": "view", 
+                                    "componentState": { 
+                                        "name": "component_stock_hloc_chart", 
+                                        "url": "http://localhost:3100" 
+                                    } 
+                                }, 
+                                { 
+                                    "type": "component", 
+                                    "componentName": "view", 
+                                    "componentState": { 
+                                        "name": "component_stock_trendline_chart", 
+                                        "url": "http://localhost:3100" 
+                                    } 
+                                } 
+                            ] 
+                        }                         
+                    ] 
+                } 
+            } 
+        ]
+```
+As shown above, the default pre-configured workspace consists of two windows. These windows load web applications from the URLs provided in view configuration sections.
+
+## Customizing Window
+OpenFin Platforms comes pre-packaged with OpenFin’s Standard Window, which has standard window controls (close, minimize, maximize) and some style customization.
+
+As the name suggests, the Standard Window is used as the default window you get if you don’t specify the window’s URL upon creation.
+
+The concern was to retain Window styles from preview version as much as possible. OpenFin Platform supports two options to customize window:
+
+  1. By providing URL to the styles of OpenFin’s Standard Window
+
+  2. By providing URL to the custom window different than Standard OpenFin
+
+It was decided that the second option is most appropriate.
+
+This task consists of two steps. First, it is needed to define the HTML file that represents the custom window. The HTML file must contain a div HTML element with the ID layout-container where the layout will be rendered. In our case the HTML file is rather simple and represents the frameless window.
+
+You can the find sources here:
+
+```
+packages\stock-ui\src\platform-window.
+```
+
+Then the URL to the HTML file should be specified in app manifest:
+
+```json
+"platform": { 
+        ... 
+        "defaultWindowOptions": { 
+            "url": "http://localhost:3000/platform-window/index.html", 
+            ... 
+        } 
+    }
+```
+
+## Customizing Platform Behavior
+OpenFin Platform allows to overwrite or extend default Platform behavior by providing a custom Provider. The Platform Provider is the communication hub that coordinates between all windows in a Platform. This Provider runs in a hidden window which is represented by the HTML file.
+
+Similar the window customization, the behavior customization also occurs in the HTML file. Custom HTML file must call fin.Platform.init to initialize the platform and open the manifest-defined snapshot. fin.Platform.init takes an options argument which may contain an overrideCallback property. The class that implements default Platform behavior is provided as an argument to this callback, and OpenFin uses the callback's return value to handle Platform functionality.
+
+Using overrideCallback allows to override default functionality in order to customize Platform behavior.
+
+The code below shows how to override getSnapshot behavior:
+
+```JavaScript
+const overrideCallback = (Provider) => { 
+    class MyOverride extends Provider { 
+        async getSnapshot() { 
+            // Custom code here 
+        } 
+    } 
+    return new MyOverride(); 
+}; 
+fin.Platform.init({ overrideCallback }); 
+```
+
+The new Stock Portfolio App uses this mechanism to save app layout when app quits and to restore app layout when app launches. It makes possible to persist user workspace between app launches.
+
+As in the previous section, the URL to custom HTML file is also specified in app manifest. In our case it looks as follows:
+
+```json
+"platform": { 
+        ... 
+        "providerUrl": "http://localhost:3000/platform-provider/index.html", 
+        ... 
+    }
+```
+
+Both custom HTML file and Provider can be found here:
+
+```
+packages\stock-ui\src\platform-provider.
+```
+
+## Where can I find the code?
+The code can be found in the GitHub repository => [https://github.com/sm2774us/full_stack_interview_prep_2021/tree/main/work_portfolio/openfin/openfin-and-wijmo-js-components](https://github.com/sm2774us/full_stack_interview_prep_2021/tree/main/work_portfolio/openfin/openfin-and-wijmo-js-components)
+
 ## Developing Financial Applications
 Whether you’re developing financial applications, or regularly use financial apps, OpenFin delivers benefits from different points of view. On the technical side, OpenFin provides an environment for the rapid development of financial applications.
 
