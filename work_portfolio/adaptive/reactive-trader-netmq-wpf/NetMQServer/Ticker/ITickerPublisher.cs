@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Common;
+
+namespace NetMQServer.Ticker
+{
+    public interface ITickerPublisher
+    {
+        void Start();
+        void Stop();
+        void PublishTrade(TickerDto ticker);   
+     
+    }
+}

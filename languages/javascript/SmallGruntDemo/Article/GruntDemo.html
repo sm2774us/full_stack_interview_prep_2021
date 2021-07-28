@@ -1,0 +1,508 @@
+
+<head>
+</head>
+
+<h1>Introduction</h1>
+<p>Any developer worth their salt will of course be playing around with Visual 
+Studio 2015, and those of us that are interested in web development would be of 
+course trying out the new ASP vNext capabilities.</p>
+<p>One thing that hit me straight away was that Microsoft have indeed stuck by 
+their promises to embrace more &quot;open source&quot; works with ASP vNext. As such any 
+new ASP vNext you do you will likely have to learn these things</p>
+<ul>
+	<li><a href="https://www.npmjs.com" target="_blank">NPM</a> (<a href="https://nodejs.org" target="_blank">Node</a> package management system)</li>
+	<li>Bower (Client library package management system (requires node,js 
+	<a href="https://www.npmjs.com" target="_blank">NPM</a>))</li>
+	<li>Either <a href="gulpjs.com" target="_blank">Gulp</a> /
+	<a href="gruntjs.com" target="_blank">Grunt</a>, for automating repetive tasks</li>
+	<li>NuGet (for managing .NET package dependencies)</li>
+</ul>
+<p>&nbsp;</p>
+<p>NPM and Bower are extremely easy to work with, so you should not fear them. 
+As for NuGet, well if you are a .NET developer you have more than likely used 
+NuGet before, nothing new there.</p>
+<p>&nbsp;</p>
+<p>Me personally I had used <a href="https://nodejs.org" target="_blank">Node</a> and NPM before, I had not used Bower, but 
+was comfortable with that within a day. As for
+<a href="gulpjs.com" target="_blank">Gulp</a> /
+<a href="gruntjs.com" target="_blank">Grunt</a>, I had obviously 
+heard of these tools but had not used them. I looked at both and actually 
+preferred the syntax of <a href="gruntjs.com" target="_blank">Grunt</a> over 
+<a href="gulpjs.com" target="_blank">Gulp</a>. </p>
+<p>&nbsp;</p>
+<p>One thing that <a href="gulpjs.com" target="_blank">Gulp</a> claims to have done better is to 
+stream files, such that they can be done asynchronously. That said I just felt 
+more at home working with <a href="gruntjs.com" target="_blank">Grunt</a>, so I decided to use that. One thing of note 
+is that with ASP vNext you may use either <a href="gruntjs.com" target="_blank">Grunt</a> or 
+<a href="gulpjs.com" target="_blank">Gulp</a>. </p>
+<p>So decided to learn about <a href="gruntjs.com" target="_blank">Grunt</a>, and just thought I would share my 
+findings here with any of you that may be in the same ship as me (ie a&nbsp; 
+beginner with a JavaScript task runner).</p>
+<p>&nbsp;</p>
+
+<h1>Getting Started</h1>
+<p>The best place to get started with <a href="gruntjs.com" target="_blank">Grunt</a>, 
+is by actually going to the <a href="gruntjs.com" target="_blank">Grunt</a> web 
+site, where they are many useful guidelines to get you started. However the 
+following sections should hopefully at least get you a little more familiar with
+<a href="gruntjs.com" target="_blank">Grunt</a>, and by reading this and the
+<a href="gruntjs.com" target="_blank">Grunt</a> resources at the
+<a href="gruntjs.com" target="_blank">Grunt</a> web site you should be able to 
+get up and running with <a href="gruntjs.com" target="_blank">Grunt</a> pretty 
+easily.</p>
+<p>&nbsp;</p>
+<h1>Where Is The Code?</h1>
+<p>As usual you can grab the code from github account :&nbsp;
+<a href="https://github.com/sachabarber/SmallGruntDemo">https://github.com/sachabarber/SmallGruntDemo</a></p>
+<p>&nbsp;</p>
+
+<h1>Prerequisites</h1>
+<p>You should ensure that you do this before you carry on with the rest of the 
+article</p>
+<p>&nbsp;</p>
+<p><strong>Installing Grunt</strong></p>
+<p>In order to install <a href="gruntjs.com" target="_blank">Grunt</a> there are 
+a couple of things you MUST do. These are outlined below.</p>
+<ol>
+	<li>Install <a href="https://nodejs.org" target="_blank">Node</a> (as we 
+	need <a href="https://www.npmjs.com" target="_blank">NPM</a> to run
+	<a href="gruntjs.com" target="_blank">Grunt</a>. So we need
+	<a href="https://nodejs.org" target="_blank">Node</a> as
+	<a href="https://www.npmjs.com" target="_blank">NPM</a> needs
+	<a href="https://nodejs.org" target="_blank">Node</a>)</li>
+	<li>From the &quot;Node.js command line&quot; run this command &quot;<strong>npm install -g 
+	grunt</strong>&quot;. 
+	This installs <a href="gruntjs.com" target="_blank">Grunt</a> itself 
+	globally</li>
+	<li>From the &quot;Node.js command line&quot; run this command &quot;<strong>npm install -g 
+	grunt-cli</strong>&quot;. This installs the <a href="gruntjs.com" target="_blank">Grunt</a> 
+	client globally</li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>The Idea Behind Grunt</h1>
+<p>As I have already state <a href="gruntjs.com" target="_blank">Grunt</a> is a 
+task runner. It is written in JavaScript and has a configuration file 
+(gruntfile.js) that details the tasks that need to be run. It is a bit like 
+MSBuild / NANT in the fact that there is a default task. </p>
+<p>&nbsp;</p>
+<p>Tasks can also call 
+other tasks. <a href="gruntjs.com" target="_blank">Grunt</a> also relies on
+<a href="https://www.npmjs.com" target="_blank">NPM</a> to install certain
+<a href="gruntjs.com" target="_blank">Grunt</a> plugins.&nbsp; </p>
+<p>Huh, what is a <a href="gruntjs.com" target="_blank">Grunt</a> plugin? Well a
+<a href="gruntjs.com" target="_blank">Grunt</a> plugin, is simple a prebuilt
+<a href="gruntjs.com" target="_blank">Grunt</a> task that has either been 
+authored by the <a href="gruntjs.com" target="_blank">Grunt</a> team or the
+<a href="gruntjs.com" target="_blank">Grunt</a> community.</p>
+<p>The official <a href="gruntjs.com" target="_blank">Grunt</a> team plugins all 
+follow the naming conventions of &quot;<strong>grunt-contrib-</strong>XXXXXX&quot;. That 
+way you can tell the &quot;Official&quot; packages from the non official packages.</p>
+<p>These <a href="gruntjs.com" target="_blank">Grunt</a> plugins (that are 
+actually installed by using <a href="https://www.npmjs.com" target="_blank">NPM</a>) 
+need to get loaded into the <a href="gruntjs.com" target="_blank">Grunt</a> 
+context. This is done using the following sort of line:</p>
+<p>&nbsp;</p>
+<pre lang="jscript">
+grunt.loadNpmTasks('grunt-contrib-clean');
+</pre>
+<p>&nbsp;</p>
+<p>Once a plugin is loaded it may be used by <a href="gruntjs.com" target="_blank">Grunt</a>. 
+Here is an example of how to use the loaded <a href="gruntjs.com" target="_blank">Grunt</a> plugin, 
+where it can be seen that the plugin has a name, and is a JSON object. Each plugin has its own API, so you will need to check the API documenation 
+for the <a href="gruntjs.com" target="_blank">Grunt</a> plugin you choose to 
+use. </p>
+<p>&nbsp;</p>
+<pre lang="jscript">
+// Cleans directories
+clean: {
+    dist: [
+        'dist/**/*'
+    ],
+    tmp: [
+        'tmp/**/*'
+    ]
+},
+</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>The Demo App</h1>
+<p>Ok so now on to what the demo app does. The demo app is a very simple VS2013 
+solution that does the following things:</p>
+<ul>
+	<li>Will use the
+	<a href="http://www.typescriptlang.org/Samples#HelloWorld" target="_blank">Typescript Greeter</a> (hello world example in 
+	<a href="http://www.typescriptlang.org" target="_blank">TypeScript</a>) example</li>
+	<li>Will use jquery as an external module, and we will use the ambient type 
+	declarations for jquery for
+	<a href="http://www.typescriptlang.org" target="_blank">TypeScript</a> in 
+	order to get the require/export package working as we need</li>
+	<li>Willl use <strong>grunt-browserify</strong></li>
+	<li>Will use <strong>grunt-contrib-clean</strong> to clean certain directories</li>
+	<li>Will use <strong>grunt-ts</strong> to compile 
+	<a href="http://www.typescriptlang.org" target="_blank">TypeScript</a> files (Note 
+	that Visual Studio has excellent support for
+	<a href="http://www.typescriptlang.org" target="_blank">TypeScript</a> compilation, but I 
+	just wanted to do everything I could using <a href="gruntjs.com" target="_blank">Grunt</a> 
+	to prove something to myself) </li>
+	<li>Will use <strong>grunt-browserify</strong> to package the javascript source files to a 
+	single output file</li>
+	<li>Will use <strong>grunt-contrib-watch</strong> to watch for changes in source files, and 
+	run tasks when these files change</li>
+	<li>Will use <strong>grunt-contrib-uglify</strong> to minify the javascript source files (if 
+	the Grunt file task was the &quot;<code>prod</code>&quot; task) to a single output file</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Extra Things You Will Need To Do For The Demo App</h2>
+<p>You need to carry out these steps if you want to work with the demo code.</p>
+<p>&nbsp;</p>
+<h3>Step 1 : Getting Missing NPM Modules</h3>
+<p>As is the case with NuGet where you would not submit the packages themselves 
+to the source control repository (github for example). So it is with NPM, you 
+would check in a configuration file (<code>package.json</code>) that tell NPM 
+what packages are needed. You should now ensure you do this:</p>
+<p>From Node.js command line, Change to directory which has package.json in it, 
+and run the following command line<br>&quot;<strong>npm install</strong>&quot;. This will 
+fetch all the packages (from the internet, so make sure you have a connection) 
+using the information contained within your <code>package.json</code> file. You 
+should end up with something like this, where the &quot;<strong>node_modules</strong>&quot; 
+directory will contain all the downloaded packages.</p>
+<p>&nbsp;</p>
+<p><img alt="" height="619" src="Npms.png" width="430"></p>
+<p>&nbsp;</p>
+<h2>A Look At The Project Structure</h2>
+<p>The project structure that we are using for this small demo app looks like 
+this</p>
+<p><img alt="" height="453" src="struct.png" width="430"></p>
+<p>&nbsp;</p>
+<ul>
+	<li>The <strong>src</strong> folder holds our source files (which for this 
+	demo app are all <a href="http://www.typescriptlang.org" target="_blank">TypeScript</a>)</li>
+	<li>The <strong>tmp</strong> folder will hold the transpiled
+	<a href="http://www.typescriptlang.org" target="_blank">TypeScript</a> -&gt; 
+	JavaScript files</li>
+	<li>The <strong>dist</strong> folder will hold the final (perhaps minified) 
+	distributable single file app.js, which will be referenced by Index.html</li>
+</ul>
+<p>&nbsp;</p>
+<p>It can also be seen that this is where the NPM <code>package.json</code> and <a href="gruntjs.com" target="_blank">Grunt</a> 
+	<code>gruntfile.js</code> files live.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>A Look At The Grunt File (gruntfile.js)</h2>
+<p>Here is the complete demo app <a href="gruntjs.com" target="_blank">Grunt</a> 
+	<code>gruntfile.js</code> file.</p>
+<pre lang="jscript">
+module.exports = function (grunt) {
+    'use strict';
+
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-ts');
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+
+
+    //INSTRUCTIONS
+	//1. Install Node.js
+	//2. From Node.js command line run this command "npm install -g grunt"
+	//3. From Node.js command line run this command "npm install -g grunt-cli"
+	//3. From Node.js command line, Change to directory which has package.json in it, 
+	//   and run the following command lines 
+	//   a) "npm install"
+	//   b) "grunt watch"
+ 
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
+        // Cleans directories
+        clean: {
+            dist: [
+                'dist/**/*'
+            ],
+            tmp: [
+                'tmp/**/*'
+            ]
+        },
+
+        // Typescript transpiler (Typescript to JS)
+        ts: {
+            options: {
+                fast: 'never',
+                target: 'es5',
+                module: 'commonjs',
+                sourceMap: true
+            },
+            index: {
+                src: ['./src/**/*.ts'],
+                outDir: './tmp'
+            }
+        },
+
+        // Package 
+        browserify: {
+            './dist/app.js': ['./tmp/*.js', './src/Jquery/jquery.js']
+        },
+
+
+        // Minify 
+        uglify: {
+            my_target: {
+                options: {
+                    sourceMap: 'dist/&lt;%= pkg.name %/&gt;.map',
+                    sourceMapRoot: '..',
+                    sourceMappingURL: '/&lt;%= pkg.name %/&gt;.map'
+                },
+                files: {
+                    './dist/app.js': ['./dist/app.js']
+                }
+            }
+        },		
+		
+	// Watch 
+        watch: {
+		  scripts: {
+			files: ['./src/**/*.ts'],
+			tasks: ['dev'],
+			options: {
+			  event: ['all'],
+			}
+		  }
+		}
+
+
+    });
+
+    // setup default task to run dev task 
+    grunt.registerTask('default', ['dev']);
+
+    // +++++++++++++++++++++++++++++++++++++++++++
+    // Prod task
+    // +++++++++++++++++++++++++++++++++++++++++++
+    // 1. Cleans directories
+    // 2. Runs typescript transpiling task
+    // 3. Package using Browserify
+    // 4. Minify using Uglify
+    grunt.registerTask('prod', [
+		'clean',
+		'ts:index',
+        'browserify',
+        'uglify'
+    ]);
+
+
+    // +++++++++++++++++++++++++++++++++++++++++++
+    // Dev task
+    // +++++++++++++++++++++++++++++++++++++++++++
+    // 1. Cleans directories
+    // 2. Runs typescript transpiling task
+    // 3. Package using Browserify
+    grunt.registerTask('dev', [
+       'clean',
+       'ts:index',
+       'browserify'
+    ]);
+
+};
+</pre>
+<p>&nbsp;</p>
+<p>As you can see the <code>gruntfile.js</code> is made up of&nbsp; a number of 
+tasks, each with its own section. We will look at each of these in turn below.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>The Demo Tasks A Deeper Look</h2>
+<p>This section will dive into each of the demo apps <a href="gruntjs.com" target="_blank">Grunt</a> 
+	tasks in more detail.</p>
+<p>&nbsp;</p>
+<h3>The &quot;default&quot; Task</h3>
+<p>The &quot;<strong>default</strong>&quot; task is what would be called if you ran the &quot;<strong>grunt</strong>&quot; 
+command line from the directory that contains the <code>gruntfile.js</code> 
+file. It simply runs the following other tasks in order</p>
+<ol>
+	<li>clean</li>
+	<li>ts:index</li>
+	<li>browserify</li>
+</ol>
+<p>We will talk more about these tasks later</p>
+<p>&nbsp;</p>
+<h3>&nbsp;</h3>
+<h3>The &quot;dev&quot; Task</h3>
+<p>The &quot;<strong>dev</strong>&quot; task is what would be called if you ran the &quot;<strong>grunt 
+dev</strong>&quot; command line from the directory that contains the <code>
+gruntfile.js</code> file.&nbsp; It is intended to be run when you are developing 
+an app, as such no minification of the code is performed. It simply runs the 
+following other tasks in order</p>
+<ol>
+	<li>clean</li>
+	<li>ts:index</li>
+	<li>browserify</li>
+</ol>
+<p>We will talk more about these tasks later</p>
+<p>&nbsp;</p>
+<h3>&nbsp;</h3>
+<h3>The &quot;prod&quot; Task</h3>
+<p>The &quot;<strong>dev</strong>&quot; task is what would be called if you ran the &quot;<strong>grunt 
+prod</strong>&quot; command line from the directory that contains the <code>
+gruntfile.js</code> file.&nbsp; It is intended to be run when you are about to 
+deploy an app, as such minification of the code <strong>IS</strong> performed. 
+It simply runs the following other tasks in order</p>
+<ol>
+	<li>clean</li>
+	<li>ts:index</li>
+	<li>browserify</li>
+	<li>Uglify</li>
+</ol>
+<p>We will talk more about these tasks later</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>The &quot;watch&quot; Task</h3>
+<p>The &quot;<strong>watch</strong>&quot; task makes use of the following NPM package, and its sole job is 
+to monitor a set of input files for changes, and then run x-many other tasks.</p>
+<ul>
+	<li>grunt-contrib-watch</li>
+</ul>
+<p>&nbsp;</p>
+<p>In order to initiate this watching of the files you MUST issue the following <a href="gruntjs.com" target="_blank">Grunt</a> 
+	command line &quot;<strong>grunt watch</strong>&quot;. Here is the relevant section of 
+the <a href="gruntjs.com" target="_blank">Grunt</a> 
+	<code>gruntfile.js</code></p>
+<pre lang="jscript">
+module.exports = function (grunt) {
+    'use strict';
+
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+		
+	// Watch 
+        watch: {
+		  scripts: {
+			files: ['./src/**/*.ts'],
+			tasks: ['dev'],
+			options: {
+			  event: ['all'],
+			},
+		  },
+		},
+
+    });
+};</pre>
+<p>&nbsp;</p>
+<p>It can seen that this task monitors the files in the <strong>src</strong> 
+folder and will run the &quot;<strong>dev</strong>&quot; task when any event (such as add, 
+change, delete, rename) of these files occur.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>The &quot;clean&quot; Task</h3>
+<p>The &quot;<strong>clean</strong>&quot; task makes use of the following NPM 
+package, and its sole job is to clean directories</p>
+<ul>
+	<li>grunt-contrib-clean</li>
+</ul>
+<p>&nbsp;</p>
+<p>Here is the relevant section of the <a href="gruntjs.com" target="_blank">Grunt</a> 
+	<code>gruntfile.js</code></p>
+<pre lang="jscript">
+&nbsp;</pre>
+<pre lang="jscript">
+module.exports = function (grunt) {
+    'use strict';
+
+
+    grunt.loadNpmTasks('grunt-contrib-<span lang="en-gb">clean</span>');
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+		
+        // Cleans directories
+        clean: {
+            dist: [
+                'dist/**/*'
+            ],
+            tmp: [
+                'tmp/**/*'
+            ]
+        },
+    });
+};</pre>
+<p>&nbsp;</p>
+<p>It can seen that this task cleans a set of files contained with the targets 
+specified by the JSON objects properties. Like I said <strong>EVERY</strong>&nbsp; <a href="gruntjs.com" target="_blank">Grunt</a> 
+task will be different, so you MUST consult the <a href="gruntjs.com" target="_blank">Grunt</a> 
+tasks API docs.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>The &quot;ts&quot; Task</h3>
+<p>&nbsp;</p>
+<h3>The &quot;browserify&quot; Task</h3>
+<p>&nbsp;</p>
+<h3>&nbsp;</h3>
+<h3>The &quot;uglify&quot; Task</h3>
+<p>The &quot;<strong>uglify</strong>&quot; task makes use of the following NPM 
+package, and its sole job is to minify the source file(s) and produce a single 
+minified output file</p>
+<ul>
+	<li>grunt-contrib-uglify</li>
+</ul>
+<p>&nbsp;</p>
+<p>Here is the relevant section of the <a href="gruntjs.com" target="_blank">Grunt</a> 
+	<code>gruntfile.js</code></p>
+<p>&nbsp;</p>
+<pre lang="jscript">
+module.exports = function (grunt) {
+    'use strict';
+
+
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+ 
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
+
+		
+		
+        // Minify 
+        uglify: {
+            my_target: {
+                options: {
+                    sourceMap: 'dist/&lt;%= pkg.name %&gt;.map',
+                    sourceMapRoot: '..',
+                    sourceMappingURL: '&lt;%= pkg.name %&gt;.map'
+                },
+                files: {
+                    './dist/app.js': ['./dist/app.js']
+                }
+            }
+        },
+
+    });
+}</pre>
+<p>&nbsp;</p>
+<p>The <code>&lt;%= pkg.name %&gt;</code> will be replaced by the name of the current 
+file. So app in this case.</p>
+<p>&nbsp;</p>
+<p>Here is what the resulting <strong>app.js </strong>file looks like when it is finished being 
+outputted by the &quot;<strong>uglify</strong>&quot; task. See how it is also 
+minified.</p>
+<p>&nbsp;</p>
+<p><img alt="" height="133" src="min.png" width="430"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h1>That's It</h1>
+<p>Anyway that is all I wanted to say this time. As always if you liked what you saw, you can always leave a vote/comment they are always appreciated</p>
+

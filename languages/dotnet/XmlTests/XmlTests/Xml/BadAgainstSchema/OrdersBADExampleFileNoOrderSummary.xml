@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<OrderList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Orders>
+    <Order>
+      <Customer>
+        <Title>Mr</Title>
+        <FirstName>John</FirstName>
+        <LastName>Barnes</LastName>
+        <Email>Email</Email>
+        <Phone>13311</Phone>
+      </Customer>
+    </Order>
+    <Order>
+      <Customer>
+        <Title>Mr</Title>
+        <FirstName>John</FirstName>
+        <LastName>Barnes</LastName>
+        <Email>Email</Email>
+        <Phone>13311</Phone>
+      </Customer>
+    </Order>
+  </Orders>
+</OrderList>
