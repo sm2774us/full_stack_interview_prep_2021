@@ -6,11 +6,11 @@ desired workspace.
 
 Here is an example of a possible workspace dashboard:
 
-![Wijmo-Open-Fin-Stock-Portfolio-App-Image-1](./assets/Wijmo-Open-Fin-Stock-Portfolio-App-Image-1.PNG)
+![Wijmo-Open-Fin-Stock-Portfolio-App-Image-1](./assets/Wijmo-Open-Fin-Stock-Portfolio-App-Image-1.png)
 
 OpenFin notifications provide support for notifications. Wijmo Stock Portfolio utilizes this by providing the user the ability to view a portfolio change history in the Notification Center:
 
-![Wijmo-Open-Fin-Stock-Portfolio-App-Image-2](./assets/Wijmo-Open-Fin-Stock-Portfolio-App-Image-2.PNG)
+![Wijmo-Open-Fin-Stock-Portfolio-App-Image-2](./assets/Wijmo-Open-Fin-Stock-Portfolio-App-Image-2.png)
 
 The stock portfolio app consists of several windows. Each window is implemented using different web frameworks (like React, Angular, and Web Components). OpenFin’s new Platform API allows users to arrange and customize windows into the desired workspace.
 
@@ -63,7 +63,7 @@ Install the app and launch it on a Windows machine. Zero technical expertise req
 ## Directory Structure
 This project is organized in the following way:
 
-![stock-portfolio-app-directory-layout](./assets/stock-portfolio-app-directory-layout.PNG)
+![stock-portfolio-app-directory-layout](./assets/stock-portfolio-app-directory-layout.png)
 
 Directory ‘./packages’ includes different projects that act as building blocks for this sample application:
 
@@ -79,14 +79,14 @@ As previously discussed, Wijmo Stock Portfolio is OpenFin application. OpenFin p
 
 In this sample, every application window loads separate web applications. For demonstration purposes, these web applications are built on different web technologies, as shown in this figure:
 
-![stock-portfolio-used-technologies](./assets/stock-portfolio-used-technologies.PNG)
+![stock-portfolio-used-technologies](./assets/stock-portfolio-used-technologies.png)
 
 These web applications utilize Wijmo controls for building UI, regardless of what web technology used.
 
 ## The Stock Portfolio Architecture
 The following diagram shows Wijmo Stock Portfolio architecture:
 
-![stock-portfolio-architecture](./assets/stock-portfolio-architecture.PNG)
+![stock-portfolio-architecture](./assets/stock-portfolio-architecture.png)
 
 Every application window is running in a separate OpenFin application under OpenFin Runtime. When the user launches the application, OpenFin Runtime first loads the Stock Portfolio configuration file (step #1 on the diagram), then starts the Stock Portfolio application and opens web application in the main window by URL retrieved from the configuration file (step #2 on the diagram).
 
