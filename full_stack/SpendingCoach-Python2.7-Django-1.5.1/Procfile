@@ -1,0 +1,1 @@
+web: gunicorn SpendingCoach.wsgi --log-file -
