@@ -59,7 +59,7 @@ So while working with the Platform API, I found out that you can save the curren
 
 As a developer, you can easily retrieve the existing snapshot of your saved platform by using the **applySnapshot** method.
 
-```javascript
+```JavaScript
 platform.applySnapshot(mySnapshot, {closeExistingWindows: true});
 ```
 

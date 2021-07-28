@@ -42,7 +42,7 @@ export class AppComponent {
         configService: ConfigService,
         changeDetector: ChangeDetectorRef
     ) {
-        document.title = Config.NAME + ' ' + Config.VERSION;
+        document.title = Config.NAME;
 
         // create portfolio
         this.portfolio = new Portfolio(this.dataService);
@@ -127,6 +127,22 @@ export class AppComponent {
 
         this._channelPromise = fin.InterApplicationBus.Channel.create(ChannelName)
             .then(channel => this._handleCreate(channel));
+
+        window.addEventListener('unload', () => {
+            console.log('unload');            
+            this._disconnect();
+        });
+    }
+
+    private _disconnect() {
+        this._channelPromise.then(connection => {
+            console.log('Channels: disconnecting');
+            return connection.destroy();
+        }).then(() => {
+            console.log('Channels: disconnected');
+        }).catch(err => {
+            console.error('Channels: disconnection failed', err);
+        });
     }
 
     private _handleCreate(channel: ChannelProvider): ChannelProvider {

@@ -1,6 +1,6 @@
 {
   "name": "stock-portfolio",
-  "version": "1.0.8",
+  "version": "2.0.1",
   "description": "A financial sample that demonstrates the usage of Wijmo controls in OpenFin application",
   "scripts": {
     "start": "concurrently -k -s first \"npm:server-chart\" \"npm:server-grid\" \"npm:openfin-grid\"",
@@ -56,10 +56,10 @@
     "@angular/cli": "~8.3.0",
     "@angular/compiler-cli": "~8.2.3",
     "@angular/language-service": "~8.2.3",
-    "@types/openfin": "^43.0.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@types/openfin": "^49.0.0",
     "codelyzer": "^5.0.0",
     "concurrently": "4.1.2",
     "jasmine-core": "~3.4.0",
