@@ -18,17 +18,17 @@ A little demo app to try out OpenFin
     - [The TypeScript](#the-typescript)
   - [Tiles](#tiles)
     - [What is the Tiles page designed to do?](#what-is-the-tiles-page-designed-to-do)
-    - [The Tiles Html/React root component](#the-tiles-htmlreact-root-component]
+    - [The Tiles Html-React root component](#the-tiles-html-react-root-component]
     - [The Tiles TypeScript](#the-tiles-typescript)
       - [Tiles Redux Workflow](#tiles-redux-workflow)
     - [What is the Tile component designed to do?](#what-is-the-tile-component-designed-to-do)
   - [Blotter](#blotter)
     - [What is the Blotter page designed to do?](#what-is-the-blotter-page-designed-to-do)
-    - [The Blotter Html/React root component](#the-blotter-htmlreact-root-component]
+    - [The Blotter Html-React root component](#the-blotter-html-react-root-component]
     - [The Blotter TypeScript](#the-blotter-typescript)
   - [Chart](#chart)
     - [What is the Chart page designed to do?](#what-is-the-chart-page-designed-to-do)
-    - [The Chart Html/React root component](#the-chart-htmlreact-root-component]
+    - [The Chart Html-React root component](#the-chart-html-react-root-component]
     - [The Chart TypeScript](#the-chart-typescript)
   - [Persisting State](#persisting-state)
     - [Hand rolled solution](#hand-rolled-solution)
@@ -771,7 +771,7 @@ This is what the overall `TilesInner` component looks like
 
 ![Tiles](./assets/Tiles.png)
 
-### The Tiles Html/React root component
+### The Tiles Html-React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
 
 ### The Tiles TypeScript
@@ -1203,7 +1203,7 @@ This is what the overall `BlotterInner` component looks like
 
 ![Blotter](./assets/Blotter.png)
 
-### The Blotter Html/React root component
+### The Blotter Html-React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
 
 ### The Blotter TypeScript
@@ -1440,7 +1440,7 @@ This is what the overall `ChartInner` component looks like
 
 ![Chart](./assets/Chart.png)
 
-### The Chart Html/React root component
+### The Chart Html-React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
 
 ### The Chart TypeScript
