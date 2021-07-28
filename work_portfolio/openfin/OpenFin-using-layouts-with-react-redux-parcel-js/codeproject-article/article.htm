@@ -1,0 +1,853 @@
+
+<head>
+<style type="text/css">
+.auto-style1 {
+background-color: #FFFF00;
+}
+.auto-style2 {
+	border-width: 0px;
+}
+</style>
+</head>
+
+<div id="TOC"><div>
+<h1>Overview</h1>
+<p>So it has been a very long time since I wrote an article here at codeproject. 
+I have been quite busy on my blog actually, so have been doing more there of 
+late. Thing is I kind of heard about this technology years ago, and kind of knew 
+what it did, but had never really used it. </p>
+<p>That technology is called <a href="https://openfin.co/">OpenFin</a>, whos 
+strap line is &quot;OpenFin OS modernizes financial desktops, enabling instant 
+distribution, strong security and application interoperability&quot;.</p>
+<p>It just so happens that I am in the business of writing trading apps, it's 
+kind of what I do. Those that know me, know that I used to use WPF a lot. 
+Those days seem ages ago now. I don't really touch anything UI related at 
+all anymore. Crist I was doing Scala and Akka for about 1.5 years, so no UI stuff 
+there at all, and my new job is deep server side/cloud. </p>
+<p>That said I do enjoy a bit of UI work, and try to keep up to date, and could not quite resist, looking 
+at <a href="https://openfin.co/">OpenFin</a>, even though it is 
+probably considered pretty old tech by some by now.</p>
+<p>Before I started I did a quick search here at codeproject, and could not 
+believe someone has not written about it before to be honest. So I thought 
+Ok I need to do this then.</p>
+<p>So this article will be about <a href="https://openfin.co/">OpenFin</a>, 
+and also showing the good parts of it, and the not so good parts of it. We 
+will also see a demo app written to use OpenFin, and learn more about what
+<a href="https://openfin.co/">OpenFin</a> is.</p>
+<p>So in nutshell this article will be about looking at
+<a href="https://openfin.co/">OpenFin</a> and walking through a demo app</p>
+<p>&nbsp;</p>
+<h1>What does the final product look like?</h1>
+<p>I think the best way to see what the final product looks like is via this 
+small video</p>
+<p>
+<a href="https://github.com/sachabarber/OpenFinWithReactReduxParcel/blob/master/codeproject-article/Recording%20%234.mp4">
+<img alt="" class="auto-style1" height="214" src="VideoSmall.png" width="450"></a></p>
+<p><i>CLICK TO DOWNLOAD VIDEO</i></p>
+<p>Essentially what I have built is a demo app that is like a VERY VERY 
+cutdown trading app, it has the following features</p>
+<ul>
+	<li>Blotter for seeing past trades (in grid form)</li>
+	<li>Tiles with FAKE ticking data</li>
+	<li>Charts for the tiles, or for the past deals. </li>
+</ul>
+<p>Although there are only 3 windows involved this give us enough meat to 
+really try oiuut Openfin</p>
+<p>&nbsp;</p>
+
+<h1>What tools will we use along the way</h1>
+<p>This is a fairly chunky demo app, and if you do follow along right to the 
+end you can expect to have seen, or could see in the source code the 
+following technologies in use:</p>
+<ul>
+	<li>React</li>
+	<li>Redux</li>
+	<li>Redux thunk</li>
+	<li>ES6</li>
+	<li>SCSS</li>
+	<li>TypeScript</li>
+	<li>Express JS</li>
+	<li>Parcel JS</li>
+	<li>OpenFin</li>
+</ul>
+<h1>Where is the code?</h1>
+<p>The code for this article is actually hosted at Github :<a href="https://github.com/sachabarber/OpenFinWithReactReduxParcel"> 
+https://github.com/sachabarber/OpenFinWithReactReduxParcel</a></p>
+ 
+ 
+<h1>What exactly is Openfin, and what problem is it trying to solve?</h1>
+<p>So as stated above <a href="https://openfin.co/">OpenFin</a> think of 
+themselves as the OS for the financial space. Why is this? Well 
+traditionally financial apps have been very rich in data, and real time 
+information, and have required many rich UI elements, such as charts, 
+docking, desktop integration (notify icons, system tray, toast 
+notifications) that sort of thing.</p>
+<p>I think it is fair to say this used to be done in a mixture of 
+Winforms/WPF and perhaps MFC.</p>
+<p>However things have moved on, and a lot of the UIs that were traditonally 
+done with these tech stacks are now being done with HTML5. However traders 
+are fickle beats and still want their cake and eat it. They like their 
+desktop type of apps.</p>
+<p>The thing is HTML5 offers something that is quite unique, you write it 
+once and run it anywhere.</p>
+<p>So that's great, and a lot of places have switched to HTML5 and are all 
+happily using the latest Single Page Application (SPA) framework. But there 
+is still a need for proper windowed/workspace driven apps. SPA doesnt fit 
+for all apps.</p>
+<p>This is kind of where <a href="https://openfin.co/">OpenFin</a> fits in, 
+where it allows you to write HTML5 applications which are then hosted inside 
+an <a href="https://openfin.co/">OpenFin</a> container type framework, where 
+the <a href="https://openfin.co/">OpenFin</a> runtime will inject itself 
+into your running HTML5 code. There are other <a href="https://openfin.co/">OpenFin</a> 
+APIs for different languages, but the HTML JavaScript API is really the main 
+use case.</p>
+<p>You can kind of think of it like this</p>
+<p><img alt="" height="352" src="OpenFin.png" width="400"></p>
+<p>Where <a href="https://openfin.co/">OpenFin</a> makes use of the Chromium 
+browser stack. You can kind of think of your source ENTRY point HTML as a 
+single single page app, you can still have all the usual stuff in it like 
+routing etc etc, but if you are trying to emmulate a traditional desktop 
+app, it may make more sense to think of one HTML page as one traditional 
+form/window in a traditional desktop app.</p>
+<p> <a href="https://openfin.co/">OpenFin</a> comes with a few key things 
+inside it, namely these</p>
+<p><img alt="" height="344" src="OpenFin2.png" width="400"></p>
+<p>What is clever about it, is it is capable of being run on 
+Windows/Mac/Linux where it will emulate the native windowing of the chosen 
+OS. Another important aspect for me is the inter process bus, we will see 
+more on this later.</p>
+<p>&nbsp;</p>
+<h2>Isn't this Electron?</h2>
+<p>That was exactly the question I came up with, and I asked this of my 
+friend and all round genius and codeproject golden boy Colin Eberhardt, and this 
+is what he said:</p>
+<p><em><br>One thing to note is that OpenFin is a pretty thin layer on top 
+of Electron, so from a technology perspective they are quite similar.<br>
+<br>The APIs and features that OpenFin offers are pretty limited and don't 
+add that much value. They tend to focus their sales message on a couple of 
+things:<br><br>Security, Electron is not secure by default, it adds Node 
+APIs directly to the renderer threading. As a result an XSS attack can cause 
+havoc! However, they have done a lot of work to create a robust opt-in 
+security model (this issue tracks a lot of those changes&nbsp;<a href="https://github.com/electron/electron/issues/6712">https://github.com/electron/electron/issues/6712</a>). 
+OpenFin have an electron fork that is secure by default, you have no access 
+at all to Node APIs. However, if you don't host third party content in your 
+app, XSS is unlikely, and Electron can be used quite safely.<br><br>(Check 
+out this video of Chuck, the OpenFin CTO, spreading fear and confusion about 
+security!&nbsp;<a href="https://www.youtube.com/watch?v=jhY4kdY_0Ho">https://www.youtube.com/watch?v=jhY4kdY_0Ho</a>)<br>
+<br>Distribution, the OpenFin distribution model involves installing their 
+runtime once, with apps downloaded from the internet via a manifest file. 
+With Electron you bundle the entire runtime with each app. The OpenFin model 
+makes life easier in regulated environments where installation of desktop 
+apps is painful.</em><br></p>
+<p>&nbsp;</p>
+<h2>What are are the important parts of OpenFin?</h2>
+<p>As I elluded to above, there are a couple of core features that make <a href="https://openfin.co/">OpenFin</a> 
+appealing:</p>
+<ul>
+	<li>Native OS windows</li>
+	<li>Small distribution that Electron due to not bundling Chromium with 
+	every app</li>
+	<li>The inter process bus is very useful</li>
+	<li>The JavaScript API is quite simple to work with</li>
+	<li>The application manifest</li>
+</ul>
+<p>We will be seeing all of these elements at pay when we disect the demo 
+app in the next section.&nbsp;</p>
+ 
+<h1>A Demo Application</h1>
+<p>This section will walk through the demo app in some detail, however 
+before we get into the detail lets just go through a few things in words</p>
+<ul>
+	<li>There is a small bar that is the main window, this is called 
+	Launcher.html. From here you can<ul>
+		<li>Show the trade blotter window</li>
+		<li>Show a chart window</li>
+		<li>Show the tiles window</li>
+	</ul>
+	</li>
+	<li>The tile window may be used to send a message on the bus, to the 
+	blotter, so simulate a trade being made, where the blotter will add the 
+	new row to its list of trades</li>
+	<li>The tile window is also able to either show a chart, or update the 
+	CCY pair for the current chart by sending a message on the bus</li>
+	<li>The blotter window will listen to messages from the tile window, and 
+	will add a new trade on this message being receieved</li>
+	<li>The blotter window is also able to either show a chart or update the 
+	CCY pair for the current chart by sending a message on the bus</li>
+	<li>The chart window simply shows a chart for the requested Url or the 
+	one requested on the bus</li>
+</ul>
+<p>So that is what we are trying to build, if you go back and watch the demo 
+video again you will see all this in action&nbsp;</p>
+	<h2>How to run the demo app</h2>
+	<p>So if you do find that you want to run the demo app, this is what you 
+	need to do</p>
+	<p><strong>Build it</strong></p>
+	<ul>
+		<li>open the code folder (find the folder with <code>server.js</code> in it)</li>
+		<li>open a node command prompt</li>
+		<li><code>npm install</code></li>
+		<li><code>npm install -g parcel-bundler</code></li>
+		<li><code>npm install -g openfin-cli</code></li>
+		<li><code>cd public</code></li>
+		<li><code>parcel launcher.html blotter.html chart.html 
+		tiles.html </code></li>
+		<li>Once its built <strong>CTRL+C</strong> as we <strong>don't</strong> want to use 
+		the Parcel web host</li>
+		<li>If this worked you should see whole bunch of 
+		files in the `public\dist` folder</li>
+	</ul>
+	<p><strong>Then Run It</strong></p>
+	<ul>
+		<li>navigate to root folder with <code>server.js</code> in it</li>
+		<li>open a node command prompt</li>
+		<li><code>node server</code></li>
+	</ul>
+	<p>&nbsp;</p>
+	<h2>Bundler</h2>
+	<p>So far we have established the demo app will be a HTML5 project. Now no 
+	self respecting HTML5 project these days would be without a bundler. Webpack 
+	is the defacto gold standard winning this holy war right now, and I used to 
+	revel in the glory of crafting a WebPack config file such as this</p>
+<pre lang="jscript">
+let _ = require('lodash');
+let webpack = require('webpack');
+let path = require('path');
+let fs = require("fs");
+let WebpackOnBuildPlugin = require('on-build-webpack');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+
+let babelOptions = {
+    "presets": ["es2015", "react"]
+};
+
+function isVendor(module) {
+    return module.context &amp;&amp; module.context.indexOf('node_modules') !== -1;
+}
+
+let entries = {
+    index: './src/index.tsx',
+    indexCss: './scss/index.scss'
+
+};
+
+//build it to the Play Framework public folder, which is services by the assets controller
+let buildDir = path.resolve(__dirname, '../public/dist');
+
+module.exports = {
+
+    context: __dirname,
+
+    entry: entries,
+
+    output: {
+        filename: '[name].bundle.[hash].js',
+        path: buildDir,
+		//this is to make it play nice with the Play Framework Assets controllers
+		//that deals with static data
+		publicPath: '/assets/dist'
+    },
+
+    // these break for node 5.3+ when building WS stuff
+    node: {
+        fs: 'empty'
+    },
+
+    watch: true,
+
+    devServer: {
+        open: true, // to open the local server in browser
+        contentBase: __dirname,
+    },
+
+    // Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", ".jsx"],
+        modules: [path.resolve(__dirname, "src"), "node_modules"]
+    },
+
+    plugins: [
+
+        //The ProvidePlugin makes a module available as a variable in every other
+        //module required by webpack
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
+
+        // creates a common vendor js file for libraries in node_modules
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'],
+            minChunks: function (module, count) {
+                return isVendor(module);
+            }
+        }),
+
+        // creates a common vendor js file for libraries in node_modules
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "commons",
+            chunks: _.keys(entries),
+            minChunks: function (module, count) {
+                return !isVendor(module) &amp;&amp; count > 1;
+            }
+        }),
+
+
+        //will unlink unused files on a build
+        //http://stackoverflow.com/questions/40370749/how-to-remove-old-files-from-the-build-dir-when-webpack-watch
+        new WebpackOnBuildPlugin(function (stats) {
+            const newlyCreatedAssets = stats.compilation.assets;
+
+            const unlinked = [];
+            fs.readdir(path.resolve(buildDir), (err, files) => {
+                files.forEach(file => {
+                    if (file != "fonts") {
+                        if (!newlyCreatedAssets[file]) {
+                            fs.unlink(path.resolve(buildDir + '\\' + file));
+                            unlinked.push(file);
+                        }
+                    }
+                });
+                if (unlinked.length > 0) {
+                    console.log('Removed old assets: ', unlinked);
+                }
+            })
+        }),
+
+        //scss/sass files extracted to common css bundle
+        new ExtractTextPlugin({
+            filename: '[name].bundle.[hash].css',
+            allChunks: true,
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'template.html',
+        })
+    ],
+
+    module: {
+        rules: [
+            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader' 1st 
+            // then 'babel-loader'
+            // NOTE : loaders run right to left (think of them as a cmd line pipe)
+            {
+                test: /\.ts(x?)$/,
+                exclude: /node_modules/,
+                use: [
+                  {
+                      loader: 'babel-loader',
+                      options: babelOptions
+                  },
+                  {
+                      loader: 'awesome-typescript-loader'
+                  }
+                ]
+            },
+
+
+            // All files with a .css extenson will be handled by 'css-loader'
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract(['css-loader?importLoaders=1']),
+            },
+
+            // All files with a .scss|.sass extenson will be handled by 'sass-loader'
+            {
+                test: /\.(sass|scss)$/,
+                loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+            },
+
+
+            // All files with a '.js' extension will be handled by 'babel-loader'.
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                  {
+                      loader: 'babel-loader',
+                      options: babelOptions
+                  }
+                ]
+            },
+
+            { 
+                test: /\.png$/, 
+                loader: "url-loader?limit=100000" 
+            },
+      
+            { 
+                test: /\.jpg$/, 
+                loader: "file-loader" 
+            },
+
+            {
+                test: /\.woff(\?.*)?$/,
+                loader: 'url-loader?prefix=fonts/&amp;name=fonts/[name].[ext]&amp;limit=10000&amp;mimetype=application/font-woff'
+            },
+
+            {
+                test: /\.woff2(\?.*)?$/,
+                loader: 'url-loader?prefix=fonts/&amp;name=fonts/[name].[ext]&amp;limit=10000&amp;mimetype=application/font-woff2'
+            },
+
+            {
+                test: /\.ttf(\?.*)?$/,
+                loader: 'url-loader?prefix=fonts/&amp;name=fonts/[name].[ext]&amp;limit=10000&amp;mimetype=application/octet-stream'
+            },
+
+            {
+                test: /\.eot(\?.*)?$/, loader: 'file-loader?prefix=fonts/&amp;name=fonts/[name].[ext]'
+            },
+
+            {
+                test: /\.svg(\?.*)?$/,
+                loader: 'url-loader?prefix=fonts/&amp;name=fonts/[name].[ext]&amp;limit=10000&amp;mimetype=image/svg+xml'
+            },
+
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader"
+            }
+        ]
+    }
+};	</pre>
+<p>Where this config would give me the following features</p>
+	<ul>
+		<li>Babel transpiling to JS</li>
+		<li>TypeScript transpiling to JS</li>
+		<li>SCSS transpiling to CSS</li>
+		<li>I could use entry points to correct grok the dependency graphs</li>
+		<li>I could use SourceMaps</li>
+		<li>I could use images that would be encoded to base64 strings if below 
+		a certain size</li>
+		<li>I could use a HTML template that works with my sitributable hashed 
+		assets</li>
+	</ul>
+	<p>Great all cool stuff indeed.....Then a much cleverer webdev collegue of 
+	mine showed me <a href="https://parceljs.org/">https://parceljs.org/</a>, 
+	which requires this much effort to achieve the same thing as above</p>
+	<p><img alt="" height="36" src="parcel.png" width="100"></p>
+	<p>Can you see all the effort in that white square. That's right there is 
+	NONE. None at all, no config. This is what I get produced for NO effort at 
+	all</p>
+	<p><img alt="" height="1626" src="parcel2.png" width="629"></p>
+	<p>See how I get hashed JS files (even though the demo app uses TypeScript), 
+	multiple entry points one per file (so thats one dependency graph per etry 
+	point), I get CSS (even though the demo app used SCSS), oh and I also get 
+	source maps</p>
+	<p><a href="Parcel3Big.png">
+	<img alt="" class="auto-style2" height="369" src="Parcel3Small.png" width="630"></a></p>
+	<p><em>CLICK FOR LARGER IMAGE</em></p>
+	<p>&nbsp;</p>
+	<p>Don't believe me, well here is the demo app running where I have debugged 
+	into it, and you can see we do indeed get the source maps sent to the 
+	browser (for PROD there is another procedure
+	<a href="https://parceljs.org/production.html">
+	https://parceljs.org/production.html</a>)</p>
+	<p>&nbsp;</p>
+	<p>All of this is pretty amazing for a simple command line like this <code>
+	parcel launcher.html blotter.html chart.html tiles.html </code></p>
+<p>&nbsp;</p>
+	<h2>Express Server Side code</h2>
+	<p> <a href="https://openfin.co/">OpenFin</a> may be a container but its not 
+	magical, for any HTML content, there MUST be something that is responsible 
+	for serving this data. While we are on this subject <a href="https://openfin.co/">OpenFin</a> 
+	does also create desktop shortcuts and menu icons, but these are just 
+	shortcuts to the <code>app.json</code> manifest file. If you don't have the 
+	actual backend that serves the app running the <a href="https://openfin.co/">OpenFin</a> 
+	shortcuts won't work at all.</p>
+	<p> &nbsp;</p>
+	<p> For the demo app, this is done using Node and 
+	Express. The role of Express in this demo app is fairly important, as it is 
+	where the <a href="https://openfin.co/">OpenFin</a> boostrapping occurs 
+	where it reads the mainfest file, and also where it provides the various 
+	roots to serve the demo application as a whole. In this Express code you 
+	will find all the routes possible for the demo application.</p>
+	<p> Ideally I would link this all back to a proper backend store, but for 
+	this demo app, I am using the Express server code as an in memory 
+	repository.</p>
+<pre lang="jscript">
+function formatDate(date) {
+    var d = new Date(date);
+    return [(d.getMonth() + 1).padLeft(),
+    d.getDate().padLeft(),
+    d.getFullYear()].join('/') + ' ' +
+        [d.getHours().padLeft(),
+        d.getMinutes().padLeft(),
+        d.getSeconds().padLeft()].join(':');
+}
+
+function createGuid() {
+
+    var r = (new Date()).getTime().toString(16) + Math.random().toString(16).substring(2) + "0".repeat(16);
+    return r.substr(0, 8) + '-' + r.substr(8, 4) + '-4000-8' + r.substr(12, 3) + '-' + r.substr(15, 12);
+}
+
+function formatTo2Places(theNum) {
+    var result = Math.round(theNum * 100) / 100
+    return parseFloat(result.toString(10)).toFixed(2);
+}
+
+function copyFile(filename) {
+
+    fs.copyFile('public/data/' + filename, 'public/dist/' + filename, (err) =&gt; {
+        if (err) throw err;
+    });
+}
+
+Number.prototype.padLeft = function (base, chr) {
+    var len = (String(base || 10).length - String(this).length) + 1;
+    return len &gt; 0 ? new Array(len).join(chr || '0') + this : this;
+}
+
+var blotterData = [
+    { "pair": "BTCEUR", "price": 5646.00 , "dateCreated": formatDate(Date.now()), "internalId": createGuid() },
+    { "pair": "BTCGBP", "price": 5046.54, "dateCreated": formatDate(Date.now()), "internalId": createGuid() }
+];
+
+var express = require('express')
+    , http = require('http')
+    , path = require('path')
+    , openfinLauncher = require('openfin-launcher')
+    , bodyParser = require("body-parser")
+    , fs = require('fs');
+
+
+
+var app = express();
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.set('title','Express Parcel app');
+app.use(express.static(path.join(__dirname, 'public/dist')));
+
+copyFile('BTCEUR_d.csv');
+copyFile('BTCGBP_d.csv');
+copyFile('BTCUSD_d.csv');
+copyFile('ETHEUR_d.csv');
+copyFile('ETHUSD_d.csv');
+copyFile('LTCEUR_d.csv');
+copyFile('LTCUSD_d.csv');
+copyFile('XRPUSD_d.csv');
+
+/* serves main page  */
+app.get('/', function (req, res) {
+    res.sendFile("public/dist/launcher.html", { "root": __dirname });
+});
+
+
+app.get('/blotter', function (req, res) {
+    res.sendFile("public/dist/blotter.html", { "root": __dirname });
+});
+
+app.post('/trade', function (req, res) {
+    blotterData.push({ 
+		"pair": req.body.pair, 
+		"price": formatTo2Places(req.body.price), 
+		"dateCreated": formatDate(Date.now()), 
+		"internalId": createGuid() });
+    res.sendStatus(200);
+});
+
+app.get('/chart', function (req, res) {
+    res.sendFile("public/dist/chart.html", { "root": __dirname });
+});
+
+app.get('/tiles', function (req, res) {
+    res.sendFile("public/dist/tiles.html", { "root": __dirname });
+});
+
+app.get('/tileInfos', function (req, res) {
+    res.send(
+        [
+            { "tilePair": "BTCEUR", "tilePrice": 5646.00 },
+            { "tilePair": "BTCGBP", "tilePrice": 5046.54 },
+            { "tilePair": "BTCUSD", "tilePrice": 3799.92 },
+            { "tilePair": "ETHEUR", "tilePrice": 195.3 },
+            { "tilePair": "ETHUSD", "tilePrice": 134.46 },
+            { "tilePair": "LTCEUR", "tilePrice": 51.61 },
+            { "tilePair": "LTCUSD", "tilePrice": 44.96 },
+            { "tilePair": "XRPUSD", "tilePrice": 0.3121 },
+        ]
+    );
+});
+
+app.get('/blotterInfos', function (req, res) {
+    res.send(blotterData);
+});
+
+app.get('/csvdata/:pair', function (req, res) {
+    var pair = req.params["pair"]
+    res.sendFile('public/dist/' + pair + '_d.csv', { "root": __dirname });
+});
+
+
+/* process.env.PORT is used in case you want to push to Heroku, 
+   for example, here the port will be dynamically allocated */
+var port = process.env.PORT || 1234;
+
+const configPath = path.join(__dirname, 'public', 'app.json');
+const localServer = http.createServer(app).listen(port, function(){
+    console.log('Express server listening on port ' + port);
+    openfinLauncher.launchOpenFin({ configPath }).then(() =&gt; {
+        localServer.close();
+    });
+});
+</pre>
+<h2>OpenFin Manifest File</h2>
+<p>For <a href="https://openfin.co/">OpenFin</a> to be able to run the app, 
+we need to supply it with a manifest file. This file should be called 
+App.json and should contain information about how to boostrap the app. Here 
+is the one for the demo app</p>
+<pre  lang="jscript">
+{
+  "devtools_port": 9090,
+  "startup_app": {
+    "name": "OpenfinPOC",
+    "description": "OpenFin POC",
+    "url": "http://localhost:1234",
+    "showTaskbarIcon": true,
+    "taskbarIcon": "http://cdn.openfin.co/hyperblotter/favicon.ico",
+    "icon": "http://cdn.openfin.co/hyperblotter/favicon.ico",
+    "uuid": "Openfin react-redux-parcel demo",
+    "autoShow": true,
+    "contextMenu": true,
+    "defaultWidth": 480,
+    "maxWidth": 480,
+    "minWidth": 480,
+    "defaultHeight": 120,
+    "maxHeight": 120,
+    "minHeight": 120,
+    "frame": true,
+    "defaultCentered": true,
+    "resizable": false
+  },
+  "runtime": {
+    "arguments": "--enable-crash-reporting --no-sandbox",
+    "version": "stable"
+  },
+  "shortcut": {
+    "company": "OpenFin",
+    "description": "Openfin POC",
+    "name": "Openfin POC"
+  }
+}
+</pre>
+<p>&nbsp;</p>
+<h2>Launcher</h2>
+	<p>The Launcher is the main window for the demo app, and it is the one 
+	served up by the Express backend for a GET <a href="http://localhost:1234">
+	http://localhost:1234</a> , and it looks like this</p>
+	<p><img alt="" height="165" src="Launcher.png" width="630"></p>
+	<p>This is also one of the Parcel.JS entry points. You can kind of think of 
+	every single window as a individual standalone app, and as such it will 
+	require its own entry point with Parcel.js, and should have a HTML page. A 
+	Window in <a href="https://openfin.co/">OpenFin</a> lingo equates to a new 
+	HTML page. Which for Parcel means new entry point/new dependency graph.</p>
+	<p>As such this is pretty typical setup for a entry point 
+	(Tiles/Blotter/Graph all follow this pattern)</p>
+	<h3><strong>The Html</strong></h3>
+<pre lang="xml">
+&lt;html&gt;
+
+&lt;head&gt;
+	
+&lt;/head&gt;
+&lt;body id="launcher"&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script src="src/LauncherEntry.tsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	<p>See how this references the <code>src/LauncherEntry.tsx</code></p>
+	<h3>The TypeScript</h3>
+	<p>Where the <code>src/LauncherEntry.tsx</code> looks like this</p>
+<pre lang="xml">
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { LauncherComponent } from './Launcher';
+
+if (window['module'] &amp;&amp; window['module'].hot) {
+  window['module'].hot.dispose(function() {});
+
+  window['module'].hot.accept(function() {
+      ReactDOM.render(&lt;LauncherComponent /&gt;, document.getElementById('root'));
+  });
+}
+
+ReactDOM.render(&lt;LauncherComponent /&gt;, document.getElementById('root'));
+
+</pre>
+	<p>Where this in turns uses hot module loading when it mounts the <code>React 
+	LauncherComponent</code> which is the view for the <code>Launcher</code> window, which looks like this</p>
+<pre lang="xml">
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { interval } from 'rxjs';
+
+//scss
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+import '../scss/index.scss';
+
+//images
+import chartColoredLogo from '../img/chartColored.png';
+import chartGrayLogo from '../img/chartGray.png';
+import tableColoredLogo from '../img/tableColored.png';
+import tableGrayLogo from '../img/tableGray.png';
+import tilesColoredLogo from '../img/tilesColored.png';
+import tilesGrayLogo from '../img/tilesGray.png';
+import HoverImage from "react-hover-image"
+
+//components
+import { showChartWindow } from "./utils/ChartUtils"
+import { LayoutService } from "./utils/LayoutUtils"
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    init();
+});
+
+
+function init() {
+    console.log("Dom Loaded ", this);
+
+    try {
+        fin.desktop.main(function () {
+            initWithOpenFin();
+        })
+    } catch (err) {
+        initNoOpenFin();
+    }
+};
+
+async function initWithOpenFin() {
+
+    const app = await fin.Application.getCurrent();
+    const mainWindow = await app.getWindow();
+    console.log("mainWindow",mainWindow);
+
+    await LayoutService.getInstance().hydrateWindows(mainWindow);
+
+    interval(1000).subscribe(async x =&gt; {
+        await LayoutService.getInstance().persistWindows(mainWindow);
+    });
+}
+
+function initNoOpenFin() {
+    alert("OpenFin is not available - you are probably running in a browser.");
+}
+
+
+class Launcher extends React.Component&lt;undefined, undefined&gt; {
+    constructor(props: any) {
+        super(props);
+    }
+
+    render() {
+        return (
+            &lt;div id="launcherDiv"&gt;
+                
+                &lt;HoverImage className="launcherImages"
+                    src={tableGrayLogo}
+                    hoverSrc={tableColoredLogo}
+                    onClick={this.handleTableClick} /&gt;
+                &lt;HoverImage className="launcherImages"
+                    src={chartGrayLogo}
+                    hoverSrc={chartColoredLogo}
+                    onClick={this.handleChartClick} /&gt;
+                &lt;HoverImage className="launcherImages"
+                    src={tilesGrayLogo}
+                    hoverSrc={tilesColoredLogo}
+                    onClick={this.handleTilesClick} /&gt;
+            &lt;/div&gt;
+        );
+    }
+
+    handleTableClick = async (e) =&gt; {
+        await LayoutService.getInstance().showChildWindow("Blotter", '/blotter', 800, 200, true);
+    }
+
+    handleChartClick = async (e) =&gt; {
+        await showChartWindow('BTCEUR');
+    }
+
+    handleTilesClick = async (e) =&gt; {
+        await LayoutService.getInstance().showChildWindow("Tiles", '/tiles', 560, 350, false);
+    }
+}
+
+
+
+export const LauncherComponent = () =&gt; (
+    &lt;Launcher/&gt;
+);
+
+</pre>
+	<p>This is all pretty standard <code>React</code> stuff here, nice that JS 
+	has finally come of age and uses stuff like Lambdas (arrow functions to the 
+	JS crowd) and <code>async</code>-<code>await </code>YAY</p>
+	<p>One special callout in the code above is see how we check for the 
+	presence of <a href="https://openfin.co/">OpenFin</a> in the <code>Init()</code> 
+	method. This is pretty much the standard way of detecting if you are in <a href="https://openfin.co/">OpenFin</a> 
+	mode or attempting to run this app in a browser (where it probably wont work 
+	as it was designed to be an <a href="https://openfin.co/">OpenFin</a> app 
+	after all)</p>
+	<p>&nbsp;</p>
+<h2>Tiles</h2>
+<p class="auto-style1">XXXXXXXXXXXXXXXXXX</p>
+<p>&nbsp;</p>
+<h2>Blotter</h2>
+<p class="auto-style1">XXXXXXXXXXXXXXXXXX</p>
+<p>&nbsp;</p>
+<h2>Chart</h2>
+<p class="auto-style1">XXXXXXXXXXXXXXXXXX</p>
+<p>&nbsp;</p>
+<h2>Persisting State</h2>
+<p class="auto-style1">XXXXXXXXXXXXXXXXXX</p>
+<p class="auto-style1">Scaling issues with the Layouts.api</p>
+<p>&nbsp;</p>
+<h2>Debugging</h2>
+	<p>Now as a developer you will at some point want to debug your code, so you 
+	will likely want to know how to do that. For <a href="https://openfin.co/">OpenFin</a> 
+	the easiest way to do this is to allow the context menu in your app which 
+	you can set in the <a href="https://openfin.co/">OpenFin</a> manifest file
+	<code>app.json</code> that we saw above. You basically set this line <code>
+	&quot;contextMenu&quot;: true</code></p>
+	<p>With that turned on you can see a menu and just launch the chrome debug 
+	tools:</p>
+	<p><img alt="" height="171" src="debugging.png" width="630"></p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+<h1>Conclusion</h1>
+<p>I do think
+<a href="https://openfin.co/">OpenFin</a> is cool, and there are some cool 
+apps written in Electron/OpenFin, and I really like the way they are trying 
+to bring back desktop type applications (which traders actually do like 
+contrary to what everyones says, its just useful to be able to tab/undock, 
+pin, move things around on to a different monitor).</p>
+<p>That said the issue that I mentioned above with the OpenFin-Layouts api 
+and how that works with Windows (even Windows 10) Scaling, makes it 
+completely unusable to run across different monitor/different resolutions. 
+So that means this rather appealing service, can't be used unless you know 
+exactly what hardware you are going to run stuff on and it has a scaling of 
+EXACTLY 100%.</p>
+<p>So that aspect sucked badly</p>
+<p>The good parts were I found the APIs very easy to work with, and found 
+that I could still run my react/redux and Typescript with ease.</p>
+<p>So it was perhaps 75% good 25% bad for me overall.</p>
+<p>I will let you lot make your own conclusions</p>
+<p>&nbsp;</p>
+<p><strong>If you did like the article votes here or stars at the repo are 
+always welcome.</strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+

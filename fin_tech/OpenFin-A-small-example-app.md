@@ -1,89 +1,87 @@
 A little demo app to try out OpenFin
 
 * [Overview](#overview)
-* [What does the final product look like?](#what-does-the-final-product-look-like?)
-What tools will we use along the way
-Where is the code?
-What exactly is Openfin, and what problem is it trying to solve?
-Isn't this Electron?
-What are are the important parts of OpenFin?
-A Demo Application
-How to run the demo app
-Bundler
-Express Server Side code
-OpenFin Manifest File
-Launcher
-What is this page designed to do?
-The Html
-The TypeScript
-Tiles
-What is this page designed to do?
-The Html/React root component
-The TilesTypeScript
-Tiles Redux Workflow
-What is this component designed to do?
-Blotter
-What is this page designed to do?
-The Html/React root component
-The TilesTypeScript
-Chart
-What is this page designed to do?
-The Html/React root component
-The TilesTypeScript
-Persisting State
-Hand rolled solution
-Using the OpenFin Layouts API
-Debugging
+* [What does the final product look like?](#what-does-the-final-product-look-like)
+* [What tools will we use along the way](#what-tools-will-we-use-along-the-way)
+* [Where is the code?](#where-is-the-code)
+* [What exactly is Openfin, and what problem is it trying to solve?](#what-exactly-is-openfin--and-what-problem-is-it-trying-to-solve)
+** [Isn't this Electron?](#isn't-this-electron)
+** [What are are the important parts of OpenFin?](#what-are-the-important-parts-of-openfin)
+* [A Demo Application](#a-demo-application)
+** [How to run the demo app](#how-to-run-the-demo-app)
+** [Bundler](#bundler)
+** [Express Server Side code](#express-server-side-code)
+** [OpenFin Manifest File](#openfin-manifest-file)
+** [Launcher](#launcher)
+*** [What is this page designed to do?](#what-is-this-page-designed-to-do)
+*** [The Html](#the-html)
+*** [The TypeScript](#the-typescript)
+** [Tiles](#tiles)
+*** [What is the Tiles page designed to do?](#what-is-the-tiles-page-designed-to-do)
+*** [The Tiles Html/React root component](#the-tiles-htmlreact-root-component]
+*** [The Tiles TypeScript](#the-tiles-typescript)
+**** [Tiles Redux Workflow](#tiles-redux-workflow)
+*** [What is the Tile component designed to do?](#what-is-the-tile-component-designed-to-do)
+** [Blotter](#blotter)
+*** [What is the Blotter page designed to do?](#what-is-the-blotter-page-designed-to-do)
+*** [The Blotter Html/React root component](#the-blotter-htmlreact-root-component]
+*** [The Blotter TypeScript](#the-blotter-typescript)
+** [Chart](#chart)
+*** [What is the Chart page designed to do?](#what-is-the-chart-page-designed-to-do)
+*** [The Chart Html/React root component](#the-chart-htmlreact-root-component]
+*** [The Chart TypeScript](#the-chart-typescript)
+** [Persisting State](#persisting-state)
+*** [Hand rolled solution](#hand-rolled-solution)
+*** [Using the OpenFin Layouts API](#using-the-openfin-layouts-api)
+** [Debugging](#debugging)
 
 ## Overview
 So it has been a very long time since I wrote an article here at codeproject. I have been quite busy on my blog actually, so have been doing more there of late. Thing is I kind of heard about this technology years ago, and kind of knew what it did, but had never really used it.
 
-That technology is called OpenFin, whos strap line is "OpenFin OS modernizes financial desktops, enabling instant distribution, strong security and application interoperability".
+That technology is called [OpenFin](https://openfin.co/), whos strap line is "OpenFin OS modernizes financial desktops, enabling instant distribution, strong security and application interoperability".
 
 It just so happens that I am in the business of writing trading apps, it's kind of what I do. Those that know me, know that I used to use WPF a lot. Those days seem ages ago now. I don't really touch anything UI related at all anymore. Crist I was doing Scala and Akka for about 1.5 years, so no UI stuff there at all, and my new job is deep server side/cloud.
 
-That said I do enjoy a bit of UI work, and try to keep up to date, and could not quite resist, looking at OpenFin, even though it is probably considered pretty old tech by some by now.
+That said I do enjoy a bit of UI work, and try to keep up to date, and could not quite resist, looking at [OpenFin](https://openfin.co/), even though it is probably considered pretty old tech by some by now.
 
 Before I started I did a quick search here at codeproject, and could not believe someone has not written about it before to be honest. So I thought Ok I need to do this then.
 
-So this article will be about OpenFin, and also showing the good parts of it, and the not so good parts of it. We will also see a demo app written to use OpenFin, and learn more about what OpenFin is.
+So this article will be about [OpenFin](https://openfin.co/), and also showing the good parts of it, and the not so good parts of it. We will also see a demo app written to use OpenFin, and learn more about what [OpenFin](https://openfin.co/) is.
 
-So in nutshell this article will be about looking at OpenFin and walking through a demo app
-
- 
+So in nutshell this article will be about looking at [OpenFin](https://openfin.co/) and walking through a demo app
 
 ## What does the final product look like?
 I think the best way to see what the final product looks like is via this small video
 
-Image 1
+![openfin-simple-demo-app-image-1](./assets/openfin-simple-demo-app-image-1.PNG)
 
-CLICK TO DOWNLOAD VIDEO
+[CLICK TO DOWNLOAD VIDEO](https://youtu.be/lgbcAnJF5OQ)
 
 Essentially what I have built is a demo app that is like a VERY VERY cutdown trading app, it has the following features
 
-Blotter for seeing past trades (in grid form)
-Tiles with FAKE ticking data
-Charts for the tiles, or for the past deals.
-Although there are only 3 windows involved this give us enough meat to really try oiuut Openfin
+* Blotter for seeing past trades (in grid form)
+* Tiles with FAKE ticking data
+* Charts for the tiles, or for the past deals.
 
- 
+Although there are only 3 windows involved this give us enough meat to really try out Openfin
 
-What tools will we use along the way
+## What tools will we use along the way
 This is a fairly chunky demo app, and if you do follow along right to the end you can expect to have seen, or could see in the source code the following technologies in use:
 
-React
-Redux
-Redux thunk
-ES6
-SCSS
-TypeScript
-Express JS
-Parcel JS
-OpenFin
-Where is the code?
-The code for this article is actually hosted at Github : https://github.com/sachabarber/OpenFinWithReactReduxParcel
+* React
+* Redux
+* Redux thunk
+* ES6
+* SCSS
+* TypeScript
+* Express JS
+* Parcel JS
+* OpenFin
 
-What exactly is Openfin, and what problem is it trying to solve?
+## Where is the code?
+The code for this article is actually hosted at Github : https://github.com/sm2774us/full_stack_interview_prep_2021/tree/main/work_portfolio/openfin/OpenFin-with-react-redux-parcel-js
+
+## What exactly is Openfin, and what problem is it trying to solve?
 So as stated above OpenFin think of themselves as the OS for the financial space. Why is this? Well traditionally financial apps have been very rich in data, and real time information, and have required many rich UI elements, such as charts, docking, desktop integration (notify icons, system tray, toast notifications) that sort of thing.
 
 I think it is fair to say this used to be done in a mixture of Winforms/WPF and perhaps MFC.
@@ -98,84 +96,79 @@ This is kind of where OpenFin fits in, where it allows you to write HTML5 applic
 
 You can kind of think of it like this
 
-Image 2
+![openfin-architecture](./assets/openfin-architecture.PNG)
 
 Where OpenFin makes use of the Chromium browser stack. You can kind of think of your source ENTRY point HTML as a single single page app, you can still have all the usual stuff in it like routing etc etc, but if you are trying to emmulate a traditional desktop app, it may make more sense to think of one HTML page as one traditional form/window in a traditional desktop app.
 
 OpenFin comes with a few key things inside it, namely these
 
-Image 3
+![openfin-components](./assets/openfin-components.PNG)
 
 What is clever about it, is it is capable of being run on Windows/Mac/Linux where it will emulate the native windowing of the chosen OS. Another important aspect for me is the inter process bus, we will see more on this later.
 
- 
-
-Isn't this Electron?
+## Isn't this Electron?
 That was exactly the question I came up with, and after looking around at a few things on the internet, it really boils down to these points
-
 
 One thing to note is that OpenFin is a pretty thin layer on top of Electron, so from a technology perspective they are quite similar.
 
-Security, Electron is not secure by default, it adds Node APIs directly to the renderer threading. As a result an XSS attack can cause havoc! However, Electron have done a lot of work to create a robust opt-in security model (this issue tracks a lot of those changes https://github.com/electron/electron/issues/6712). OpenFin have an electron fork that is secure by default, you have no access at all to Node APIs. However, if you don't host third party content in your app, XSS is unlikely, and Electron can be used quite safely.
+Security, Electron is not secure by default, it adds Node APIs directly to the renderer threading. As a result an XSS attack can cause havoc! However, Electron has done a lot of work to create a robust opt-in security model (this issue tracks a lot of those changes [https://github.com/electron/electron/issues/6712](https://github.com/electron/electron/issues/6712)). 
+OpenFin is an electron fork that is secure by default, you have no access at all to Node APIs. However, if you don't host third party content in your app, XSS is unlikely, and Electron can be used quite safely.
 
-Check out this video of Chuck, the OpenFin CTO, talking about security https://www.youtube.com/watch?v=jhY4kdY_0Ho
+Check out this video of Chuck, the OpenFin CTO, talking about security [https://www.youtube.com/watch?v=jhY4kdY_0Ho](https://www.youtube.com/watch?v=jhY4kdY_0Ho)
 
 Distribution, the OpenFin distribution model involves installing their runtime once, with apps downloaded from the internet via a manifest file. With Electron you bundle the entire runtime with each app. The OpenFin model makes life easier in regulated environments where installation of desktop apps is painful.
 
- 
+## What are are the important parts of OpenFin?
+As I alluded to above, there are a couple of core features that make OpenFin appealing:
 
-What are are the important parts of OpenFin?
-As I elluded to above, there are a couple of core features that make OpenFin appealing:
+* Native OS windows
+* Small distribution that Electron due to not bundling Chromium with every app
+* The inter process bus is very useful
+* The JavaScript API is quite simple to work with
+* The application manifest
 
-Native OS windows
-Small distribution that Electron due to not bundling Chromium with every app
-The inter process bus is very useful
-The JavaScript API is quite simple to work with
-The application manifest
 We will be seeing all of these elements at pay when we disect the demo app in the next section. 
 
- 
-
-A Demo Application
+## A Demo Application
 This section will walk through the demo app in some detail, however before we get into the detail lets just go through a few things in words
 
-There is a small bar that is the main window, this is called Launcher.html. From here you can
-Show the trade blotter window
-Show a chart window
-Show the tiles window
-The tile window may be used to send a message on the bus, to the blotter, so simulate a trade being made, where the blotter will add the new row to its list of trades
-The tile window is also able to either show a chart, or update the CCY pair for the current chart by sending a message on the bus
-The blotter window will listen to messages from the tile window, and will add a new trade on this message being receieved
-The blotter window is also able to either show a chart or update the CCY pair for the current chart by sending a message on the bus
-The chart window simply shows a chart for the requested Url or the one requested on the bus
+* There is a small bar that is the main window, this is called Launcher.html. From here you can
+** Show the trade blotter window
+** Show a chart window
+** Show the tiles window
+* The tile window may be used to send a message on the bus, to the blotter, so simulate a trade being made, where the blotter will add the new row to its list of trades
+* The tile window is also able to either show a chart, or update the CCY pair for the current chart by sending a message on the bus
+* The blotter window will listen to messages from the tile window, and will add a new trade on this message being receieved
+* The blotter window is also able to either show a chart or update the CCY pair for the current chart by sending a message on the bus
+* The chart window simply shows a chart for the requested Url or the one requested on the bus
+
 So that is what we are trying to build, if you go back and watch the demo video again you will see all this in action 
 
-How to run the demo app
+## How to run the demo app
 So if you do find that you want to run the demo app, this is what you need to do
 
-Build it
+**Build it**
 
-open the code folder (find the folder with server.js in it)
-open a node command prompt
-npm install
-npm install -g parcel-bundler
-npm install -g openfin-cli
-cd public
-parcel launcher.html blotter.html chart.html tiles.html
-Once its built CTRL+C as we don't want to use the Parcel web host
-If this worked you should see whole bunch of files in the `public\dist` folder
-Then Run It
+* open the code folder (find the folder with server.js in it)
+* open a node command prompt
+* `npm install`
+* `npm install -g parcel-bundler`
+* `npm install -g openfin-cli`
+* `cd public`
+* `parcel launcher.html blotter.html chart.html tiles.html`
+* Once its built **CTRL+C** as we **don't** want to use the Parcel web host
+* If this worked you should see whole bunch of files in the `public\dist` folder
 
-navigate to root folder with server.js in it
-open a node command prompt
-node server
+**Then Run It**
+
+* navigate to root folder with `server.js` in it
+* open a node command prompt
+* `node server`
  
-
-Bundler
+## Bundler
 So far we have established the demo app will be a HTML5 project. Now no self respecting HTML5 project these days would be without a bundler. Webpack is the defacto gold standard winning this holy war right now, and I used to revel in the glory of crafting a WebPack config file such as this
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 let _ = require('lodash');
 let webpack = require('webpack');
 let path = require('path');
@@ -384,50 +377,44 @@ module.exports = {
         ]
     }
 };
+```
+
 Where this config would give me the following features
 
-Babel transpiling to JS
-TypeScript transpiling to JS
-SCSS transpiling to CSS
-I could use entry points to correct grok the dependency graphs
-I could use SourceMaps
-I could use images that would be encoded to base64 strings if below a certain size
-I could use a HTML template that works with my sitributable hashed assets
-Great all cool stuff indeed.....Then a much cleverer webdev collegue of mine showed me https://parceljs.org/, which requires this much effort to achieve the same thing as above
+* Babel transpiling to JS
+* TypeScript transpiling to JS
+* SCSS transpiling to CSS
+* I could use entry points to correct grok the dependency graphs
+* I could use SourceMaps
+* I could use images that would be encoded to base64 strings if below a certain size
+* I could use a HTML template that works with my sitributable hashed assets
 
-Image 4
+Great all cool stuff indeed.....Then a much cleverer webdev collegue of mine showed me [https://parceljs.org/](https://parceljs.org/), 
+which requires this much effort to achieve the same thing as above
 
-Can you see all the effort in that white square. That's right there is NONE. None at all, no config. This is what I get produced for NO effort at all
+![parcel](./assets/parcel.PNG)
 
-Image 5
+Can you see all the effort in that white square. That's right there is NONE. None at all, no config. 
+This is what I get produced for NO effort at all :
+
+![parcel-output](./assets/parcel-output.PNG)
 
 See how I get hashed JS files (even though the demo app uses TypeScript), multiple entry points one per file (so thats one dependency graph per etry point), I get CSS (even though the demo app used SCSS), oh and I also get source maps
 
-Image 6
+![parcel-prod](./assets/parcel-prod.PNG)
 
-CLICK FOR LARGER IMAGE
+Don't believe me, well here is the demo app running where I have debugged into it, and you can see we do indeed get the source maps sent to the browser (for PROD there is another procedure [https://parceljs.org/production.html](https://parceljs.org/production.html))
 
- 
+All of this is pretty amazing for a simple command line like this `parcel launcher.html blotter.html chart.html tiles.html`
 
-Don't believe me, well here is the demo app running where I have debugged into it, and you can see we do indeed get the source maps sent to the browser (for PROD there is another procedure https://parceljs.org/production.html)
-
- 
-
-All of this is pretty amazing for a simple command line like this parcel launcher.html blotter.html chart.html tiles.html
-
- 
-
-Express Server Side code
-OpenFin may be a container but its not magical, for any HTML content, there MUST be something that is responsible for serving this data. While we are on this subject OpenFin does also create desktop shortcuts and menu icons, but these are just shortcuts to the app.json manifest file. If you don't have the actual backend that serves the app running the OpenFin shortcuts won't work at all.
-
- 
+## Express Server Side code
+OpenFin may be a container but its not magical, for any HTML content, there MUST be something that is responsible for serving this data. While we are on this subject OpenFin does also create desktop shortcuts and menu icons, but these are just shortcuts to the `app.json` manifest file. If you don't have the actual backend that serves the app running the OpenFin shortcuts won't work at all.
 
 For the demo app, this is done using Node and Express. The role of Express in this demo app is fairly important, as it is where the OpenFin boostrapping occurs where it reads the mainfest file, and also where it provides the various roots to serve the demo application as a whole. In this Express code you will find all the routes possible for the demo application.
 
 Ideally I would link this all back to a proper backend store, but for this demo app, I am using the Express server code as an in memory repository.
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 function formatDate(date) {
     var d = new Date(date);
     return [(d.getMonth() + 1).padLeft(),
@@ -555,11 +542,12 @@ const localServer = http.createServer(app).listen(port, function(){
         localServer.close();
     });
 });
-OpenFin Manifest File
-For OpenFin to be able to run the app, we need to supply it with a manifest file. This file should be called App.json and should contain information about how to boostrap the app. Here is the one for the demo app
+```
 
-JavaScript
-Shrink ▲   Copy Code
+## OpenFin Manifest File
+For OpenFin to be able to run the app, we need to supply it with a manifest file. This file should be called `App.json` and should contain information about how to boostrap the app. Here is the one for the demo app
+
+```JavaScript
 {
   "devtools_port": 9090,
   "startup_app": {
@@ -592,23 +580,22 @@ Shrink ▲   Copy Code
     "name": "Openfin POC"
   }
 }
- 
+``` 
 
-Launcher
-The Launcher is the main window for the demo app, and it is the one served up by the Express backend for a GET http://localhost:1234 , and it looks like this
+## Launcher
+The Launcher is the main window for the demo app, and it is the one served up by the Express backend for a GET `http://localhost:1234`, and it looks like this
 
-Image 7
+![launcher](./assets/launcher.PNG)
 
 This is also one of the Parcel.JS entry points. You can kind of think of every single window as a individual standalone app, and as such it will require its own entry point with Parcel.js, and should have a HTML page. A Window in OpenFin lingo equates to a new HTML page. Which for Parcel means new entry point/new dependency graph.
 
 As such this is pretty typical setup for a entry point (Tiles/Blotter/Graph all follow this pattern)
 
-What is this page designed to do?
+### What is this page designed to do?
 This page is designed as a simple launcher (as its name suggests), and it simply launches other HTML windows using both the OpenFin JS API where the content for the page is served up using Express JS. 
 
-The Html
-XML
-Copy Code
+### The Html
+```html
 <html>
 
 <head>
@@ -619,13 +606,14 @@ Copy Code
   <script src="src/LauncherEntry.tsx"></script>
 </body>
 </html>
+```
+
 See how this references the src/LauncherEntry.tsx
 
-The TypeScript
+### The TypeScript
 Where the src/LauncherEntry.tsx looks like this
 
-XML
-Copy Code
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { LauncherComponent } from './Launcher';
@@ -639,10 +627,11 @@ if (window['module'] && window['module'].hot) {
 }
 
 ReactDOM.render(<LauncherComponent />, document.getElementById('root'));
-Where this in turns uses hot module loading when it mounts the React LauncherComponent which is the view for the Launcher window, which looks like this
+```
 
-XML
-Shrink ▲   Copy Code
+Where this in turns uses hot module loading when it mounts the `React LauncherComponent` which is the view for the `Launcher` window, which looks like this
+
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { interval } from 'rxjs';
@@ -744,16 +733,17 @@ class Launcher extends React.Component<undefined, undefined> {
 export const LauncherComponent = () => (
     <Launcher/>
 );
-This is all pretty standard React stuff here, nice that JS has finally come of age and uses stuff like Lambdas (arrow functions to the JS crowd) and async-await YAY
+```
+
+This is all pretty standard `React` stuff here, nice that JS has finally come of age and uses stuff like Lambdas (arrow functions to the JS crowd) and `async-await` YAY
 
 The few special callout sin the code above are these
 
-See how we check for the presence of OpenFin in the Init() method. This is pretty much the standard way of detecting if you are in OpenFin mode or attempting to run this app in a browser (where it probably wont work as it was designed to be an OpenFin app after all)
+See how we check for the presence of OpenFin in the `Init()` method. This is pretty much the standard way of detecting if you are in OpenFin mode or attempting to run this app in a browser (where it probably wont work as it was designed to be an OpenFin app after all)
 
 The other is how we launch a new OpenFin window which is achieved using this code:
 
-JavaScript
-Copy Code
+```JavaScript
 showChildWindow = async (name: string, url: string, width: number, height: number, resizable: boolean) => {
 
     return await fin.Window.create({
@@ -767,27 +757,27 @@ showChildWindow = async (name: string, url: string, width: number, height: numbe
         autoShow: true
     });
 }
- 
+``` 
 
-Tiles
-What is this page designed to do?
-This page is designed to show a number of static pairs (these are served up by the Express backend as a static array of data).
-This page taken the initial prices and then creates a new Tile for each pair seen.
-The Tile itself uses randomness to jiggle the current price up and down.
-A Tile can also send a "trade created" message on the bus to the "blotter" window
-A Tile can also show its pair in the "chart" window
-This is what the overall TilesInner component looks like
+## Tiles
+### What is the Tiles page designed to do?
+* This page is designed to show a number of static pairs (these are served up by the Express backend as a static array of data).
+* This page taken the initial prices and then creates a new `Tile` for each pair seen.
+* The `Tile` itself uses randomness to jiggle the current price up and down.
+* A `Tile` can also send a "trade created" message on the bus to the "`blotter`" window
+* A `Tile` can also show its pair in the "`chart`" window
 
-Image 8
+This is what the overall `TilesInner` component looks like
 
-The Html/React root component
-Is woeks in much the same way as we just saw above with the src/LauncherEntry.tsx
+![Tiles](./assets/Tiles.PNG)
 
-The TilesTypeScript
-This TilesComponent is reponsible for rendering ALL individual Tile components based on the incoming data, it looks like this
+### The Tiles Html/React root component
+Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
 
-JavaScript
-Shrink ▲   Copy Code
+### The Tiles TypeScript
+This `TilesComponent` is reponsible for rendering ALL individual `Tile` components based on the incoming data, it looks like this
+
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -879,15 +869,17 @@ export const TilesComponent = () => (
         <Tiles />
     </Provider>
 );
-Where it can be seen we make use of Redux to get the state from the store, and dispatch it back to the TilesInner component props.
+```
+
+Where it can be seen we make use of Redux to get the state from the store, and dispatch it back to the `TilesInner` component props.
 
 Lets see how that works
 
-Tiles Redux Workflow
+#### Tiles Redux Workflow
+
 We dispatch the call to the store to load state using this.props.fetchTilesFromEndpoint(); . So this gets dispatched to the Redux store. So lets move over to have a look at the redux store
 
-JavaScript
-Copy Code
+```JavaScript
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './root';
 import { convertToPlainAction } from '../utils/redux-with-class/convert-to-plain-action';
@@ -896,10 +888,11 @@ import thunk  from 'redux-thunk'
 let store = createStore(rootReducer, applyMiddleware(convertToPlainAction, thunk));
 
 export { store };
-Where we use this rootReducer to hold the global state
+```
 
-JavaScript
-Copy Code
+Where we use this `rootReducer` to hold the global state
+
+```JavaScript
 import * as redux from 'redux';
 import { TilesInfoState, tilesReducer } from './tiles';
 import { BlotterInfoState, blotterReducer } from './blotter';
@@ -916,10 +909,11 @@ export const rootReducer = redux.combineReducers({
     blotter: blotterReducer,
     chart: chartReducer
 });
-Where the actual reducer for the TilesInner component looks like this (notice how we use Redux-Thunk to dispatch functions), where it can be see that this code uses the fetch api to call the Express JS backend (server side code basically), and then uses promises to deal with what to dispatch (ie error or good dispatch back the React store connnected component TilesInner in this case)
+```
 
-JavaScript
-Shrink ▲   Copy Code
+Where the actual reducer for the `TilesInner` component looks like this (notice how we use [Redux-Thunk](https://github.com/reduxjs/redux-thunk) to dispatch functions), where it can be see that this code uses the fetch api to call the Express JS backend (server side code basically), and then uses promises to deal with what to dispatch (ie error or good dispatch back the React store connnected component `TilesInner` in this case)
+
+```JavaScript
 import { ActionWrapper } from '../utils/redux-with-class/actionwrapper';
 import { TileInfo } from '../common/commonModels';
 
@@ -988,24 +982,23 @@ class TileLoadingErrorAction {
 
     }
 }
+```
 The other windows "blotter" and "chart" also using React-Redux in a similar manner, so I won't be discussing how redux works again, as its just the same way.
 
-Ok so now we have seen the Tiles, how does a single Tile work.
+Ok so now we have seen the `Tiles`, how does a single `Tile` work.
 
-What is this component designed to do?
-The Tile itself uses randomness to jiggle the current price up and down.
-A Tile can also send a "trade created" message on the bus to the "blotter" window
-A Tile can also show its pair in the "chart" window
-This is what the overall Tile component looks like
+### What is the Tile component designed to do?
+* The `Tile` itself uses randomness to jiggle the current price up and down.
+* A `Tile` can also send a "trade created" message on the bus to the "`blotter`" window
+* A `Tile` can also show its pair in the "`chart`" window
 
-Image 9 
+This is what the overall `Tile` component looks like
 
- 
+![Tile](./assets/Tile.PNG)
 
 Well lets see its React markup
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { interval } from 'rxjs';
@@ -1188,31 +1181,35 @@ export class Tile extends React.Component<TileProps, TileState> {
         }
     }
 };
+```
+
 As previoulsy shown this component is able to show a new OpenFin window, it also makes use of the OpenFin inter process bus, if you look at these lines this is how the publishing works
 
-JavaScript
-Copy Code
+```JavaScript
 fin.desktop.InterApplicationBus.publish("created-trade-from-tile", {
     pair: this.props.tilePair,
     price: this.state.tilePriceRaw
 });
-Blotter
-What is this page designed to do?
-This page is designed to show a static list of trades from the Express endpoint
-It also listens to new trades from a Tile
-It can also show a new chart when a row is clicked on, where the rows pair will be used to show the "chart" window
-This is what the overall BlotterInner component looks like
+```
 
-Image 10
+## Blotter
 
-The Html/React root component
-Is woeks in much the same way as we just saw above with the src/LauncherEntry.tsx
+### What is the Blotter page designed to do?
+* This page is designed to show a static list of trades from the Express endpoint
+* It also listens to new trades from a `Tile`
+* It can also show a new chart when a row is clicked on, where the rows pair will be used to show the "`chart`" window
 
-The TilesTypeScript
-This BlotterComponent is responsible for rendering all the trades, and the code for it is like this.
+This is what the overall `BlotterInner` component looks like
 
-JavaScript
-Shrink ▲   Copy Code
+![Blotter](./assets/Blotter.PNG)
+
+### The Blotter Html/React root component
+Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
+
+### The Blotter TypeScript
+This `BlotterComponent` is responsible for rendering all the trades, and the code for it is like this.
+
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import ReactTable from "react-table";
@@ -1418,38 +1415,38 @@ export const BlotterComponent = () => (
         <Blotter/>
     </Provider>
 );
- 
+``` 
 
 The only really imoportant parts of this are
 
-It uses React-Table to render the grid
-It subscribes to the OpenFin interproc3ess bus like this
-JavaScript
-Copy Code
+* It uses [React-Table](https://github.com/tannerlinsley/react-table) to render the grid
+* It subscribes to the OpenFin interprocess bus like this
+
+```JavaScript
 fin.desktop.InterApplicationBus.subscribe("*","created-trade-from-tile",
     function (message, uuid) {
         self.props.fetchBlotterFromEndpoint();
     });	
- 
+``` 
 
-Chart
-What is this page designed to do?
-This page is designed to show a chart for a given currency pair, where the chart data is a static CSV file served up by Express JS
-It also listens to bus messages from a Tile
-It also listens to bus messages from a Blotter
-It can also show a new chart window from the Launcher where the pair is part of the url for the Chart window
-This is what the overall CHartInner component looks like
+## Chart
+### What is the Chart page designed to do?
+* This page is designed to show a chart for a given currency pair, where the chart data is a static CSV file served up by Express JS
+* It also listens to bus messages from a `Tile`
+* It also listens to bus messages from a `Blotter`
+* It can also show a new chart window from the `Launcher` where the pair is part of the url for the `Chart` window
 
-Image 11
+This is what the overall `ChartInner` component looks like
 
-The Html/React root component
-Is woeks in much the same way as we just saw above with the src/LauncherEntry.tsx
+![Chart](./assets/Chart.PNG)
 
-The TilesTypeScript
-This ChartComponent is reponsible for rendering all the trades, and the code for it is like this.
+### The Chart Html/React root component
+Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
 
-JavaScript
-Shrink ▲   Copy Code
+### The Chart TypeScript
+This `ChartComponent` is reponsible for rendering all the trades, and the code for it is like this.
+
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -1577,10 +1574,11 @@ export const ChartComponent = () => (
         <TheChart />
     </Provider>
 );
+```
+
 Where the guts of creating the chart is handled by this React component
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -1742,26 +1740,25 @@ class CandleStickChartWithZoomPan extends React.Component<CandleStickChartWithZo
 }
 
 export const FixedWidthChart: any = fitWidth(CandleStickChartWithZoomPan);
+```
+
 Since I showed you how the bus subscription stuff works, there is not much more to add for this component
 
- 
+## Persisting State
+OpenFin comes with this cool [Layouts API](https://openfin.co/documentation/layouts-tutorial/) which takes care of docking, snapping of Windows, allows you to persist window state/positions etc etc.
 
-Persisting State
-OpenFin comes with this cool Layouts API which takes care of docking, snapping of Windows, allows you to persist window state/positions etc etc.
-
-Hand rolled solution
-Sounds great. Only snag is that if like me you have a small laptop but a 4k resolution, this doesnt play well with OpenFin. If you try and run the OpenFin Layouts API whilst you have a scaling value other than 100% you will receive a error message from the Layouts API  on startup.
+### Hand rolled solution
+Sounds great. Only snag is that if like me you have a small laptop but a 4k resolution, this doesnt play well with OpenFin. If you try and run the [OpenFin Layouts API](https://openfin.co/documentation/layouts-tutorial/) whilst you have a scaling value other than 100% you will receive a error message from the Layouts API  on startup.
 
 Sure you could adjust this scaling to be 100% but then your PC is just unusable
 
 You can change the scaling using your display settings, as shown here
 
-Image 12
+![Scaling](./assets/Scaling.PNG)
 
 So that was a real bummer for me. I wanted to be able to save state/restore state, so what could I do. Well I thought about it, and thought ok it won't be as fancy as the native OpenFin one, but I could just use local storage to save/restore by window layouts, so this is what I did
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 import { PersistedWindowInfo } from './../common/commonModels';
 
 export class LayoutService {
@@ -1911,15 +1908,16 @@ export class LayoutService {
     }
    
 }
+```
+
 Worked very well actually
 
-Using the OpenFin Layouts API
-So I decided to give this a go on my work machine where my monitors have 100% scaling. The code below is the revised LayoutService.
+### Using the OpenFin Layouts API
+So I decided to give this a go on my work machine where my monitors have 100% scaling. The code below is the revised `LayoutService`.
 
-NOTE: if you want to run this from the demo code its in the "using-layouts-api" branch
+NOTE: if you want to run this from the demo code its in the "`using-layouts-api`" branch
 
-JavaScript
-Shrink ▲   Copy Code
+```JavaScript
 import * as Layouts from "openfin-layouts"
 import { interval } from 'rxjs';
 
@@ -2016,11 +2014,13 @@ export class LayoutService {
         });
     }
 }
-Debugging
-Now as a developer you will at some point want to debug your code, so you will likely want to know how to do that. For OpenFin the easiest way to do this is to allow the context menu in your app which you can set in the OpenFin manifest file app.json that we saw above. You basically set this line "contextMenu": true
+```
+
+## Debugging
+Now as a developer you will at some point want to debug your code, so you will likely want to know how to do that. For OpenFin the easiest way to do this is to allow the context menu in your app which you can set in the OpenFin manifest file app.json that we saw above. You basically set this line `"contextMenu": true`
 
 With that turned on you can see a menu and just launch the chrome debug tools:
 
-Image 13
+![debugging](./assets/debugging.PNG)
 
  
