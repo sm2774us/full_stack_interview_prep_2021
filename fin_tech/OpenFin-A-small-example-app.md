@@ -5,35 +5,35 @@ A little demo app to try out OpenFin
 * [What tools will we use along the way](#what-tools-will-we-use-along-the-way)
 * [Where is the code?](#where-is-the-code)
 * [What exactly is Openfin, and what problem is it trying to solve?](#what-exactly-is-openfin--and-what-problem-is-it-trying-to-solve)
-** [Isn't this Electron?](#isn't-this-electron)
-** [What are are the important parts of OpenFin?](#what-are-the-important-parts-of-openfin)
+  - [Isn't this Electron?](#isn't-this-electron)
+  - [What are are the important parts of OpenFin?](#what-are-the-important-parts-of-openfin)
 * [A Demo Application](#a-demo-application)
-** [How to run the demo app](#how-to-run-the-demo-app)
-** [Bundler](#bundler)
-** [Express Server Side code](#express-server-side-code)
-** [OpenFin Manifest File](#openfin-manifest-file)
-** [Launcher](#launcher)
-*** [What is this page designed to do?](#what-is-this-page-designed-to-do)
-*** [The Html](#the-html)
-*** [The TypeScript](#the-typescript)
-** [Tiles](#tiles)
-*** [What is the Tiles page designed to do?](#what-is-the-tiles-page-designed-to-do)
-*** [The Tiles Html/React root component](#the-tiles-htmlreact-root-component]
-*** [The Tiles TypeScript](#the-tiles-typescript)
-**** [Tiles Redux Workflow](#tiles-redux-workflow)
-*** [What is the Tile component designed to do?](#what-is-the-tile-component-designed-to-do)
-** [Blotter](#blotter)
-*** [What is the Blotter page designed to do?](#what-is-the-blotter-page-designed-to-do)
-*** [The Blotter Html/React root component](#the-blotter-htmlreact-root-component]
-*** [The Blotter TypeScript](#the-blotter-typescript)
-** [Chart](#chart)
-*** [What is the Chart page designed to do?](#what-is-the-chart-page-designed-to-do)
-*** [The Chart Html/React root component](#the-chart-htmlreact-root-component]
-*** [The Chart TypeScript](#the-chart-typescript)
-** [Persisting State](#persisting-state)
-*** [Hand rolled solution](#hand-rolled-solution)
-*** [Using the OpenFin Layouts API](#using-the-openfin-layouts-api)
-** [Debugging](#debugging)
+  - [How to run the demo app](#how-to-run-the-demo-app)
+  - [Bundler](#bundler)
+  - [Express Server Side code](#express-server-side-code)
+  - [OpenFin Manifest File](#openfin-manifest-file)
+  - [Launcher](#launcher)
+    - [What is this page designed to do?](#what-is-this-page-designed-to-do)
+    - [The Html](#the-html)
+    - [The TypeScript](#the-typescript)
+  - [Tiles](#tiles)
+    - [What is the Tiles page designed to do?](#what-is-the-tiles-page-designed-to-do)
+    - [The Tiles Html/React root component](#the-tiles-htmlreact-root-component]
+    - [The Tiles TypeScript](#the-tiles-typescript)
+      - [Tiles Redux Workflow](#tiles-redux-workflow)
+    - [What is the Tile component designed to do?](#what-is-the-tile-component-designed-to-do)
+  - [Blotter](#blotter)
+    - [What is the Blotter page designed to do?](#what-is-the-blotter-page-designed-to-do)
+    - [The Blotter Html/React root component](#the-blotter-htmlreact-root-component]
+    - [The Blotter TypeScript](#the-blotter-typescript)
+  - [Chart](#chart)
+    - [What is the Chart page designed to do?](#what-is-the-chart-page-designed-to-do)
+    - [The Chart Html/React root component](#the-chart-htmlreact-root-component]
+    - [The Chart TypeScript](#the-chart-typescript)
+  - [Persisting State](#persisting-state)
+    - [Hand rolled solution](#hand-rolled-solution)
+    - [Using the OpenFin Layouts API](#using-the-openfin-layouts-api)
+  - [Debugging](#debugging)
 
 ## Overview
 So it has been a very long time since I wrote an article here at codeproject. I have been quite busy on my blog actually, so have been doing more there of late. Thing is I kind of heard about this technology years ago, and kind of knew what it did, but had never really used it.
@@ -96,7 +96,7 @@ This is kind of where OpenFin fits in, where it allows you to write HTML5 applic
 
 You can kind of think of it like this
 
-![openfin-architecture](./assets/openfin-architecture.PNG)
+![openfin-architecture](./assets/openfin-architecture.png)
 
 Where OpenFin makes use of the Chromium browser stack. You can kind of think of your source ENTRY point HTML as a single single page app, you can still have all the usual stuff in it like routing etc etc, but if you are trying to emmulate a traditional desktop app, it may make more sense to think of one HTML page as one traditional form/window in a traditional desktop app.
 
@@ -392,16 +392,16 @@ Where this config would give me the following features
 Great all cool stuff indeed.....Then a much cleverer webdev collegue of mine showed me [https://parceljs.org/](https://parceljs.org/), 
 which requires this much effort to achieve the same thing as above
 
-![parcel](./assets/parcel.PNG)
+![parcel](./assets/parcel.png)
 
 Can you see all the effort in that white square. That's right there is NONE. None at all, no config. 
 This is what I get produced for NO effort at all :
 
-![parcel-output](./assets/parcel-output.PNG)
+![parcel-output](./assets/parcel-output.png)
 
 See how I get hashed JS files (even though the demo app uses TypeScript), multiple entry points one per file (so thats one dependency graph per etry point), I get CSS (even though the demo app used SCSS), oh and I also get source maps
 
-![parcel-prod](./assets/parcel-prod.PNG)
+![parcel-prod](./assets/parcel-prod.png)
 
 Don't believe me, well here is the demo app running where I have debugged into it, and you can see we do indeed get the source maps sent to the browser (for PROD there is another procedure [https://parceljs.org/production.html](https://parceljs.org/production.html))
 
@@ -585,7 +585,7 @@ For OpenFin to be able to run the app, we need to supply it with a manifest file
 ## Launcher
 The Launcher is the main window for the demo app, and it is the one served up by the Express backend for a GET `http://localhost:1234`, and it looks like this
 
-![launcher](./assets/launcher.PNG)
+![launcher](./assets/launcher.png)
 
 This is also one of the Parcel.JS entry points. You can kind of think of every single window as a individual standalone app, and as such it will require its own entry point with Parcel.js, and should have a HTML page. A Window in OpenFin lingo equates to a new HTML page. Which for Parcel means new entry point/new dependency graph.
 
@@ -769,7 +769,7 @@ showChildWindow = async (name: string, url: string, width: number, height: numbe
 
 This is what the overall `TilesInner` component looks like
 
-![Tiles](./assets/Tiles.PNG)
+![Tiles](./assets/Tiles.png)
 
 ### The Tiles Html/React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
@@ -994,7 +994,7 @@ Ok so now we have seen the `Tiles`, how does a single `Tile` work.
 
 This is what the overall `Tile` component looks like
 
-![Tile](./assets/Tile.PNG)
+![Tile](./assets/Tile.png)
 
 Well lets see its React markup
 
@@ -1201,7 +1201,7 @@ fin.desktop.InterApplicationBus.publish("created-trade-from-tile", {
 
 This is what the overall `BlotterInner` component looks like
 
-![Blotter](./assets/Blotter.PNG)
+![Blotter](./assets/Blotter.png)
 
 ### The Blotter Html/React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
@@ -1438,7 +1438,7 @@ fin.desktop.InterApplicationBus.subscribe("*","created-trade-from-tile",
 
 This is what the overall `ChartInner` component looks like
 
-![Chart](./assets/Chart.PNG)
+![Chart](./assets/Chart.png)
 
 ### The Chart Html/React root component
 Is works in much the same way as we just saw above with the `src/LauncherEntry.tsx`
@@ -1754,7 +1754,7 @@ Sure you could adjust this scaling to be 100% but then your PC is just unusable
 
 You can change the scaling using your display settings, as shown here
 
-![Scaling](./assets/Scaling.PNG)
+![Scaling](./assets/Scaling.png)
 
 So that was a real bummer for me. I wanted to be able to save state/restore state, so what could I do. Well I thought about it, and thought ok it won't be as fancy as the native OpenFin one, but I could just use local storage to save/restore by window layouts, so this is what I did
 
@@ -2021,6 +2021,6 @@ Now as a developer you will at some point want to debug your code, so you will l
 
 With that turned on you can see a menu and just launch the chrome debug tools:
 
-![debugging](./assets/debugging.PNG)
+![debugging](./assets/debugging.png)
 
  
