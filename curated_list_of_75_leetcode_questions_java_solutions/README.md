@@ -2581,89 +2581,194 @@ https://www.ics.uci.edu/~eppstein/161/960229.html
 #### [LC-139:Word Break](https://leetcode.com/problems/word-break/)
 ##### Solution Explanation:
 ```
-Solution Approach:
-DP
-=================================================================================================================================================================
-(1) dp[hi] = s[0:hi] is segmentable ( or breakable ).
-(2) Considering all possible substrings of s.
-(3) If s[0:lo] is segmentable and s[lo:hi] is segmentable, then s[0:hi] is segmentable. Equivalently, if dp[lo] is True and s[lo:hi] is in the wordDict, then dp[hi] is True.
-(4) Our goal is to determine if dp[hi] is segmentable, and once we do, we don't need to consider anything else. This is because we want to construct dp.
-(5) dp[len(s)] tells us if s[0:len(s)] (or equivalently, s) is segmentable.
+Approach-1 : Brute Force ( Recursion )
+==================================
+The time complexity depends on how many nodes the recursion tree has. In the worst case, the recursion tree has the most nodes, which means the program should not return in the middle and it should try as many possibilities as possible. So the branches and depth of the tree are as many as possible. For the worst case, for example, we take s = "abcd" and wordDict = ["a", "b", "c", "bc", "ab", "abc"], the recursion tree is shown below:
+```
+![word-break-brute-force-image-1](./assets/word-break-brute-force-image-1.PNG)
+```
+From the code if (set.contains(s.substring(0, i)) && wb(s.substring(i), set)) { }, we can see that only if the wordDict contains the prefix, the recursion function can go down to the next level. So on the figure above, string on the edge means the wordDict contains that string. All the gray node with empty string cannot be reached because if the program reaches one such node, the program will return, which lead to some nodes right to it will not be reached. So the conclusion is for a string with length 4, the recursion tree has 8 nodes (all black nodes), and 8 is 2^(4-1). So to generalize this, for a string with length n, the recursion tree wil have 2^(n-1) nodes, i.e., the time complexity is O(2^n). I will prove this generalization below using mathmatical induction:
+```
+![word-break-brute-force-image-2](./assets/word-break-brute-force-image-2.PNG)
+```
+Explanation: the value of a node is the string length. We calculate the number of nodes in the recursion tree for string length=1, 2, ...., n respectively.
+
+For example, when string length=4, the second layer of the recursion tree has three nodes where the string length is 3, 2 and 1 respectively. And the number of subtree rooted at these three nodes have been calculated when we do the mathmatical induction.
+
+So time complexity is O(2^n).
+
+T(n) = T(n-1) + T(n-2) + T(n-3)...+ 1
+also, T(n-1) = T(n-2) + T(n-3)...+ 1
+
+So:
+T(n) = T(n-1) + T(n-2) + T(n-3)...+ 1
+= T(n-1) + T(n-1) // subbing in T(n-1) equation from above
+= 2 * T(n-1)
+= 4 * T(n-2)
+= ...
+= 2^n // since T(1) = 1
+
+```
+```
+Approach-2 : BFS
+==================================
+We can use a graph to represent the possible solutions. The vertices of the graph are simply the positions of the first characters of the words and each edge actually represents a word. For example, the input string is "nightmare", there are two ways to break it, "night mare" and "nightmare". The graph would be
+
+0-->5-->9
+
+|__ __ _^
+
+The question is simply to check if there is a path from 0 to 9. The most efficient way is traversing the graph using BFS with the help of a queue and a hash set. The hash set is used to keep track of the visited nodes to avoid repeating the same work.
+
+For this problem, the time complexity is O(n^2) and space complexity is O(n), the same with DP. 
+This idea can be used to solve the problem word break II. We can simple construct the graph using BFS, 
+save it into a map and then find all the paths using DFS.
+```
+```
+Approach-3 : Dynamic Programming
+==================================
+For each ith character in the string s we do the following;
+
+  1. For each word in the dictionary, replace that word at the end of the substring s. Let the current word be w, and its length be L. After replacing, the string s will be in the form 
+     s = s[0, i-L] + s[i - L + 1, 0]
+  2. Then we need to check 2 things:
+     * Whether s[0, i - L] can be broken using the words from the dictionary
+     * Whether s[i - l, i] = w
+       If both are true, then s[0 , i] can be broken
+
+For example: let the input string is s = "catsdog" and the dictionary is dict={"cats", "dog", "cat"}
+Assume that we have calculated all the way up to the last character (i = 6), we then consider each word in the dictionary for this position as follow:
+
+  * For cats: length("cats") = 4 so s = s[0, 6 - 4] + s[6 - 4 + 1, 6] = s[0,2] + s[3, 6] = "cat" + "sdog", we can see that "cat" can be broken using the dictionary 
+    words but "sdog" != "cats", therefore this is invalid.
+  * For dog: length("dog") = 3 so s = s[0, 6 - 3] + s[6 - 3 + 1, 6] = s[0,3] + s[4, 6] = "cats" + "dog", again, "cats" can be broken using the dictionary words but 
+    now "dog" != "dog", therefore this is valid and we accept the whole string.
 ```
 ##### Complexity Analysis:
 ```
-TIME COMPLEXITY  : O(N*L) [ O(N*L*N) or O(L*N^2) is substr is considered ]. 
-SPACE COMPLEXITY : O(N)
+Approach-1 : Brute Force ( Recursion )
+==================================
+TC: O(2^N)
 
-where:
-------
-L = size of wordDict
-N = length of string s
+Approach-2 : BFS
+&
+Approach-3 : Dynamic Programming
+==================================
+TC: O(N^2)
+
+O(n^2) because there are O(n) suffixes (i.e. nodes/states in your graph), and when processing each suffix, 
+you have an O(n) for-loop that's looking up prefixes in O(1) time.
+
+Now, if you consider .substring() to take O(n) time, then each lookup takes O(n) time because you have to 
+make the substring first.
+
+Hence, a more precise total is O(n^3).
+
+TC: O(N^3)
 ```
-```python
-#(1) dp[i] = s[0:i] is breakable
-#(2) Considering all possible substrings of s.
-#(3) If s[0:j] is breakable and s[j:i] is breakable, then s[0:i] is breakable.
-#    Equivalently, if dp[j] is True and s[j:i] is in the wordDict, then dp[i] is True.
-#(4) Our goal is to determine if dp[i] is breakable, and once we do, we don't need to consider anything else. This is because we want to construct dp.
-#(5) dp[len(s)] tells us if s[0:len(s)] (or equivalently, s) is breakable.
-def wordBreak(s: str, wordDict: List[str]) -> bool:
-    if not s: return False
-    dp = [False for i in range(len(s) + 1)] #(1)
-    dp[0] = True
-    
-    for hi in range(len(s) + 1): #(2)
-        for lo in range(hi):
-            if dp[lo] and s[lo:hi] in wordDict: #(3)
-                dp[hi] = True
-                break #(4)
-        
-    return dp[len(s)] #(5)
+```java
+// Approach-1 : Brute Force ( Recursion )
+// ==================================
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-if __name__ == "__main__":
-    #Input: s = "leetcode", wordDict = ["leet","code"]
-    #Output: true
-    #Explanation: Return true because "leetcode" can be segmented as "leet code".
-    s = "leetcode"
-    wordDict = ["leet","code"]
-    print(wordBreak(s, wordDict))
-```
-```kotlin
-//(1) dp[i] = s[0:i] is breakable
-//(2) Considering all possible substrings of s.
-//(3) If s[0:j] is breakable and s[j:i] is breakable, then s[0:i] is breakable.
-//     Equivalently, if dp[j] is True and s[j:i] is in the wordDict, then dp[i] is True.
-//(4) Our goal is to determine if dp[i] is breakable, and once we do, we don't need to consider anything else. This is because we want to construct dp.
-//(5) dp[len(s)] tells us if s[0:len(s)] (or equivalently, s) is breakable.
-fun wordBreak(s: String, wordDict: List<String>): Boolean {
-    // sanity check
-    if(s.isEmpty()) return false
-
-    val len = s.length
-    val wordSet = HashSet(wordDict)
-
-    val dp = BooleanArray(len + 1) //(1)
-    dp[0] = true
-
-    for (hi in 1..len) { //(2)
-        for (lo in 0..hi) {
-            if (dp[lo] && wordSet.contains(s.substring(lo, hi))) { //(3)
-                dp[hi] = true
-                break //(4)
+public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+		if (s.isEmpty() || wordDict.isEmpty()) {
+            return false;
+        }
+        if (wordDict.contains(s)) { return true; }
+        // put all words into a hashset
+        Set<String> set = new HashSet<>(wordDict);
+        return wb(s, set);
+    }
+    private boolean wb(String s, Set<String> set) {
+        int len = s.length();
+        if (len == 0) {
+            return true;
+        }
+        for (int i = 1; i <= len; ++i) {
+            if (set.contains(s.substring(0, i)) && wb(s.substring(i), set)) {
+                return true;
             }
         }
+        return false;
     }
-    
-    return dp[len] //(5)
 }
 
-fun main(args: Array<String>) {
-    //Input: s = "leetcode", wordDict = ["leet","code"]
-    //Output: true
-    //Explanation: Return true because "leetcode" can be segmented as "leet code".
-    val s = "leetcode"
-    val wordDict: List<String> = arrayListOf("leet","code")
-    print(wordBreak(s, wordDict))
+// Approach-2 : BFS
+// ==================================
+//
+// Optimizations:
+// ==================================
+//   * only traverse max_len rather than to the end of s to find end.
+//   * mark visited when enqueue rather than dequeue.
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+
+public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+		if (s.isEmpty() || wordDict.isEmpty()) {
+            return false;
+        }
+        if (wordDict.contains(s)) { return true; }
+        int max_len = -1;
+        for (String word : wordDict)
+            max_len = Math.max (max_len, word.length ());
+        Set<String> wordDictSet=new HashSet(wordDict);
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[s.length()];
+        queue.add(0);
+        visited[0] = true;
+        while (!queue.isEmpty()) {
+            int start = queue.remove();
+            for (int end = start + 1; end <= s.length () && end - start <= max_len; end++) {
+                if (wordDictSet.contains(s.substring(start, end)) && !(end < s.length () && visited[end])) {
+                    if (end == s.length()) {
+                        return true;
+                    }
+                    queue.add(end);
+                    visited[end] = true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+// Approach-3 : Dynamic Programming
+import java.util.List;
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true; // Cover the dp[-1] case
+        
+        // For each ith character in the string
+        // We repeatedly replace each possible word in the dictionary to that position from right to left
+        // Assume that we are replace a word w of length L to that position
+        // The substring from start upto ith will be in this from
+        // s = s[0, i - L] + s[i-L, i]
+        // Hence, we need to check 2 things, whether s[0, i - L] can be broken and also s[i - L, i] = w
+        // If both are true then the substring up to i can be broken 
+        for (int i = 0; i < s.length(); i++) {
+            for (String word : wordDict) {
+                int wLength = word.length();
+                if (wLength <= i + 1) {
+                    if (s.substring(i - wLength + 1, i + 1).equals(word) && dp[i + 1 - wLength] == true) {
+                        dp[i + 1] = true;
+                        break;
+                    }
+                }
+            }    
+        }
+        
+        return dp[s.length()];
+    }
 }
 ```
 
@@ -2677,46 +2782,28 @@ fun main(args: Array<String>) {
 ##### Solution Explanation:
 ```
 Solution Approach:
-DP
 =================================================================================================================================================================
-
 Idea:
-With this problem, we can easily imagine breaking up the solution into smaller pieces that we can use as stepping stones 
-towards the overall answer. For example, if we're searching for a way to get from 0 to our target number (T), 
-and if 0 < x < y < T, then we can see that finding out how many ways we can get 
-from y to T will help us figure out how many ways we can get from x to T, 
-all the way down to 0 to T. 
-
-This is a classic example of a top-down (memoization) dyanamic programming (DP) solution.
+=================================================================================================================================================================
+With this problem, we can easily imagine breaking up the solution into smaller pieces that we can use as stepping stones towards the overall answer. For example, if we're searching for a way to get from 0 to our target number (T), and if 0 < x < y < T, then we can see that finding out how many ways we can get from y to T will help us figure out how many ways we can get from x to T, all the way down to 0 to T. This is a classic example of a top-down (memoization) dyanamic programming (DP) solution.
 
 Of course, the reverse is also true, and we could instead choose to use a bottom-up (tabulation) DP solution with the same result.
 
-Top-Down DP Approach: 
----------------------
+Top-Down DP Approach: Our DP array (dp) will contain cells (dp[i]) where i will represent the remaining space left before T and dp[i] will represent the number of ways the solution (dp[T]) can be reached from i.
+=================================================================================================================================================================
 
-Our DP array (dp) will contain cells (dp[i]) where i will represent the remaining space left before T 
-and dp[i] will represent the number of ways the solution (dp[T]) can be reached from i.
-At each value of i as we build out dp we'll iterate through the different nums in our number array (N) 
-and consider the cell that can be reached with each num (dp[i-num]). 
-The value of dp[i] will therefore be the sum of the results of each of those possible moves.
+At each value of i as we build out dp we'll iterate through the different nums in our number array (N) and consider the cell that can be reached with each num (dp[i-num]). The value of dp[i] will therefore be the sum of the results of each of those possible moves.
 
-We'll need to seed dp[0] with a value of 1 to represent the value of the completed combination, 
-then once the iteration is complete, we can return dp[T] as our final answer.
+We'll need to seed dp[0] with a value of 1 to represent the value of the completed combination, then once the iteration is complete, we can return dp[T] as our final answer.
 
-Bottom-Up DP Approach: 
----------------------
+Bottom-Up DP Approach: Our DP array (dp) will contain cells (dp[i]) where i will represent the current count as we head towards T and dp[i] will represent the number of ways we can reach i from the starting point (dp[0]). This means that dp[T] will represent our final solution.
+=================================================================================================================================================================
 
-Our DP array (dp) will contain cells (dp[i]) where i will represent the current count as we head towards T 
-and dp[i] will represent the number of ways we can reach i from the starting point (dp[0]).
-This means that dp[T] will represent our final solution.
+At each value of i as we build out dp we'll iterate through the different nums in our number array (N) and update the value of the cell that can be reached with each num (dp[i+num]) by adding the result of the current cell (dp[i]). If the current cell has no value, then we can continue without needing to iterate through N.
 
-At each value of i as we build out dp we'll iterate through the different nums in our number array (N)
-and update the value of the cell that can be reached with each num (dp[i+num]) by adding the result 
-of the current cell (dp[i]). If the current cell has no value, then we can continue without 
-needing to iterate through N.
+We'll need to seed dp[0] with a value of 1 to represent the value of the common starting point, then once the iteration is complete, we can return dp[T] as our final answer.
 
-We'll need to seed dp[0] with a value of 1 to represent the value of the common starting point, 
-then once the iteration is complete, we can return dp[T] as our final answer.
+In both the top-down and bottom-up DP solutions, the time complexity is O(N * T) and the space complexity is O(T).
 ```
 ##### Complexity Analysis:
 ```
@@ -2726,98 +2813,31 @@ In both the top-down and bottom-up DP solutions, the time complexity is O(N * T)
 TIME COMPLEXITY  : O(N*T)
 SPACE COMPLEXITY : O(T)
 ```
-```python
-# Top-Down DP
-def combinationSum4_TopDownDP(nums: List[int], target: int) -> int:
-    dp = [0] * (target + 1)
-    dp[0] = 1
-    for i in range(1, target+1):
-        for num in nums:
-            if num <= i: dp[i] += dp[i-num]
-    return dp[target]
-
-# Bottom-Up DP
-def combinationSum4_BottomUpDP(nums: List[int], target: int) -> int:
-    dp = [0] * (target + 1)
-    dp[0] = 1
-    for i in range(target):
-        if not dp[i]: continue
-        for num in nums:
-            if num + i <= target: dp[i+num] += dp[i]
-    return dp[target]
-
-if __name__ == "__main__":
-    #Input: nums = [1,2,3], target = 4
-    #Output: 7
-    #Explanation:
-    #The possible combination ways are:
-    #(1, 1, 1, 1)
-    #(1, 1, 2)
-    #(1, 2, 1)
-    #(1, 3)
-    #(2, 1, 1)
-    #(2, 2)
-    #(3, 1)
-    #Note that different sequences are counted as different combinations.
-    nums = [1,2,3]
-    target = 4
-    print(combinationSum4_TopDownDP(nums, target))
-    print(combinationSum4_BottomUpDP(nums, target))
-```
-```kotlin
+```java
 // Top-Down DP
-fun combinationSum4_TopDownDP(nums: IntArray, target: Int): Int {
-    val dp = IntArray(target + 1) { if (it == 0) 1 else 0 }
-    for (i in 1..target) {
-        for (num in nums) {
-            if (num <= i) {
-                dp[i] += dp.getOrNull(i - num) ?: 0
-            }
-        }
+class Solution {
+    public int combinationSum4(int[] N, int T) {
+        int[] dp = new int[T+1];
+        dp[0] = 1;
+        for (int i = 1; i <= T; i++)
+            for (int num : N)
+                if (num <= i) dp[i] += dp[i-num];
+        return dp[T];
     }
-    //return dp.last()
-    return dp[target]
 }
 
 // Bottom-Up DP
-fun combinationSum4_BottomUpDP(nums: IntArray, target: Int): Int {
-    val dp = IntArray(target + 1) { if (it == 0) 1 else 0 }
-    for (i in 0..target-1) {
-        if (dp[i] == 0) continue
-        for (num in nums) {
-            if ((num + i) <= target) {
-                dp[i+num] += dp.getOrNull(i) ?: 0
-            }
+class Solution {
+    public int combinationSum4(int[] N, int T) {
+        int[] dp = new int[T+1];
+        dp[0] = 1;
+        for (int i = 0; i < T; i++) {
+            if (dp[i] == 0) continue;
+            for (int num : N)
+                if (num + i <= T) dp[i+num] += dp[i];
         }
+        return dp[T];
     }
-    //return dp.last()
-    return dp[target]
-}
-
-
-fun main(args: Array<String>) {
-    //Input: nums = [1,2,3], target = 4
-    //Output: 7
-    //Explanation:
-    //The possible combination ways are:
-    //(1, 1, 1, 1)
-    //(1, 1, 2)
-    //(1, 2, 1)
-    //(1, 3)
-    //(2, 1, 1)
-    //(2, 2)
-    //(3, 1)
-    //Note that different sequences are counted as different combinations.
-    val nums = intArrayOf(1,2,3)
-    val target = 4
-    println(combinationSum4_TopDownDP(nums, target))
-    println(combinationSum4_BottomUpDP(nums, target))
-    //Input: nums = [9], target = 3
-    //Output: 0
-    val nums1 = intArrayOf(9)
-    val target1 = 3
-    println(combinationSum4_TopDownDP(nums1, target1))
-    println(combinationSum4_BottomUpDP(nums1, target1))
 }
 ```
 
@@ -2830,26 +2850,16 @@ fun main(args: Array<String>) {
 #### [LC-198:House Robber](https://leetcode.com/problems/house-robber/)
 ##### Solution Explanation:
 ```
-Solution Approach:
------------------------------------
-Bottom-Up DP 2 ways:
------------------------------------
-1) Iterative + memo (bottom-up)
-2) Iterative + N variables (bottom-up)
-
-NOTE: For interview situation use method (2) => rob_iteratively_with_variables()
-=================================================================================================================================================================
+There is some frustration when people publish their perfect fine-grained algorithms without sharing any information abut how they were derived. This is an attempt to change the situation. There is not much more explanation but it's rather an example of higher level improvements. Converting a solution to the next step shouldn't be as hard as attempting to come up with perfect algorithm at first attempt.
 
 This particular problem and most of others can be approached using the following sequence:
 
-  1. Find recursive relation
-  2. Recursive (top-down)
-  3. Recursive + memo (top-down)
-  4. Iterative + memo (bottom-up)
-  5. Iterative + N variables (bottom-up)
-
-Step 1> Figure out recursive relation.
-------------------------------------------------
+Find recursive relation
+Recursive (top-down)
+Recursive + memo (top-down)
+Iterative + memo (bottom-up)
+Iterative + N variables (bottom-up)
+Step 1. Figure out recursive relation.
 A robber has 2 options: a) rob current house i; b) don't rob current house.
 If an option "a" is selected it means she can't rob previous i-1 house but can safely proceed to the one before previous i-2 and gets all cumulative loot that follows.
 If an option "b" is selected the robber gets all the possible loot from robbery of i-1 and all the following buildings.
@@ -2857,12 +2867,10 @@ So it boils down to calculating what is more profitable:
 
 robbery of current house + loot from houses before the previous
 loot from the previous house robbery and any loot captured before that
-
-
 rob(i) = Math.max( rob(i - 2) + currentHouseValue, rob(i - 1) )
 
 Step 2. Recursive (top-down)
-------------------------------------------------
+Converting the recurrent relation from Step 1 shound't be very hard.
 
 public int rob(int[] nums) {
     return rob(nums, nums.length - 1);
@@ -2873,9 +2881,9 @@ private int rob(int[] nums, int i) {
     }
     return Math.max(rob(nums, i - 2) + nums[i], rob(nums, i - 1));
 }
+This algorithm will process the same i multiple times and it needs improvement. Time complexity: [to fill]
 
 Step 3. Recursive + memo (top-down).
-------------------------------------------------
 
 int[] memo;
 public int rob(int[] nums) {
@@ -2895,12 +2903,10 @@ private int rob(int[] nums, int i) {
     memo[i] = result;
     return result;
 }
-
 Much better, this should run in O(n) time. Space complexity is O(n) as well, because of the recursion stack, let's try to get rid of it.
 
-
 Step 4. Iterative + memo (bottom-up)
-------------------------------------------------
+
 public int rob(int[] nums) {
     if (nums.length == 0) return 0;
     int[] memo = new int[nums.length + 1];
@@ -2912,12 +2918,10 @@ public int rob(int[] nums) {
     }
     return memo[nums.length];
 }
-
-
 Step 5. Iterative + 2 variables (bottom-up)
-------------------------------------------------
-We can notice that in the previous step we use only memo[i] and memo[i-1], so going just 2 steps back. We can hold them in 2 variables instead.
-This optimization is met in Fibonacci sequence creation and some other problems.
+We can notice that in the previous step we use only memo[i] and memo[i-1], so going just 2 steps back. 
+We can hold them in 2 variables instead. This optimization is met in Fibonacci sequence creation and some other problems 
+[to paste links].
 
 /* the order is: prev2, prev1, num  */
 public int rob(int[] nums) {
@@ -2932,206 +2936,12 @@ public int rob(int[] nums) {
     return prev1;
 }
 ```
-##### Complexity Analysis:
+##### References:
 ```
-For both the solutions mentioned in Steps 4 (rob_iteratively_using_memo) and 5 (rob_iteratively_with_variables)
-
-TIME COMPLEXITY  : O(N)
-SPACE COMPLEXITY : O(1)
-```
-```python
-#Bottom-Up DP 2 ways:
-#-----------------------------------
-#1) Iterative + memo (bottom-up)
-#2) Iterative + N variables (bottom-up)
-#
-#NOTE: For interview situation use method (2) => rob_iteratively_with_variables()
-"""
-Note to self:
-rerun "pylint house_robber.py; python3 house_robber.py"
-
-I use pyright to do static type checking in VSCode
-"""
-
-# pylint: disable = too-few-public-methods, no-self-use
-from typing import List # so you can do List[int]
-
-# https://leetcode.com/problems/house-robber/discuss/156523/From-good-to-great.-How-to-approach-most-of-DP-problems.
-# my take-away:
-# 1) recursive
-# 2) recursive memo
-# 3) iterative memo
-# 4) iterative "pointer" variables
-
-class Solution:
-    """solution for 'House Robber' on leetcode"""
-
-    def __init__(self):
-        self.memo = {}
-
-    def rob(self, houses: List[int]) -> int:
-        """
-        Gets the max loot from non-adjacent houses.
-        Stores data in the given list of houses.
-        """
-        # handle trivial cases:
-        if not houses:
-            return 0
-        if len(houses) == 1:
-            return houses[0]
-        if len(houses) == 2:
-            return max(houses[0], houses[1])
-        # return self.rob_recursively(houses, 0) # works
-        # return self.rob_iteratively(houses) # better
-        return self.rob_iteratively_with_variables(houses) # even better
-
-    def rob_recursively(self, houses: List[int], i: int) -> int:
-        """
-        TO FIND A RECURSIVE SOLUTION: THINK OF THE BASE CASES!!!
-        Either (1) loot this house (and then must skip next one),
-        or (2) don't loot this house (and loot the next one).
-        If you don't loot this house and not the next one either,
-        then you're being silly and are better off with case (1) above anyways.
-        (BTW: going left to right recursively until base case i >= len.)
-        """
-        if i >= len(houses):
-            return 0
-        if i in self.memo:
-            return self.memo[i]
-        loot_this_house_and_next_house = houses[i] + self.rob_recursively(houses, i + 2)
-        loot_next_house = self.rob_recursively(houses, i + 1)
-        max_loot = max(loot_this_house_and_next_house, loot_next_house)
-        self.memo[i] = max_loot
-        return max_loot
-
-    def rob_iteratively_using_memo(self, houses: List[int]) -> int:
-        """
-        Iterative solution: loot up to the NEXT house =
-        either (1) loot from this house + house 2 ago,
-        or (2) loot previous house.
-        (BTW: going left to right with O(n).)
-        """
-        self.memo[0] = houses[0]
-        # loop starting at the 2nd house:
-        for i in range(1, len(houses)):
-            if i - 2 < 0: # as if only getting 2nd house (otherwise invalid index)
-                loot_this_house_and_2_ago = houses[i]
-            else: # otherwise i - 2 is a valid index
-                loot_this_house_and_2_ago = houses[i] + self.memo[i - 2]
-            loot_previous_house = self.memo[i - 1]
-            self.memo[i] = max(loot_this_house_and_2_ago, loot_previous_house)
-        return self.memo[len(houses) - 1]
-
-    def rob_iteratively_with_variables(self, houses: List[int]) -> int:
-        """
-        (Iterative solution that uses "pointer" variables instead of memo.)
-        Improve on the iterative memo solution by noticing:
-            self.memo[i - 2] = houses[i - 2]
-            self.memo[i - 1] = houses[i - 1]
-        so:
-            loot_this_house_and_2_ago = this house + two ago
-            loot_previous_house = one ago
-        (BTW: going left to right with O(n).)
-        """
-        prev = 0
-        curr = 0
-        for house in houses:
-            # curr: current house = either previous house, or this house + two ago
-            # prev: just moves one to the next position
-            loot_this_house_and_2_ago = house + prev
-            loot_previous_house = curr
-            curr = max(loot_previous_house, loot_this_house_and_2_ago)
-            prev = loot_previous_house
-        return curr # = current house = either previous house, or this house + two ago
-
-if __name__ == "__main__":
-    def check_answer(houses, correct):
-        """helper function"""
-        answer = Solution().rob(houses)
-        assert answer == correct, f'{answer} should be {correct}'
-        print(answer, 'ok' if answer == correct else 'error')
-    check_answer(houses=[], correct=0) # empty
-    check_answer(houses=None, correct=0) # invalid
-    check_answer(houses=[1], correct=1) # simple
-    check_answer(houses=[111], correct=111) # simple
-    check_answer(houses=[1, 2], correct=2)
-    check_answer(houses=[1, 2, 3], correct=4)
-    check_answer(houses=[1, 2, 3, 1], correct=4)
-    check_answer(houses=[2, 7, 9, 3, 1], correct=12)
-    check_answer(houses=[9, 1, 1, 9], correct=18)
-    check_answer(houses=[0], correct=0)
-    check_answer(houses=[1, 0, 0, 0], correct=1)
-    check_answer(houses=[0, 1, 0, 0, 0], correct=1)
-    check_answer(houses=[0, 1, 0, 0, 0], correct=1)
-    check_answer(houses=[1, 0, 1, 0, 0, 1], correct=3)
-    check_answer(houses=[0, 1, 0, 1, 0, 0, 1], correct=3)
-    check_answer(houses=[155, 44, 52, 58, 250, 225, 109, 118, 211, \
-        73, 137, 96, 137, 89, 174, 66, 134, 26, 25, 205, 239, 85, 146, \
-        73, 55, 6, 122, 196, 128, 50, 61, 230, 94, 208, 46, 243, 105, \
-        81, 157, 89, 205, 78, 249, 203, 238, 239, 217, 212, 241, 242, \
-        157, 79, 133, 66, 36, 165], correct=4517) # requires fast algorithm
-    check_answer(houses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], correct=30)
-    check_answer(houses=[10, 9, 8, 7, 6, 5, 4, 3, 2, 1], correct=30)
-```
-```kotlin
-fun rob_iteratively_using_memo(houses: IntArray): Int {
-    //
-    //Iterative solution: loot up to the NEXT house =
-    //either (1) loot from this house + house 2 ago,
-    //or     (2) loot previous house.
-    //(BTW: going left to right with O(n).)
-    //
-    val len = houses.size
-    val memo = IntArray(houses.size)
-    memo[0] = houses[0]
-    var loot_this_house_and_2_ago = -1
-    var loot_previous_house = -1 
-    // loop starting at the 2nd house:
-    for (i in 1 until len) { 
-        if ((i - 2) < 0) { // as if only getting 2nd house (otherwise invalid index)
-           loot_this_house_and_2_ago = houses[i]
-        } else { // otherwise i - 2 is a valid index
-            loot_this_house_and_2_ago = houses[i] + memo[i - 2]
-            loot_previous_house = memo[i - 1]
-            memo[i] = maxOf(loot_this_house_and_2_ago, loot_previous_house)
-        }
-    }
-    return memo[len - 1]
-}
-
-fun rob_iteratively_with_variables(houses: IntArray): Int {
-    //
-    //(Iterative solution that uses "pointer" variables instead of memo.)
-    //Improve on the iterative memo solution by noticing:
-    //    self.memo[i - 2] = houses[i - 2]
-    //    self.memo[i - 1] = houses[i - 1]
-    //so:
-    //    loot_this_house_and_2_ago = this house + two ago
-    //    loot_previous_house = one ago
-    //(BTW: going left to right with O(n).)
-    //
-    var prev = 0
-    var curr = 0
-    for (house in houses) {
-        // curr: current house = either previous house, or this house + two ago
-        // prev: just moves one to the next position
-        val loot_this_house_and_2_ago = house + prev
-        val loot_previous_house = curr
-        curr = maxOf(loot_previous_house, loot_this_house_and_2_ago)
-        prev = loot_previous_house
-    }
-    return curr // = current house = either previous house, or this house + two ago
-}
-
-fun main(args: Array<String>) {
-    //Input: houses = [1,2,3,1]
-    //Output: 4
-    //Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
-    //Total amount you can rob = 1 + 3 = 4.
-    val houses = intArrayOf(1,2,3,1)
-    println(rob_iteratively_using_memo(houses))
-    println(rob_iteratively_with_variables(houses))
-}
+The major take away for me personally was to make an investment in learning about recurrence relationships (he says recursive relation). What are they? How do you create them? And related: What is an arithmetic progression, what is a geometric progression. Check it out:
+http://www.crazyforcode.com/house-robber-dynamic-programming/
+https://www.wikihow.com/Solve-Recurrence-Relations
+https://nzmaths.co.nz/resource/why-and-how-general-terms
 ```
 
 <br/>
@@ -3145,80 +2955,47 @@ fun main(args: Array<String>) {
 ```
 Solution Approach:
 -----------------------------------
-Bottom-Up DP => Iterative + N variables (bottom-up)
-
-Variant of [ House Robber | LeetCode Problem 198 | https://leetcode.com/problems/house-robber/ ] ... can be solved by just calling the solution for LC-198 twice.
-=================================================================================================================================================================
-This problem can be seen as follow-up question for problem 198. House Robber. 
-
-If thief choose to rob first house, then thief cannot rob last house. Simiarly, if choose to rob last house, then cannot rob first.
-So if we are given houses [1,3,4,5,6,7], then we are taking max from:
-1.[1,3,4,5,6] OR
-2.[3,4,5,6,7]
-
-whichever's max value is larger.
-So we just do 2 pass of dp and take the larger one. And the problem is reduced to House Robber I [ House Robber | LeetCode Problem 198 | https://leetcode.com/problems/house-robber/ ].
+he only difference from House Robber I is that all the houses are in the circle here, 
+which simply means if you select the first one then you WON'T be able to select the last one since they are neignbors. 
+Only when you NOT select the first one, you then COULD select the last one. 
+Hey, why don't we break the circle => e.g. houses are [2,7,9,3,1], if I select the first one (which has money 2), 
+I don't even care about the last one, question will become to rob [2,7,9,3] instead. 
+Same, if we did not select first one, question becomes to rob [7,9,3,1], and the final result would be the larger result 
+between them. OMG House Robber II really is want us to do House Robber I twice! Take a look at my beating-100% solution 
+for house robber, finish this up and move on to house robber III !
 ```
 ##### Complexity Analysis:
 ```
 Time Complexity: time complexity is O(n), because we use dp problem with complexity O(n) twice. 
-Space complexity is O(1), because in python lists passed by reference and space complexity of House Robber problem is O(1).
+Space complexity is O(1), .
 
 TIME COMPLEXITY  : O(N)
 SPACE COMPLEXITY : O(1)
 ```
-```python
-from typing import List
-
-class Solution:
-
-    def __init__(self):
-        self.memo = {}
-
-    def rob_dp(self, houses: List[int], start: int, end: int) -> int:
-        prev = 0
-        curr = 0
-        for i in range(start,end+1):
-            loot_this_house_and_2_ago = houses[i] + prev
-            loot_previous_house = curr
-            curr = max(loot_previous_house, loot_this_house_and_2_ago)
-            prev = loot_previous_house
-        return curr
-
-    def rob(self, houses: List[int]) -> int:
-        return max(self.rob_dp(houses, 0, len(houses)-2), self.rob_dp(houses, 1, len(houses)-1))
-
-if __name__ == "__main__":
-    #Input: nums = [2,3,2]
-    #Output: 3
-    #Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
-    houses = [2,3,2]
-    solution = Solution()
-    print(solution.rob(houses))
-```
-```kotlin
-fun rob_dp(houses: IntArray, start: Int, end: Int): Int {
-    var prev = 0
-    var curr = 0
-    for (i in start..end) {
-        val loot_this_house_and_2_ago = houses[i] + prev
-        val loot_previous_house = curr
-        curr = maxOf(loot_previous_house, loot_this_house_and_2_ago)
-        prev = loot_previous_house
+```java
+import java.util.Arrays;
+    
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length==0) return 0;
+        if (nums.length==1) return nums[0];
+        int[] circutBreaker1 = Arrays.copyOfRange(nums, 0, nums.length-1);
+        int[] circutBreaker2 = Arrays.copyOfRange(nums, 1, nums.length);
+        return Math.max(robSub(circutBreaker1), robSub(circutBreaker2));
     }
-    return curr
-}
-
-fun rob(houses: IntArray): Int {
-    return maxOf(rob_dp(houses, 0, houses.size-2), rob_dp(houses, 1, houses.size-1))
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [2,3,2]
-    //Output: 3
-    //Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
-    val houses = intArrayOf(2,3,2)
-    println(rob(houses))
+    
+    /* the order is: prev2, prev1, num  */
+    private int rob(int[] nums) {
+        if (nums.length == 0) return 0;
+        int prev1 = 0;
+        int prev2 = 0;
+        for (int num : nums) {
+            int tmp = prev1;
+            prev1 = Math.max(prev2 + num, prev1);
+            prev2 = tmp;
+        }
+        return prev1;
+    }
 }
 ```
 
@@ -3231,25 +3008,32 @@ fun main(args: Array<String>) {
 #### [LC-91:Decode Ways](https://leetcode.com/problems/decode-ways/)
 ##### Solution Explanation:
 ```
+------------------
 DP Approach 1>
 ------------------
-Use a dp array of size n + 1 to save subproblem solutions.
+Use a dp array of size n + 1 to save subproblem solutions. 
+* dp[0] means an empty string will have one way to decode, 
+* dp[1] means the way to decode a string of size 1. 
+* Then check one digit and two digit combination and save the results along the way. 
+* In the end, dp[n] will be the end result.
 
-dp[0] means an empty string will have one way to decode,
-dp[1] means the way to decode a string of size 1.
+=> dp[i]: represents possible decode ways to the ith char(include i), whose index in string is i-1
 
-Check one digit and two digit combination and save the results along the way.
+=> Base case: dp[0] = 1 is just for creating base; dp[1], when there's one character, if it is not zero, it can only be 1 decode way. If it is 0, there will be no decode ways.
 
-In the end, dp[n] will be the end result.
+=> Here only need to look at at most two digits before i, cuz biggest valid code is 26, which has two digits.
 
-For example:
-s = "231"
-index 0: extra base offset. dp[0] = 1
-index 1: # of ways to parse "2" => dp[1] = 1
-index 2: # of ways to parse "23" => "2" and "23", dp[2] = 2
-index 3: # of ways to parse "231" => "2 3 1" and "23 1" => dp[3] = 2
+=> For dp[i]: to avoid index out of boundry, extract substring of (i-1,i)- which is the ith char(index in String is i-1) and substring(i-2, i)
 
-DP Approach 2> ( SPACE OPTIMIZATION - Constant Space )
+=> First check if substring (i-1,i) is 0 or not. If it is 0, skip it, continue right to check substring (i-2,i), cuz 0 can only be decode by being together with the char before 0.
+
+=> Second, check if substring (i-2,i) falls in 10~26. If it does, means there are dp[i-2] more new decode ways.
+
+Time: should be O(n), where n is the length of String
+Space: should be O(n), where n is the length of String
+
+------------------
+DP Approach 2 uses Fibonacci like logic> ( SPACE OPTIMIZATION - Constant Space )
 ------------------
 We can use two variables to store the previous results.
 Since we only use dp[i-1] and dp[i-2] to compute dp[i]. 
@@ -3268,128 +3052,65 @@ For DP Approach 2>
 TIME COMPLEXITY  : O(N)
 SPACE COMPLEXITY : O(1)
 ```
-```python
-#DP Approach 1>
-#------------------
-def numDecodings(s: str) -> int:
-    if not s or s[0] == '0':
-        return 0
+```java
+// DP Approach 1>
+// ------------------
+public class Solution {
+    public int numDecodings(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] chars = s.toCharArray();
+        int[] dp = new int[chars.length];
+        dp[0] = chars[0] == '0' ? 0 : 1;
+        for (int i = 1; i < chars.length; i++) {
+            char current = chars[i];
+            char prev = chars[i - 1];
+            if (current >= '1' && current <= '9') {
+                dp[i] = dp[i - 1];
+            }
+            if ((prev == '1' && current >= '0' && current <= '9') ||
+                    (prev == '2' && current >= '0' && current <= '6')) {
+                dp[i] += i >= 2 ? dp[i - 2] : 1;
+            }
+        }
+        return dp[chars.length - 1];
+    }
+}
 
-    dp = [0 for x in range(len(s) + 1)]
-    dp[0] = 1
-    dp[1] = 1 if 0 < int(s[0]) <= 9 else 0
-
-    for i in range(2, len(s) + 1):
-        first = int(s[i-1:i])
-        second = int(s[i-2:i])
-        if 1 <= first <= 9:
-            dp[i] += dp[i - 1]
-        if 10 <= second <= 26:
-            dp[i] += dp[i - 2]
-    return dp[len(s)]
-
-if __name__ == "__main__":
-    #Input: s = "12"
-    #Output: 2
-    #Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
-    s = "12"
-    print(numDecodings(s))
-
-#DP Approach 2> ( SPACE OPTIMIZATION - Constant Space )
-#------------------
-def numDecodings(s: str) -> int:
-    if not s or s[0] == '0':
-        return 0
-
-    # pre represents dp[i-1]
-    pre = 1
-    # ppre represents dp[i-2]
-    ppre = 0
-    for i in range(1, len(s) + 1):
-        temp = pre
-        if s[i - 1] == "0":
-            pre = 0
-        if i > 1 and 10 <= int(s[i-2:i]) <= 26:
-            pre += ppre
-        ppre = temp
-    return pre
-
-if __name__ == "__main__":
-    #Input: s = "12"
-    #Output: 2
-    #Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
-    s = "12"
-    print(numDecodings(s))
-```
-```kotlin
-//DP Approach 1>
-//------------------
-fun numDecodings(s: String): Int {
-    if (s.isEmpty() || s[0] == '0') return 0
-
-    val n = s.length
-    val dp = IntArray(n + 1)
-        
-    /*
-     * dp[0] is set to 1 only to get the result for dp[2].
-     * For example, you have a string "12" , "12" could be decoded as "AB" (1 2) or "L" (12).
-     * Now if you select "12" , then dp[2] += dp[0]. If dp[0] is 0, you wont count '12' as a way to decode. Hence dp[0]
-     * needs to be 1.
-     */
-    dp[0] = 1 // To handle the case like "12"
-    dp[1] = if ((s[0] > '0') and (s[0] <= '9')) 1 else 0
-        
-    for (i in 2..n) {
-        val first = s.substring(i - 1, i).toInt()
-        val second = s.substring(i - 2, i).toInt()
+// DP Approach 2> ( SPACE OPTIMIZATION - Constant Space )
+// ------------------
+public class Solution {
+    public int numDecodings(String s) {
+        if(s==null || s.length()==0)
+            return 0;
             
-        if (first in 1..9) {
-            dp[i] += dp[i - 1]
+        int i = 0;
+        int f2 = 1;
+        int f1 = (s.charAt(i) != '0') ? 1 : 0;
+        
+        int numDec = f1;  // numDecodes till position i
+        if(numDec==0) return numDec; // starting with zero, no decode possible
+        
+        for(i=1; i<s.length(); i++){
+            numDec = 0;
+            if(s.charAt(i) != '0'){
+                numDec = f1;
+            }
+            
+            // check if the two chars i-1 and i form a valid decoding
+            int val = Integer.parseInt(s.substring(i-1, i+1));
+            if(val > 9 && val <= 26){
+                numDec += f2;
+            }
+            if(numDec == 0) return numDec;
+            
+            f2 = f1;
+            f1 = numDec;
         }
-        if (second in 10..26) {
-            dp[i] += dp[i -2]
-        }
+        
+        return numDec;
     }
-    return dp[n]        
-}
-
-fun main(args: Array<String>) {
-    //Input: s = "12"
-    //Output: 2
-    //Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
-    val s = "12"
-    println(numDecodings(s))
-}
-
-//DP Approach 2> ( SPACE OPTIMIZATION - Constant Space )
-//------------------
-fun numDecodings(s: String): Int {
-    if (s.isEmpty() || s[0] == '0') return 0
-    val n = s.length
-    // pre represents dp[i-1]
-    var pre = 1
-    // ppre represents dp[i-2]
-    var ppre = 0
-    for (i in 1..n) {
-        val temp = pre
-        if (s[i - 1] == '0') {
-            pre = 0
-        }
-        if ( i > 1 ) {
-            if (s.substring(i - 2, i).toInt() in 10..26) pre += ppre
-        }
-        ppre = temp        
-    }
-
-    return pre
-}
-
-fun main(args: Array<String>) {
-    //Input: s = "12"
-    //Output: 2
-    //Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
-    val s = "12"
-    println(numDecodings(s))
 }
 ```
 
@@ -3402,75 +3123,117 @@ fun main(args: Array<String>) {
 #### [LC-62:Unique Paths](https://leetcode.com/problems/unique-paths/)
 ##### Solution Explanation:
 ```
-Solution Approach:
-=================================================================================================================================================================
-DP without Recursion + Space Optimization
+2 DP Solutions:
+==============================================================
 
-- path[i,j] = Number of paths from [0,0] to [i,j].
-- path[0,j] = 1 and path[i,0] = 1
-- path[i,j] = path[i,j-1] + path[i-1,j]
-- return path[m-1, n-1]
-- We can start from row 1 and column 1 after initializing the path matrix to 1.
+Solution-1: Memoization or "Top-Down dynamic programming"
+==============================================================
+Time complexity: O(m x n) 
+Space complexity: O(m x n)
 
-Time and Space complexity: O(MN)
+Solution-2: Tabulation or "Bottom-Up dynamic programming"
+==============================================================
+Time complexity: O(m x n) 
+Space complexity: O(m x n)
 
-- Space Optimization: Instead of 2D matrix, a single array can do the job and reduce space complexity to O(N)
-```
-##### Complexity Analysis:
-```
-TIME COMPLEXITY  : O(N)
-SPACE COMPLEXITY : O(1)
-```
-```python
-def uniquePaths(m: int, n: int) -> int:
-    if m == 0 or n == 0:
-        return 0
-    dp = [1]*n
-    for i in range(1,m):
-        for j in range(1,n):
-            dp[j] = dp[j-1] + dp[j]
-    return dp[-1]
+Solution-3: Combinatorics
+==============================================================
+Time complexity: O(m + n) 
+Space complexity: O(1)
 
-if __name__ == "__main__":
-    #Input: m = 3, n = 2
-    #Output: 3
-    #Explanation:
-    #From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
-    #1. Right -> Down -> Down
-    #2. Down -> Down -> Right
-    #3. Down -> Right -> Down
-    m = 3
-    n = 2
-    print(uniquePaths(m, n))
+This solution uses the combinatorics theorems to quickly calculate the number of unique paths.
+
+In this problem, you're limited to choosing a right move, or a down move - both of which take you in the right direction. There will be (n-1) right moves and (m-1) down moves in any path from start to finish. Let a right move be represented by the character X and a down move be represented by the character O.
+
+Let m=3, n=4. The problem becomes "how many unique permutations of the String 'OOXXX' exist?"
+
+This is a well-studied and well-known problem in combinatorics and you may have studied this if you've taken a combinatorics class before. Here's the theorem used to solve this problem.
 ```
-```kotlin
-fun uniquePaths(m: Int, n: Int): Int {
-    if ((m == 0) or (n == 0)) {
-        return 0
+![unique-paths-combinatorics-solution](./assets/unique-paths-combinatorics-solution.PNG)
+```
+```java
+// Solution-1: Memoization or "Top-Down dynamic programming"
+// ==============================================================
+// Time complexity: O(m x n) 
+// Space complexity: O(m x n)
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        return uniquePathsHelper(m - 1, n - 1, new int[n][m]);
     }
-
-    var dp = IntArray(n){1}
-
-    for (i in 1 until m) {
-        for (j in 1 until n){
-            dp[j] += dp[j-1]
+  
+    private int uniquePathsHelper(int m, int n, int[][] memo) {
+        if (m < 0 || n < 0) {
+            return 0;
+        } else if (m == 0 || n == 0) {
+            return 1;
+        } else if (memo[n][m] > 0) {
+            return memo[n][m];
+        } else {
+            memo[n][m] = uniquePathsHelper(m - 1, n, memo) + uniquePathsHelper(m, n - 1, memo);
+            return memo[n][m];
         }
     }
-
-    return dp[n-1]        
 }
 
-fun main(args: Array<String>) {
-    //Input: m = 3, n = 2
-    //Output: 3
-    //Explanation:
-    //From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
-    //1. Right -> Down -> Down
-    //2. Down -> Down -> Right
-    //3. Down -> Right -> Down
-    val m = 3
-    val n = 2
-    println(uniquePaths(m, n))
+// Solution-2: Tabulation or "Bottom-Up dynamic programming"
+// ==============================================================
+// Time complexity: O(m x n) 
+// Space complexity: O(m x n)
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] grid = new int[n][m];
+    
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (i == 0) grid[0][j] = 1;
+                if (j == 0) grid[i][j] = 1;
+                if (i != 0 && j != 0) {
+                    int up = grid[i - 1][j];
+                    int left = grid[i][j - 1];
+                    grid[i][j] = up + left;
+                }
+            }
+        }
+        return grid[n - 1][m - 1];
+    }
+} 
+
+// Solution-3: Combinatorics
+// ==============================================================
+// Time complexity: O(m + n) 
+// Space complexity: O(1)
+import java.math.BigInteger;
+
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        //numerator = total moves! = ((m-1) + (n - 1))! = (m+n-2)! (as a BigInteger because factorials get out of hand quickly)
+		//BigInteger String constructor is easy to use. So we'll convert the number to a String and pass to BigInteger constructor, which is sent to factorial function
+        BigInteger numerator = bigFact(new BigInteger(String.valueOf(m + n - 2)));
+		
+		//we only have 2 classes of indistinguishable objects (down moves and right moves)
+		//denom1 is the first factorial of the denominator
+        BigInteger denom1 = bigFact(new BigInteger(String.valueOf(m-1)));
+		
+		//denom2 is the second factorial of the denominator
+        BigInteger denom2 = bigFact(new BigInteger(String.valueOf(n-1)));
+		
+		//denom is both denominator terms multiplied together
+        BigInteger denom = denom1.multiply(denom2);
+		
+		//result is the numerator divided by the denominator (obviously)
+        BigInteger result = numerator.divide(denom);
+        return result.intValueExact();
+    }
+    
+	//BigInteger Factorial function
+    public static BigInteger bigFact(BigInteger number){
+        BigInteger result = BigInteger.ONE;
+        while(number.compareTo(BigInteger.ONE) > 0){
+            result = result.multiply(number);
+            number = number.subtract(BigInteger.ONE);
+        }
+        return result;
+    }
 }
 ```
 
@@ -3485,57 +3248,117 @@ fun main(args: Array<String>) {
 ```
 Solution Approach:
 =================================================================================================================================================================
-Greedy Algorithm
+Dynamic Programming
+=================================================================================================================================================================
+Looking from the end and at each point ahead checking the best possible way to reach the end
 
-Greedy -- Reach means last num's maximum reach position.
-If current index > reach, then means can't reach current position from last number.
 
-1. We start travering the array from start
-2. While traversing, we keep a track on maximum reachable index and update it accordingly. 
-3. If we cannot reach the maxium reachable index we get out of loop ( If current index > reach, then means can't reach current position from last number ).
-```
-##### Complexity Analysis:
-```
-TIME COMPLEXITY  : O(N)
-SPACE COMPLEXITY : O(1)
-```
-```python
-from typing import List
+=================================================================================================================================================================
+Greedy
+=================================================================================================================================================================
+Looking from the start and selecting the locally optimum in the hope of reaching global optimum
 
-def canJump(nums: List[int]) -> bool:
-    reachable_ind = 0
-    for ind, val in enumerate(nums):
-        if ind > reachable_ind:
-            return False
-        reachable_ind = max(reachable_ind, ind + val) 
-            
-    return True
 
-if __name__ == "__main__":
-    #Input: nums = [2,3,1,1,4]
-    #Output: true
-    #Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
-    nums = [2,3,1,1,4]
-    print(canJump(nums))
+=================================================================================================================================================================
+Difference between DP and Greedy
+=================================================================================================================================================================
+Example
 ```
-```kotlin
-fun canJump(nums: IntArray): Boolean {
-    var reachable_ind = 0
-    for ((index, value) in nums.withIndex()) {
-        if (index > reachable_ind) {
-            return false
+![jump-game-difference-between-dp-and-greedy](./images/jump-game-difference-between-dp-and-greedy.PNG)
+```
+If we have a Greedy Approach here then we will take the path 1+99+1 as we select local optimum from the beggining
+
+But if we take DP Approach then we start from back and find the cost of reaching end from that specific node. So when we reach the first node we will have two options
+
+99+1 path
+5+1 path
+Now we simply have to decide between (1+(99+1)) and (20+(5+1)) path
+```
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        
+        // Recursive
+        // return s1(0, nums.length, nums);
+        
+        // Top-Down DP / Memoization
+        // int[] memo = new int[nums.length];
+        // Arrays.fill(memo, -1);
+        // return s2(0, nums.length, nums, memo);
+    
+        // Bottom-Up DP / Tabulation
+        // return s3(nums, nums.length);
+        
+        // Greedy 
+        return s4(nums);
+        
+    }
+    
+    // Recursive
+	// TC : O(max_of_array^n) SC : O(n)
+    public boolean s1(int idx, int n, int[] arr){
+        if(idx == n-1) return true;
+        if(idx >= n) return false;
+        
+        boolean i_can_reach_n = false;
+        
+        for(int i=1;i<=arr[idx];i++){
+            i_can_reach_n = i_can_reach_n || s1(idx+i, n, arr); 
         }
-        reachable_ind = maxOf(reachable_ind, index + value)
-    }            
-    return true
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [2,3,1,1,4]
-    //Output: true
-    //Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
-    val nums = intArrayOf(2,3,1,1,4)
-    println(canJump(nums))
+        
+        return i_can_reach_n;
+    }
+    
+    // Top-Down DP/Memoization
+	// TC : O(n) SC : O(n)
+    public boolean s2(int idx, int n, int[] arr, int[] memo){
+        
+        if(idx == n-1) return true;
+        if(idx >= n) return false;
+        if(memo[idx]!=-1) return memo[idx]==1;
+        
+        boolean i_can_reach_n = false;
+        
+        for(int i=1;i<=arr[idx];i++){
+            i_can_reach_n = i_can_reach_n || s2(idx+i, n, arr, memo); 
+        }
+        
+        memo[idx] = i_can_reach_n?1:0;
+        return i_can_reach_n;
+        
+    }
+    
+    // Bottom-Up DP/Tabulation
+	// TC : O(n) SC : O(n)
+    public boolean s3(int[] arr, int n){
+        
+        boolean[] dp = new boolean[n];
+        dp[n-1] = true;
+        
+        for(int i=n-2;i>=0;i--){
+            boolean i_can_reach_n = false;
+            for(int j=1;j<=arr[i] && i+j<n ;j++){
+                i_can_reach_n = i_can_reach_n || dp[i+j];
+            }            
+            dp[i] = i_can_reach_n;
+        }
+        
+        return dp[0];
+        
+    }
+    
+    // Greedy O(n) O(1)
+    public boolean s4(int[] nums){
+        int n = nums.length;
+        int max_i_can_reach = 0;
+        for(int i=0;i<n-1;i++){
+            if(i>max_i_can_reach) return false; 
+            max_i_can_reach = Math.max(max_i_can_reach, i+nums[i]);
+        }
+        return max_i_can_reach>=n-1;
+    }
+    
+    
 }
 ```
 
