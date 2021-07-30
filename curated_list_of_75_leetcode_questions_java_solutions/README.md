@@ -2132,68 +2132,116 @@ public class Solution {
 #### [LC-70:Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 ##### Solution Explanation:
 ```
-Intuition
----------
-Solution to this problem makes a Fibonacci sequence. We can understand it better if we start from the end. 
-To reach to Step N, you can either reach to step N-1 and take 1 step from there or take 2 step from N - 2.
-Therefore it can be summarized as:
-F(N) = F(N-1) + F(N-2)
+Solution 1: Brute-Force Approach ( using Recursion )
+======================================================
+Base cases:
+if n == 0, then the number of ways should be zero.
+if n == 1, then there is only one way to climb the stair.
+if n == 2, then there are two ways to climb the stairs. One solution is one step by another; the other one is two steps at one time.
 
-Once you have recognized the pattern, it is very easy to write the code:
----------
+  * We can reach ith step in one of the two ways:
+       1. Taking a single step from (i - 1)th step
+       2. Taking a step of two from (i - 2)th step.
+  * So, the total number of ways to reach ith step is equal to sum of ways of reaching (i - 1)th step and ways of reaching (i - 2)th step.
 
-Solution Approach:
-DP and Fibonacci Sequence
-=================================================================================================================================================================
-To reach a specific stair x, we can either climb 1 stair from x-1, or 2 stairs from x-2. 
-Therefore, suppose dp[i] records the number of ways to reach stair i, dp[i] = dp[i-1]+dp[i-2]. 
-And it's a Fibonacci Array.
-The base case is to reach the first stair, we only have one way to do it so dp[1] = 1.
-
-Besides, since only dp elements we used is most recent two elements, we can use two pointers to save using of dp array. 
-So space complexity is O(1).
+Complexity Analysis
+======================================================
+Time complexity: O(2^n) - since size of recursion tree will be 2^n
+Space Complexity: O(n) - space required for the recursive function call stack.
 ```
-##### Complexity Analysis:
 ```
-Time  : O(N)
-Space : O(1)
-```
-```python
-def climbStairs(n: int) -> int:
-    prev, curr = 0, 1
-    for _ in range(n):
-        curr = prev + curr
-        prev = curr
-    return curr
-
-if __name__ == "__main__":
-    #Input: n = 2
-    #Output: 2
-    #Explanation: There are two ways to climb to the top.
-    #1. 1 step + 1 step
-    #2. 2 steps
-    n = 2
-    print(climbStairs(n))
-```
-```kotlin
-fun climbStairs(n: Int): Int {
-    var prev = 0
-    var curr = 1
-    for (i in 0 until n) {
-        curr = prev + curr
-        prev = curr
+class Solution
+{
+    public int climbStairs(int n)
+    {
+        if(n <= 2)
+            return n;
+        else
+            return climbStairs(n - 1) + climbStairs(n - 2);
     }
-    return curr        
+}
+```
+```
+Solution 2: Dynamic Programming
+======================================================
+* This similar to Solution1, but here we cache the intermediate results in an array for the performance improvement.
+* Let dp[i] denotes the number of ways to reach on ith step, then
+    dp[i] = dp[i - 1] + dp[i - 2]
+
+Complexity Analysis
+======================================================
+Time complexity: O(n)
+Space Complexity: O(n)
+```
+```
+// Top-Down Approach
+class Solution
+{
+    int[] cache = new int[46];
+    
+    public int climbStairs(int n)
+    {
+        if(n <= 2)
+            return n;
+        else if(cache[n] != 0)
+            return cache[n];
+        else
+            return cache[n] = climbStairs(n - 1) + climbStairs(n - 2);
+    }
 }
 
-fun main(args: Array<String>) {
-    //Input: n = 2
-    //Output: 2
-    //Explanation: There are two ways to climb to the top.
-    //1. 1 step + 1 step
-    //2. 2 steps
-    val n = 2
-    println(climbStairs(n))
+//Bottom-Up Approach
+class Solution
+{
+    public int climbStairs(int n)
+    {
+        if(n <= 2)
+            return n;
+
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        
+        for(int i = 3; i <= n; i++)
+        {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+}
+```
+```
+Solution 3: Fibonacci Number
+======================================================
+ * In the above approach of Solution2, we have used an array where dp[i] = dp[i - 1] + dp[i - 2]. It can be easily analyzed that dp[i] is nothing but ith Fibonacci number.
+   Fib(n) = Fib(n - 1) + Fib(n - 2)
+ * So now we just have to find nth number of the Fibonacci series having 1 and 2 as their first and second term respectively,
+   i.e. Fib(1) = 1 and Fib(2) = 2.
+
+Complexity Analysis
+======================================================
+Time complexity: O(n)
+Space Complexity: O(1)
+```
+```
+class Solution
+{
+    public int climbStairs(int n)
+    {
+        if(n <= 2)
+            return n;
+
+        int a = 1;
+        int b = 2;
+
+		for(int i = 3; i <= n; i++)
+		{
+            int sum = a + b;
+            a = b;
+            b = sum;
+        }
+        return b;
+    }
 }
 ```
 
@@ -2206,60 +2254,82 @@ fun main(args: Array<String>) {
 #### [LC-322:Coin Change](https://leetcode.com/problems/coin-change/)
 ##### Solution Explanation:
 ```
-Solution Approach:
-DP
-=================================================================================================================================================================
+Method 1 : Brute Force
+Time Complexity : O(2^n)
+Space Complexity : O(n)
 
-Assume dp[i] is the fewest number of coins making up amount i, then for every coin in coins, dp[i] = min(dp[i - coin] + 1).
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int cnt = count(coins, amount, coins.length); 
+        if(cnt == (Integer.MAX_VALUE -1))
+            return -1;
+        else
+            return cnt;
+    }
+    public int count(int [] coins, int amount, int n) {
+        if(amount == 0)
+            return 0;
+        if(n==0)
+            return Integer.MAX_VALUE-1;
+        if (amount < coins[n-1])
+            return count(coins, amount, n-1);
+        else
+            return Math.min(1 + count(coins, amount-coins[n-1], n), count(coins, amount, n-1));
+    }
+}
+Method 2 : Recursion With Memoization
+Time Complexity : O(n * amount)
+Space Complexity : O(n * amount)
 
-The time complexity is O(amount * coins.length) and the space complexity is O(amount).
-```
-##### Complexity Analysis:
-```
-TIME COMPLEXITY : O(amount * coins.length)
-SPACE COMPLEXITY : O(amount)
-```
-```python
-from typing import List
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        Integer [][] dp = new Integer[coins.length+1][amount+1];
+        int cnt = count(coins, amount, coins.length, dp); 
+        if(cnt == (Integer.MAX_VALUE -1))
+            return -1;
+        else
+            return cnt;
+    }
+    public int count(int [] coins, int amount, int n, Integer[][] dp) {
+        if(dp[n][amount] != null)
+            return dp[n][amount];
+        if(amount == 0)
+            if(n==0)
+                return dp[n][amount] = Integer.MAX_VALUE-1;
+            else
+                return dp[n][amount] = 0;
+        if(n==0)
+            return dp[n][amount] = Integer.MAX_VALUE-1;
+        if (amount < coins[n-1])
+            return dp[n][amount] = count(coins, amount, n-1, dp);
+        else
+            return dp[n][amount] = Math.min(1 + count(coins, amount-coins[n-1], n, dp), count(coins, amount, n-1, dp));
+    }
+}
+Method 3 : 2D Dynamic Programming
+Time Complexity : O(n * amount)
+Space Complexity : O(n * amount)
 
-def coinChange(coins: List[int], amount: int) -> int:
-    dp = [float('Inf')]*(amount+1)
-    dp[0] = 0
-    for i in range(1, amount+1):
-        for coin in coins:
-            if i - coin >= 0:
-                dp[i] = min(dp[i], dp[i-coin] + 1)
-    return dp[amount] if dp[amount] != float('Inf') else -1
-
-if __name__ == "__main__":
-    #Input: coins = [1,2,5], amount = 11
-    #Output: 3
-    #Explanation: 11 = 5 + 5 + 1
-    coins = [1,2,5]
-    amount = 11
-    print(coinChange(coins, amount))
-```
-```kotlin
-fun coinChange(coins: IntArray, amount: Int): Int {
-    val dp = IntArray(amount+1)
-    for (i in 1 until amount+1) {
-        dp[i] = Int.MAX_VALUE
-        for (coin in coins) {
-            if (i - coin >= 0 && dp[i - coin] != Int.MAX_VALUE) {
-                dp[i] = minOf(dp[i], dp[i - coin] + 1)
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int [][] dp = new int[coins.length + 1][amount + 1];
+        for(int i=0;i<dp.length;i++)
+            dp[i][0] = 0;
+        for(int j=0;j<dp[0].length;j++)
+            dp[0][j] = Integer.MAX_VALUE - 1;
+        for(int i=1;i<dp.length;i++) {
+            for(int j=1;j<dp[0].length;j++) {
+                if(j < coins[i-1])
+                    dp[i][j] = dp[i-1][j];
+                else
+                    dp[i][j] = Math.min(dp[i-1][j], 1 + dp[i][j-coins[i-1]]);
             }
         }
+        if(dp[coins.length][amount] == Integer.MAX_VALUE -1)
+            return -1;
+        else 
+            return dp[coins.length][amount];
     }
-    return if (dp[amount] == Int.MAX_VALUE) -1 else dp[amount]
-}
-
-fun main(args: Array<String>) {
-    //Input: coins = [1,2,5], amount = 11
-    //Output: 3
-    //Explanation: 11 = 5 + 5 + 1
-    val coins = intArrayOf(1,2,5)
-    val amount = 11
-    println(coinChange(coins, amount))
 }
 ```
 
@@ -2273,250 +2343,125 @@ fun main(args: Array<String>) {
 ##### Solution Explanation:
 ```
 =================================================================================================================================================================
-Approach 1: Patience Sorting using Binary Search
+Patience Sorting using Binary Search
 =================================================================================================================================================================
-This algorithm is actually Patience sorting. 
-It might be easier for you to understand how it works if you think about it as piles of cards instead of tails.
-The number of piles is the length of the longest subsequence.
-For more info see Princeton lecture.
 
-1) Initially, there are no piles. The first card dealt forms a new pile consisting of the single card.
-2) Each subsequent card is placed on the leftmost existing pile whose top card has a value greater 
-   than or equal to the new card's value, or to the right of all of the existing piles, thus forming a new pile.
-3) When there are no more cards remaining to deal, the game ends.
-
-Detailed Algorithm:
------------------------
-piles is an array storing the smallest tail of all increasing subsequences with length i+1 in piles[i].
+tails is an array storing the smallest tail of all increasing subsequences with length i+1 in tails[i].
 For example, say we have nums = [4,5,6,3], then all the available increasing subsequences are:
 
-len = 1   :      [4], [5], [6], [3]   => piles[0] = 3
-len = 2   :      [4, 5], [5, 6]       => piles[1] = 5
-len = 3   :      [4, 5, 6]            => piles[2] = 6
-We can easily prove that piles is a increasing array. Therefore it is possible to do a binary search in piles array to find the one needs update.
+len = 1   :      [4], [5], [6], [3]   => tails[0] = 3
+len = 2   :      [4, 5], [5, 6]       => tails[1] = 5
+len = 3   :      [4, 5, 6]            => tails[2] = 6
+We can easily prove that tails is a increasing array. Therefore it is possible to do a binary search in tails array to find the one needs update.
 
 Each time we only do one of the two:
 
-(1) if num is larger than all piles, append it, increase the size by 1
-(2) if piles[i-1] < num <= piles[i], update piles[i]
-(3) Doing so will maintain the piles invariant. The the final answer is just the size.
+(1) if x is larger than all tails, append it, increase the size by 1
+(2) if tails[i-1] < x <= tails[i], update tails[i]
 
+Doing so will maintain the tails invariant. The the final answer is just the size.
 
 -----------------------
 References:
 https://en.wikipedia.org/wiki/Patience_sorting
 Priceton Lecture on LIS: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/LongestIncreasingSubsequence.pdf
-
-=================================================================================================================================================================
-Approach 2: DP
-=================================================================================================================================================================
-1) Check the base case, if nums has size less than or equal to 1, then return length of nums
-2) Create a 'dp' array of size nums.length to track the longest sequence length
-3) Fill each position with value 1 in the array
-4) Mark one pointer at i. For each i, start from j=0.
-   4.1.1) If, nums[j] < nums[i], it means next number contributes to increasing sequence. 
-      4.1.1.1) But increase the value only if it results in a larger value of the sequence than dp[i].
-               It is possible that dp[i] already has larger value from some previous j'th iteration.
-5) Find the maximum length from the array that we just generated.
-
------------------------
-References:
-https://www.youtube.com/watch?v=CE2b_-XfVDk
-```
-##### Interview Tips:
-```
-NOTES: In an Interview Situation - Choose Approach 1 ( Patience Sorting using Binary Search ) over Approach 2 ( DP ),
-       since it is an O(N*log(N)) TC [ DP is worse off at O(N^2) ].
 ```
 ##### Complexity Analysis:
 ```
 =================================================================================================================================================================
-Approach 1: Patience Sorting using Binary Search
+Patience Sorting using Binary Search
 =================================================================================================================================================================
 TIME COMPLEXITY : O(N*log(N))
 SPACE COMPLEXITY : O(N)
-=================================================================================================================================================================
-Approach 2: DP
-=================================================================================================================================================================
-TIME COMPLEXITY : O(N^2)
-SPACE COMPLEXITY : O(N)
 ```
-```python
-#=================================================================================================================================================================
-#Approach 1 ( Patience Sorting using Binary Search ) ... answer for the Follow-Up question
-#TC: O(N*log(N))
-#SC: O(N)
-#=================================================================================================================================================================
-from typing import List
-
-def binary_search(nums: List[int], target: int) -> int:
-    lo, hi = 0, len(nums)
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if nums[mid] < target:
-            lo = mid + 1
-        else:
-            hi = mid
-    return lo
-
-def lengthOfLIS(nums: List[int]) -> int:
-    piles = []
-    for num in nums:
-        if not piles or num > piles[-1]:
-            piles.append(num)
-        else:
-            pos = binary_search(piles, num)
-            piles[pos] = num
-    return len(piles)
-
-def lengthOfLIS(nums: List[int]) -> int:
-    if len(nums) == 0:
-        return 0
-    piles = [0] * len(nums)
-    longest = 0
-    for num in nums:
-        i, j = 0, longest
-        while i != j:
-            m = (i + j) // 2
-            if piles[m] < x:
-                i = m + 1
-            else:
-                j = m
-        piles[i] = x
-        longest = max(i + 1, longest)
-    return longest
-
-if __name__ == "__main__":
-    #Input: nums = [10,9,2,5,3,7,101,18]
-    #Output: 4
-    #Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
-    nums = [10,9,2,5,3,7,101,18]
-    print(lengthOfLIS(nums))
-	
-#=================================================================================================================================================================
-#Approach 2 ( DP )
-#TC: O(N^2)
-#SC: O(N)
-#=================================================================================================================================================================
-from typing import List
-
-def lengthOfLIS(nums: List[int]) -> int:
-    if len(nums) == 0:
-        return 0
-    nums_length = len(nums)
-    dp = [1] * nums_length
-    longest = 1
-    for i in range(nums_length):
-        for j in range(i):
-            if nums[i] < nums[j]:
-                dp[i] = max(dp[i], dp[j]+1)
-        longest = max(longest, dp[i])
-    return longest
-
-if __name__ == "__main__":
-    #Input: nums = [10,9,2,5,3,7,101,18]
-    #Output: 4
-    #Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
-    nums = [10,9,2,5,3,7,101,18]
-    print(lengthOfLIS(nums))
+```java
+public class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int[] tails = new int[nums.length];
+        int size = 0;
+        for (int x : nums) {
+            int i = 0, j = size;
+            while (i != j) {
+                int m = (i + j) / 2;
+                if (tails[m] < x)
+                    i = m + 1;
+                else
+                    j = m;
+            }
+            tails[i] = x;
+            if (i == size) ++size;
+        }
+        return size;
+    }
+}
 ```
-```kotlin
-//=================================================================================================================================================================
-//Approach 1 ( Patience Sorting using Binary Search ) ... answer for the Follow-Up question
-//TC: O(N*log(N))
-//SC: O(N)
-//=================================================================================================================================================================
-fun binarySearch(nums: IntArray, target: Int): Int {
-    var lo = 0
-    var hi = nums.size
-    while (lo < hi) {
-        val mid = (lo + hi) / 2
-        if (nums[mid] < target) {
-            lo = mid + 1
+##### A MORE DETAILED EXPLANATION OF PATIENCE SORTING
+```
+This algorithm is actually Patience sorting. It might be easier for you to understand how it works if you think 
+about it as piles of cards instead of tails. The number of piles is the length of the longest subsequence. 
+
+For more info see Princeton lecture :
+https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/LongestIncreasingSubsequence.pdf
+```
+```java
+public int lengthOfLIS(int[] nums) {
+    List<Integer> piles = new ArrayList<>(nums.length);
+    for (int num : nums) {
+        int pile = Collections.binarySearch(piles, num);
+        if (pile < 0) pile = ~pile;
+        if (pile == piles.size()) {
+            piles.add(num);
         } else {
-            hi = mid
+            piles.set(pile, num);
         }
     }
-    return lo
+    return piles.size();
 }
 
-fun lengthOfLIS(nums: IntArray): Int {
-    // sanity check
-    if (nums.isEmpty()) return 0
+//How to print LIS?
+//Above solution only returns the length of LIS but do not actually returns LIS itself.
 
-    var piles: MutableList<Int> = mutableListOf()
-    for (num in nums) {
-        if ( num > piles?.lastOrNull() ?: -1 ) {
-            piles.add(num)
+public List<Integer> lengthOfLIS(int[] nums) {
+    List<Node> piles = new ArrayList<>(nums.length);
+    for (int num : nums) {
+        Node node = new Node(num);
+        int pile = Collections.binarySearch(piles, node);
+        if (pile < 0) pile = ~pile;
+
+        if (pile != 0) {
+            node.prev = piles.get(pile - 1);
+        }
+
+        if (pile == piles.size()) {
+            piles.add(node);
         } else {
-            val pos = binarySearch(piles.toIntArray(), num)
-            piles[pos] = num
+            piles.set(pile, node);
         }
     }
-    return piles.size
+    return extractLIS(piles);
 }
 
-fun lengthOfLIS(nums: IntArray): Int {
-    // sanity check
-    if (nums.isEmpty()) return 0
-    val piles = IntArray(nums.size)
-    var longest = 0
-    for (x in nums) {
-        var i = 0
-        var j = longest
-        while (i != j) {
-            var m = (i + j) / 2
-            if (piles[m] < x) {
-                i = m + 1
-            } else {
-                j = m
-            }
-        }
-        piles[i] = x
-        if (i == longest) ++longest
+private List<Integer> extractLIS(List<Node> piles) {
+    List<Integer> result = new ArrayList<>(piles.size());
+    for (Node curr = piles.isEmpty() ? null : piles.get(piles.size() - 1); curr != null; curr = curr.prev) {
+        result.add(curr.val);
     }
-    return longest
+    Collections.reverse(result);
+    return result;
 }
 
-fun main(args: Array<String>) {
-    //Input: nums = [10,9,2,5,3,7,101,18]
-    //Output: 4
-    //Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
-    val nums = intArrayOf(10,9,2,5,3,7,101,18)
-    println(lengthOfLIS(nums))
-}
+private static class Node implements Comparable<Node> {
+    int val;
+    Node prev;
 
-//=================================================================================================================================================================
-//Approach 2 ( DP )
-//TC: O(N^2)
-//SC: O(N)
-//=================================================================================================================================================================
-fun lengthOfLIS(nums: IntArray): Int {
-    // sanity check
-    if (nums.isEmpty()) return 0
-
-    val nums_length = nums.size
-
-    val dp = IntArray(nums_length) { 1 }
-    var longest = 1
-
-    for (i in 0 until nums_length) {
-        for (j in 0 until i) {
-            if (nums[i] > nums[j]) {
-                dp[i] = maxOf(dp[i], dp[j] + 1)
-            }
-        }
-        longest = maxOf(longest, dp[i])
+    public Node(int val) {
+        this.val = val;
     }
-    return longest
-}
 
-fun main(args: Array<String>) {
-    //Input: nums = [10,9,2,5,3,7,101,18]
-    //Output: 4
-    //Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
-    val nums = intArrayOf(10,9,2,5,3,7,101,18)
-    println(lengthOfLIS(nums))
+    @Override
+    public int compareTo(Node that) {
+        return Integer.compare(this.val, that.val);
+    }
 }
 ```
 
@@ -2527,111 +2472,104 @@ fun main(args: Array<String>) {
 <br/>
 
 #### [LC-1143:Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
+![LCS-image](./assets/LCS-image.PNG)
 ##### Solution Explanation:
 ```
 Solution Approach:
 =================================================================================================================================================================
-DP with Memoization and 1D array for "Space Optimization"
------------------------------------------------------------
-
 Find LCS;
-Let X be “XMJYAUZ” and Y be “MZJAWXU”. The longest common subsequence between X and Y is “MJAU”. 
-The following table shows the lengths of the longest common subsequences between prefixes of X and Y.
-The ith row and jth column shows the length of the LCS between X_{1..i} and Y_{1..j}.
+Let X be “XMJYAUZ” and Y be “MZJAWXU”. The longest common subsequence between X and Y is “MJAU”. The following table shows the lengths of the longest common subsequences between prefixes of X and Y. The ith row and jth column shows the length of the LCS between X_{1..i} and Y_{1..j}.
+image
+you can refer to here for more details.
 
-+-------+---+---+---+---+---+---+---+---+
-|       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
-|       +---+---+---+---+---+---+---+---+
-|       | 0 | M | Z | J | A | W | X | U |
-+---+---+---+---+---+---+---+---+---+---+
-| 0 | 0 |*0*| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-+---+---+---+---+---+---+---+---+---+---+
-| 1 | X | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
-+---+---+---+---+---+---+---+---+---+---+
-| 2 | M | 0 |*1*| 1 | 1 | 1 | 1 | 1 | 1 |
-+---+---+---+---+---+---+---+---+---+---+
-| 3 | J | 0 | 1 | 1 |*2*| 2 | 2 | 2 | 2 |
-+---+---+---+---+---+---+---+---+---+---+
-| 4 | Y | 0 | 1 | 1 | 2 | 2 | 2 | 2 | 2 |
-+---+---+---+---+---+---+---+---+---+---+
-| 5 | A | 0 | 1 | 1 | 2 |*3*| 3 | 3 | 3 |
-+---+---+---+---+---+---+---+---+---+---+
-| 6 | U | 0 | 1 | 1 | 2 | 3 | 3 | 3 |*4*|
-+---+---+---+---+---+---+---+---+---+---+
-| 7 | Z | 0 | 1 | 2 | 2 | 3 | 3 | 3 | 4 |
-+---+---+---+---+---+---+---+---+---+---+
+Method 1:
+
+    public int longestCommonSubsequence(String s1, String s2) {
+        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+        for (int i = 0; i < s1.length(); ++i)
+            for (int j = 0; j < s2.length(); ++j)
+                if (s1.charAt(i) == s2.charAt(j)) dp[i + 1][j + 1] = 1 + dp[i][j];
+                else dp[i + 1][j + 1] =  Math.max(dp[i][j + 1], dp[i + 1][j]);
+        return dp[s1.length()][s2.length()];
+    }
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        dp = [[0] * (len(text2) + 1) for _ in range(len(text1) + 1)]
+        for i, c in enumerate(text1):
+            for j, d in enumerate(text2):
+                dp[i + 1][j + 1] = 1 + dp[i][j] if c == d else max(dp[i][j + 1], dp[i + 1][j])
+        return dp[-1][-1]
+Analysis:
+
+Time & space: O(m * n)
+
+Method 2:
+
+Space Optimization
+
+Obviously, the code in method 1 only needs information of previous row to update current row. So we just use a two-row 2D array to save and update the matching results for chars in s1 and s2.
+
+Note: use k ^ 1 and k ^= 1 to switch between dp[0] (row 0) and dp[1] (row 1).
+
+    public int longestCommonSubsequence(String s1, String s2) {
+        int m = s1.length(), n = s2.length();
+        if (m < n)  return longestCommonSubsequence(s2, s1);
+        int[][] dp = new int[2][n + 1];
+        for (int i = 0, k = 1; i < m; ++i, k ^= 1)
+            for (int j = 0; j < n; ++j)
+                if (s1.charAt(i) == s2.charAt(j)) dp[k][j + 1] = 1 + dp[k ^ 1][j];
+                else dp[k][j + 1] = Math.max(dp[k ^ 1][j + 1], dp[k][j]);
+        return dp[m % 2][n];
+    }
+Note: use 1 - i % 2 and i % 2 to switch between dp[0] (row 0) and dp[1] (row 1).
+
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = len(text1), len(text2)
+        if m < n:
+            return self.longestCommonSubsequence(text2, text1) 
+        dp = [[0] * (n + 1) for _ in range(2)]
+        for i, c in enumerate(text1):
+            for j, d in enumerate(text2):
+                dp[1 - i % 2][j + 1] = 1 + dp[i % 2][j] if c == d else max(dp[i % 2][j + 1], dp[1 - i % 2][j])
+        return dp[m % 2][-1]
+Further Space Optimization to save half space - credit to @survive and @lenchen1112.
+
+Obviously, the above code in method 2 only needs information of previous and current columns of previous row to update current row. So we just use a 1-row 1D array and 2 variables to save and update the matching results for chars in text1 and text2.
+
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length(), n = text2.length();
+        if (m < n) {
+            return longestCommonSubsequence(text2, text1);
+        }
+        int[] dp = new int[n + 1];
+        for (int i = 0; i < text1.length(); ++i) {
+            for (int j = 0, prevRow = 0, prevRowPrevCol = 0; j < text2.length(); ++j) {
+                prevRowPrevCol = prevRow;
+                prevRow = dp[j + 1];
+                dp[j + 1] = text1.charAt(i) == text2.charAt(j) ? prevRowPrevCol + 1 : Math.max(dp[j], prevRow);
+            }
+        }
+        return dp[n];
+    }
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = map(len, (text1, text2))
+        if m < n:
+            return self.longestCommonSubsequence(text2, text1)
+        dp = [0] * (n + 1)
+        for c in text1:
+            prevRow, prevRowPrevCol = 0, 0
+            for j, d in enumerate(text2):
+                prevRow, prevRowPrevCol = dp[j + 1], prevRow
+                dp[j + 1] = prevRowPrevCol + 1 if c == d else max(dp[j], prevRow)
+        return dp[-1]
+		
+Analysis:
+
+Time: O(m * n). space: O(min(m, n)).
 
 References:
 -----------------
 https://en.m.wikipedia.org/wiki/Longest_common_subsequence_problem
 https://www.ics.uci.edu/~eppstein/161/960229.html
-```
-##### Complexity Analysis:
-```
-TIME COMPLEXITY : O(M*N)
-SPACE COMPLEXITY : O(MIN(M,N))
-
-where:
-------
-M = length of string text1
-N = length of string text2
-```
-```python
-#Q & A:
-#---------------
-#Q1: What is the difference between [[0] * m * n] and [[0] * m for _ in range(n)]? 
-#    Why does the former update all the rows of that column when I try to update one particular cell ?
-#A1: [[0] * m * n] creates n references to the exactly same list objet: [0] * m; 
-#    In contrast: [[0] * m for _ in range(n)] creates n different list objects that have same value of [0] * m.
-#
-def longestCommonSubsequence(text1: str, text2: str) -> int:
-    m, n = map(len, (text1, text2))
-    if m < n:
-        return self.longestCommonSubsequence(text2, text1)
-    dp = [0] * (n + 1)
-    for c in text1:
-        prevRow, prevRowPrevCol = 0, 0
-        for j, d in enumerate(text2):
-            prevRow, prevRowPrevCol = dp[j + 1], prevRow
-            dp[j + 1] = prevRowPrevCol + 1 if c == d else max(dp[j], prevRow)
-    return dp[-1]
-
-if __name__ == "__main__":
-    #Input: text1 = "abcde", text2 = "ace" 
-    #Output: 3  
-    #Explanation: The longest common subsequence is "ace" and its length is 3.
-    text1 = "abcde"
-    text2 = "ace"
-    print(longestCommonSubsequence(text1,text2))
-```
-```kotlin
-fun longestCommonSubsequence(text1: String, text2: String): Int {
-    val m = text1.length
-    val n = text2.length
-    if (m < n) {
-        return longestCommonSubsequence(text2, text1);
-    }
-    val dp = IntArray(n+1)
-    for (c in text1) {
-        var prevRow = 0
-        var prevRowPrevCol = 0
-        for ((j, d) in text2.withIndex()) {
-            prevRow = dp[j + 1]
-            prevRowPrevCol = prevRow
-            dp[j + 1] = if (c.equals(d)) prevRowPrevCol + 1 else maxOf(dp[j], prevRow)
-        }
-    }
-    return dp.last()
-}
-
-fun main(args: Array<String>) {
-    //Input: text1 = "abcde", text2 = "ace" 
-    //Output: 3  
-    //Explanation: The longest common subsequence is "ace" and its length is 3.
-    val text1 = "abcde"
-    val text2 = "ace"
-    println(longestCommonSubsequence(text1,text2))
-}
 ```
 
 <br/>
