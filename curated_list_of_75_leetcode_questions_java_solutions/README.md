@@ -1580,11 +1580,8 @@ public class Solution {
 | 0190  | [Reverse Bits](#lc-190reverse-bits)                 | https://leetcode.com/problems/reverse-bits/                                   | _O(1)_   | _O(1)_   | Easy       |              |                        |
 
 #### [LC-371:Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
-##### Solution Explanation:
+##### Binary Mathematics:
 ```
-=====================================
-Java/Kotlin
-=====================================
 For this problem, the main crux is that, we are dividing the task of adding 2 numbers into two parts -
 
 Let a = 13 and b = 10. Then we want to add them, a+b
@@ -1621,42 +1618,61 @@ https://en.wikipedia.org/wiki/Adder_%28electronics%29#Half_adder
 The half adder adds two single binary digits A and B. It has two outputs, sum (S) and carry (C).
 The carry signal represents an overflow into the next digit of a multi-digit addition. 
 The value of the sum is 2C + S. 
+```
+##### Solution Explanation:
+```
+There's lot of answers here, but none of them shows how they arrived at the answer, here's my simple try to explain.
 
-=====================================
-Python
-=====================================
-Python doesn't respect this int boundary that other strongly typed languages like Java and C++ have defined.
-So we need to use a mask.
+Eg: Let's try this with our hand 3 + 2 = 5 , the carry will be with in the brackets i.e "()"
 
-=====================================
-Let's recall the rule for taking two's complements: Flip all the bits, then plus one.
+3 => 011 
+2=>  010
+     ____
+     1(1)01
+Here we will forward the carry at the second bit to get the result.
+So which bitwise operator can do this ? A simple observation says that XOR can do that,but it just falls short in dealing with the carry properly, but correctly adds when there is no need to deal with carry.
+For Eg:
 
-So, to take the two's complement of -20 in the 32 bits sense. We flip all the 32 bits of 0xFFFFFFEC and add 1 to it.
-Note that here we cannot use the bit operation ~ because it will flip infinite many bits, not only the last 32.
-Instead, we xor it with the mask 0xFFFFFFFF. Recall that xor with 1 has the same effect as flipping.
-This only flips the last 32 bits, all the 0's to the far left remains intact.
-Then we add 1 to it to finish the two's complement and produce a valid 20
+1   =>  001 
+2   =>  010 
+1^2 =>  011 (2+1 = 3) 
+So now when we have carry, to deal with, we can see the result as :
 
-(0xFFFFFFEC^mask)+1 == 0x14 == 20
-Next, we take the two's complement of 20 in the Python fashion. Now we can direcly use the default bit operation
+3  => 011 
+2  => 010 
+3^2=> 001  
+Here we can see XOR just fell short with the carry generated at the second bit.
+So how can we find the carry ? The carry is generated when both the bits are set, i.e (1,1) will generate carry but (0,1 or 1,0 or 0,0) won't generate a carry, so which bitwise operator can do that ? AND gate ofcourse.
 
-~20+1 == -20
-Write these two steps in one line
+To find the carry we can do
 
-~((0xFFFFFFEC^mask)+1)+1 == -20 == 0x...FFFFFFFFFFFFFFEC
-Wait a minute, do you spot anything weird? We are not supposed to use + in the first place, right? Why are there two +1's?
-Does it mean this method won't work? Hold up and let me give the final magic of today:
+3    =>  011 
+2    =>  010 
+3&2  =>  010
+now we need to add it to the previous value we generated i.e ( 3 ^ 2), but the carry should be added to the left bit of the one which genereated it.
+so we left shift it by one so that it gets added at the right spot.
 
-for any number x, we have
+Hence (3&2)<<1 => 100
+so we can now do
 
-~(x+1)+1 = ~x
-(Here the whole (0xFFFFFFEC^mask) is considered as x).
+3 ^2        =>  001 
+(3&2)<<1    =>  100 
 
-In other words, the two +1's miracly cancel each other! so we can simly write
+Now xor them, which will give 101(5) , we can continue this until the carry becomes zero.
 
-~(0xFFFFFFEC^mask) == -20
-To sum up, since Python allows arbitary length for integers, we first use a mask 0xFFFFFFFF to restrict the lengths.
-But then we lose information for negative numbers, so we use the magical formula ~(a^mask) to convert the result to Python-interpretable form.
+==========================
+A supplement：
+==========================
+A simple explanation on why b will eventually become zero:
+==========================
+
+Suppose in the first iteration a&b = 1011 0101 , pay attention to all the zero bits.
+
+  (1) the operation a&b << 1 will introduce an 0-bit and has the ability to reduce a head 1-bit. For example 1011 0101=> 0011 1010, the first 1-bit is removed and a brand new 0-bit is introduced at the end.
+      Thus, after assign a&b<<1 to b, b has less 1-bit and more 0-bit than a&b .
+  (2) Continue iterating, the operation a & b preserves all the 0-bit in b no matter what a· is, as 0&(.) = 0.
+
+Thus, combining (1) and (2), b will hold less and less 1-bit during the iteration, and eventually become zero.
 ```
 ##### Complexity Analysis:
 ```
@@ -1664,49 +1680,17 @@ Time  : O(1)
 Space : O(1)
 ```
 ```python
-def getSum(a: int, b: int) -> int:
-    """
-    :type a: int
-    :type b: int
-    :rtype: int
-    """
-    mask = 0xffffffff
-    while b:
-        sum = (a^b) & mask
-        carry = ((a&b)<<1) & mask
-        a = sum
-        b = carry
-
-    if (a>>31) & 1: # If a is negative in 32 bits sense
-        return ~(a^mask)
-    return a
-
-if __name__ == "__main__":
-    #Input: a = 1, b = 2
-    #Output: 3
-    a = 1
-    b = 2
-    print(getSum(a, b))
-```
-```kotlin
-fun getSum(a: Int, b: Int): Int {
-    var a = a
-    var b = b
-    while (b != 0) {
-        var carry = a.and(b) // carry contains common set bits
-        a = a.xor(b) // sum of bits where at least 1 common bit is not set
-        carry = carry.shl(1) // carry needs to be added 1 place left side
-        b = carry
+public class Solution {
+    public int getSum(int a, int b) {
+      int c; 
+      while(b !=0 ) {
+        c = (a&b);
+        a = a ^ b;
+        b = (c)<<1;
+      }
+      return a;
+        
     }
-    return a
-}
-
-fun main(args: Array<String>) {
-    //Input: a = 1, b = 2
-    //Output: 3
-    val a = 1
-    val b = 2
-    println(getSum(a, b))
 }
 ```
 
@@ -1719,199 +1703,83 @@ fun main(args: Array<String>) {
 #### [LC-191:Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 ##### Solution Explanation:
 ```
-=================================================================================================================================================================
-Approach-1 ( Using masking )
-=================================================================================================================================================================
-Solution Explanation:
-Using masking
-=================================================================================================================================================================
-The best solution for this problem is to use "divide and conquer" to count bits:
+* An Integer in Java has 32 bits, e.g. 00101000011110010100001000011010.
+* To count the 1s in the Integer representation we put the input int n in bit 
+  AND with 1 (that is represented as 00000000000000000000000000000001, and if this operation result is 1,
+  that means that the last bit of the input integer is 1. Thus we add it to the 1s count.
 
-- First, count adjacent two bits, the results are stored separatedly into two bit spaces;
-- Second is to count the results from each of the previous two bits and store results to four bit spaces;
-- Repeat those steps and the final result will be sumed.
-- Check the following diagram from Hack's Delight book to understand the procedure:
+  c += (n & 1);
 
+* Then we shift the input Integer by one on the right, to check for the next bit.
 
-x = (x & 0x55555555) + ((x >> 1) & 0x55555555);
-x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
-x = (x & 0x0F0F0F0F) + ((x >> 4) & 0x0F0F0F0F);
-x = (x & 0x00FF00FF) + ((x >> 8) & 0x00FF00FF);
-x = (x & 0x0000FFFF) + ((x >> 16) & 0x0000FFFF);
+  n >>>= 1;
+========================  
+We need to use bit shifting unsigned operation >>> (while >> depends on sign extension)
 
-The first line uses (x >> 1) & 0x55555555 rather than the perhaps more natural (x & 0xAAAAAAAA) >> 1,
-because the code shown avoids generating two large constants in a register. This would cost an
-instruction if the machine lacks the and not instruction. A similar remark applies to the other lines.
-Clearly, the last and is unnecessary, and other and’s can be omitted when there is no danger that a
-field’s sum will carry over into the adjacent field. Furthermore, there is a way to code the first line
-that uses one fewer instruction. This leads to the simplification shown in Figure 5–2, which executes
-in 21 instructions and is branch-free.
+  * We keep doing this until the input Integer is 0.
 
-Resource: https://doc.lagout.org/security/Hackers%20Delight.pdf (Chapter 5)
+In Java we need to put attention on the fact that the maximum integer is 2147483647. Integer type in Java is signed and there is no unsigned int. So the input 2147483648 is represented in Java as -2147483648 (in java int type has a cyclic representation, that means Integer.MAX_VALUE+1==Integer.MIN_VALUE).
 
+This force us to use
 
-=================================================================================================================================================================
-Approach-2 ( Using Brian Kernighan Algorithm )
-=================================================================================================================================================================
-Solution Explanation:
-Kernighan way
-=================================================================================================================================================================
-If we can somehow get rid of iterating through all the 32 bits and only iterate as many times as there are 1's, wouldn't that be better?
-Below is a solution that does this. It's based on Kernighan's number of set bits counting algorithm.
-=================================================================================================================================================================
-To solve this problem efficiently one must be familiar with Brian Kernighans Bit Manipulation Algorithm 
-which is used to count the number of set bits in a binary representation of a number k. (a bit is considered set if it has the value of 1)
+  * n!=0
 
-Resource: https://www.techiedelight.com/brian-kernighans-algorithm-count-set-bits-integer/
-=================================================================================================================================================================
+in the while condition and we cannot use
 
-Using Brian Kernighan Algorithm, we will not check/compare or loop through all the 32 bits present
-but only count the set bits which is way better than checking all the 32 bits
+  * n>0
 
-Suppose we have a number 00000000000000000000000000010110 (32 bits).
+because the input 2147483648 would correspond to -2147483648 in java and the code would not enter the while if the condition is n>0 for n=2147483648.
+```
+##### Additional Explanation:
+```
+Why can't we use n > 0?
+========================
+The binary representation of Integer.MAX_VALUE is 0111 1111 1111 1111 1111 1111 1111 1111, and
+the binary representation of Integer.MAX_VALUE + 1 is 1000 0000 0000 0000 0000 0000 0000 0000 (spaces added).
+Note that the leftmost bit here denotes the sign of the number, but recall that we're told to treat input as unsigned.
 
-Now using this algorithm we will skip the 0's bit and directly jump to set bit(1's bit) 
-and we don't have to go through each bit to count set bits i.e. the loop will be executed 
-only for 3 times in the mentioned example and not for 32 times.
+As mentioned above, Integer.MAX_VALUE is 2147483647, and Integer.MAX_VALUE + 1 is -2147483648.
 
+Intuitively, we would agree that -2147483648 has 1 one.
 
-Assume we are working for 8 bits for better understanding, but the same logic apply for 32 bits
-So, we will take a number having 3 set bits.
-n = 00010110
-n - 1 = 00010101 (by substracting 1 from the number, all the bits gets flipped/toggled after the MSB(most significant right bit) including the MSB itself
-After applying &(bitwise AND) operator on n and n - 1 i.e. (n & n - 1), the righmost set bit will be turned off/toggled/flipped
+However, if our test is n > 0, -2147483648 fails that test, so we don't count any 1s, and instead incorrectly return 0.
 
-Let's understand step by step:
-===============================
-* 1st Iteration
-     00010110 --> (22(n) in decimal)
-  &  00010101 --> (21(n - 1) in decimal i.e. flipping all the bits of n(22) after MSB including the MSB)
-  -----------
-     00010100 --> (20(n & n - 1) in decimal i.e after applying bitwise AND(&), the MSB will be turned off)
+Why can't we use n >>= 1?
+========================
+The assumption of this code is that, starting with a 32-bit binary number, we can move the bits over to the right, filling in zeros from the left.
 
-After applying bitwise AND(&) ,assign this number to n i.e. n = n & n - 1
-n = 00010100(20 in decimal)
-and increase the count
-bitCount++ (Initial bitCount = 0. By incrementing it, the bitCount = 1)
--------------------------------------------------------------------------------------------------------------------------------
-* 2nd Iteration
-     00010100 --> (20(n) in decimal)
-  &  00010011 --> (19(n - 1) in decimal i.e. flipping all the bits of n(20) after MSB including the MSB)
-  -----------
-     00010000 --> (16(n & n - 1) in decimal i.e after applying bitwise AND(&), the MSB will be turned off)
+So a few shifts of Integer.MAX_VALUE + 1 should look like this:
+0100 0000 0000 0000 0000 0000 0000 0000
+0010 0000 0000 0000 0000 0000 0000 0000
+0001 0000 0000 0000 0000 0000 0000 0000
 
-After applying bitwise AND(&) ,assign this number to n i.e. n = n & n - 1
-n = 00010000(16 in decimal)
-and increase the count
-bitCount++ (previous bitCount = 1. By incrementing it, the bitCount = 2)
--------------------------------------------------------------------------------------------------------------------------------
-* 3rd Iteration
-     00010000 --> (16(n) in decimal)
-  &  00001111 --> (15(n - 1) in decimal i.e. flipping all the bits of n(16) after MSB including the MSB)
-  -----------
-     00000000 --> (0(n & n - 1) in decimal i.e after applying bitwise AND(&), the MSB will be turned off)
+The operation that describes that kind of shift is the unsigned shift (also "logical shift") operator, denoted by >>>.
 
-After applying bitwise AND(&) ,assign this number to n i.e. n = n & n - 1
-n = 00000000 (0 in decimal)
-and increase the count
-bitCount++ (previous bitCount = 2. By incrementing it, the bitCount = 3)
--------------------------------------------------------------------------------------------------------------------------------
+The operation denoted by >> is indeed also a shift (the "signed" or "arithmetic" shift), but not the shift we're looking for (since it fills in whatever the sign bit is, either 0 or 1)
 
-Now, since the n = 0, there will be no furthur iteration as the condition becomes false, so it will come 
-out of the loop and return bitCount which is 3 which is desired output.
+A few shifts of Integer.MAX_VALUE + 1 using the >> operator would look like this:
+1100 0000 0000 0000 0000 0000 0000 0000
+1110 0000 0000 0000 0000 0000 0000 0000
+1111 0000 0000 0000 0000 0000 0000 0000
+1111 1000 0000 0000 0000 0000 0000 0000
+...
+1111 1111 1111 1111 1111 1111 1111 1111, to infinity, which would never exit our n != 0 condition.
 ```
 ##### Complexity Analysis:
 ```
-For both approaches:
-
 Time  : O(1)
 Space : O(1)
 ```
-```python
-# Approach-1 ( Using masking )
-def hammingWeight(n: int) -> int:
-    mask_sum_2bit = 0x55555555
-    mask_sum_4bit = 0x33333333
-    mask_sum_8bit = 0x0F0F0F0F
-    mask_sum_16bit = 0x00FF00FF
-    mask_sum_32bit = 0x0000FFFF
-
-    n = (n & mask_sum_2bit) + ((n >> 1) & mask_sum_2bit)
-    n = (n & mask_sum_4bit) + ((n >> 2) & mask_sum_4bit)
-    n = (n & mask_sum_8bit) + ((n >> 4) & mask_sum_8bit)
-    n = (n & mask_sum_16bit) + ((n >> 8) & mask_sum_16bit)
-    n = (n & mask_sum_32bit) + ((n >> 16) & mask_sum_32bit)
-
-    return n
-
-if __name__ == "__main__":
-    #Input: n = 00000000000000000000000000001011
-    #Output: 3
-    #Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.
-    n = 0b00000000000000000000000000001011
-    print(hammingWeight(n))
-
-# Approach-2 ( Using Brian Kernighan Algorithm )
-def hammingWeight(n: int) -> int:
-    count = 0
-    while n:
-        count += 1
-        n = n & (n - 1)    
-    return count
-
-
-if __name__ == "__main__":
-    #Input: n = 00000000000000000000000000001011
-    #Output: 3
-    #Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.
-    n = 0b00000000000000000000000000001011
-    print(hammingWeight(n))
-```
-```kotlin
-// Approach-1 ( Using masking )
-fun hammingWeight(n:Int):Int {
-    var num = n
-    val mask_sum_2bit: Int = 0x55555555.toInt()
-    val mask_sum_4bit: Int = 0x33333333.toInt()
-    val mask_sum_8bit: Int = 0x0F0F0F0F.toInt()
-    val mask_sum_16bit: Int = 0x00FF00FF.toInt()
-    val mask_sum_32bit: Int = 0x0000FFFF.toInt()
-
-    
-    num = ((num and 0xAAAAAAAA.toInt()) ushr 1) + (num and mask_sum_2bit)
-    num = ((num and 0xCCCCCCCC.toInt()) ushr 2) + (num and mask_sum_4bit)
-    num = ((num and 0xF0F0F0F0.toInt()) ushr 4) + (num and mask_sum_8bit)
-    num = ((num and 0xFF00FF00.toInt()) ushr 8) + (num and mask_sum_16bit)
-    num = ((num and 0xFFFF0000.toInt()) ushr 16) + (num and mask_sum_32bit)
-    return num
-}
-
-fun main(args: Array<String>) {
-    //Input: n = 00000000000000000000000000001011
-    //Output: 3
-    //Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.
-    val n = 0b00000000000000000000000000001011
-    println(hammingWeight(n))
-}
-
-// Approach-2 ( Using Brian Kernighan Algorithm )
-fun hammingWeight(n:Int):Int {
-    var num = n
-    var count = 0
-    while (num != 0) {
-        num = num and (num - 1)
-        count++      
+```java
+public class Solution {
+    public static int hammingWeight(int n) {
+        int c = 0;
+        while (n != 0) {
+            c += (n & 1);
+            n >>>= 1;
+        }
+        return c;
     }
-   
-   return count
-}
-
-fun main(args: Array<String>) {
-    //Input: n = 00000000000000000000000000001011
-    //Output: 3
-    //Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.
-    val n = 0b00000000000000000000000000001011
-    println(hammingWeight(n))
 }
 ```
 
@@ -1924,134 +1792,52 @@ fun main(args: Array<String>) {
 #### [LC-338:Counting Bits](https://leetcode.com/problems/counting-bits/)
 ##### Prerequisite:
 ```
-=================================================================================================================================================================
-To solve this problem efficiently one must be familiar with Brian Kernighans Bit Manipulation Algorithm 
-which is used to count the number of set bits in a binary representation of a number k. (a bit is considered set if it has the value of 1)
+Prerequisite
 
-Resource: https://www.techiedelight.com/brian-kernighans-algorithm-count-set-bits-integer/
-```
-##### Solution Explanation:
-```
-Intuition:
-=================================================================================================================================================================
+As we know, a number can be classified into an even or odd number.
 
-This problem can be solved using dynamic programming combined with a bit manipulation technique.
+An even number ends with 0 in binary
 
-Overview
-------------------
-Recall the goal is to count the number of set bits in the binary representation of all integers 0 to n and record the set bits count of each number.
-This can be done in O(N) time and using O(N) space.
+An odd number ends with 1 in binary
 
-To solve this problem efficiently one must be familiar with Brian Kernighans Bit Manipulation Algorithm which is used to count the number 
-of set bits in a binary representation of a number k. (a bit is considered set if it has the value of 1)
+Strategy
 
-Intially it seems just to be aware of Kernighans algorithm is enough to solve this problem, but this is not the case. 
-It would be naive to calculate the set bit count of each number from 1 to n and record the result for each number.
-This is because Kernighans Algorithm has a runtime of of O(S) where S is the number of set bits in a number. 
-This is because in each iteration a set bits in the original number is changed from 1 to 0 until there are no more set bits. 
-This must be done for all N numbers.
-The runtime of this approach is O(N*S) time. We can do better.
+Let's denote the number as num:
 
+If it is even, the ending bit is 0, then that bit can be ignored, countBits(num) is the same as countBits(num >> 1), so countBits(num) = countBits(num >> 1);
 
-Optimization
-We can use dynamic programming to eliminate uncessary work.
+For example:
 
-The uncessary work is calculating the set bit count for each number from 0 to n.
+num:      101010101010
+num >> 1: 10101010101
+If it is odd, the ending bit is 1, then the number of set bits is that of num - 1 + 1, i.e. countBits(num) = countBits(num - 1) + 1
 
-if we use a cache and leverage the heart of kernighans algorithm, we can avoid explictly calculating the set bit count for each number reducing the runtime to O(N)
+For example:
 
-The heart of kernighans algorithm uses a bit manipulation techinuque to turn off (set 1 to 0) the least significant bit (rightmost) in a number. an AND operation is perfomerd be between the binary representations of k and k-1. this results in a number m who's set bits count is one less than k. The algorithm performs this operation on each iteration, eahc time updating k to the value of m. in python this operation is k = k & (k - 1)
-
-The key observation for optimization is that, if we count the set bits of each number in sorted order and we cache the results. for any given number k which no set bit count has been recorded, we can always lookup a number m who has a set bits count that is one less than k. if we know the set bit count of m, we can get the set bits count of k by adding one to the set bits count of m. lookup is possible because we are going in sorted order and it is the case m <= k.
-
-if we use kernighans bit manipulation technique, m can always be found in constant time.
-if we start at 0 we can build our way up to n. obtaining all counts along the way.
-
-if n = 4
-0 -> 0 set bits by default
-thus dp[0] = 0
-
-Now how do we count the set bits of the number 1?
-Using kernighans technique we can find a number that has one less set bit than the binary representation of 1. that number is zero.
-
-1 -> 1 & (1 - 1) = 0
-
-You can think of 1 ask and 0 asm from above explanation
-
-Thus if we add 1 + 0 we get the set bit count for the binary representation of one.
-count set bits in binary representation of 1 dp[1] = 1 + dp[0] = 1 + 0 = 1
-
-count set bits in binary representation of  2 
-dp = [0, 1, 0, 0, 0]
-2 -> 2 & (2 - 1) = 0
-base 2: 0010  & 0001 = 0000
-dp[2] = 1 + dp[0] =  0 + 1 = 1 
-
-count set bits in binary representation of  3 
-dp = [0, 1, 1, 0, 0]
-3 -> 3 & (3 - 1) = 3 & 2 = 2
-base 2: 0011  & 0010 = 0010 
-dp[3] = 1 + dp[2] =  1 + 1 = 2
-
-count set bits in binary representation of  4 
-dp = [0, 1, 1, 2, 0]
-4 -> 4 & (4 - 1) = 4 & 3 = 2
-base 2: 0100  & 0011 = 0100
-dp[4] = 1 + dp[4] =  1 + 0 = 1
-
-result 
-dp = [0, 1, 1, 2, 1]
-
-the pattern from these examples is 
-dp[i]  = 1 + dp[i & (i - 1)]
+num:     101010101011
+num - 1: 101010101010
 ```
 ##### Complexity Analysis:
 ```
 Time  : O(N)
 Space : O(N)
 ```
-```python
-from typing import List
-
-def countBits(n: int) -> List[int]:
-    if num < 0: return []
-    dp = [0]*(num+1)
-    for i in range(1, num+1):
-        # Use kernighans algorithm for bit manipulation techinuque to turn off (set 1 to 0) the least significant bit (rightmost) in a number.
-        # i & i - 1,  yeilds a number m , where m <= i, and has one less set bit than i.
-        dp[i] = dp[i & (i-1)] + 1
-    return dp
-
-if __name__ == "__main__":
-    #Input: n = 2
-    #Output: [0,1,1]
-    #Explanation:
-    #0 --> 0
-    #1 --> 1
-    #2 --> 10
-    n = 2
-    print(countBits(n))
-```
-```kotlin
-fun countBits(n: Int): IntArray {
-    if (n < 0) return intArrayOf()
-    val dp = IntArray(n+1)
-    dp[0] = 0
-    for (i in 1 until n+1) {
-        dp[i] = dp[i and (i-1)]+1;
+```java
+class Solution {
+    public int[] countBits(int num) {
+        int[] res = new int[num + 1];
+        res[0] = 0;
+        
+        for(int i = 1; i <= num; i++){
+            if((i & 1) == 0){
+                res[i] = res[i >> 1];
+            }else{
+                res[i] = res[i - 1] + 1;
+            }
+        }
+        
+        return res;
     }
-    return dp
-}
-
-fun main(args: Array<String>) {
-    //Input: n = 2
-    //Output: [0,1,1]
-    //Explanation:
-    //0 --> 0
-    //1 --> 1
-    //2 --> 10
-    val n = 2
-    println(countBits(n).joinToString(","))
 }
 ```
 
@@ -2064,6 +1850,10 @@ fun main(args: Array<String>) {
 #### [LC-268:Missing Number](https://leetcode.com/problems/missing-number/)
 ##### Solution Explanation:
 ```
+Intuition
+=================================================================================================================================================================
+The idea is to perform xor with the count and element in array. The end result will be that missing number.
+
 Bitwise XOR Operation
 =================================================================================================================================================================
 
@@ -2078,60 +1868,15 @@ Bitwise XOR Operation
 Time  : O(N)
 Space : O(1)
 ```
-```python
-from typing import List
-
-def missingNumber(nums: List[int]) -> int:
-    missing_number = len(nums)
-    for i in range(len(nums)):
-        missing_number ^= nums[i] ^ i
-    
-    return missing_number
-
-if __name__ == "__main__":
-    #Input: nums = [3,0,1]
-    #Output: 2
-    #Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
-    #2 is the missing number in the range since it does not appear in nums.
-    nums = [3,0,1]
-    print(missingNumber(nums))
-```
-```kotlin
-fun missingNumber(nums: IntArray): Int {
-    var result = nums.size
-    for (i in 0 until nums.size) {
-        //result = result xor nums[i]
-        //result = result xor i
-        result = result.xor(nums[i]).xor(i)
-    }
-    return result    
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [3,0,1]
-    //Output: 2
-    //Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
-    //2 is the missing number in the range since it does not appear in nums.
-    var nums = intArrayOf(3,0,1)
-    println(missingNumber(nums))
-    //Input: nums = [0,1]
-    //Output: 2
-    //Explanation: n = 2 since there are 2 numbers, so all numbers are in the range [0,2].
-    //2 is the missing number in the range since it does not appear in nums.
-    nums = intArrayOf(0,1)
-    println(missingNumber(nums))
-    //Input: nums = [9,6,4,2,3,5,7,0,1]
-    //Output: 8
-    //Explanation: n = 9 since there are 9 numbers, so all numbers are in the range [0,9].
-    //8 is the missing number in the range since it does not appear in nums.
-    nums = intArrayOf(9,6,4,2,3,5,7,0,1)
-    println(missingNumber(nums))
-    //Input: nums = [0]
-    //Output: 1
-    //Explanation: n = 1 since there is 1 number, so all numbers are in the range [0,1].
-    //1 is the missing number in the range since it does not appear in nums.
-    nums = intArrayOf(0)
-    println(missingNumber(nums))
+```java
+public class Solution {  
+    public int missingNumber(int[] nums) {  
+        int r = 0;  
+        for (int i = 0; i<nums.length; i++){  
+            r ^=  i ^ nums[i];  
+        }  
+        return r ^ nums.length;  
+    }  
 }
 ```
 
@@ -2144,107 +1889,222 @@ fun main(args: Array<String>) {
 #### [LC-190:Reverse Bits](https://leetcode.com/problems/reverse-bits/)
 ##### Solution Explanation:
 ```
-Bitwise XOR Operation
 =================================================================================================================================================================
-Approach 1: Bit Manipulation and Bit-wise XOR operation
+Approach 1: Bit Manipulation
 =================================================================================================================================================================
+* you need treat n as an unsigned value
+* perform the following bit-by-bit
+  - and last digit of n with 1, append the result to result
+  - right shift n to get next digit 
+  - we don't left shift last bit = 32 (else it's an overflow)
+  
+=================================================================================================================================================================
+Approach 2: Divide & Conquer
+=================================================================================================================================================================
+Basic Idea behind this:
+In this implementation we have followed "Divide and Conquer" strategy where Original problem is divided into sub problems
 
-- In each loop, use logical AND operation n & 1 to get the least significant bit and add it to the ans. 
-- To reverse the bit, shift n and ans in opposite directions.
-- What needs attention is that, after we add the last bit of n to ans at the 32nd loop,
-  the following left shift of ans is no longer needed.
-- The most significant bit of n has already at the right most position after previous 31 loops.
-=================================================================================================================================================================
+Let's understand in terms of decimal number to understand how the code is implemented
+Suppose we have a number 12345678 and we have to reverse it to get 87654321 as desired output
+The process will be as follows:
+      12345678 --> original number
 
-=================================================================================================================================================================
-Approach 2: Using Masking
-=================================================================================================================================================================
-For 8 bit binary number A B C D E F G H, the process is like: A B C D E F G H --> E F G H A B C D --> G H E F C D A B --> H G F E D C B A
+56781234
+78563412
+87654321 --> desired number(reversed number)
+Explanation of above process is as follows:
+
+Divide original number(12345678) into 2 parts(4 - 4 each)
+1234|5678 and swap with each other i.e.
+  |_____|
+
+5678|1234(it can also be said that we are right shifting the 1st part(1234) to 4 places from its original position and left shifting the 2nd part(5678) to 4 places from its original position)
+
+Divide this obtained number(56781234) into 4 parts(2 - 2 each)
+56|78|12|34 and swap with each other i.e.
+ |__|    |__|
+
+78|56|34|12(it can also be said that we are right shifting the 1st part(56) and 3rd part(12) to 2 places from their original positions and left shifting the 2nd part(78) and 4th part(34) to 2 places from their original positions)
+
+Divide the obtained number(78563412) into 8 parts(1 - 1 each)
+7|8|5|6|3|4|1|2 and swap with each other i.e.
+ |_|  |_|  |_|  |_|
+
+8|7|6|5|4|3|2|1(it can also be said that we are right shifting the 1st part(7), 3rd part(5), 5th part(3) and 7th part(1) to 1 place from their original positions and left shifting the 2nd part(8), 4th part(6), 6th part(4) and 8th part(2) to 1 place from their original positions)
+
+We got the desired output as 87654321
+
+Time to play with bits!!!!!!
+
+To get better understanding of how the 32 bits are reversed in binary, we will take 8 bits instead of 32.
+If the number is of 8 bits, the bits will be reversed in 3 steps as we are using Divide and Conquer approach which is nothing dividing the original problem into sub problems i.e. log(O(Number_Of_Bits)) i.e. log(O(8)) --> 3 and the same Idea applies for 32 bits where the bits will be reversed in 5 steps as log(O(32)) --> 5
+
+First let's understand with 8 bits
+Suppose we have bits as 00010111 and we have to reverse it to get 11101000 as desired output
+The Process will be as follows:
+00010111(8 bits) --> Original Number
+
+01110001
+11010100
+11101000 --> Reversed Numer
+Explanation of above process is as follows:
+
+Divide original bits into 4 - 4 each (4 * 2 = 8 bits)
+0001|0111 and swap with each other i.e.
+  |_____|
+0111|0001 (It can also be said that we are right shifting 1st part(first 4 bits) to 4 places from their original positions and left shifting the 2nd part(last 4 bits) to 4 places from their original positions)
+
+Following is the process of doing it:
+a) Preserve 1st part(first 4 bits) and we know the property of bitwise and(&) opertor i.e. 0, 1 -> 0 and 1, 1 -> 1
+For this, we will take a mask in hexadecimal form and apply bitwise and(&) to preserve the first 4 bits
+mask = 0xf0 (which is nothing but 1111 0000 i.e. 1111(15 == f) and 0000(0))
+   0001 0111 --> num
+& 1111 0000 --> 0xf0
+   0001 0000
+
+b) Right shift the obtained number from its original position by 4 places i.e. (num & 0xf0) >>> 4
+    00000001
+
+c) Preserve the 2nd part(last 4 bits)
+For this, will take a mask in hexadecimal form and apply bitwise and(&) to preserve the last 4 bits
+mask = 0x0f (which is nothing but 0000 1111 i.e. 0000(0) and 1111(15 == f))
+   0001 0111 --> num
+& 0000 1111 --> 0x0f
+   0000 0111
+
+d) Left shift the obtained number from its original position by 4 places i.e. (num & 0x0f) << 4
+   01110000
+
+e) Do the bitwise OR(|) operation on both shifted numbers to merge intermediate results into a single number which is used as an input for the next step.
+   0000 0001 --> number obtained by right shift at step b)
+|  0111 0000 --> number obtained by left shift at step d)
+   0111 0001
+
+f) Assign the result into num after apply bitwise or into num again to proceed furthur
+   num = 01110001
+Till here, 1 of 3 steps of process has been completed. 2 More remaining!!!
+
+Divide obtained bits(01110001) into 2 - 2 each (2 * 4 = 8 bits)
+01|11|00|01 and swap with each other i.e.
+ |__|    |__|
+11|01|01|00 (It can also be said that we are right shifting 1st part(01) and 3rd part(00) to 2 places from their original positions and left shifting the 2nd part(11) and 4th part(01) to 2 places from their original positions)
+
+Following is the process of doing it:
+a) Preserve 1st part(01) and 3rd part(00) and we know the property of bitwise and(&) opertor i.e. 0, 1 -> 0 and 1, 1 -> 1
+For this, we will take a mask in hexadecimal form and apply bitwise and(&) to preserve 1st part(01) and 3rd part(00)
+mask = 0xcc (which is nothing but 1100 1100 i.e. (12 == c) and (12 == c))
+   01 11 00 01 --> num
+& 11 00 11 00 --> 0xcc
+   01 00 00 00
+
+b) Right shift the obtained number(01 00 00 00) from its original position by 2 places i.e. (num & 0xcc) >>> 2
+    00 01 00 00
+
+c) Preserve the 2nd part(11) and 4th part(01)
+For this, we will take a mask in hexadecimal form and apply bitwise and(&) to preserve 2nd part(11) and 4th part(01)
+mask = 0x33 (which is nothing but 0011 0011 i.e. 0011(3) and 0011(3))
+   01 11 00 01 --> num
+& 00 11 00 11 --> 0x33
+   00 11 00 01
+
+d) Left shift the obtained number(00 11 00 01) from its original position by 2 places i.e. (num & 0x33) << 2
+   11 00 01 00
+
+e) Do the bitwise OR(|) operation on both shifted numbers to merge intermediate results into a single number which is used as an input for the next step.
+   00 01 00 00 --> number obtained by right shift at step b)
+|  11 00 01 00 --> number obtained by left shift at step d)
+   11 01 01 00
+
+f) Assign the result into num after apply bitwise or into num again to proceed furthur
+   num = 11010100
+Till here, 2 of 3 steps of process has been completed. Only 1 more to go!!!!!!!!!
+
+Divide obtained bits(11010100) into 1 - 1 each (1 * 8 = 8 bits)
+1|1|0|1|0|1|0|0 and swap with each other i.e.
+ |_|  |_|  |_|  |_|
+1|1|1|0|1|0|0|0 (It can also be said that we are right shifting 1st(1), 3rd(0), 5th(0) and 7th(0) parts to 1 place from their original positions and left shifting the 2nd(1), 4th(1), 6th(1) and 8th(0) parts to 1 place from their original positions)
+
+Following is the process of doing it
+a) Preserve 1st(1), 3rd(0), 5th(0) and 7th(0) parts
+We know the property of bitwise and(&) opertor i.e. 0, 1 -> 0 and 1, 1 -> 1
+For this, we will take a mask in hexadecimal form and apply bitwise and(&) to preserve 1st(1), 3rd(0), 5th(0) and 7th(0) parts
+mask = 0xaa (which is nothing but 1010 1010 i.e. (10 == a) and (10 == a))
+   1 1 0 1 0 1 0 0 --> num
+& 1 0 1 0 1 0 1 0 --> 0xaa
+   1 0 0 0 0 0 0 0
+
+b) Right shift the obtained number(1 0 0 0 0 0 0 0) from its original position by 1 place i.e. (num & 0xaa) >>> 1
+    0 1 0 0 0 0 0 0
+
+c) Preserve the 2nd(1), 4th(1), 6th(1) and 8th(0) parts
+For this, we will take a mask in hexadecimal form and apply bitwise and(&) to preserve 2nd(1), 4th(1), 6th(1) and 8th(0) parts
+mask = 0x55 (which is nothing but 0101 0101 i.e. 0101(5) and 0101(5))
+   1 1 0 1 0 1 0 0 --> num
+& 0 1 0 1 0 1 0 1 --> 0x55
+   0 1 0 1 0 1 0 0
+
+d) Left shift the obtained number(0 1 0 1 0 1 0 0) from its original position by 1 place i.e. (num & 0x55) << 1
+   1 0 1 0 1 0 0 0
+
+e) Do the bitwise OR(|) operation on both shifted numbers
+   0 1 0 0 0 0 0 0 --> number obtained by right shift at step b)
+|  1 0 1 0 1 0 0 0 --> number obtained by left shift at step d)
+   1 1 1 0 1 0 0 0
+
+f) Assign the result into num after apply bitwise or into num again
+   num = 11101000
+Now, return the num.
+
+We have finally reversed the original number i.e. 00010111 -> 11101000
+
+
+Same idea goes for 32 bits
+eg:
+break the 32 bits into half(16 - 16 each) and right shift 1st half part to 16 positions and left shift the 2nd half to 16 positions
+break the 16 bits into half(8 - 8 each) and right shift to 8 positions and left shift to 8 positions
+break the 8 bits into half(4 - 4 each) and right shift to 4 positions and left shift to 4 positions
+break the 4 bits into half(2 - 2 each) and right shift to 2 positions and left shift to 2 positions
+break the 2 bits into half(1 - 1 each) and right shift to 1 positions and left shift to 1 positions
+
+* For 8 bit binary number A B C D E F G H, the process is like: A B C D E F G H --> E F G H A B C D --> G H E F C D A B --> H G F E D C B A
 ```
 ##### Complexity Analysis:
 ```
 For both approaches
 =================================================================================================================================================================
-Time  : O(log(N))
+Time  : O(k) = O(log n) - where k is the number of bits in the integer and the log is log_base2.
 Space : O(1)
 ```
-```python
-# Approach 1: Bitwise XOR operation
-def reverseBits(n: int) -> int:
-    result = 0
-    for i in range(32):
-        result <<= 1
-        result |= n & 1
-        n >>= 1
-    return result
-
-if __name__ == "__main__":
-    #Input       : n = 00000010100101000001111010011100
-    #Output      : 964176192 (00111001011110000010100101000000)
-    #Explanation : The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596,
-    #so return 964176192 which its binary representation is 00111001011110000010100101000000.
-    nums = 0b00000010100101000001111010011100
-    print(reverseBits(nums))
-
-# Approach 2: Using Masking
-def reverseBits(n: int) -> int:
-    n = (n >> 16) | (n << 16)
-    n = ((n & 0xff00ff00) >> 8) | ((n & 0x00ff00ff) << 8)
-    n = ((n & 0xf0f0f0f0) >> 4) | ((n & 0x0f0f0f0f) << 4)
-    n = ((n & 0xcccccccc) >> 2) | ((n & 0x33333333) << 2)
-    n = ((n & 0xaaaaaaaa) >> 1) | ((n & 0x55555555) << 1)
-    return n
-
-if __name__ == "__main__":
-    #Input       : n = 00000010100101000001111010011100
-    #Output      : 964176192 (00111001011110000010100101000000)
-    #Explanation : The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596,
-    #so return 964176192 which its binary representation is 00111001011110000010100101000000.
-    nums = 0b00000010100101000001111010011100
-    print(reverseBits(nums))
-```
-```kotlin
+```java
 // Approach 1: Bitwise XOR operation
-fun reverseBits(n:Int):Int {
-    var num = n
-    var result = 0
-
-    for (i in 0 until 32) {
-        result = result.shl(1)
-        result += (num and 1)
-        num = num ushr 1
+public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        int result = 0;
+        for (int i = 0; i < 32; i++) {
+            result += n & 1;        //and last digit of n with 1, append the result to result
+            n >>>= 1;           //right shift n to get next digit
+            if (i < 31) {
+                result <<= 1;       //we don't left shift last bit = 32 (else it's an overflow)
+            }
+        }
+        return result;
     }
-
-    return result
 }
 
-fun main(args: Array<String>) {
-    //Input       : n = 00000010100101000001111010011100
-    //Output      : 964176192 (00111001011110000010100101000000)
-    //Explanation : The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596,
-    //so return 964176192 which its binary representation is 00111001011110000010100101000000.
-    val nums = 0b00000010100101000001111010011100
-    println(reverseBits(nums))
-}
-
-// Approach 2: Using Masking
-fun reverseBits(n:Int):Int {
-    var num = n
-    num = (num ushr 16) or (num shl 16);
-    num = ((num and 0xFF00FF00.toInt()) ushr 8) or ((num and 0x00FF00FF.toInt()) shl 8)
-    num = ((num and 0xF0F0F0F0.toInt()) ushr 4) or ((num and 0x0F0F0F0F.toInt()) shl 4)
-    num = ((num and 0xCCCCCCCC.toInt()) ushr 2) or ((num and 0x33333333.toInt()) shl 2)
-    num = ((num and 0xAAAAAAAA.toInt()) ushr 1) or ((num and 0x55555555.toInt()) shl 1)
-    return num
-}
-
-fun main(args: Array<String>) {
-    //Input       : n = 00000010100101000001111010011100
-    //Output      : 964176192 (00111001011110000010100101000000)
-    //Explanation : The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596,
-    //so return 964176192 which its binary representation is 00111001011110000010100101000000.
-    val nums = 0b00000010100101000001111010011100
-    println(reverseBits(nums))
+// Approach 2: Divide & Conquer
+public class Solution {
+    
+    public int reverseBits(int num) {
+        num = ((num & 0xffff0000) >>> 16) | ((num & 0x0000ffff) << 16);
+        num = ((num & 0xff00ff00) >>> 8) | ((num & 0x00ff00ff) << 8);
+        num = ((num & 0xf0f0f0f0) >>> 4) | ((num & 0x0f0f0f0f) << 4);
+        num = ((num & 0xcccccccc) >>> 2) | ((num & 0x33333333) << 2);
+        num = ((num & 0xaaaaaaaa) >>> 1) | ((num & 0x55555555) << 1);
+        
+        return num;
+        
+    }
 }
 ```
 
