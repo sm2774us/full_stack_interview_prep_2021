@@ -2472,7 +2472,7 @@ private static class Node implements Comparable<Node> {
 <br/>
 
 #### [LC-1143:Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
-![LCS-image](./assets/LCS-image.PNG)
+![LCS-image](./assets/LCS-image.png)
 ##### Solution Explanation:
 ```
 Solution Approach:
@@ -2585,11 +2585,11 @@ Approach-1 : Brute Force ( Recursion )
 ==================================
 The time complexity depends on how many nodes the recursion tree has. In the worst case, the recursion tree has the most nodes, which means the program should not return in the middle and it should try as many possibilities as possible. So the branches and depth of the tree are as many as possible. For the worst case, for example, we take s = "abcd" and wordDict = ["a", "b", "c", "bc", "ab", "abc"], the recursion tree is shown below:
 ```
-![word-break-brute-force-image-1](./assets/word-break-brute-force-image-1.PNG)
+![word-break-brute-force-image-1](./assets/word-break-brute-force-image-1.png)
 ```
 From the code if (set.contains(s.substring(0, i)) && wb(s.substring(i), set)) { }, we can see that only if the wordDict contains the prefix, the recursion function can go down to the next level. So on the figure above, string on the edge means the wordDict contains that string. All the gray node with empty string cannot be reached because if the program reaches one such node, the program will return, which lead to some nodes right to it will not be reached. So the conclusion is for a string with length 4, the recursion tree has 8 nodes (all black nodes), and 8 is 2^(4-1). So to generalize this, for a string with length n, the recursion tree wil have 2^(n-1) nodes, i.e., the time complexity is O(2^n). I will prove this generalization below using mathmatical induction:
 ```
-![word-break-brute-force-image-2](./assets/word-break-brute-force-image-2.PNG)
+![word-break-brute-force-image-2](./assets/word-break-brute-force-image-2.png)
 ```
 Explanation: the value of a node is the string length. We calculate the number of nodes in the recursion tree for string length=1, 2, ...., n respectively.
 
@@ -3149,7 +3149,7 @@ Let m=3, n=4. The problem becomes "how many unique permutations of the String 'O
 
 This is a well-studied and well-known problem in combinatorics and you may have studied this if you've taken a combinatorics class before. Here's the theorem used to solve this problem.
 ```
-![unique-paths-combinatorics-solution](./assets/unique-paths-combinatorics-solution.PNG)
+![unique-paths-combinatorics-solution](./assets/unique-paths-combinatorics-solution.png)
 ```
 ```java
 // Solution-1: Memoization or "Top-Down dynamic programming"
@@ -3264,7 +3264,7 @@ Difference between DP and Greedy
 =================================================================================================================================================================
 Example
 ```
-![jump-game-difference-between-dp-and-greedy](./images/jump-game-difference-between-dp-and-greedy.PNG)
+![jump-game-difference-between-dp-and-greedy](./images/jump-game-difference-between-dp-and-greedy.png)
 ```
 If we have a Greedy Approach here then we will take the path 1+99+1 as we select local optimum from the beggining
 
@@ -9573,13 +9573,13 @@ This problem requires quite a bit of quirky thinking steps. Take it slow until y
 Basics
 ==========================
 ```
-![lc-124-solution-explanation-image-1](./assets/lc-124-solution-explanation-image-1.PNG)
+![lc-124-solution-explanation-image-1](./assets/lc-124-solution-explanation-image-1.png)
 ```
 
 Base Cases
 ==========================
 ```
-![lc-124-solution-explanation-image-2](./assets/lc-124-solution-explanation-image-2.PNG)
+![lc-124-solution-explanation-image-2](./assets/lc-124-solution-explanation-image-2.png)
 ```
 Important Observations
 ==========================
@@ -9587,15 +9587,15 @@ Important Observations
       [x] For example, in the code (Line 9), we do something like max(get_max_gain(node.left), 0). The important part is: why do we take maximum value between 0 and maximum gain we can get from left branch? Why 0?
       [x] Check the two images below first.
 ```
-![lc-124-solution-explanation-image-3](./assets/lc-124-solution-explanation-image-3.PNG)
-![lc-124-solution-explanation-image-4](./assets/lc-124-solution-explanation-image-4.PNG)
+![lc-124-solution-explanation-image-3](./assets/lc-124-solution-explanation-image-3.png)
+![lc-124-solution-explanation-image-4](./assets/lc-124-solution-explanation-image-4.png)
 ```
       [x] The important thing is "We can only get any sort of gain IF our branches are not below zero. If they are below zero, why do we even bother considering them? Just pick 0 in that case. Therefore, we do 
 	      max(<some gain we might get or not>, 0)..
 
 Going down the recursion stack for one example:
 ```
-![lc-124-solution-explanation-image-5](./assets/lc-124-solution-explanation-image-5.PNG)
+![lc-124-solution-explanation-image-5](./assets/lc-124-solution-explanation-image-5.png)
 ![lc-124-solution-explanation-image-6](./assets/lc-124-solution-explanation-image-6.PNG)
 ![lc-124-solution-explanation-image-7](./assets/lc-124-solution-explanation-image-7.PNG)
 ```
