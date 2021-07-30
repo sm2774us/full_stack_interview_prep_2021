@@ -3264,7 +3264,7 @@ Difference between DP and Greedy
 =================================================================================================================================================================
 Example
 ```
-![jump-game-difference-between-dp-and-greedy](./images/jump-game-difference-between-dp-and-greedy.png)
+![jump-game-difference-between-dp-and-greedy](./assets/jump-game-difference-between-dp-and-greedy.png)
 ```
 If we have a Greedy Approach here then we will take the path 1+99+1 as we select local optimum from the beggining
 
