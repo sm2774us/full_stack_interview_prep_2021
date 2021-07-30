@@ -893,152 +893,71 @@ public class Solution {
 <br/>
 
 #### [LC-217:Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
-##### Solution Explanation ( 2 possible solutions w/ their trade-offs explained ):
+##### Solution Explanation ( possible solutions w/ their trade-offs explained ):
 ```
-- For a sufficiently large value of N, choose Approach 2 ( Hash Table based approach ).
-- When N is not sufficiently large, choose Approach 1 ( Sorting based approach ).
+This problem seems trivial, so lets try different approaches to solve it:
 
-Two Possible Solutions (with their trade-offs explained)
-=================================================================================================================================================================
-Approach 1: Sorting
-=================================================================================================================================================================
-Intuition
--------------------------
-If there are any duplicate integers, they will be consecutive after sorting.
+Starting from worst time complexity to the best one:
 
-Algorithm
--------------------------
-- This approach employs sorting algorithm.
-- Since comparison sorting algorithm like heapsort is known to provide O(N*log(N)) worst-case performance, sorting is often a good preprocessing step. 
-- After sorting, we can sweep the sorted array to find if there are any two consecutive duplicate elements.
+Time complexity: O(N^2), Space complexity: O(1)
 
-=================================================================================================================================================================
-Complexity Analysis:
-=================================================================================================================================================================
+Solution-1: The naive approach would be to run a iteration for each element and see whether a duplicate value can be found: this results in O(N^2) time complexity.
 
-Time complexity : O(N*log(N))
-========================
-Sorting is O(N*log(N)) and the sweeping is O(N).
-The entire algorithm is dominated by the sorting step, which is O(N*log(N)).
+public boolean containsDuplicate(int[] nums) {
 
-Space complexity : O(1)
-========================
-Space depends on the sorting implementation which, usually,
-costs O(1) auxiliary space if heapsort is used.
-
-Note
--------------------------
-+ The implementation here modifies the original array by sorting it. 
-+ In general, it is not a good practice to modify the input unless it is clear to the caller that the input will be modified. 
-+ One may make a copy of nums and operate on the copy instead.
-
-=================================================================================================================================================================
-Approach 2: Hash Table
-=================================================================================================================================================================
-Intuition
--------------------------
-Utilize a dynamic data structure that supports fast search and insert operations.
-
-Algorithm
--------------------------
-From Approach #1 we know that search operations is O(N) in an unsorted array and we did so repeatedly.
-Utilizing a data structure with faster search time will speed up the entire algorithm.
-
-There are many data structures commonly used as dynamic sets such as Binary Search Tree and Hash Table.
-The operations we need to support here are search() and insert().
-For a self-balancing Binary Search Tree (TreeSet or TreeMap in Java), search() and insert() are both O(log(N)) time.
-For a Hash Table (HashSet or HashMap in Java), search() and insert() are both O(1) on average.
-Therefore, by using hash table, we can achieve linear time complexity for finding the duplicate in an unsorted array.
-
-=================================================================================================================================================================
-Complexity Analysis:
-=================================================================================================================================================================
-
-Time complexity : O(N)
-========================
-We do search() and insert() for N times and each operation takes constant time.
-
-Space complexity : O(N)
-========================
-The space used by a hash table is linear with the number of elements in it.
-
-Note
--------------------------
-+ For certain test cases with not very large N, the runtime of this method can be slower than Approach #2.
-+ The reason is hash table has some overhead in maintaining its property.
-+ One should keep in mind that real world performance can be different from what the Big-O notation says.
-+ The Big-O notation only tells us that for sufficiently large input, one will be faster than the other.
-+ Therefore, when N is not sufficiently large, an O(N) algorithm can be slower than an O(N*log(N)) algorithm.
-```
-```python
-from typing import List
-
-# Approach 1: Sorting [ TC: O(N*log(N)) ; SC: O(1) ]
-def containsDuplicateApproachOne(nums: List[int]) -> bool:
-    if len(nums) == 0 or len(nums) == 1: return False
-    nums.sort()
-    for i in range(len(nums) - 1):
-        if nums[i] == nums[i + 1]:
-            return True
-    return False
-
-# Approach 2: Hash Table [ TC: O(N) ; SC: O(N) ]
-def containsDuplicateApproachTwo(nums: List[int]) -> bool:
-    if len(nums) == 0 or len(nums) == 1: return False
-    s = set()
-    for num in nums:
-        if num in s: return True
-        s.add(num)
-    return False
-
-if __name__ == "__main__":
-    #Input: nums = [1,2,3,1]
-    #Output: true
-    nums = [1,2,3,1]
-    print(containsDuplicateApproachOne(nums))
-    nums = [1,2,3,1]
-    print(containsDuplicateApproachTwo(nums))
-```
-```kotlin
-fun containsDuplicateApproachOne(nums: IntArray): Boolean {
-    //if ( (nums?.isEmpty() ?: true) || (nums.size == 1) ) return false
-    if ( (nums.isEmpty()) || (nums.size == 1) ) return false
-    nums.sort()
-    for (i in 0 until nums.size) {
-        if (nums[i] == nums[i + 1]) {
-            return true
+        for(int i = 0; i < nums.length; i++) {
+            for(int j = i + 1; j < nums.length; j++) {
+                if(nums[i] == nums[j]) {
+                    return true;
+                }
+            }
         }
+        return false;
     }
-    return false
-}
 
-fun containsDuplicateApproachTwo(nums: IntArray): Boolean {
-    //if ( (nums?.isEmpty() ?: true) || (nums.size == 1) ) return false
-    if ( (nums.isEmpty()) || (nums.size == 1) ) return false
-    val numsSet = hashSetOf<Int>()
-    //nums.forEach {value -> 
-    //    if (numsSet.contains(value)) {
-    //        return true
-    //    }
-    //    numsSet.add(value)
-    //}
-    for (num in nums) {
-        if (numsSet.contains(num)) {
-            return true
+Time complexity: O(N lg N), Space complexity: O(1) - not counting the memory used by sort
+
+if we are factoring in the sort ... Considering Arrays.Sort(nums) will use a QuickSort, the space complexity will be O(log(n)).
+
+Solution-2: Since it is trivial task to find duplicates in sorted array, we can sort it as the first step of the algorithm and then search for consecutive duplicates.
+
+    public boolean containsDuplicate(int[] nums) {
+
+        Arrays.sort(nums);
+        for(int ind = 1; ind < nums.length; ind++) {
+            if(nums[ind] == nums[ind - 1]) {
+                return true;
+            }
         }
-        numsSet.add(num)
+        return false;
     }
-    return false
+
+Time complexity: O(N), Space complexity: O(N)
+
+Solution-3: Finally we can used a well known data structure hash table that will help us to identify whether an element has been previously encountered in the array.
+
+public boolean containsDuplicate(int[] nums) {
+
+    final Set<Integer> distinct = new HashSet<Integer>();
+    for(int num : nums) {
+        if(distinct.contains(num)) {
+            return true;
+        }
+        distinct.add(num);
+    }
+    return false;
+}
+This is trivial but quite nice example of space-time tradeoff.
+
+
+Solution-4: As a bonus a Java 8 version using streams that is TC: O(n), SC: O(n)
+
+public boolean containsDuplicate(int[] nums) {
+    Set<Integer> seen = new HashSet<>();
+    return Arrays.stream(nums).anyMatch(num -> !seen.add(num));
 }
 
-fun main(args: Array<String>) {
-    //Input: nums = [1,2,3,1]
-    //Output: true
-    var nums = intArrayOf(1, 2, 3, 1)
-    println(containsDuplicateApproachOne(nums))
-    nums = intArrayOf(1, 2, 3, 1)
-    println(containsDuplicateApproachTwo(nums))
-}
+It's just a syntactic sugar over standard iteration but it looks nice.
 ```
 
 <br/>
@@ -1050,184 +969,46 @@ fun main(args: Array<String>) {
 #### [LC-238:Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 ##### Solution Explanation
 ```
-=================================================================================================================================================================
-Approach 1: Left and Right Arrays that capture the multiplication product scanning from left-to-right or right-to-left.
-=================================================================================================================================================================
-- We maintain a left and right array that captures the multiplication product scanning from left-to-right or right-to-left.
-- The time complexity is two linear traversals, thus it's linear time.
+Given numbers [2, 3, 4, 5], regarding the third number 4, the product of array except 4 is 2*3*5 which consists of two parts: left 2*3 and right 5. The product is left*right. We can get lefts and rights:
 
-- The tricky part is to keep a multiplicative counter with result till its previous element (not its self),
-  and assign this value on to its left/right_array.
+Numbers:     2    3    4     5
+Lefts:            2  2*3 2*3*4
+Rights:  3*4*5  4*5    5      
+Let’s fill the empty with 1:
 
-=================================================================================================================================================================
-Approach 2: Optimized Space Solution. Without using extra memory of left and right product list.
-=================================================================================================================================================================
-Step 1. Create a list that contains the product of all left side elements except the current index of nums element.
-Step 2. Create a variable of the right product and multiply with what we have in Step 1 (List that contains all the
-        left side produts except the current index itself) through the loop --> this will calculate the product of
-        array except for self.
-Step 3. Keep updating the right product and loop.
-Step 4. Return the answer.
+Numbers:     2    3    4     5
+Lefts:       1    2  2*3 2*3*4
+Rights:  3*4*5  4*5    5     1
+We can calculate lefts and rights in 2 loops. The time complexity is O(n).
+
+We store lefts in result array. If we allocate a new array for rights. The space complexity is O(n). To make it O(1), we just need to store it in a variable which is right
 ```
-##### Complexity Analysis:
+##### Complexity
 ```
-=================================================================================================================================================================
-Approach 1: Left and Right Arrays that capture the multiplication product scanning from left-to-right or right-to-left.
-=================================================================================================================================================================
-Time complexity : O(N) [ Technically O(2N) ]
-========================
-We traverse the list containing N elements twice. Each look up in the list costs only O(1) time.
-
-Space complexity : O(1) [ As per problem, the output array does not count as extra space for space complexity analysis. ]
-========================
-Constant space since we only create a single output array to store the results.
-
-=================================================================================================================================================================
-Approach 2: Optimized Space Solution. Without using extra memory of left and right product list.
-=================================================================================================================================================================
-Time complexity : O(N) [ Technically O(2N) ]
-========================
-We traverse the list containing N elements twice. Each look up in the list costs only O(1) time.
-
-Space complexity : O(1) [ As per problem, the output array does not count as extra space for space complexity analysis. ]
-========================
-Constant space since we only create a single output array to store the results.
+TC: O(N)
+SC: O(1)
 ```
-```python
-from typing import List
-import unittest
-
-class Solution(object):
-    #
-    # -------------------------------------------------------------------------------------------------------------------------
-    # Approach 1: Left and Right Arrays that capture the multiplication product scanning from left-to-right or right-to-left.
-    # -------------------------------------------------------------------------------------------------------------------------
-    #
-    # TC: O(N)
-    # SC: O(N)
-    def productExceptSelf_Solution_1(self, nums: List[int]) -> List[int]:
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        if not nums: return []
-        
-        l = len(nums)
-        left_arr, right_arr, left, right = [1]*l, [1]*l, 1, 1
-        
-        for i in range(1, l):
-            left *= nums[i-1]
-            left_arr[i] = left
-        
-        for j in range(l-2, -1, -1):
-            right *= nums[j+1]
-            right_arr[j] = right
-        
-        return [tup[0]*tup[1] for tup in zip(left_arr, right_arr)]
-
-    #
-    # -------------------------------------------------------------------------------------------------------------------------
-    # Approach 2: Optimized Space Solution. Without using extra memory of left and right product list.
-    # -------------------------------------------------------------------------------------------------------------------------
-    # TC: O(N)
-    # SC: O(1) [ excluding the output/result array, which does not count towards extra space, as per problem description. ]
-    def productExceptSelf_Solution_2(self, nums: List[int]) -> List[int]:
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        length_of_list = len(nums)
-		result = [0]*length_of_list
-		
-        # update result with left product.
-        result[0] = 1
-        for i in range(1, length_of_list):
-            result[i] = result[i-1] * nums[i-1]
-
-        right_product = 1
-        for i in reversed(range(length_of_list)):
-            result[i] = result[i] * right_product
-			right_product *= nums[i]
-
-        return result
-
-class Test(unittest.TestCase):
-    def setUp(self) -> None:
-        pass
-
-    def tearDown(self) -> None:
-        pass
-
-    def test_reverseList(self) -> None:
-        sol = Solution()
-        for nums, solution in (
-            [
-                [1,2,3,4],
-                [24,12,8,6],
-            ],
-            [
-                [-1,1,0,-3,3],
-                [0,0,9,0,0]
-            ]
-        ):
-            self.assertEqual(
-                sol.productExceptSelf_Solution_1(nums),
-                solution
-            )
-            self.assertEqual(
-                sol.productExceptSelf_Solution_2(nums),
-                solution
-            )
-
-if __name__ == "__main__":
-    ##Input: nums = [1,2,3,4]
-    ##Output: [24,12,8,6]
-    #nums = [1,2,3,4]
-    #print(productExceptSelf(nums))
-    ##Input: nums = [-1,1,0,-3,3]
-    ##Output: [0,0,9,0,0]
-    #nums = [-1,1,0,-3,3]
-    #print(productExceptSelf(nums))
-	unittest.main()
-```
-```kotlin
-fun productExceptSelf(nums: IntArray): IntArray {
-    // create a list for output
-    val results = IntArray(nums.size)
-    // edge case
-    if (nums.isEmpty()) return results
-
-    // Step_#1
-    // record product of terms on the left hand side        
-    results[0] = 1
-    for (i in 1 until nums.size) {
-        results[i] = results[i - 1] * nums[i - 1]
+```java
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        // Calculate lefts and store in res.
+        int left = 1;
+        for (int i = 0; i < n; i++) {
+            if (i > 0)
+                left = left * nums[i - 1];
+            res[i] = left;
+        }
+        // Calculate rights and the product from the end of the array.
+        int right = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (i < n - 1)
+                right = right * nums[i + 1];
+            res[i] *= right;
+        }
+        return res;
     }
-
-    // Step_#2
-    // Update array elements as the product of ( product of left hand side ) * ( produt of right hand side )
-    var right = 1
-    for (i in nums.size - 1 downTo 0) {
-        results[i] *= right
-        right *= nums[i]
-    }
-    return results
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [1,2,3,4]
-    //Output: [24,12,8,6]
-    var nums = intArrayOf(1,2,3,4)
-    //contentToString() deprecated from kotlin version 1.4 onwards
-    //println(productExceptSelf(nums).contentToString())
-    println(productExceptSelf(nums).joinToString(","))
-
-    //Input: nums = [-1,1,0,-3,3]
-    //Output: [0,0,9,0,0]
-    nums = intArrayOf(-1,1,0,-3,3)
-    //contentToString() deprecated from kotlin version 1.4 onwards
-    //println(productExceptSelf(nums).contentToString())
-    println(productExceptSelf(nums).joinToString(","))
 }
 ```
 
@@ -1238,28 +1019,32 @@ fun main(args: Array<String>) {
 <br/>
 
 #### [LC-53:Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
-##### Solution Explanation ( 2 possible solutions w/ their trade-offs explained ):
+##### Solution Explanation
 ```
-Approach 1: Kadane's Algorithm
+Kadane's Algorithm
 -------------------------------
 The largest subarray is either:
   - the current element
   - sum of previous elements
+-------------------------------
 
-If the current element does not increase the value a local maximum subarray is found.
+This problem was discussed by Jon Bentley (Sep. 1984 Vol. 27 No. 9 Communications of the ACM P885)
 
-If local > global replace otherwise keep going
+The paragraph below was copied from his paper (with a little modifications)
 
-Problem is called Kadane's algorithm.
+algorithm that operates on arrays: 
+  * it starts at the left end (element A[1]) and scans through to the right end (element A[n]), keeping track of the maximum sum subvector seen so far.
+  
+  * The maximum is initially A[0]. Suppose we've solved the problem for A[1 .. i - 1]; how can we extend that to A[1 .. i]? The maximum
+  
+  * sum in the first i elements is either the maximum sum in the first i - 1 elements (which we'll call MaxSoFar), 
+    or, 
+	it is that of a subvector that ends in position i (which we'll call maxEndingHere).
 
-Reference: https://www.youtube.com/watch?v=86CQq3pKSUw
-           https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d
-
-
-=================================================================================================================================================================
-Complexity Analysis:
-=================================================================================================================================================================
-
+  * maxEndingHere is either A[i] plus the previous maxEndingHere, or just A[i], whichever is larger.
+```
+##### Complexity Analysis
+```
 Time complexity : O(N)
 ========================
 The time complexity of Kadane’s algorithm is O(N) because there is only one for loop which scans the entire array exactly once.
@@ -1267,232 +1052,17 @@ The time complexity of Kadane’s algorithm is O(N) because there is only one fo
 Space complexity : O(1)
 ========================
 Kadane’s algorithm uses a constant space. So, the space complexity is O(1).
-
-
-Approach 2: Divide and Conquer
--------------------------------
-Explanation :
-
-In the approach, we follow a divide and conquer approach similar to merge sort.
-
-We use a helper functionhelper for this, wherein we pass in a starting index and the ending index to look at. The idea is to use this helper function recurseively.
-
-Within the helper function, for a given start and end index, we find the mid of the array and split the array into two parts. Part 1 being the start ... mid and part 2 being mid+1 ... end. For each of the parts, we return 4 pieces of information.
-
-1. The best possible answer within the subArray ==> ans
-2. The maxSubarraySum starting at the beginning of the subArray ==> maxFromBegging
-3. The maxSubarraySum ending at the end of the subArray ==> maxFromEnd
-4. The total sum of the subArray ==> totalSum
-
-With these four pieces of information for the two split parts, it is possible to combine them to generate a similar four pieces of information for the aggregated array. The trick to get an O(n) solution is to combine the information in a constant time.
-
-The details of combing the information to curry up the information is as follows. (For each of 1-4 above, I will be prefexing left_ or right_ to denote they came from left/right subArray)
-
-1. For part (1), we need to take the maximum of left_ans (best answer in left subarray), right_ans (nest answer in right subarray) and the crossover. The crossover is simply left_maxFromEnd + right_maxFromBeginning. The max these 3 components gives us the ans. For the highest level recursion, this is all we need.
-
-2. For maxFromBeginning, we take the maximum among left_maxFromBeginning and left_totalSum + right_maxFromBeginning. This logically makes sense i.e either we want to take the result of left part or take the entire left part and merge it with the result from the right part.
-
-3. For maxFromEnd, it is similar to above and we take the maximum among right_maxFromEnd and right_totalSum + left_maxFromEnd
-
-4. For totalSum, we add the left_totalSum and right_totalSum.
-
-Time Complexity : T(n) = 2*T(n/2) + 1 ==> O(n)
-
-See this for proof https://youtu.be/OynWkEj0S-s?t=273
-
-=================================================================================================================================================================
-Complexity Analysis:
-=================================================================================================================================================================
-
-Time complexity : O(N)
-========================
-Time Complexity : T(n) = 2*T(n/2) + 1 ==> O(N) .. See this for proof https://youtu.be/OynWkEj0S-s?t=273.
-
-Space complexity : O(log(N))
-========================
-Space Complexity : O(log(N)) since we are recursing and the call stack/number of recursive calls is of the order of log(N).
 ```
-##### Approach-1 ( Kadane's Algorithm ):
-```python
-# If we are only interested in returning the sum of max sub-array
-def maxSubArray(nums: List[int]) -> int:
-    # largest subarray found in entire problem
-    maxGlobal = nums[0]
-    # current maximum subarray that is reset
-    maxCurrent = nums[0]
-        
-    for i in range(1, len(nums)):
-        maxCurrent  = max(nums[i], maxCurrent + nums[i])
-        maxGlobal = max(maxCurrent, maxGlobal)
-        
-    return maxGlobal
-
-if __name__ == "__main__":
-    #Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-    #Output: 6
-    #Explanation: [4,-1,2,1] has the largest sum = 6.
-    nums = [-2,1,-3,4,-1,2,1,-5,4]
-    print(maxSubArray(nums))
-
-
-# Variant: If we are interested in returning the actual max sub-array
-
-# We can easily solve this problem in linear time using Kadane's algorithm.
-# The idea is to maintain a maximum (positive-sum) subarray "ending" at each index of the given array.
-# 	- The subarray is either empty (in which case its sum is zero) or 
-#	- The subarray consists of one more element than the maximum subarray ending at the previous index.
- 
-#Variant (Also print the list)
-# - Modify Kadane's algorithm which outputs only the sum of contiguous subarray with the largest sum but
-#   does not print the subarray itself.
-# - Keep track of the maximum subarray's starting and ending indices.
-
-# Function to print contiguous sublist with the largest sum
-# in a given set of integers
-def maxSubArray(A: List[int]) -> List[int]:
- 
-    # stores maximum sum sublist found so far
-    maxSoFar = 0
- 
-    # stores the maximum sum of sublist ending at the current position
-    maxEndingHere = 0
- 
-    # stores endpoints of maximum sum sublist found so far
-    start = end = 0
- 
-    # stores starting index of a positive-sum sequence
-    beg = 0
- 
-    # traverse the given list
-    for i in range(len(A)):
- 
-        # update the maximum sum of sublist "ending" at index `i`
-        maxEndingHere = maxEndingHere + A[i]
- 
-        # if the maximum sum is negative, set it to 0
-        if maxEndingHere < 0:
-            maxEndingHere = 0        # empty sublist
-            beg = i + 1
- 
-        # update result if the current sublist sum is found to be greater
-        if maxSoFar < maxEndingHere:
-            maxSoFar = maxEndingHere
-            start = beg
-            end = i
- 
-    #print(f"The sum of contiguous sublist with the largest sum is: {maxSoFar}")
-    #print(f"The contiguous sublist with the largest sum is: {A[start: end + 1]}")
-    return A[start: end + 1]
-	
-if __name__ == '__main__':
-    A = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-    print(maxSubArray(A))
-```
-```kotlin
-fun maxSubArray(nums: IntArray): Int {
-    var maxGlobal = nums[0] // largest subarray found in entire problem
-    var maxCurrent = nums[0] // current maximum subarray that is reset
-
-    for (i in 1 until nums.size) {
-        maxCurrent = maxOf(nums[i], maxCurrent + nums[i])
-        maxGlobal = maxOf(maxCurrent, maxGlobal)
+```java
+public class Solution {
+    public static int maxSubArray(int[] A) {
+        int maxSoFar=A[0], maxEndingHere=A[0];
+        for (int i=1;i<A.length;++i){
+    	    maxEndingHere= Math.max(maxEndingHere+A[i],A[i]);
+    	    maxSoFar=Math.max(maxSoFar, maxEndingHere);	
+        }
+        return maxSoFar;
     }
-
-    return maxGlobal
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-    //Output: 6
-    //Explanation: [4,-1,2,1] has the largest sum = 6.
-    val nums = intArrayOf(-2,1,-3,4,-1,2,1,-5,4)
-    println(maxSubArray(nums))
-}
-```
-##### Approach-2 ( Divide and Conquer Algorithm ):
-```python
-def maxSubArray(nums: List[int]) -> int:
-    def helper(nums, start, end):
-        if start == end:
-            return nums[start], nums[start], nums[start], nums[start]
-        else:
-            mid = start + (end - start)//2
-                
-        left_ans , left_maxFromBeginning , left_maxFromEnd , left_totalSum  = helper(nums, start, mid)
-        right_ans, right_maxFromBeginning, right_maxFromEnd, right_totalSum = helper(nums, mid+1, end)
-                
-        ans = max(left_ans, right_ans, left_maxFromEnd + right_maxFromBeginning)
-        maxFromBeginning = max(left_maxFromBeginning, left_totalSum + right_maxFromBeginning)
-        maxFromEnd = max(right_maxFromEnd, right_totalSum + left_maxFromEnd)
-        totalSum = left_totalSum + right_totalSum
-                
-        return (ans, maxFromBeginning, maxFromEnd, totalSum)
-
-    ans, _, _, _ = helper(nums, 0, len(nums)-1)
-    return ans
-
-if __name__ == "__main__":
-    #Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-    #Output: 6
-    #Explanation: [4,-1,2,1] has the largest sum = 6.
-    nums = [-2,1,-3,4,-1,2,1,-5,4]
-    print(maxSubArray(nums))
-```
-```kotlin
-//The max subarray sum of an array of length 1 is equal to the unique element in that array.
-
-//For arrays of size 2 or greater, the pivot index is used to divide the array into two halves.
-
-//Case 1: The max subarray is divided between the two halves. In this case, the max subarray sum can be found by considering the sum of the largest sum found by iterating backward over the left half and the largest sum found by iterating forward over the right half.
-
-//Case 2: The max subarray is not divided between the two halves. In this case, the max subarray sum of the overall array is equal to the maximum of the max subarray sums for the two array halves. This is the divide and conquer step.
-
-fun maxLeftSumFromPivot(pivot: Int, startInclusive: Int): Int {
-    var maxLeftSum = nums.get(pivot)
-    var leftSum = nums.get(pivot)
-    for (index in pivot - 1 downTo startInclusive) {
-        leftSum += nums.get(index)
-        maxLeftSum = Math.max(maxLeftSum, leftSum)
-    }
-    return maxLeftSum
-}
-    
-fun maxRightSumFromPivot(pivot: Int, endExclusive: Int): Int {
-    var maxRightSum = nums.get(pivot)
-    var rightSum = nums.get(pivot)
-    for (index in pivot + 1 until endExclusive) {
-        rightSum += nums.get(index)
-        maxRightSum = maxOf(maxRightSum, rightSum)
-    }
-    return maxRightSum
-}
-
-fun maxSubArray(startInclusive: Int, endExclusive: Int): Int {
-    val diameter = endExclusive - startInclusive
-    if (diameter == 1) {
-        return nums.get(startInclusive)
-    }
-    val pivot = startInclusive + diameter / 2
-    val leftMaxSubArray = maxSubArray(startInclusive, pivot)
-    val rightMaxSubArray = maxSubArray(pivot, endExclusive)
-    val maxRecursiveSubArray = Math.max(leftMaxSubArray, rightMaxSubArray)
-    val maxLeftSumFromPivot = maxLeftSumFromPivot(pivot, startInclusive)
-    val maxRightSumFromPivot = maxRightSumFromPivot(pivot, endExclusive)
-    val maxSumFromPivot = maxLeftSumFromPivot + maxRightSumFromPivot - nums.get(pivot)
-    return maxOf(maxRecursiveSubArray, maxSumFromPivot)
-}
-
-fun maxSubArray(nums: IntArray): Int {
-    this.nums = nums
-    return maxSubArray(0, nums.size)
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-    //Output: 6
-    //Explanation: [4,-1,2,1] has the largest sum = 6.
-    val nums = intArrayOf(-2,1,-3,4,-1,2,1,-5,4)
-    println(maxSubArray(nums))
 }
 ```
 
@@ -1505,73 +1075,65 @@ fun main(args: Array<String>) {
 #### [LC-152:Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 ##### Solution Explanation
 ```
-Kadane's Algorithm
-=================================================================================================================================================================
-In this solution we keep track of both the minimum and the maximum subarray encountered so far. 
-This is done in a Kadane like fashion, where the updates for both the current minimal streak and maximal streak depend on the other, 
-while the maximum encountered so far only depends on the current maximum, and the updated current maximal streak.
+idea is to keep 3 variables
+1. max -> maximum product ending at a[i]
+2. min -> minimum product ending at a[i]
+3. ans -> maximum product subarray
+
+Ex.
+num = [3, 2, -1,   5, -2]
+min = [3, 2, -6, -30, -10]
+max = [3, 6, -1,   5, 60]
+ans = [3, 6,  6,   6, 60]
+
+* This is greedy algorithm similar to "Maximum Subarray" question. 
+* In "Maximum Subarray" the sum of the subarray is what we keep tracking of. 
+* At each number we face a choice between two moves: 
+  - 1) keep expanding the subarray, i.e. keep growing the previous sum; and 
+  - 2) abandon the previous sum and restart a new sum. If adding the current number to the previous sum produces 
+       a sum that is less than the number itself, i.e. when the sum is negative, 
+	   the best local strategy is to take move 2).
+
+What makes this question more complex is that negative previous product is not as undesirable 
+since it could be turned into a very large positive product if there is a large negative number coming up. 
+
+Therefore we can just keep track of a positive running product and a negative running product, 
+and make decision best for growing them separately. 
+
+Whenever we encounter a negative number, the positive product would become negative, and negative product positive. 
+
+We simply swap the two products in this case.
 ```
 ##### Complexity Analysis:
 ```
 Time  : O(N)
 ========================
-The time complexity of Kadane’s algorithm is O(N) because there is only one for loop which scans the entire array exactly once.
+O(N) because there is only one for loop which scans the entire array exactly once.
 
 Space : O(1)
 ========================
 Kadane’s algorithm uses a constant space. So, the space complexity is O(1).
 ```
-```python
-from typing import List
-
-def maxProduct(nums: List[int]) -> int:
-    ## RC ##
-    ## APPROACH : KADANES ALGORITHM ##
-
-    ## TIME COMPLEXITY : O(N) ##
-    ## SPACE COMPLEXITY : O(1) ##
-
-    # 1. Edge Case : Negative * Negative = Positive
-    # 2. So we need to keep track of minimum values also, as they can yield maximum values.
-    global_max = prev_max = prev_min = nums[0]
-    for i in range(1, len(nums)):
-        curr_min = min(prev_max*nums[i], prev_min*nums[i], nums[i])
-        curr_max = max(prev_max*nums[i], prev_min*nums[i], nums[i])
-        global_max = max(global_max, curr_max)
-        prev_max = curr_max
-        prev_min = curr_min
-    return global_max
-
-if __name__ == "__main__":
-    #Input: nums = [2,3,-2,4]
-    #Output: 6
-    #Explanation: [2,3] has the largest product 6.    nums = [-2,1,-3,4,-1,2,1,-5,4]
-    nums = [2,3,-2,4]
-    print(maxProduct(nums))
-```
-```kotlin
-fun maxProduct(nums: IntArray): Int {
-    var maxGlobal = nums[0]
-    var prevMax = nums[0]
-    var prevMin = nums[0]
-    for (i in 1 until nums.size) {
-        val currMin = minOf(prevMax*nums[i], prevMin*nums[i], nums[i])
-        val currMax = maxOf(prevMax*nums[i], prevMin*nums[i], nums[i])
-
-        maxGlobal = maxOf(maxGlobal, currMax)
-        prevMax = currMax
-        prevMin = currMin
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        if(nums==null||nums.length==0) return 0;
+        int max = nums[0];
+        int min = nums[0];
+        int ans = nums[0];
+        int temp;
+        for(int i=1;i<nums.length;i++) {
+            if(nums[i]<0) {
+                temp = max;
+                max = min;
+                min = temp;
+            }
+            max = Integer.max(nums[i],nums[i]*max);
+            min = Integer.min(nums[i],nums[i]*min);
+            ans = Integer.max(ans,max);
+        }
+        return ans;
     }
-
-    return maxGlobal
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [2,3,-2,4]
-    //Output: 6
-    //Explanation: [2,3] has the largest product 6.    nums = [-2,1,-3,4,-1,2,1,-5,4]
-    val nums = intArrayOf(2,3,-2,4)
-    println(maxProduct(nums))
 }
 ```
 
@@ -1696,137 +1258,36 @@ Same as Binary Search O(log(N))
 Space : O(1)
 ========================
 ```
-```python
-from typing import List
-
-def findMin(nums: List[int]) -> int:
-    """
-    :type nums: List[int]
-    :rtype: int
-    """
-    # set left and right bounds
-    left, right = 0, len(nums)-1
-
-    # left and right both converge to the minimum index;
-    # DO NOT use left <= right because that would loop forever
-    while left < right:
-        # find the middle value between the left and right bounds (their average);
-        # can equivalently do: mid = left + (right - left) // 2,
-        # if we are concerned left + right would cause overflow (which would occur
-        # if we are searching a massive array using a language like Java or C that has
-        # fixed size integer types)
-        #mid = (left + right) // 2
-        mid = left + (right - left) // 2
-            
-        # the main idea for our checks is to converge the left and right bounds on the left
-        # of the pivot, and never disqualify the index for a possible minimum value.
-
-        # in normal binary search, we have a target to match exactly,
-        # and would have a specific branch for if nums[mid] == target.
-        # we do not have a specific target here, so we just have simple if/else.
-            
-        if nums[mid] > nums[right]:
-            # we KNOW the pivot must be to the right of the middle:
-            # if nums[mid] > nums[right], we KNOW that the
-            # pivot/minimum value must have occurred somewhere to the right
-            # of mid, which is why the values wrapped around and became smaller.
-
-            # example:  [3,4,5,6,7,8,9,1,2] 
-            # in the first iteration, when we left with mid index = 4, right index = 9.
-            # if nums[mid] > nums[right], we know that at some point to the right of mid,
-            # the pivot must have occurred, which is why the values wrapped around
-            # so that nums[right] is less then nums[mid]
-
-            # we know that the number at mid is greater than at least
-            # one number to the right, so we can use mid + 1 and
-            # never consider mid again; we know there is at least
-            # one value smaller than it on the right
-            left = mid + 1
-        else:
-            # here, nums[mid] <= nums[right]:
-            # we KNOW the pivot must be at mid or to the left of mid:
-            # if nums[mid] <= nums[right], we KNOW that the pivot was not encountered
-            # to the right of middle, because that means the values would wrap around
-            # and become smaller (which is caught in the above if statement).
-            # this leaves the possible pivot point to be at index <= mid.
-                
-            # example: [8,9,1,2,3,4,5,6,7]
-            # in the first iteration, when we left with mid index = 4, right index = 9.
-            # if nums[mid] <= nums[right], we know the numbers continued increasing to
-            # the right of mid, so they never reached the pivot and wrapped around.
-            # therefore, we know the pivot must be at index <= mid.
-
-            # we know that nums[mid] <= nums[right].
-            # therefore, we know it is possible for the mid index to store a smaller
-            # value than at least one other index in the list (at right), so we do
-            # not discard it by doing right = mid - 1. it still might have the minimum value.
-            right = mid
-
-    # at this point, left and right converge to a single index (for minimum value) since
-    # our if/else forces the bounds of left/right to shrink each iteration:
-
-    # when left bound increases, it does not disqualify a value
-    # that could be smaller than something else (we know nums[mid] > nums[right],
-    # so nums[right] wins and we ignore mid and everything to the left of mid).
-
-    # when right bound decreases, it also does not disqualify a
-    # value that could be smaller than something else (we know nums[mid] <= nums[right],
-    # so nums[mid] wins and we keep it for now).
-
-    # so we shrink the left/right bounds to one value,
-    # without ever disqualifying a possible minimum
-    return nums[left]
-
-if __name__ == "__main__":
-    #Input: nums = [3,4,5,1,2]
-    #Output: 1
-    #Explanation: The original array was [1,2,3,4,5] rotated 3 times.
-    nums = [3,4,5,1,2]
-    print(findMin(nums))
-
-### Uncommented concise solution
-from typing import List
-
-def findMin(nums: List[int]) -> int:
-    left, right = 0, len(nums)-1
-    while left < right:
-        mid = left + (right - left) // 2            
-        if nums[mid] > nums[right]:
-            left = mid + 1
-        else:
-            right = mid
-
-    return nums[left]
-
-if __name__ == "__main__":
-    #Input: nums = [3,4,5,1,2]
-    #Output: 1
-    #Explanation: The original array was [1,2,3,4,5] rotated 3 times.
-    nums = [3,4,5,1,2]
-    print(findMin(nums))
-```
-```kotlin
-fun findMin(nums: IntArray): Int {
-    var left = 0
-    var right = nums.size - 1
-    while (left < right) {
-        //var mid = (right + left) / 2
-        var mid = left + (right - left) / 2
-        if (nums[mid] >= nums[left] && nums[mid] > nums[right]) {
-            left = mid + 1
-        } else {
-            right = mid
-        }
+```java
+//Recursion:
+public class Solution {
+    public int findMin(int[] nums) {
+        return findMin(nums, 0, nums.length - 1);
     }
-    return nums[left]
+    public int findMin(int[] nums, int low, int high){
+        if(low == high) return nums[low];
+        int mid = (low + high)/2;
+        if(nums[mid] > nums[high]){
+            return findMin(nums, mid+1, high);
+        }
+        else
+            return findMin(nums,low, mid);
+    }
 }
 
-fun main(args: Array<String>) {
-    //Input: nums = [3,4,5,1,2]
-    //Output: 1
-    //Explanation: The original array was [1,2,3,4,5] rotated 3 times.
-    val nums = intArrayOf(3,4,5,1,2)
-    println(findMin(nums))
+//Iteration:
+public class Solution {
+    public int findMin(int[] nums) {
+       int low = 0, high = nums.length - 1;
+       while(low < high){
+           int mid = (low + high)/2;
+           if(nums[mid] > nums[high])
+               low = mid + 1;
+           else
+               high = mid;
+       } 
+       return nums[low]; 
+    }
 }
 ```
 
@@ -1837,30 +1298,23 @@ fun main(args: Array<String>) {
 <br/>
 
 #### [LC-33:Search in Rotated Sorted Array Solution 1](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+![search-in-a-rotated-array](./assets/search-in-a-rotated-array.PNG)
 ##### Solution Explanation:
 ```
-Binary Search Algorithm
+Intuition
 =================================================================================================================================================================
-Idea:
---------------------------
-We have an ascending array, which is rotated at some pivot.
-Let's call the rotation the inflection point. (IP)
-One characteristic the inflection point holds is: arr[IP] > arr[IP + 1] and arr[IP] > arr[IP - 1]
-So if we had an array like: [7, 8, 9, 0, 1, 2, 3, 4] the inflection point, IP would be the number 9.
+The main idea is that we need to find some parts of array that we could adopt binary search on that, 
+which means we need to find some completed sorted parts, then determine whether target is in left part or right part. 
+There is at least one segment (left part or right part) is monotonically increasing.
 
-One thing we can see is that values until the IP are ascending. And values from IP + 1 until end are also ascending (binary search, wink, wink).
-Also the values from [0, IP] are always bigger than [IP + 1, n].
-
-Intuition:
---------------------------
-We can perform a Binary Search.
-If A[mid] is bigger than A[left] we know the inflection point will be to the right of us, meaning values from a[left]...a[mid] are ascending.
-
-So if target is between that range we just cut our search space to the left.
-Otherwise go right.
-
-The other condition is that A[mid] is not bigger than A[left] meaning a[mid]...a[right] is ascending.
-In the same manner we can check if target is in that range and cut the search space correspondingly.
+Revised Binary Search
+=================================================================================================================================================================
+* If the entire left part is monotonically increasing, which means the pivot point is on the right part
+  - If left <= target < mid ------> drop the right half
+  - Else ------> drop the left half
+* If the entire right part is monotonically increasing, which means the pivot point is on the left part
+  - If mid < target <= right ------> drop the left half
+  - Else ------> drop the right half
 ```
 ##### Complexity Analysis:
 ```
@@ -1871,62 +1325,51 @@ Same as Binary Search O(log(N))
 Space Complexity : O(1)
 ========================
 ```
-```python
-from typing import List
-
-def search(nums: List[int], target: int) -> int:
-    n = len(nums)
-    left, right = 0, n - 1
-    if n == 0: return -1
-        
-    while left <= right:
-        mid = left + (right - left) // 2
-        if nums[mid] == target: return mid
-            
-        # inflection point to the right. Left is strictly increasing
-        if nums[mid] >= nums[left]:
-            if nums[left] <= target < nums[mid]:
-                right = mid - 1
-            else:
-                left = mid + 1
-                    
-        # inflection point to the left of me. Right is strictly increasing
-        else:
-            if nums[mid] < target <= nums[right]:
-                left = mid + 1
-            else:
-                right = mid - 1
-            
-        return -1
-
-if __name__ == "__main__":
-    #Input: nums = [4,5,6,7,0,1,2], target = 0
-    #Output: 4
-    nums = [4,5,6,7,0,1,2]
-    target = 0
-    print(search(nums, target))
-```
-```kotlin
-fun search(nums: IntArray, target: Int): Int {
-    var left = 0
-    var right = nums.size - 1
-    while (left <= right) {
-        val mid = left + (right - left) / 2
-        when {
-            nums[mid] == target -> return mid
-            nums[left] <= nums[mid] -> if (target in nums[left] .. nums[mid]) right = mid - 1 else left = mid + 1
-            nums[mid] <= nums[right] -> if (target in nums[mid] .. nums[right]) left = mid + 1 else right = mid - 1
+```java
+public class Solution {
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
         }
-    }
-    return -1
-}
+    
+        /*.*/
+        int left = 0, right = nums.length - 1;
+        //when we use the condition "left <= right", we do not need to determine if nums[left] == target
+        //in outside of loop, because the jumping condition is left > right, we will have the determination
+        //condition if(target == nums[mid]) inside of loop
+        while (left <= right) {
+            //left bias
+            int mid = left + (right - left) / 2;
+            if (target == nums[mid]) {
+                return mid;
+            }
+            //if left part is monotonically increasing, or the pivot point is on the right part
+            if (nums[left] <= nums[mid]) {
+                //must use "<=" at here since we need to make sure target is in the left part,
+                //then safely drop the right part
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                }
+                else {
+                    //right bias
+                    left = mid + 1;
+                }
+            }
 
-fun main(args: Array<String>) {
-    //Input: nums = [4,5,6,7,0,1,2], target = 0
-    //Output: 4
-    val nums = intArrayOf(4,5,6,7,0,1,2)
-    val target = 0
-    println(search(nums, target))
+            //if right part is monotonically increasing, or the pivot point is on the left part
+            else {
+                //must use "<=" at here since we need to make sure target is in the right part,
+                //then safely drop the left part
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                }
+                else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
 }
 ```
 
@@ -1982,133 +1425,33 @@ If we do not consider the result list, the space complexity is bounded by O(N).
 
 If we consider the result list, then space complexity becomes => O(N^2).
 ```
-```python
-from typing import List
-
-def threeSum(nums: List[int]) -> List[List[int]]:
-    if len(nums) < 3: return []
-    res = []        # Triples
-    n = len(nums)   # Length of the list
-    nums.sort()     # We need to sort the list first!
-        
-    for i in range(n-2):            
-        # Since the list is sorted, if nums[i] > 0, then all 
-        # nums[j] with j > i are positive as well, and we cannot
-        # have three positive numbers sum up to 0. Return immediately.
-        if nums[i] > 0:
-            break
-                
-        # The nums[i] == nums[i-1] condition helps us avoid duplicates.
-        # E.g., given [-1, -1, 0, 0, 1], when i = 0, we see [-1, 0, 1]
-        # works. Now at i = 1, since nums[1] == -1 == nums[0], we avoid
-        # this iteration and thus avoid duplicates. The i > 0 condition
-        # is to avoid negative index, i.e., when i = 0, nums[i-1] = nums[-1]
-        # and you don't want to skip this iteration when nums[0] == nums[-1]
-        if i > 0 and nums[i] == nums[i-1]:
-            continue
-                
-        # Classic two pointer solution
-        left, right = i + 1, n - 1
-        while left < right:
-            sumOfNums = nums[i] + nums[left] + nums[right]
-            if sumOfNums < 0: # sum too small, move left ptr
-                left += 1
-            elif sumOfNums > 0: # sum too large, move right ptr
-                right -= 1
-            else:
-                res.append([nums[i], nums[left], nums[right]])
-                    
-                # we need to skip elements that are identical to our
-                # current solution, otherwise we would have duplicated triples
-                while left < right and nums[left] == nums[left+1]:
-                    left += 1
-                while left < right and nums[right] == nums[right-1]:
-                    right -= 1
-                left += 1
-                right -= 1
-    return res
-
-if __name__ == "__main__":
-    #Input: nums = [-1,0,1,2,-1,-4]
-    #Output: [[-1,-1,2],[-1,0,1]]
-    nums = [-1,0,1,2,-1,-4]
-    print(threeSum(nums))
-
-# Concise w/o comments solution
-from typing import List
-
-def threeSum(nums: List[int]) -> List[List[int]]:
-    if len(nums) < 3: return []
-    res = []        # Triples
-    n = len(nums)   # Length of the list
-    nums.sort()     # We need to sort the list first!
-        
-    for i in range(n-2):            
-        if nums[i] > 0:
-            break
-                
-        if i > 0 and nums[i] == nums[i-1]:
-            continue
-                
-        left, right = i + 1, n - 1
-        while left < right:
-            sumOfNums = nums[i] + nums[left] + nums[right]
-            if sumOfNums < 0: # sum too small, move left ptr
-                left += 1
-            elif sumOfNums > 0: # sum too large, move right ptr
-                right -= 1
-            else:
-                res.append([nums[i], nums[left], nums[right]])
-                    
-                while left < right and nums[left] == nums[left+1]:
-                    left += 1
-                while left < right and nums[right] == nums[right-1]:
-                    right -= 1
-                left += 1
-                right -= 1
-    return res
-
-if __name__ == "__main__":
-    #Input: nums = [-1,0,1,2,-1,-4]
-    #Output: [[-1,-1,2],[-1,0,1]]
-    nums = [-1,0,1,2,-1,-4]
-    print(threeSum(nums))
-```
-```kotlin
-fun threeSum(nums: IntArray): List<List<Int>> {
-    val ans:MutableList<List<Int>> = mutableListOf()
-    if (nums.size < 3) return ans
-    nums.sort()
-    for (i in 0 until nums.size - 2) {
-        if (nums[i] > 0) break
-        if ((i > 0) && (nums[i] == nums[i-1])) {
-            continue
-        }
-        var left = i+1
-        var right = nums.size -1
-        while (left < right) {
-            val sumOfNums = nums[i] + nums[left] + nums[right]
-            if (sumOfNums < 0) {
-                left++
-            } else if (sumOfNums > 0) {
-                right--
-            } else {
-                ans.add(listOf(nums[i],nums[left],nums[right]))
-                while ((left < right) && (nums[left] == nums[left+1])) left++
-                while ((left < right) && (nums[right] == nums[right-1])) right--
-                left++
-                right--
+```java
+public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if(nums.length < 3) return ans;
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] > 0) return ans;
+            int left = i+1, right = nums.length - 1;
+            if(i != 0 && nums[i] == nums[i-1]) continue;
+            while(left < right){
+                int sum = nums[left] + nums[right] + nums[i];
+                if(sum == 0){
+                    ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    while(left < right && nums[left]==nums[left-1]) left++;
+                    right--;
+                    while(left < right && nums[right] == nums[right+1]) right--;
+                }else if(sum < 0){
+                    left++;
+                }else{
+                    right--;
+                }
             }
         }
+        return ans;
     }
-    return ans.toList()        
-}
-
-fun main(args: Array<String>) {
-    //Input: nums = [-1,0,1,2,-1,-4]
-    //Output: [[-1,-1,2],[-1,0,1]]
-    val nums = intArrayOf(-1,0,1,2,-1,-4)
-    println(threeSum(nums))
 }
 ```
 
@@ -2119,37 +1462,76 @@ fun main(args: Array<String>) {
 <br/>
 
 #### [LC-11:Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
-##### Formal Proof than an O(N) solution exists:
-```
-Formal Proof than an O(N) solution exists:
-=================================================================================================================================================================
-Problem Description:
-Condition: We have two pointers at i & j, suppose h[i] <= h[j].
-Goal to Prove: If there is a better answer within the sub-range of [i, j], then the range [i + 1, j] must contain that optimal sub-range. (This doesn't mean range [i, j - 1] can't contain it, we just want to prove range [i + 1, j] will contain it).
-
-Proof:
-Since we assume there is a better answer in the sub-range of [i, j], then this optimal range must be contained by either [i + 1, j] or [i, j - 1], or both.
-
-Let's assume [i + 1, j] doesn't contain the optimal range, but [i, j - 1] contains it. Then this means two things:
-
-the optimal range is not in [i + 1, j - 1], otherwise, [i + 1, j] will contain it.
-The optimal range contains the block [i, i + 1] (since this is the part which exists in [i, j - 1] but not in [i+1, j]).
-However, notice that, len(i, j - 1) < len(i, j), and in the range [i, j], the area is constrained by the height of h[i] (even in the case h[i] == h[j]). Thus, in the range [i, j - 1], even all pillar are no shorter than h[j], the maximum area is smaller than the area formed by i & j, which contradicts our assumption there is a better answer in the sub-range of [i, j]. This contradiction suggests [i + 1, j] contains the optimal sub-range, if such sub-range exists.
-
-According to above theorem, we can design the algorithm, whenever h[i] < h[j], we advance the pointer i.
-```
 ##### Solution Explanation:
 ```
-=================================================================================================================================================================
-Solution Explanation:
-Two Pointers
-=================================================================================================================================================================
-- O(N) solution which is explained in editorial. Why the solution works needs some thought.
-- Use two pointers start and end initialized at 0 and N-1
-- Now compute the area implied by these pointers as (end-start) * min (height[start], height[end])
-- if height[start] < height[end], start = start + 1 else end = end -1
-- Why? Imagine height[start] < height[end]. Then is there any need to compare height[end-1] with height[start]? 
-  There is no way we can now get a larger area using height[start] as one of the end points. We should therefore move start.
+Idea / Proof:
+==================
+  1. The widest container (using first and last line) is a good candidate, because of its width. Its water level is the height of the smaller one of first and last line.
+  2. All other containers are less wide and thus would need a higher water level in order to hold more water.
+  3. The smaller one of first and last line doesn't support a higher water level and can thus be safely removed from further consideration.
+
+Implementation: (Python)
+==================
+class Solution:
+    def maxArea(self, height):
+        i, j = 0, len(height) - 1
+        water = 0
+        while i < j:
+            water = max(water, (j - i) * min(height[i], height[j]))
+            if height[i] < height[j]:
+                i += 1
+            else:
+                j -= 1
+        return water
+		
+Further explanation:
+==================
+Variables i and j define the container under consideration. We initialize them to first and last line, 
+meaning the widest container. Variable water will keep track of the highest amount of water we managed so far. 
+We compute j - i, the width of the current container, and min(height[i], height[j]), the water level that this 
+container can support. Multiply them to get how much water this container can hold, and update water accordingly. 
+Next remove the smaller one of the two lines from consideration, as justified above in "Idea / Proof". 
+Continue until there is nothing left to consider, then return the result.
+```
+##### Matrix Visualization:
+```
+Here's another way to see what happens in a matrix representation:
+
+Draw a matrix where rows correspond to the position of the left line, and columns corresponds to the position of the right line.
+
+For example, say n=6. Element at (2,4) would corresponds to the case where the left line is at position 2 and the right line is at position 4. The value of the element is the volume for the case.
+
+In the figures below, x means we don't need to compute the volume for that case, because:
+
+on the diagonal, the two lines are overlapped;
+the lower left triangle area of the matrix, the two lines are switched and the case is symmetric to the upper right area.
+We start by computing the volume at (1,6), denoted by o. Now if the left line is shorter than the right line, then moving the right line towards left would only decrease the volume, so all the elements left to (1,6) on the first row have smaller volume. Therefore, we don't need to compute those cases (crossed by ---).
+
+  1 2 3 4 5 6
+1 x ------- o
+2 x x
+3 x x x 
+4 x x x x
+5 x x x x x
+6 x x x x x x
+So we can only move the left line towards right to 2 and compute (2,6). Now if the right line is shorter, all cases below (2,6) are eliminated.
+
+  1 2 3 4 5 6
+1 x ------- o
+2 x x       o
+3 x x x     |
+4 x x x x   |
+5 x x x x x |
+6 x x x x x x
+And no matter how this o path goes, we end up only need to find the max value on this path, which contains n-1 cases.
+
+  1 2 3 4 5 6
+1 x ------- o
+2 x x - o o o
+3 x x x o | |
+4 x x x x | |
+5 x x x x x |
+6 x x x x x x
 ```
 ##### Complexity Analysis:
 ```
@@ -2161,58 +1543,24 @@ Space : O(1)
 ========================
 The constant space required by the output variable max_water.
 ```
-```python
-from typing import List
-
-def maxArea(height: List[int]) -> int:
-    """
-    :type height: List[int]
-    :rtype: int
-    """
-    start, end = 0, len(height)-1
-    max_water = -1
-    while start < end:
-        max_water = max(max_water, (end-start)*min(height[start], height[end]))
-        if height[start] < height[end]:
-            start = start+1
-        else:
-            end = end-1
-    return max_water
-
-if __name__ == "__main__":
-    #Input: height = [1,8,6,2,5,4,8,3,7]
-    #Output: 49
-    #Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. 
-    #             In this case, the max area of water (blue section) the container 
-    #             can contain is 49.
-    height = [1,8,6,2,5,4,8,3,7]
-    print(maxArea(height))
-```
-```kotlin
-fun maxArea(height: IntArray): Int {    
-    val ans:MutableList<List<Int>> = mutableListOf()
-    var start = 0
-    var end = height.size - 1
-    var maxWater = -1
-    while (start < end) {
-        maxWater = maxOf(maxWater, (end-start)*minOf(height[start], height[end]))
-        if (height[start] < height[end]) {
-            start++
-        } else {
-            end--
+```java
+// same as the trap rain water problem, we just follow the shorter line to calculate area.
+// LeetCode - Problem 42 - Trapping Rain Water [ https://leetcode.com/problems/trapping-rain-water/ ]
+public class Solution {
+    public int maxArea(int[] h) {
+        int area = 0, i = 0, j = h.length - 1;
+        
+        while (i < j) {
+            int width = j - i;
+            int height = h[i] <= h[j] ? h[i++] : h[j--];
+            int currArea = width * height;
+            
+            if (currArea > area)
+                area = currArea; 
         }
+        
+        return area;
     }
-    return maxWater
-}
-
-fun main(args: Array<String>) {
-    //Input: height = [1,8,6,2,5,4,8,3,7]
-    //Output: 49
-    //Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. 
-    //             In this case, the max area of water (blue section) the container 
-    //             can contain is 49.
-    val height = intArrayOf(1,8,6,2,5,4,8,3,7)
-    println(maxArea(height))
 }
 ```
 
