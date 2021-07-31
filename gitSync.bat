@@ -1,0 +1,2 @@
+(C: && cd C:\interview_prep\Full_Stack_Interview\oop_java_cplusplus_csharp_python_notes && git.exe add .\* && git.exe commit -am "adding more notes" && git.exe push origin && git.exe pull origin)
+REM: to run this from a scheduled task with output appended to a text file enter this in the task action /C C:\interview_prep\Full_Stack_Interview\oop_java_cplusplus_csharp_python_notes\gitSync.bat >> C:\interview_prep\Full_Stack_Interview\oop_java_cplusplus_csharp_python_notes\gitSync.output.txt 2>&1

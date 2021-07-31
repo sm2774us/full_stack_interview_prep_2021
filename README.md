@@ -153,6 +153,14 @@ you are not as gung-ho about web design as you thought you were.
 
 # Phase 5
 
+### Java
+
+* [Design Patterns](./Java-Design-Patterns/README.md)
+
+---
+
+# Phase 6
+
 ### Postgres
 
 * [13 PostgreSQL Q&A](http://www.dotnetfunda.com/interviews/cat/208/postgresql)
