@@ -158,7 +158,7 @@ you are not as gung-ho about web design as you thought you were.
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
-* [Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"](https://github.com/sm2774us/full_stack_interview_prep_2021#explain-the-difference-between--inversion-of-control----dependency-injection--and--dependency-inversion-principle)
+* [Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"](https://github.com/sm2774us/full_stack_interview_prep_2021#explain-the-difference-between-inversion-of-control-dependency-injection-and-dependency-inversion-principle)
 * [100+ Top Java Interview Questions and Answers in 2021](https://hackr.io/blog/java-interview-questions)
 * [160+ Top Java Interview Questions and Answers in 2021](https://www.mygreatlearning.com/blog/java-interview-questions/)
 * [10 Tricky Java Interview Questions with Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#10-trick-java-interview-questions-with-answers)
