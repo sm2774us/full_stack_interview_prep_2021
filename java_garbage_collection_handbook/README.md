@@ -498,11 +498,67 @@ For a quick cheat sheet, the following list is a fast way to get yourself up to 
 > **NOTE: Garbage First (G1) GC, has become the default GC from Java 9 onwards.**
 >
 
+If the above looks too complex, do not worry. In reality it all boils down to just four combinations highlighted in the table above. The rest are either [deprecated](http://openjdk.java.net/jeps/173), not supported or just impractical to apply in real world. So, in the following chapters we cover the working principles of the following combinations:
+
+  * Serial GC for both the Young and Old generations
+  * Parallel GC for both the Young and Old generations
+  * Parallel New for Young + Concurrent Mark and Sweep (CMS) for the Old Generation
+  * G1, which encompasses collection of both Young and Old generations
+
 ---
 
 #### Serial GC
 
+This collection of garbage collectors uses [mark-copy](#copy) for the Young Generation and [mark-sweep-compact](#compact) for the Old Generation. As the name implies – both of these collectors are single-threaded collectors, incapable of parallelizing the task at hand. Both collectors also trigger stop-the-world pauses, stopping all application threads.
+
+This GC algorithm cannot thus take advantage of multiple CPU cores commonly found in modern hardware. Independent of the number of cores available, just one is used by the JVM during garbage collection.
+
+Enabling this collector for both the Young and Old Generation is done via specifying a single parameter in the JVM startup script:
+
+> ```bash
+> java -XX:+UseSerialGC com.mypackages.MyExecutableClass
+> ```
+
+This option makes sense and is recommended only for the JVM with a couple of hundreds megabytes heap size, running in an environment with a single CPU. For the majority of server-side deployments this is a rare combination. Most server-side deployments are done on platforms with multiple cores, essentially meaning that by choosing Serial GC you are setting artificial limits on the use of system resources. This results in idle resources which otherwise could be used to reduce latency or increase throughput.
+
+Let us now review how garbage collector logs look like when using Serial GC and what useful information one can obtain from there. For this purpose, we have turned on GC logging on the JVM using the following parameters:
+
+> ```bash
+> -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps
+> ```
+
+The resulting output is similar to the following:
+
+> ```bash
+> 2015-05-26T14:45:37.987-0200: 151.126: [GC (Allocation Failure) 151.126: [DefNew: 629119K->69888K(629120K), 0.0584157 secs] 1619346K->1273247K(2027264K), 0.0585007 secs] [Times: user=0.06 sys=0.00, real=0.06 secs]
+> 2015-05-26T14:45:59.690-0200: 172.829: [GC (Allocation Failure) 172.829: [DefNew: 629120K->629120K(629120K), 0.0000372 secs]172.829: [Tenured: 1203359K->755802K(1398144K), 0.1855567 secs] 1832479K->755802K(2027264K), [Metaspace: 6741K->6741K(1056768K)], 0.1856954 secs] [Times: user=0.18 sys=0.00, real=0.18 secs]
+> ```
+
+Such short snippet from the GC logs exposes a lot of information about what is taking place inside the JVM. As a matter of fact, in this snippet there were two Garbage Collection events taking place, one of them cleaning the Young Generation and another taking care of the entire heap. Let’s start by analyzing the first collection that is taking place in the Young Generation.
+
 ##### Minor GC
+
+Following snippet contains the information about a GC event cleaning the Young Generation:
+
+<pre>2015-05-26T14:45:37.987-0200: 151.126: [GC (Allocation Failure) 151.126: [DefNew: 629119K-&gt;69888K(629120K), 0.0584157 secs] 1619346K-&gt;1273247K(2027264K), 0.0585007 secs] [Times: user=0.06 sys=0.00, real=0.06 secs]
+2015-05-26T14:45:59.690-0200: 172.829: [GC (Allocation Failure) 172.829: [DefNew: 629120K-&gt;629120K(629120K), 0.0000372 secs]172.829: [Tenured: 1203359K-&gt;755802K(1398144K), 0.1855567 secs] 1832479K-&gt;755802K(2027264K), [Metaspace: 6741K-&gt;6741K(1056768K)], 0.1856954 secs] [Times: user=0.18 sys=0.00, real=0.18 secs]</pre>
+<p>Such short snippet from the GC logs exposes a lot of information about what is taking place inside the JVM. As a matter of fact, in this snippet there were two Garbage Collection events taking place, one of them cleaning the Young Generation and another taking care of the entire heap. Let’s start by analyzing the first collection that is taking place in the Young Generation.</p>
+<h3 id="serial-minor-gc">Minor GC</h3><p>Following snippet contains the information about a GC event cleaning the Young Generation:</p>
+<div class="code-line-wrap">
+<p class="code-line"><span class="node">2015-05-26T14:45:37.987-0200<sup>1</sup></span>:<span class="node">151.126<sup>2</sup></span>:[<span class="node">GC<sup>3</sup></span>(<span class="node">Allocation Failure<sup>4</sup></span>) 151.126: [<span class="node">DefNew<sup>5</sup></span>:<span class="node">629119K-&gt;69888K<sup>6</sup></span><span class="node">(629120K)<sup>7</sup></span>, 0.0584157 secs]<span class="node">1619346K-&gt;1273247K<sup>8</sup></span><span class="node">(2027264K)<sup>9</sup></span>,<span class="node">0.0585007 secs<sup>10</sup></span>]<span class="node">[Times: user=0.06 sys=0.00, real=0.06 secs]<sup>11</sup></span></p>
+<ol class="code-line-components">
+<li class="description"><span class="node">2015-05-26T14:45:37.987-0200</span> &#8211; Time when the GC event started.</li>
+<li class="description"><span class="node">151.126</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
+<li class="description"><span class="node">GC</span> &#8211; Flag to distinguish between Minor &amp; Full GC. This time it is indicating that this was a Minor GC.</li>
+<li class="description"><span class="node">Allocation Failure</span> &#8211; Cause of the collection. In this case, the GC is triggered due to a data structure not fitting into any region in the Young Generation.</li>
+<li class="description"><span class="node">DefNew</span> &#8211; Name of the garbage collector used. This cryptic name stands for the single-threaded mark-copy stop-the-world garbage collector used to clean Young generation.</li>
+<li class="description"><span class="node">629119K-&gt;69888K</span> &#8211; Usage of the Young Generation before and after collection.</li>
+<li class="description"><span class="node">(629120K)</span> &#8211; Total size of the Young Generation.</li>
+<li class="description"><span class="node">1619346K-&gt;1273247K</span> &#8211; Total used heap before and after collection.</li>
+<li class="description"><span class="node">(2027264K)</span> &#8211; Total available heap.</li>
+<li class="description"><span class="node">0.0585007 secs</span> &#8211; Duration of the GC event in seconds.</li>
+<li class="description"><span class="node">[Times: user=0.06 sys=0.00, real=0.06 secs]</span> &#8211; Duration of the GC event, measured in different categories:
+<ul>
 
 ##### Full GC
 
