@@ -540,11 +540,6 @@ Such short snippet from the GC logs exposes a lot of information about what is t
 
 Following snippet contains the information about a GC event cleaning the Young Generation:
 
-<pre>2015-05-26T14:45:37.987-0200: 151.126: [GC (Allocation Failure) 151.126: [DefNew: 629119K-&gt;69888K(629120K), 0.0584157 secs] 1619346K-&gt;1273247K(2027264K), 0.0585007 secs] [Times: user=0.06 sys=0.00, real=0.06 secs]
-2015-05-26T14:45:59.690-0200: 172.829: [GC (Allocation Failure) 172.829: [DefNew: 629120K-&gt;629120K(629120K), 0.0000372 secs]172.829: [Tenured: 1203359K-&gt;755802K(1398144K), 0.1855567 secs] 1832479K-&gt;755802K(2027264K), [Metaspace: 6741K-&gt;6741K(1056768K)], 0.1856954 secs] [Times: user=0.18 sys=0.00, real=0.18 secs]</pre>
-<p>Such short snippet from the GC logs exposes a lot of information about what is taking place inside the JVM. As a matter of fact, in this snippet there were two Garbage Collection events taking place, one of them cleaning the Young Generation and another taking care of the entire heap. Let’s start by analyzing the first collection that is taking place in the Young Generation.</p>
-<h3 id="serial-minor-gc">Minor GC</h3><p>Following snippet contains the information about a GC event cleaning the Young Generation:</p>
-<div class="code-line-wrap">
 <p class="code-line"><span class="node" style="color:aqua;">2015-05-26T14:45:37.987-0200<sup>1</sup></span>:<span class="node">151.126<sup>2</sup></span>:[<span class="node">GC<sup>3</sup></span>(<span class="node">Allocation Failure<sup>4</sup></span>) 151.126: [<span class="node">DefNew<sup>5</sup></span>:<span class="node">629119K-&gt;69888K<sup>6</sup></span><span class="node">(629120K)<sup>7</sup></span>, 0.0584157 secs]<span class="node">1619346K-&gt;1273247K<sup>8</sup></span><span class="node">(2027264K)<sup>9</sup></span>,<span class="node">0.0585007 secs<sup>10</sup></span>]<span class="node">[Times: user=0.06 sys=0.00, real=0.06 secs]<sup>11</sup></span></p>
 <ol class="code-line-components">
 <li class="description"><span class="node" style="color:aqua;">2015-05-26T14:45:37.987-0200</span> &#8211; Time when the GC event started.</li>
