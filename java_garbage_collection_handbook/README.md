@@ -366,26 +366,137 @@ First attempt is to get the insight via the [jstat](http://docs.oracle.com/javas
 > 16.7 34048.0 34048.0 34047.0  0.0   272640.0 48378.0  1756416.0   838594.4  22268.0 21003.5 3200.0 2813.2     16    1.433   2      0.050    1.484
 > ```
 
+This snippet is extracted from the first 17 seconds after the JVM was launched. Based on this information we could conclude that after 12 Minor GC runs two Full GC runs were performed, spanning **50ms** in total. You would get the same confirmation via GUI-based tools, such as the [jconsole](http://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html) or [jvisualvm](http://download.oracle.com/javase/6/docs/technotes/tools/share/jvisualvm.html).
+
+> NOTE: If your using OpenJDK 8+ onwards then instead of jconsole and jvisualvm , you need to use **JDK Flight Recorder** (**JFR** for short) and **JDK Mission Control** (**JMC** for short) as [explained here](https://developers.redhat.com/blog/2020/08/25/get-started-with-jdk-flight-recorder-in-openjdk-8u#demo__profiling_gc_allocation).
+>
+
+Before nodding at this conclusion, let’s look at the output of the garbage collection logs gathered from the same JVM launch. Apparently `-XX:+PrintGCDetails` tells us a different and a more detailed story:
+
+> ```bash
+> java -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC eu.plumbr.demo.GarbageProducer
+> ```
+>
+> ```bash
+> 3.157: [GC (Allocation Failure) 3.157: [ParNew: 272640K->34048K(306688K), 0.0844702 secs] 272640K->69574K(2063104K), 0.0845560 secs] [Times: user=0.23 sys=0.03, real=0.09 secs] 
+> 4.092: [GC (Allocation Failure) 4.092: [ParNew: 306688K->34048K(306688K), 0.1013723 secs] 342214K->136584K(2063104K), 0.1014307 secs] [Times: user=0.25 sys=0.05, real=0.10 secs] 
+> ... cut for brevity ...
+> 11.292: [GC (Allocation Failure) 11.292: [ParNew: 306686K->34048K(306688K), 0.0857219 secs] 971599K->779148K(2063104K), 0.0857875 secs] [Times: user=0.26 sys=0.04, real=0.09 secs] 
+> 12.140: [GC (Allocation Failure) 12.140: [ParNew: 306688K->34046K(306688K), 0.0821774 secs] 1051788K->856120K(2063104K), 0.0822400 secs] [Times: user=0.25 sys=0.03, real=0.08 secs] 
+> 12.989: [GC (Allocation Failure) 12.989: [ParNew: 306686K->34048K(306688K), 0.1086667 secs] 1128760K->931412K(2063104K), 0.1087416 secs] [Times: user=0.24 sys=0.04, real=0.11 secs] 
+> 13.098: [GC (CMS Initial Mark) [1 CMS-initial-mark: 897364K(1756416K)] 936667K(2063104K), 0.0041705 secs] [Times: user=0.02 sys=0.00, real=0.00 secs] 
+> 13.102: [CMS-concurrent-mark-start]
+> 13.341: [CMS-concurrent-mark: 0.238/0.238 secs] [Times: user=0.36 sys=0.01, real=0.24 secs] 
+> 13.341: [CMS-concurrent-preclean-start]
+> 13.350: [CMS-concurrent-preclean: 0.009/0.009 secs] [Times: user=0.03 sys=0.00, real=0.01 secs] 
+> 13.350: [CMS-concurrent-abortable-preclean-start]
+> 13.878: [GC (Allocation Failure) 13.878: [ParNew: 306688K->34047K(306688K), 0.0960456 secs] 1204052K->1010638K(2063104K), 0.0961542 secs] [Times: user=0.29 sys=0.04, real=0.09 secs] 
+> 14.366: [CMS-concurrent-abortable-preclean: 0.917/1.016 secs] [Times: user=2.22 sys=0.07, real=1.01 secs] 
+> 14.366: [GC (CMS Final Remark) [YG occupancy: 182593 K (306688 K)]14.366: [Rescan (parallel) , 0.0291598 secs]14.395: [weak refs processing, 0.0000232 secs]14.395: [class unloading, 0.0117661 secs]14.407: [scrub symbol table, 0.0015323 secs]14.409: [scrub string table, 0.0003221 secs][1 CMS-remark: 976591K(1756416K)] 1159184K(2063104K), 0.0462010 secs] [Times: user=0.14 sys=0.00, real=0.05 secs] 
+> 14.412: [CMS-concurrent-sweep-start]
+> 14.633: [CMS-concurrent-sweep: 0.221/0.221 secs] [Times: user=0.37 sys=0.00, real=0.22 secs] 
+> 14.633: [CMS-concurrent-reset-start]
+> 14.636: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
+> ```
+
+Based on this information we can see that after 12 Minor GC runs ‘something different’ indeed started happening. But instead of two Full GC runs, this ‘different thing’ was in reality just a single GC running in Old generation and consisting of different phases:
+
+  * Initial Mark phase, spanning for 0.0041705 seconds or approximately 4ms. This phase is a stop-the-world event stopping all application threads for initial marking.
+  * Markup and Preclean phases. were executed concurrently with the application threads.
+  * Final Remark phase, spanning for 0.0462010 seconds or approximately 46ms. This phase is again stop-the-world event.
+  * Sweep operation was executed concurrently, without stopping the application threads.
+
+So what we see from the actual garbage collection logs is that, instead of two Full GC operations, just one Major GC cleaning Old space was actually executed.
+
+If you were after latency then the data revealed by jstat would have led you towards correct decisions. It correctly listed the two stop-the-world events totaling 50ms affecting the latency for all the active threads at that very moment. But if you were trying to optimize for throughput, you would have been misguided – listing just the stop-the-world initial mark and final remark phases, the jstat output completely hides the concurrent work being done.
 
 ---
 
 ### GC Algorithms: Basics
 
+Before diving into the practical implementation details of Garbage Collection algorithms it will be beneficial to define the required terminology and to understand the basic principles supporting the implementations. Specific details vary from collector to collector but in general all collectors focus in two areas
+
+  * find out all objects that are still alive
+  * get rid of everything else – the supposedly dead and unused objects.
+
+First part, the census on live objects, is implemented in all collectors with the help of a process called **Marking**.
+
 ---
 
 #### Marking Reachable Objects
 
+Every modern GC algorithm used in JVM starts its job with finding out all objects that are still alive. This concept is best explained using the following picture representing your JVM’s memory layout:
+
+![Java-GC-mark-and-sweep](./assets/Java-GC-mark-and-sweep.png)
+
+First, GC defines some specific objects as **Garbage Collection Roots**. Examples of such GC roots are:
+
+  * Local variable and input parameters of the currently executing methods
+  * Active threads
+  * Static field of the loaded classes
+  * JNI references
+
+Next, GC traverses the whole object graph in your memory, starting from those Garbage Collection Roots and following references from the roots to other objects, e.g. instance fields. Every object the GC visits is **marked** as alive.
+
+Live objects are represented as blue on the picture above. When the marking phase finishes, every live object is marked. All other objects (grey data structures on the picture above) are thus unreachable from the GC roots, implying that your application cannot use the unreachable objects anymore. Such objects are considered garbage and GC should get rid of them in the following phases.
+
+There are important aspects to note about the marking phase:
+
+  * The application threads need to be stopped for the marking to happen as you cannot really traverse the graph if it keeps changing under your feet all the time. Such a situation when the application threads are temporarily stopped so that the JVM can indulge in housekeeping activities is called a **safe point** resulting in a **Stop The World pause**. Safe points can be triggered for different reasons but garbage collection is by far the most common reason for a safe point to be introduced.
+  * The duration of this pause depends neither on the total number of objects in heap nor on the size of the heap but on the number of **alive objects**. So increasing the size of the heap does not directly affect the duration of the marking phase.
+
+When the **mark** phase is completed, the GC can proceed to the next step and start removing the unreachable objects.
+
 #### Removing Unused Objects
+
+Removal of unused objects is somewhat different for different GC algorithms but all such GC algorithms can be divided into three groups: sweeping, compacting and copying. Next sections will discuss each of such algorithms in more detail.
 
 ##### Sweep
 
+**Mark and Sweep** algorithms use conceptually the simplest approach to garbage by just ignoring such objects. What this means is that after the marking phase has completed all space occupied by unvisited objects is considered free and can thus be reused to allocate new objects.
+
+The approach requires using the so called **free-list** recording of every free region and its size. The management of the free-lists adds overhead to object allocation. Built into this approach is another weakness – there may exist plenty of free regions but if no single region is large enough to accommodate the allocation, the allocation is still going to fail (with an [OutOfMemoryError](http://plumbr.io/outofmemoryerror) in Java).
+
+![GC-sweep](./assets/GC-sweep.png)
+
 ##### Compact
 
+**Mark-Sweep-Compact** algorithms solve the shortcomings of Mark and Sweep by moving all marked – and thus alive – objects to the beginning of the memory region. The downside of this approach is an increased GC pause duration as we need to copy all objects to a new place and to update all references to such objects. The benefits to Mark and Sweep are also visible – after such a compacting operation new object allocation is again extremely cheap via pointer bumping. Using such approach the location of the free space is always known and no fragmentation issues are triggered either.
+
+![GC-mark-sweep-compact](./assets/GC-mark-sweep-compact.png)
+
 ##### Copy
+
+**Mark and Copy** algorithms are very similar to the Mark and Compact as they too relocate all live objects. The important difference is that the target of relocation is a different memory region as a new home for survivors. Mark and Copy approach has some advantages as copying can occur simultaneously with marking during the same phase. The disadvantage is the need for one more memory region, which should be large enough to accommodate survived objects.
+
+![GC-mark-and-copy-in-Java](./assets/GC-mark-and-copy-in-Java.png)
 
 ---
 
 ### GC Algorithms: Implementations
+
+Now that we have reviewed the core concepts behind GC algorithms, let us move to the specific implementations one can find inside the JVM. An important aspect to recognize first is the fact that, for most JVMs out there, two different GC algorithms are needed – one to clean the Young Generation and another to clean the Old Generation.
+
+You can choose from a variety of such algorithms bundled into the JVM. If you do not specify a garbage collection algorithm explicitly, a platform-specific default will be used. In this chapter, the working principles of each of those algorithms will be explained.
+
+For a quick cheat sheet, the following list is a fast way to get yourself up to speed with which algorithm combinations are possible. Note that this stands true for Java 8, for older Java versions the available combinations might differ a bit:
+
+| Young | Tenured | JVM options |
+| :- | :- | :- |
+| Incremental | Incremental | `-Xincgc` |
+| **Serial** | **Serial** |	<code><b>-XX:+UseSerialGC</b></code> |
+| Parallel Scavenge | Serial | `-XX:+UseParallelGC -XX:-UseParallelOldGC` | 
+| Parallel New | Serial | N/A |
+| Serial | Parallel Old | N/A |
+| **Parallel Scavenge** | **Parallel Old** | <code><b>-XX:+UseParallelGC -XX:+UseParallelOldGC</b></code> |
+| Parallel New | Parallel Old | N/A |
+| Serial | CMS | `-XX:-UseParNewGC -XX:+UseConcMarkSweepGC` | 
+| Parallel Scavenge | CMS | N/A |
+| **Parallel New** | **CMS** | <code><b>-XX:+UseParNewGC -XX:+UseConcMarkSweepGC</b></code> |
+| **G1** | | <code><b>-XX:+UseG1GC</b></code> |
+
+> **NOTE: Garbage First (G1) GC, has become the default GC from Java 9 onwards.**
+>
 
 ---
 
