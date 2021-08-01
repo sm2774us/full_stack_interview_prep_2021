@@ -783,15 +783,13 @@ Just to bear in mind – in real world situation Minor Garbage Collections of th
 
 In the illustration, a reference pointing away from the “Current object” was removed concurrently with the marking thread.
 
->
-> <div align="center">
-> 	<br>
-> 	<a href="./cms_gc_full_gc_phase_2_concurrent_mark.svg">
-> 		<img src="./cms_gc_full_gc_phase_2_concurrent_mark.svg" width="800" height="600">
-> 	</a>
-> 	<br>
-> </div>
->
+<div align="center">
+ 	<br>
+	<a href="./cms_gc_full_gc_phase_2_concurrent_mark.svg">
+		<img src="./cms_gc_full_gc_phase_2_concurrent_mark.svg" width="800" height="600">
+ 	</a>
+ 	<br>
+</div>
 
 **Phase 3: Concurrent Preclean.** This is again a concurrent phase, running in parallel with the application threads, not stopping them. While the previous phase was running concurrently with the application, some references were changed. Whenever that happens, the JVM marks the area of the heap (called “Card”) that contains the mutated object as “dirty” (this is known as [Card Marking](http://psy-lob-saw.blogspot.com.ee/2014/10/the-jvm-write-barrier-card-marking.html)).
 
