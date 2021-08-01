@@ -28,7 +28,7 @@
 				}				
 			</style>
 			<pre>2015-05-26T16:23:07.321-0200: 64.425: [CMS-concurrent-mark-start]
-			2015-05-26T16:23:07.357-0200: 64.460: [<span id="token1">CMS-concurrent-mark<sup>1</sup></span>: <span id="token2">035/0.035 secs<sup>2</sup></span>]</pre>
+     2015-05-26T16:23:07.357-0200: 64.460: [<span id="token1">CMS-concurrent-mark<sup>1</sup></span>: <span id="token2">035/0.035 secs<sup>2</sup></span>]<span id="token3">[Times: user=0.07 sys=0.00, real=0.03 secs]<sup>3</sup></span></pre>
 			<div id="just-line-break"></div>
 			<pre><span id="token3">[Times: user=0.07 sys=0.00, real=0.03 secs]<sup>3</sup></span></pre>
 			<ol>
