@@ -174,7 +174,7 @@ In the C++ code above, we still had to explicitly say when we want to have memor
 
 The idea that we have demonstrated with the shared pointers of C++ can be applied to all objects. Many languages such as Perl, Python or PHP take this approach. This is best illustrated with a picture:
 
-![reference-counting](./assets/reference-counting.PNG)
+![reference-counting](./assets/reference-counting.png)
 
 The green clouds indicate that the object that they point to is still in use by the programmer. Technically, these may be things like a local variable in the currently executing method or a static variable or something else. It may vary from programming language to programming language so we will not focus on it here.
 
@@ -182,7 +182,7 @@ The blue circles are the live objects in memory, with the numbers inside denotin
 
 This all looks really good, does it not? Well, it does, but the whole method has a huge drawback. It is quite easy to end up with a **detached cycle** of objects none of which are in scope yet due to cyclic references the count of their reference is not zero. Here’s an illustration:
 
-![reference-counting-2](./assets/reference-counting-2.PNG)
+![reference-counting-2](./assets/reference-counting-2.png)
 
 See? The red objects are in fact garbage that the application does not use. But due to the limitations of reference counting there is still a memory leak.
 
@@ -206,7 +206,7 @@ Different GC algorithms within the JVM, such as ___Parallel Scavenge___, ___Para
 
 A crucially important thing about this approach is that the cycles are no longer leaked:
 
-![mark-and-sweep](./assets/mark-and-sweep.PNG)
+![mark-and-sweep](./assets/mark-and-sweep.png)
 
 The not-so-good thing is that the application threads need to be stopped for the collection to happen, as you cannot really count references if they keep changing all the time. Such a situation when the application is temporarily stopped so that the JVM can indulge in housekeeping activities is called a **Stop The World pause**. They may happen for many reasons, but garbage collection is by far the most popular one.
 
@@ -227,7 +227,7 @@ Whenever sweeping takes place, the JVM has to make sure the areas filled with un
 
 To avoid such problems, the JVM is making sure the fragmenting does not get out of hand. So instead of just marking and sweeping, a ‘memory defrag’ process also happens during garbage collection. This process relocates all the reachable objects next to each other, eliminating (or reducing) the fragmentation. Here is an illustration of that:
 
-![fragmented-vs-compacted-heap](./assets/fragmented-vs-compacted-heap.PNG)
+![fragmented-vs-compacted-heap](./assets/fragmented-vs-compacted-heap.png)
 
 #### Generational Hypothesis
 
@@ -238,7 +238,7 @@ As we have mentioned before, doing a garbage collection entails stopping the app
 
 These observations come together in the Weak Generational Hypothesis. Based on this hypothesis, the memory inside the VM is divided into what is called the **Young Generation** and the **Old Generation**. The latter is sometimes also called **Tenured**.
 
-![object-age-based-on-GC-generation-generational-hypothesis](./assets/object-age-based-on-GC-generation-generational-hypothesis.PNG)
+![object-age-based-on-GC-generation-generational-hypothesis](./assets/object-age-based-on-GC-generation-generational-hypothesis.png)
 
 Having such separate and individually cleanable areas allows for a multitude of different algorithms that have come a long way in improving the performance of the GC.
 
@@ -250,7 +250,7 @@ But most importantly, the generational hypothesis may in fact not hold for some 
 
 The following division of memory pools within the heap should be familiar. What is not so commonly understood is how Garbage Collection performs its duties within the different memory pools. Notice that in different GC algorithms some implementation details might vary but, again, the concepts in this chapter remain effectively the same.
 
-![java-heap-eden-survivor-old](./assets/java-heap-eden-survivor-old.PNG)
+![java-heap-eden-survivor-old](./assets/java-heap-eden-survivor-old.png)
 
 ##### Eden
 
@@ -262,7 +262,7 @@ When Eden is being collected, GC walks all the reachable objects from the roots 
 
 We have previously noted that objects can have cross-generational links so a straightforward approach would have to check all the references from other generations to Eden. Doing so would unfortunately defeat the whole point of having generations in the first place. The JVM has a trick up its sleeve: _card-marking_. Essentially, the JVM just marks the rough location of ‘dirty’ objects in Eden that may have links to them from the Old Generation. You can read more on that in [Nitsan’s blog entry](http://psy-lob-saw.blogspot.com/2014/10/the-jvm-write-barrier-card-marking.html).
 
-![TLAB-in-Eden-memory](./assets/TLAB-in-Eden-memory.PNG)
+![TLAB-in-Eden-memory](./assets/TLAB-in-Eden-memory.png)
 
 After the marking phase is completed, all the live objects in Eden are copied to one of the _Survivor_ _spaces_. The whole Eden is now considered to be empty and can be reused to allocate more objects. Such an approach is called **“Mark and Copy”**: the live objects are marked, and then copied (not moved) to a survivor space.
 
@@ -272,7 +272,7 @@ Next to the Eden space reside two **Survivor** spaces called _from_ and _to_. It
 
 The empty Survivor space will start having residents next time the Young generation gets collected. All of the live objects from the whole of the Young generation (that includes both the Eden space and the non-empty ‘from’ Survivor space) are copied to the ‘to’ survivor space. After this process has completed, ‘to’ now contains objects and ‘from’ does not. Their roles are switched at this time.
 
-![how-java-garbage-collection-works](./assets/how-java-garbage-collection-works.PNG)
+![how-java-garbage-collection-works](./assets/how-java-garbage-collection-works.png)
 
 This process of copying the live objects between the two Survivor spaces is repeated several times until some objects are considered to have matured and are ‘old enough’. Remember that, based on the generational hypothesis, objects which have survived for some time are expected to continue to be used for very long time.
 
@@ -365,6 +365,7 @@ First attempt is to get the insight via the [jstat](http://docs.oracle.com/javas
 > 15.7 34048.0 34048.0  0.0   34048.0 272640.0 21474.1  1756416.0   757347.0  22012.0 20792.0 3200.0 2791.0     15    1.336   2      0.050    1.386
 > 16.7 34048.0 34048.0 34047.0  0.0   272640.0 48378.0  1756416.0   838594.4  22268.0 21003.5 3200.0 2813.2     16    1.433   2      0.050    1.484
 > ```
+
 
 ---
 
