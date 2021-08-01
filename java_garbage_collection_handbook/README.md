@@ -89,7 +89,7 @@
         * [What is the Solution?](#what-is-the-solution-)
     * [Other Examples](#other-examples)
         * [RMI & GC](#rmi---gc)
-        * [JVMTI tagging & GC](#jvmti-tagging---gc)
+        * [JVMTI tagging & GC](#jvmti-tagging--gc)
         * [Humongous Allocations](#humongous-allocations)
         * [Conclusion](#conclusion)
 
