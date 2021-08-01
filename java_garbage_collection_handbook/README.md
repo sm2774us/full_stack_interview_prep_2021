@@ -39,7 +39,7 @@
     * [Concurrent Mark and Sweep](#concurrent-mark-and-sweep)
         * [Minor GC](#minor-gc)
         * [Full GC](#full-gc)
-    * [G1 - Garbage First](#g1-garbage-first)
+    * [G1 - Garbage First](#g1---garbage-first)
         * [Evacuation Pause: Fully Young](#evacuation-pause-fully-young)
         * [Concurrent Marking](#concurrent-marking)
         * [Evacuation Pause: Mixed](#evacuation-pause-mixed)
