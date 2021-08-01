@@ -968,8 +968,8 @@ Most of the heavy-lifting is done by multiple dedicated GC worker threads. Their
 
 <div align="center">
 	<br>
-	<a href="./g1_gc_evacuation_pause_fully_young_gc_worker_threads.svg">
-		<img src="./g1_gc_evacuation_pause_fully_young_gc_worker_threads.svg" width="1000" height="1200">
+	<a href="./g1_gc_gc_worker_threads.svg">
+		<img src="./g1_gc_gc_worker_threads.svg" width="1000" height="1200">
 	</a>
 	<br>
 </div>
