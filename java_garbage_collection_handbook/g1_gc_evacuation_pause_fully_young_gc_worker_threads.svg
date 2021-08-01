@@ -1,4 +1,4 @@
-<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" viewBox="0 0 800 1000" width="800" height="1000" xmlns="http://www.w3.org/2000/svg">
 	<foreignObject width="100%" height="100%">
 		<div xmlns="http://www.w3.org/1999/xhtml">
 			<style>
@@ -72,15 +72,8 @@
 					border:1px solid black;
 					overflow:hidden;
 				}
-				span#token11 {
-					color: #663399;
-					font-weight: bold;
-					font-family:Helvetica;
-					border:1px solid black;
-					overflow:hidden;
-				}
 			</style>
-			<p><span id="token1">[Parallel Time: 13.9 ms, GC Workers: 8]<sup>1</sup></span><br />    <span id="token2"> [GC Worker Start (ms)<sup>2</sup></span><code>: Min: 134.0, Avg: 134.1, Max: 134.1, Diff: 0.1]</code><br />    <span id="token3">[Ext Root Scanning (ms)<sup>3</sup></span><code>: Min: 0.1, Avg: 0.2, Max: 0.3, Diff: 0.2, Sum: 1.2]</code><br />    <code>[Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</code><br />        <code>[Processed Buffers: Min: 0, Avg: 0.0, Max: 0, Diff: 0, Sum: 0]</code><br />    <code>[Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</code><br />    <span id="token4">[Code Root Scanning (ms)<sup>4</sup></span><code>: Min: 0.0, Avg: 0.0, Max: 0.2, Diff: 0.2, Sum: 0.2]</code><br />    <span id="token5">[Object Copy (ms)<sup>5</sup></span><code>: Min: 10.8, Avg: 12.1, Max: 12.6, Diff: 1.9, Sum: 96.5]</code><br />    <span id="token6">[Termination (ms)<sup>6</sup></span><code>: Min: 0.8, Avg: 1.5, Max: 2.8, Diff: 1.9, Sum: 12.2]</code><br />        <span id="token7">[Termination Attempts<sup>7</sup></span><code>: Min: 173, Avg: 293.2, Max: 362, Diff: 189, Sum: 2346]</code><br />    <span id="token8">[GC Worker Other (ms)<sup>8</sup></span><code>: Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]</code><br />    <span id="token9">GC Worker Total (ms)<sup>9</sup></span><code>: Min: 13.7, Avg: 13.8, Max: 13.8, Diff: 0.1, Sum: 110.2]</code><br />    <span id="token10">[GC Worker End (ms)<sup>10</sup></span>: Min: 147.8, Avg: 147.8, Max: 147.8, Diff: 0.0]
+			<p><span id="token1">[Parallel Time: 13.9 ms, GC Workers: 8]<sup>1</sup></span><br />    <span id="token2"> [GC Worker Start (ms)<sup>2</sup></span><code>: Min: 134.0, Avg: 134.1, Max: 134.1, Diff: 0.1]</code><br />    <span id="token3">[Ext Root Scanning (ms)<sup>3</sup></span><code>: Min: 0.1, Avg: 0.2, Max: 0.3, Diff: 0.2, Sum: 1.2]</code><br />    <code>[Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</code><br />        <code>[Processed Buffers: Min: 0, Avg: 0.0, Max: 0, Diff: 0, Sum: 0]</code><br />    <code>[Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</code><br />    <span id="token4">[Code Root Scanning (ms)<sup>4</sup></span><code>: Min: 0.0, Avg: 0.0, Max: 0.2, Diff: 0.2, Sum: 0.2]</code><br />    <span id="token5">[Object Copy (ms)<sup>5</sup></span><code>: Min: 10.8, Avg: 12.1, Max: 12.6, Diff: 1.9, Sum: 96.5]</code><br />    <span id="token6">[Termination (ms)<sup>6</sup></span><code>: Min: 0.8, Avg: 1.5, Max: 2.8, Diff: 1.9, Sum: 12.2]</code><br />        <span id="token7">[Termination Attempts<sup>7</sup></span><code>: Min: 173, Avg: 293.2, Max: 362, Diff: 189, Sum: 2346]</code><br />    <span id="token8">[GC Worker Other (ms)<sup>8</sup></span><code>: Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]</code><br />    <span id="token9">GC Worker Total (ms)<sup>9</sup></span><code>: Min: 13.7, Avg: 13.8, Max: 13.8, Diff: 0.1, Sum: 110.2]</code><br />    <span id="token10">[GC Worker End (ms)<sup>10</sup></span>: Min: 147.8, Avg: 147.8, Max: 147.8, Diff: 0.0]</p>
 			<ol>
 				<li><span id="token1">[Parallel Time: 13.9 ms, GC Workers: 8]</span> - Indicating that for 13.9 ms (clock time) the following activities were carried out by 8 threads in parallel</li>
 				<li><span id="token2"> [GC Worker Start (ms)</span> - The moment in time at which the workers started their activity, matching the timestamp at the beginning of the pause. If Min and Max differ a lot, then it may be an indication that too many threads are used or other processes on the machine are stealing CPU time from the garbage collection process inside the JVM</li>
