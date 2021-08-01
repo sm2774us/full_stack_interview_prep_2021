@@ -158,6 +158,7 @@ you are not as gung-ho about web design as you thought you were.
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
+* [Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"](https://github.com/sm2774us/full_stack_interview_prep_2021#explain-the-difference-between--inversion-of-control----dependency-injection--and--dependency-inversion-principle)
 * [100+ Top Java Interview Questions and Answers in 2021](https://hackr.io/blog/java-interview-questions)
 * [160+ Top Java Interview Questions and Answers in 2021](https://www.mygreatlearning.com/blog/java-interview-questions/)
 * [10 Tricky Java Interview Questions with Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#10-trick-java-interview-questions-with-answers)
@@ -8921,6 +8922,63 @@ abstractions.<br />
 
 ---
 
+#### Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"
+
+---
+
+> **1. IOC (Inversion of Control)** is about who initiates the call. If your code initiates a call, it is not IoC, if the container/system/library calls back into code that you provided it, is it IoC.
+>
+> So, _IOC_ answers the question => **Who** is in control of the dependency?
+
+> **2. DIP (Dependency Inversion Principle)**, on the other hand, is about the level of the abstraction in the messages sent from your code to the thing it is calling.
+>
+> So, _IOC_ answers the question => **What** is being abstracted by the dependency?
+
+> **3. DI (Dependency Injection)** is about how one object acquires a dependency. When a dependency is provided externally, then the system is using DI.
+>
+> So, _DI_ answers the question => **How** is the dependency delivered?
+
+![IOC_DIP_and_DI](./assets/IOC_DIP_and_DI.PNG)
+
+As illustrated in the above figure, IoC and DIP are high level design principles which should be used while designing application classes. As they are principles, they recommend certain best practices but do not provide any specific implementation details. Dependency Injection (DI) is a pattern and IoC container is a framework.
+
+Let's have an overview of each term with their formal defintions before going into details.
+
+**Inversion of Control**
+
+IoC is a design principle which recommends the inversion of different kinds of controls in object-oriented design to achieve loose coupling between application classes. In this case, control refers to any additional responsibilities a class has, other than its main responsibility, such as control over the flow of an application, or control over the dependent object creation and binding (Remember SRP - Single Responsibility Principle). If you want to do TDD (Test Driven Development), then you must use the IoC principle, without which TDD is not possible. Learn about IoC in detail in the next chapter.
+
+**Dependency Inversion Principle**
+
+The DIP principle also helps in achieving loose coupling between classes. It is highly recommended to use DIP and IoC together in order to achieve loose coupling.
+
+DIP suggests that high-level modules should not depend on low level modules. Both should depend on abstraction.
+
+The DIP principle was invented by [Robert Martin](https://en.wikipedia.org/wiki/Robert_Cecil_Martin) (a.k.a. Uncle Bob). He is a founder of the SOLID principles.
+
+**Dependency Injection**
+
+Dependency Injection (DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects. We will learn about it in the DI chapter.
+
+**IoC Container**
+
+The IoC container is a framework used to manage automatic dependency injection throughout the application, so that we as programmers do not need to put more time and effort into it. 
+There are various IoC Containers for .NET, such as [Unity](https://github.com/unitycontainer/unity), [Ninject](https://github.com/ninject), [StructureMap](https://structuremap.github.io/), [Autofac](https://autofac.org/), etc.
+There are various IoC Containers for Java, such as [Spring](https://spring.io/), [Guice](https://github.com/google/guice), [Dagger](https://dagger.dev/).
+
+**From `tightly coupled classes` to `loosely coupled classes` the roadmap
+
+We cannot achieve loosely coupled classes by using IoC alone. Along with IoC, we also need to use DIP, DI and IoC container. The following figure illustrates how we are going to achieve loosely coupled design step by step in the next few chapters.
+
+![tightly-to-loosely-coupled-classes-roadmap](./assets/tightly-to-loosely-coupled-classes-roadmap.PNG)
+
+##### References:
+
+* [DIP in the Wild article by Martin Fowler](https://martinfowler.com/articles/dipInTheWild.html#YouMeanDependencyInversionRight)
+* [Inversion of Control Tutorials](https://www.tutorialsteacher.com/ioc/introduction)
+
+---
+
 #### 10 Tricky Java Interview Questions with Answers
 
 ---
@@ -9336,6 +9394,7 @@ The Java EE and CORBA modules, after being deprecated in JAVA SE 9, were removed
 * xml.bind
 * xml.ws
 * xml.ws.annotation
+
 
 JavaFX modules were also removed from JDK 11. These modules were part of previous Oracle JDKs, but absent from the latest OpenJDKs. However, do not panic! These modules are always accessible outside of the JDK.
 
