@@ -30,7 +30,7 @@
 			<pre>2015-05-26T16:23:07.357-0200: 64.460: [CMS-concurrent-preclean-start]
 		2015-05-26T16:23:07.373-0200: 64.476: [<span id="token1">CMS-concurrent-preclean<sup>1</sup></span>: <span id="token2">0.016/0.016 secs<sup>2</sup></span>]</pre>
 			<div id="just-line-break"></div>
-			<span id="token3">[Times: user=0.02 sys=0.00, real=0.02 secs]<sup>3</sup></span></pre>
+			<pre><span id="token3">[Times: user=0.02 sys=0.00, real=0.02 secs]<sup>3</sup></span></pre>
 			<ol>
 				<li><span id="token1">CMS-concurrent-preclean</span> &#8211; Phase of the collection &#8211; “Concurrent Preclean” in this occasion &#8211; accounting for references being changed during previous marking phase.</li>
 				<li><span id="token2">0.016/0.016 secs</span> &#8211; Duration of the phase, showing elapsed time and wall clock time correspondingly.</li>
