@@ -23,9 +23,14 @@
 					border:1px solid black;
 					overflow:hidden;
 				}
+				#just-line-break {
+					white-space: pre-line;
+				}				
 			</style>
 			<pre>2015-05-26T16:23:07.373-0200: 64.476: [CMS-concurrent-abortable-preclean-start]
-			2015-05-26T16:23:08.446-0200: 65.550: [<span id="token1">CMS-concurrent-abortable-preclean<sup>1</sup></span>: <span id="token2">0.167/1.074 secs<sup>2</sup></span>] <span id="token3">[Times: user=0.20 sys=0.00, real=1.07 secs]<sup>3</sup></span></pre>
+		2015-05-26T16:23:08.446-0200: 65.550: [<span id="token1">CMS-concurrent-abortable-preclean<sup>1</sup></span>: <span id="token2">0.167/1.074 secs<sup>2</sup></span>] </pre>
+			<div id="just-line-break"></div>
+			<pre><span id="token3">[Times: user=0.20 sys=0.00, real=1.07 secs]<sup>3</sup></span></pre>
 			<ol>
 				<li><span id="token1">CMS-concurrent-abortable-preclean</span> &#8211; Phase of the collection “Concurrent Abortable Preclean” in this occasion</li>
 				<li><span id="token2">0.167/1.074 secs</span> &#8211; Duration of the phase, showing elapsed and wall clock time respectively. It is interesting to note that the user time reported is a lot smaller than clock time. Usually we have seen that real time is less than user time, meaning that some work was done in parallel and so elapsed clock time is less than used CPU time. Here we have a little amount of work &#8211; for 0.167 seconds of CPU time, and garbage collector threads were doing a lot of waiting. Essentially, they were trying to stave off for as long as possible before having to do an STW pause. By default, this phase may last for up to 5 seconds.</li>
