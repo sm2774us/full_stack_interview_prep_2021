@@ -147,11 +147,64 @@ int send_request() {
 }
 ```
 
+But in more complex cases, especially when sharing objects across multiple threads, just the destructor will not be sufficient. In comes the simplest form of garbage collection: reference counting. For each object, you simply know how many times it is referred to and when that count reaches zero the object can be safely reclaimed. A well-known example of that would be the shared pointers of C++:
+
+```C++
+int send_request() {
+    size_t n = read_size();
+    auto elements = make_shared<vector<int>>();
+
+    // read elements
+
+    store_in_cache(elements);
+
+    // process elements further
+
+    return 0;
+}
+```
+
+Now, to avoid reading the elements next time the function is called, we may want to cache them. In such a case, destroying the vector when it’s out of scope is not an option. Therefore, we make use of `shared_ptr`. It keeps track of the number of references to it. This number increases as you pass it around and decreases as it leaves scope. As soon as the number of references reaches zero, the `shared_ptr` automatically deletes the underlying vector.
+
 #### Automated Memory Management
+
+In the C++ code above, we still had to explicitly say when we want to have memory management to be taken care of. But what if we could make all the objects behave this way? That would be very handy, since the developers no longer have to think about cleaning up after themselves. The runtime will automatically understand that some memory is no longer used and frees it. In other words, it automatically **collects the garbage**. The first garbage collector was created in 1959 for Lisp and the technology has only advanced since then.
 
 ##### Reference Counting
 
+The idea that we have demonstrated with the shared pointers of C++ can be applied to all objects. Many languages such as Perl, Python or PHP take this approach. This is best illustrated with a picture:
+
+![reference-counting](./assets/reference-counting.PNG)
+
+The green clouds indicate that the object that they point to is still in use by the programmer. Technically, these may be things like a local variable in the currently executing method or a static variable or something else. It may vary from programming language to programming language so we will not focus on it here.
+
+The blue circles are the live objects in memory, with the numbers inside denoting their reference counts. Finally, the grey circles are objects that are not referenced from any object that is still explicitly in use (these are directly referenced to by the green clouds). The grey objects are thus garbage and could be cleaned by the Garbage Collector.
+
+This all looks really good, does it not? Well, it does, but the whole method has a huge drawback. It is quite easy to end up with a **detached cycle** of objects none of which are in scope yet due to cyclic references the count of their reference is not zero. Here’s an illustration:
+
+![reference-counting-2](./assets/reference-counting-2.PNG)
+
+See? The red objects are in fact garbage that the application does not use. But due to the limitations of reference counting there is still a memory leak.
+
+There are some ways to overcome this, such as using special ‘weak’ references or applying a separate algorithm for collecting cycles. The aforementioned languages – Perl, Python and PHP – all handle cycles in one way or another, but this is outside the scope of this handbook. Instead, we will start investigating the approach taken by the JVM in more details.
+
 ##### Mark and Sweep
+
+First of all, the JVM is more specific about what constitutes reachability of an object. Instead of the vaguely defined green clouds that we saw on earlier chapters, we have a very specific and explicit set of objects that are called the **Garbage Collection Roots**:
+
+  * Local variables
+  * Active threads
+  * Static fields
+  * JNI references
+
+The method used by JVM to track down all the reachable (live) objects and to make sure the memory claimed by non-reachable objects can be reused is called the Mark and Sweep algorithm. It consists of two steps:
+
+  * **Marking** is walking through all reachable objects, starting from GC roots and keeping a ledger in native memory about all such objects
+  * **Sweeping** is making sure the memory addresses occupied by non-reachable objects can be reused by the next allocations.
+
+Different GC algorithms within the JVM, such as ___Parallel Scavenge___, ___Parallel Mark+Copy___ or ___CMS___, are implementing those phases slightly differently, but at the conceptual level the process remains similar to the two steps described above.
+
+A crucially important thing about this approach is that the cycles are no longer leaked:
 
 ---
 
