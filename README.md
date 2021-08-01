@@ -158,10 +158,12 @@ you are not as gung-ho about web design as you thought you were.
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
-* [Exp
 * [100+ Top Java Interview Questions and Answers in 2021](https://hackr.io/blog/java-interview-questions)
 * [160+ Top Java Interview Questions and Answers in 2021](https://www.mygreatlearning.com/blog/java-interview-questions/)
 * [10 Tricky Java Interview Questions with Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#10-trick-java-interview-questions-with-answers)
+* [42 Advanced Java Interview Questions For Senior Developers](https://www.fullstack.cafe/blog/advanced-java-interview-questions)
+* [String, StringBuilder, and StringBuffer Do you know the difference?](https://github.com/sm2774us/full_stack_interview_prep_2021#string--stringbuilder--and-stringbuffer-do-you-know-the-difference)
+* [9 New Features in Java 11](https://github.com/sm2774us/full_stack_interview_prep_2021#9-new-features-in-java-11)
 
 ### Spring
 
@@ -170,7 +172,6 @@ you are not as gung-ho about web design as you thought you were.
 
 
 ### Gradle
-
 
 ### Encryption
 
@@ -9028,3 +9029,313 @@ public class Test{
 
 ##### A10.
 It prints “main method”. There will be no error or exception because the main method can be overloaded in Java. It has to be called from within the main method to be executed just like any other method.
+
+---
+
+#### String, StringBuilder, and StringBuffer Do you know the difference?
+
+---
+
+Java has three classes named `String`, `StringBuilder`, and `StringBuffer`, which have methods written to manipulate Strings. These classes are included in the `java.lang` package and are imported into our code automatically.
+Given below is an explanation about these classes and a discussion on how to use them and when to use them to make String manipulation easier.
+
+##### String
+Strings in Java are immutable (cannot be changed). When a change is made to a `String` object in Java, a completely new `String` object is created each time. There are two ways to declare a `String` object in Java, and this is shown in the example below.
+
+```java
+class StrEx1 {
+  public static void main(String[] args) {
+  String s1 = "This is a String"; // Declared using String literal
+  String s2 = new String("This is another String"); // Declared using new operator
+  }
+}
+```
+
+The difference between these two methods is that when using the new operator, a new `String` object will be created each time in the heap memory. But when using a literal object, if the object already exists in the heap, a new object will not be created, and the reference variable will be pointed to the existing object. When using the `String` literal, the `String` object is stored in something called the **String Pool** in Java. It’s located inside the **heap memory**, and it helps to save a lot of space for **Java Runtime** even though it takes more time to create the `String`. So if you want to create a new `String` object every time, you should use the new operator to create a `String`, or if you want to save the heap memory, use the literal string to create a String.
+
+![java-lang-String](./assets/java-lang-String.png)
+
+> When using the new operator, if the object does not exist in the String Pool, first it will be created in the String pool, and then in the heap memory as well. The created string object reference always points to the heap area object. But if it already exists in the String Pool, then only in the heap memory the `String` object will be created. This is known to be a Java interview question.
+>
+
+The Java `String` class also allows access to many useful methods to manipulate Strings in a variety of ways. Some of those methods are `substring()`, `charAt()`, `length()`, `equals()`, `concat()`, `replace()`, `trim()`, `split()`, `toUpperCase()` and `toLowerCase()`. These methods can also be used individually as well as in combination with other `String` class methods to manipulate the Strings however we want.
+
+```java
+class StrEx2 {
+  public static void main(String args[]) {
+        String s1 = "Hello World";
+        String s2 = s1.substring(0,5).concat(" r2d2").toUpperCase();
+        System.out.println(s2); // HELLO R2D2
+    }
+}
+```
+
+Here the value of variable s1 does not change.
+
+##### StringBuilder
+The `StringBuilder` class provides an alternative to the `String` class because it creates a mutable (modifiable) set of characters. `StringBuilder` class also has a set of methods to manipulate `String` objects like in `String` class.
+
+```java
+class SbdEx1 {
+ public static void main(String args[]) {
+        StringBuilder sbd = new StringBuilder("Hello World");
+        String s = sbd.replace(5,11,"").append(" r2d2").toString();
+        System.out.println(sbd); // Hello r2d2
+        System.out.println(s.toUpperCase()); // HELLO R2D2
+    }
+}
+```
+
+`StringBuilder` and `StringBuffer` classes provide important methods that `String` class does not provide, such as `insert()`, `delete()` and `reverse()` methods. If you use numerous string manipulations in your code, you should use `StringBuilder` or `StringBuffer` because it is much faster and consumes less memory than `String`. For example, if you use `String` concatenation in a loop, it’s better to use `StringBuilder`.
+
+```java
+class SbdEx2 {
+ public static void main(String args[]){
+        StringBuilder sbd = new StringBuilder("0");
+        for (int i = 1; i < 100; i++) {
+            sbd.append(", "+i);
+        }
+    }
+}
+```
+
+`StringBuilder` class does not provide synchronization, which means instances of `StringBuilder` class cannot be shared between multiple threads. For `String` manipulations in a non-multi threaded environment, we should use `StringBuilder` because it is faster than `StringBuffer`.
+
+##### StringBuffer
+Just as the `StringBuilder` class, `StringBuffer` also creates a mutable `String`. And `StringBuffer` has the same methods as the `StringBuilder` class did. So the difference between the two is that the `StringBuffer` class is **thread-safe and synchronized**, which means instances of `StringBuffer` class can be shared between multiple threads. For `String` manipulations in multi-threaded environments, we should use `StringBuffer`.
+
+Here multiple threads access the hello() method, so StringBuffer must be used to ensure thread-safety.
+
+```java
+ class Test extends Thread  {  
+
+    public String hello(StringBuffer sbr) {
+        sbr.append("Hello World ");
+        return(sbr.toString());
+    }
+}
+
+ public class SbrEx {  
+    public static void main(String args[]) {
+      StringBuffer sbrObj = new StringBuffer();
+      Test thread1 = new Test(); 
+      thread1.start(); 
+      Test thread2 = new Test(); 
+      thread2.start(); 
+      System.out.println(thread1.hello(sbrObj));
+      System.out.println(thread2.hello(sbrObj));
+    }
+}
+```
+
+Here multiple threads access the `hello()` method, so `StringBuffer` must be used to ensure thread-safety.
+
+---
+
+#### 9 New Features in Java 11
+
+---
+
+##### Q1 - Why Java 11 so crucial ?
+##### A1.
+Java 11 is the second release of the long-term support (LTS) after Java 8. Since Java 11, Oracle JDK is no longer free for commercial use. You can use it in the development stages, but you need to buy a license to use it commercially. After Java 11, Oracle will not provide free long-term (LTS) support for any single Java version.
+
+##### Q2 - What is difference between Oracle JDK and OpenJDK? ?
+##### A2.
+Ever since Java 7, Java has been developed out in the open in the OpenJDK project. It's open source, but it's mainly driven by committers from Oracle, the owners of Java. But there are also many outside contributions from the likes of Red Hat, Twitter, and IBM. When you want to run Java, you have a choice to either use the OpenJDK releases, or to use the Oracle JDK release. The Oracle JDK release used to be a slightly extended and amended version of OpenJDK. The ultimate goal here is to have no differences between the Oracle JDK builds and the OpenJDK builds.
+
+The main difference between Oracle JDK and OpenJDK is that Oracle JDK incorporates some commercial features. Rather than stripping these features to get conversions between Oracle JDK and OpenJDK, Oracle has committed to open source these commercial features into OpenJDK. This process already started with Java 9 and 10 and is continued with Java 11.
+
+With Java 11, the goal of a convergence between the Oracle JDK and OpenJDK code bases have been achieved. there's some pretty big differences in licensing. OpenJDK is GPL 2 licensed, so it has a true open source license. Oracle JDK, on the other hand, has a proprietary license called the Oracle Binary Code License Agreement. Up until Java 10, you could use both OpenJDK and Oracle JDK in production free of charge. For Oracle JDK, you could buy optional support from Oracle. That's changing with Java 11. For OpenJDK there are no changes, you can still use the GPL 2 license builds. However, you can no longer use Oracle JDK free of charge in production.
+
+##### Q3 - Which commercial features are available as open source in Java 11?
+##### A3.
+One of the Oracle JDK commercial features that has been open sourced is Java Flight Recorder. In addition to Java Flight Recorder, Java Mission Control has also been open sourced.
+
+##### Q4 - What is Flight Recorder in Java 11?
+##### A4.
+Java Flight Recorder is an always-on, low-overhead, data collection framework that you can use to get metrics on your JVMs. It's implemented as a bounded circular buffer, which buffers internal JVM metrics for a configurable amount of minutes. The great thing about this feature is that you can leave it enabled on your production systems because it's so low overhead.
+
+##### Q5 - What is Java Mission Control in Java 11?
+##### A5.
+Java Mission Control is an application that can analyze the dumps that come from Java Flight Recorder, and give you a graphical overview of what's happening inside of a JVM.
+
+##### Q6 - How can I download the free version of Java 11?
+##### A6.
+You can download from [Java 11](https://jdk.java.net/11/). Download tar/zip, unzip them, install and set the environment variables to use java 11.
+
+##### Q7 - What are Java 11 Features?
+##### A7
+Below is a list of the main features included in Java 11 :
+* [181: Nest-Based Access Control](https://www.techgeeknext.com/java/java11-features#nbac)
+* [309: Dynamic Class-File Constants](https://www.techgeeknext.com/java/java11-features#dcfc)
+* [315: Improve Aarch64 Intrinsics](https://www.techgeeknext.com/java/java11-features#iai)
+* [318: Epsilon: A No-Op Garbage Collector](https://www.techgeeknext.com/java/java11-features#engc)
+* [320: Remove the Java EE and CORBA Modules](https://www.techgeeknext.com/java/java11-features#rjcm)
+* [321: HTTP Client (Standard)](https://www.techgeeknext.com/java/java11-features#hcs)
+* [323: Local-Variable Syntax for Lambda Parameters](https://www.techgeeknext.com/java/java11-features#plvslp)
+* [324: Key Agreement with Curve25519 and Curve448](https://www.techgeeknext.com/java/java11-features#kacc)
+* [327: Unicode 10](https://www.techgeeknext.com/java/java11-features#u10)
+* [328: Flight Recorder](https://www.techgeeknext.com/java/java11-features#fr)
+* [329: ChaCha20 and Poly1305 Cryptographic Algorithms](https://www.techgeeknext.com/java/java11-features#cpca)
+* [330: Launch Single-File Source-Code Programs](https://www.techgeeknext.com/java/java11-features#lsfscp)
+* [331: Low-Overhead Heap Profiling](https://www.techgeeknext.com/java/java11-features#lsfscp)
+* [332: Transport Layer Security (TLS) 1.3](https://www.techgeeknext.com/java/java11-features#tls)
+* [333: ZGC: A Scalable Low-Latency Garbage Collector(Experimental)](https://www.techgeeknext.com/java/java11-features#zgc)
+* [335: Deprecate the Nashorn JavaScript Engine](https://www.techgeeknext.com/java/java11-features#dnje)
+* [336: Deprecate the Pack200 Tools and API](https://www.techgeeknext.com/java/java11-features#dnje)
+
+##### 1. Type inference for the arguments of Lambda expressions
+One of the key features introduced in Java 10 was local variable type inference. It allowed the use of var as the type of the local variable instead of the actual type. The compiler inferred the type based on the value assigned to the variable.
+
+However, we could not use this feature with lambda parameters. For example, consider the following lambda. Here we explicitly specify the types of the parameters:
+
+> ```java
+> (String s1, String s2) -> s1 + s2
+> ```
+
+We could skip the parameter types and rewrite the lambda as:
+
+> ```java
+> (s1, s2) -> s1 + s2
+> ```
+
+Even Java 8 supported this. The logical extension to this in Java 10 would be:
+
+> ```java
+> (var s1, var s2) -> s1 + s2
+> ```
+
+However, Java 10 did not support this.
+
+Java 11 addresses this by supporting the above syntax. **This makes the usage of var uniform in both local variables and lambda parameters**.
+
+**Benefit**
+Why would we want to use var for lambda parameters when we could simply skip the types?
+
+One benefit of uniformity is that modifiers can be applied to local variables and lambda formals without losing brevity. For example, a common modifier is a type annotation:
+
+> ```java
+> (@Nonnull var s1, @Nullable var s2) -> s1 + s2
+> ```
+
+**We cannot use such annotations without specifying the types.**
+
+**Limitations**
+
+There are a few limitations of using var in lambda.
+
+For example, we cannot use var for some parameters and skip for others:
+
+> ```java
+> (var s1, s2) -> s1 + s2
+> ```
+
+Similarly, we cannot mix var with explicit types:
+
+> ```java
+> (var s1, String s2) -> s1 + s2
+> ```
+
+Finally, even though we can skip the parentheses in single parameter lambda:
+
+> ```java
+> s1 -> s1.toUpperCase
+> ```
+
+we cannot skip them while using var:
+
+> ```java
+> var s1 -> s1.toUpperCase   // WRONG: will result in compilation error
+>
+> var s1 -> s1.toUpperCase() // CORRECT
+>
+> ```
+
+All of the above three usages will result in compilation error.
+
+##### 2. Simplified launch of single file programs
+Before Java 11 -
+
+> ```java
+> javac HelloWorld.java
+> java HelloWorld
+> ```
+
+From Java 11 onwards -
+
+> ```java
+> java HelloWorld.java
+> ```
+
+This feature, in addition to JShell, complements the tools available to novice developers and also allows Oracle to upgrade Java to a lighter running language. This may illustrate its willingness to bring Java into the scripting language course in the future. Let’s wait and see!
+
+##### 3. Evolution of the http client api
+For users of the HTTP Client API introduced by Java 9 and updated by Java 10, be aware that its implementation has been almost entirely revised by Java 11. Oracle ensures that these revisions do not affect the API from a high-level standpoint, while improving a number of technical points as a result of community feedback.
+
+The implementation is now completely asynchronous. The data flow can now be easily tracked, from user requests to sockets. This should greatly reduce the complexity of the code and maximize the possibility to reuse HTTP / 1.1 and HTTP / 2.
+
+**The name of the API module and package is now java.net.http.**
+
+##### 4. APis improvements
+JDK 11 embeds a number of new classes and methods built into already existing modules. The list below is a non-exhaustive overview, highlighting the additions that seem appear to be, in my opinion the most important.
+
+* **`java.lang.String`:**
+    * `boolean isBlank()`: Returns true if the String is empty or composed only of whitespaces, otherwise false.
+    * `stream lines()`: Returns a stream of lines extracted from the String.
+    * `string repeat(int)`: returns a String that is the original String concatenated with itself n times.
+    * `String strip()`: returns a String free of trailing and leading whitespaces. To put it simply, strip () is the “Unicode-aware” version of trim () whose definition of whitespace dates back from the first versions of Java.
+    * `String stripLeading()`: Returns a String free of its leading whitespaces.
+    * `String stripTrailing()`: returns a String free of trailing whitespaces.
+
+* **`java.util.function.Predicate`:**
+    * `Predicate not(Predicate)`: Returns a Predicate which is the negation of the Predicate passed as an argument. Example to filter a list:
+
+* **`java.lang.CharSequence`:**
+    * `int compare(CharSequence, CharSequence)`: compares two instances of CharSequence in lexicographic order. Returns a negative, null or positive value.
+
+* **`java.lang.StringBuffer`/`java.lang.StrinBuilder`:**
+    * Both classes now have access to a new `compareTo()` method that takes a `StringBuffer`/`StringBuilder` argument and returns an `int`. The comparison logic follows the same lexicographic order as the new `int compare(CharSequence, CharSequence)` method of the `CharSequence` class.
+
+##### 5. Visibility management of nested classes attributes
+Java allows multiple classes to be declared in a single source file, such as nested classes. From the user’s point of view, however, they are generally considered to belong to the “same class”. And, therefore, users expect them to share a common access regime relative to their attributes.
+
+To preserve these expectations, compilers must extend private attribute access to classes in the same package by adding access bridges. An invocation of a private member is compiled into a call of a compiler-generated method (getter) in the target class, which in turn accesses the intended private member.
+
+For example, in the case of a NestedClass class, nested inside a NestingClass class, which needs to access one of the private attributes of the host class:
+
+The compiler separates the two classes and creates a public access method to nestingInt used bye the NestedClass class:
+
+These bridges subvert the encapsulation (private no longer has the exact same meaning) and can confuse users and tools. A formal notion of a group of nesting class files (or nest), where nest partners share a common access control mechanism, makes it possible to directly obtain the desired result in a simpler, more secure, and more transparent way.
+
+To easily connect nested classes and hosts in JDK 11, two new attributes have been added to the classes: NestHost (new host) and NestMembers (nest members).
+
+3 methods are also added to jave.lang.Class:
+
+* `Class getNestHost()`
+* `Class[] getNestMembers()`
+* `boolean isNestmateof(Class)`
+
+##### 6. Dynamic class-file constants
+This change is an extension of the class file format to support a new constants pool: `CONSTANT_Dynamic`.
+
+It seems contradictory for a value to be both constant and dynamic. However, you can essentially consider it as a final value in Java. The value of the constant is not defined at compile time (unlike other constants), but uses a bootstrap method to determine the value at run time. **The value is therefore dynamic, but since its value is only defined once, it is also constant**. This feature introduces a new class, `java.lang.invoke.ConstantBootstraps`, with nine new methods.
+
+##### 7. The epsilon garbage collector
+**The Epsilon garbage collector** is a little unusual in the sense that it **does not collect waste**! It will allocate memory, as needed, when instantiating new objects but will not recover any space occupied by unreferenced objects. This is a totally passive, openly experimental, “no-op” GC implementation. It is an isolated change, does not affect other GCs an makes minimal changes to the rest of the JVM. This GC is mainky useful when doing performance or memory allocation tests as wall as tasks with a very short lifecycle.
+
+##### 8. Unicode 10
+The JDK 11 has taken note of the arrival of Unicode 10, and therefore supports the new version of this standard. This version includes 8,518 new symbols (from Bitcoin to emojis through traditional Chinese, Arabic or Buddhist signs) that you can use with Java 11.
+
+##### 9.Deleted modules
+The Java EE and CORBA modules, after being deprecated in JAVA SE 9, were removed from JAVA SE Platform and JDK 11. The impacted modules are:
+
+* corba
+* transaction
+* activation
+* xml.bind
+* xml.ws
+* xml.ws.annotation
+
+JavaFX modules were also removed from JDK 11. These modules were part of previous Oracle JDKs, but absent from the latest OpenJDKs. However, do not panic! These modules are always accessible outside of the JDK.
+
