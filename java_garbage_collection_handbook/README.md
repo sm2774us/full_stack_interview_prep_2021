@@ -1422,7 +1422,6 @@ For this purpose, let us take a look at an example code:
 >   }
 > }
 > ```
->
 
 The code submits two jobs to run every 100 ms. Each job emulates objects with a specific lifespan: it creates objects, lets them leave for a predetermined amount of time and then forgets about them, allowing GC to reclaim the memory.
 
