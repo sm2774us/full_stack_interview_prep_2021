@@ -4,78 +4,89 @@
 			<style>
 			    span#token1 {
 					color: #7FFFD4;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token2 {
 					color: #6495ED;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token3 {
 					color: #F08080;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token4 {
 					color: #CD5C5C;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token5 {
 					color: #32CD32;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token6 {
 					color: #6B8E23;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token7 {
 					color: #98FB98;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token8 {
 					color: #EE82EE;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token9 {
 					color: #FF6347;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token10 {
 					color: #FFFF00;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
 				span#token11 {
 					color: #663399;
-					font-size:11px;
-					font-family:Tahoma;
+					font-size:15px;
+					font-weight: bold;
+					font-family:Helvetica;
 					border:1px solid black;
 					overflow:hidden;
 				}
