@@ -543,7 +543,7 @@ Following snippet contains the information about a GC event cleaning the Young G
 <div align="center">
 	<br>
 	<a href="./serial_gc_minor_gc.svg">
-		<img src="./serial_gc_minor_gc.svg" width="800" height="600">
+		<img src="./serial_gc_minor_gc.svg" width="800" height="400">
 	</a>
 	<br>
 </div>
@@ -608,7 +608,7 @@ The first of the two events indicates a GC event taking place in the Young Gener
 <div align="center">
 	<br>
 	<a href="./serial_gc_minor_gc.svg">
-		<img src="./parallel_gc_minor_gc.svg" width="800" height="600">
+		<img src="./parallel_gc_minor_gc.svg" width="800" height="400">
 	</a>
 	<br>
 </div>
