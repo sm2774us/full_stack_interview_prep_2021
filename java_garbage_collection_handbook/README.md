@@ -563,7 +563,7 @@ After understanding the first minor GC event, lets look into the second GC event
 <div align="center">
 	<br>
 	<a href="./serial_gc_full_gc.svg">
-		<img src="./serial_gc_full_gc.svg" width="800" height="600">
+		<img src="./serial_gc_full_gc.svg" width="800" height="800">
 	</a>
 	<br>
 </div>
@@ -624,7 +624,7 @@ After understanding how Parallel GC cleans the Young Generation, we are ready to
 <div align="center">
 	<br>
 	<a href="./parallel_gc_full_gc.svg">
-		<img src="./parallel_gc_full_gc.svg" width="800" height="600">
+		<img src="./parallel_gc_full_gc.svg" width="800" height="800">
 	</a>
 	<br>
 </div>
