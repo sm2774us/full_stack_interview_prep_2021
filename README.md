@@ -3,7 +3,7 @@ Here is a curated list of resources, question and exercises to go through that c
 The contents have been broken down into **4** phases, covering the basics from HTML/CSS to APIs. It would be best to cover these phases in chronological order to gain a broad understanding from the basics to the more advanced topics.
 
 # Phase 0
-
+---
 ### A) Ice Breaker Questions
 
 #### General Questions
@@ -41,7 +41,7 @@ you are not as gung-ho about web design as you thought you were.
 * [Wed Developer Roadmap 2021](https://github.com/kamranahmedse/developer-roadmap)
 
 # Phase 1
-
+---
 ### A) HTML
 
 * [10 Typical HTML Exercises](https://github.com/sm2774us/full_stack_interview_prep_2021#10-typical-html-exercises)
@@ -155,7 +155,24 @@ you are not as gung-ho about web design as you thought you were.
 
 ### Java
 
+* [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
+* [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
+* [Exp
+* [100+ Top Java Interview Questions and Answers in 2021](https://hackr.io/blog/java-interview-questions)
+* [160+ Top Java Interview Questions and Answers in 2021](https://www.mygreatlearning.com/blog/java-interview-questions/)
+* [10 Tricky Java Interview Questions with Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#10-trick-java-interview-questions-with-answers)
+
+### Spring
+
+
+### Spring Boot
+
+
+### Gradle
+
+
+### Encryption
 
 ---
 
@@ -8744,3 +8761,270 @@ Parametric mixins are same like standard mixins. The only difference is that par
 * No inline rules
 
 ---
+# Phase 5
+---
+
+# OOP
+
+![OOP](./assets/OOP.PNG)
+
+## Four Principles of OOP
+
+The four pillars of object oriented programming are:
+
+  * [Inheritance](https://github.com/sm2774us/full_stack_interview_prep_2021#inheritance): child classes inherit data and behaviors from parent class
+  * [Encapsulation](https://github.com/sm2774us/full_stack_interview_prep_2021#encapsulation): containing information in an object, exposing only selected information
+  * [Abstraction](https://github.com/sm2774us/full_stack_interview_prep_2021#abstraction): only exposing high level public methods for accessing an object
+  * [Polymorphism](https://github.com/sm2774us/full_stack_interview_prep_2021#polymorphism): many methods can do the same task
+
+#### Inheritance
+**Inheritance** allows classes to inherit features of other classes. Put another way, parent classes extend attributes and behaviors to child classes. **Inheritance supports reusability**.
+
+If basic attributes and behaviors are defined in a parent class, child classes can be created extending the functionality of the parent class, and adding additional attributes and behaviors.
+
+For example, herding dogs have the unique ability to herd animals. In other words, all herding dogs are dogs, but not all dogs are herding dogs. We represent this difference by creating a child class `HerdingDog` from the parent class `Dog`, and then add the unique `herd()` behavior.
+
+The benefits of inheritance are programs can create a generic parent class, and then create more specific child classes as needed. This simplifies overall programming, because instead of recreating the structure of the `Dog` class multiple times, **child classes automatically gain access to functionalities within their parent class**.
+
+#### Encapsulation
+**Encapsulation** means containing all important information **inside an object**, and only exposing selected information to the outside world. Attributes and behaviors are defined by code inside the class template.
+
+Then, when an object is instantiated from the class, the data and methods are encapsulated in that object. Encapsulation hides the internal software code implementation inside a class, and hides internal data of inside objects.
+
+Encapsulation requires defining some fields as private and some as public.
+
+  * **Private/ Internal interface:** methods and properties, accessible from other methods of the same class.
+  * **Public / External Interface:** methods and properties, accessible also from outside the class.
+
+Let’s use a car as a metaphor for encapsulation. The information the car shares with the outside world, using blinkers to indicate turns, are public interfaces. In contrast, the engine is hidden under the hood.
+
+It’s a private, internal interface. When you’re driving a car down the road, other drivers require information to make decisions, like whether you’re turning left or right. However, exposing internal, private data like the engine temperature, would just confuse other drivers.
+
+![ENCAPSULATION](./assets/ENCAPSULATION.PNG)
+
+Encapsulation adds **security**. Attributes and methods can be set to private, so they can’t be accessed outside the class. To get information about data in an object, public methods & properties are used to access or update data.
+
+> This adds a layer of security, where the developer chooses what data can be seen on an object by exposing that data through public methods in the class definition.
+>
+
+Within classes, most programming languages have public, protected, and private sections. Public is the limited selection of methods available to the outside world, or other classes within the program. Protected is only accessible to child classes.
+
+Private code can only be accessed from within that class. To go back to our dog/owner example, encapsulation is ideal so owners can’t access private information about other people’s dogs.
+
+The benefits of encapsulation are summarized here:
+
+  * **Adds security:** Only public methods and attributes are accessible from the outside
+  * **Protects against common mistakes:** Only public fields & methods accessible, so developers don’t accidentally change something dangerous
+  * **Protects IP:** Code is hidden in a class, only public methods are accessible by the outside developers
+  * **Supportable:** Most code undergoes updates and improvements
+  * **Hides complexity:** No one can see what’s behind the object’s curtain!
+
+#### Abstraction
+
+**Abstraction** means that the user interacts with only selected attributes and methods of an object. Abstraction uses simplified, high level tools, to access a complex object.
+
+* Using simple things to represent complexity
+* Hide complex details from user
+
+Abstraction is using **simple classes** to **represent complexity**. Abstraction is an extension of encapsulation. For example, you don’t have to know all the details of how the engine works to drive a car.
+
+A driver only uses a small selection of tools: like gas pedal, brake, steering wheel, blinker. The engineering is hidden from the driver. To make a car work, a lot of pieces have to work under the hood, but exposing that information to the driver would be a dangerous distraction.
+
+![ABSTRACTION](./assets/ABSTRACTION.PNG)
+
+Abstraction also serves an important security role. By only displaying selected pieces of data, and only allowing data to be **accessed through classes** and **modified through methods**, we protect the data from exposure. To continue with the car example, you wouldn’t want an open gas tank while driving a car.
+
+The benefits of abstraction are summarized below:
+
+  * Simple, high level user interfaces
+  * Complex code is hidden
+  * Security
+  * Easier software maintenance
+  * Code updates rarely change abstraction
+
+#### Polymorphism
+
+**Polymorphism** means designing objects to **share behaviors**. Using inheritance, objects can override shared parent behaviors, with specific child behaviors. Polymorphism allows the same method to execute different behaviors in two ways: method overriding and method overloading.
+
+##### Method Overriding
+
+**_Runtime_ _polymorphism_** uses **method overriding**. In method overriding, a child class can provide a different implementation than its parent class. In our dog example, we may want to give `TrackingDog` a specific type of bark different than the generic dog class.
+
+> Method overriding could create a `bark()` method in the child class that overrides the `bark()` method in the parent `Dog` class.
+>
+
+![Method-Overriding-Example](./assets/Method-Overriding-Example.PNG)
+
+##### Method Overloading
+
+**_Compile_ _Time_ _polymorphism_** uses **method overloading**. Methods or functions may have the same name, but a different number of parameters passed into the method call. Different results may occur depending on the number of parameters passed in.
+
+The benefits of Polymorphism are:
+
+* Objects of different types can be passed through the same interface
+* Method overriding
+* Method overloading
+
+---
+
+# SOLID
+
+* **Single responsibility principle** - A class should have only a single responsibility.
+
+* **Open/Closed principle - A class should be open for extension but closed for modification.
+
+* **Liskov Substitution Principle** - A type must be substitutable by its subtypes without altering the correctness of the application.
+
+* **Interface Segregation Principle** - Clients of a class should not be forced to depend on those of its methods that they don’t use.
+
+* **Dependency inversion principle** - High-level classes should not dependent on low-level classes. Both of them should depend on abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.
+
+---
+#### S - Single Responsibility Principle (SRP) <br />
+A class should have only a single responsibility.<br /><br />
+![srp](./assets/srp.JPG?raw=true "Single Responsibility Principle")
+
+---
+
+#### O - Open/Closed Principle (OCP) <br />
+A class should be open for extension but closed for modification. <br /><br />
+![ocp](./assets/ocp.JPG?raw=true "Open/Closed Principle")
+
+---
+
+#### L - Liskov’s Substitution Principle (LSP) <br />
+A type must be substitutable by its subtypes without altering the correctness of the application. <br /><br />
+![lsp](./assets/lsp.JPG?raw=true "Liskov's Substitution Principle")
+
+---
+
+#### I - Interface Segregation Principle (ISP) <br />
+Clients of a class should not be forced to depend on those of its methods that they don’t use.<br /><br />
+![isp](./assets/isp.JPG?raw=true "Interface Segregation Principle")
+
+---
+
+#### D - Dependency Inversion Principle (DIP)<br />
+High-level classes should not dependent on low-level classes. Both of them should depend on abstractions.<br />
+Abstractions should not depend upon details. Details should depend upon
+abstractions.<br />
+![dip](./assets/dip.JPG?raw=true "Dependency Inversion Principle")
+
+---
+
+### SOLID Principles Check List
+- Do methods in the class have similar responsibilities? (SRP)
+- Are there any method in the class that functions different based on different variables? (OCP)
+- Are there any functionless methods/properties which comes from base class/interface in your derived classes? (LSP & ISP)
+- Are there initiations of non-abstract objects in a high-level class? (DIP)
+
+---
+
+#### 10 Tricky Java Interview Questions with Answers
+
+---
+
+##### Q1. What is the output of the given Java code?
+```java
+public class Test {
+ public static void main(String[] args) {
+  method(null);
+ }
+ public static void method(Object o) {
+  System.out.println("Object method");
+ }
+ public static void method(String s) {
+  System.out.println("String method");
+ }
+}
+```
+
+##### A1.
+It will print “String method”. First of all, null is not an object in Java. But we know that we can assign null to any object reference type in Java. Java String is also an object of the class java.lang.String. Here, the Java compiler chooses to call the overloaded method with the most specific parameters. Which would be String because the String class is more specific than the Object class.
+
+##### Q2 — What will be the output of the given Java code?
+```java
+public class Test{
+public static void main(String[] args){
+  Integer num1 = 100;
+  Integer num2 = 100;
+  if(num1==num2){
+   System.out.println("num1 == num2");
+  }
+  else{
+   System.out.println("num1 != num2");
+  }
+ }
+}
+```
+
+##### A2.
+It will print “num1 == num2”. Whenever two different object references are compared using “==,” the value is always “false.” But here, because of the Integer Auto-Unboxing, num1 and num2 are converted to their primitive int values. Thus num1==num2 returns “true”. Integer Auto-Unboxing happens only for values between -128 and 127.
+
+##### Q3 — How does Garbage Collection prevent a Java application from going out of memory?
+
+##### A3.
+Java Garbage Collector does not prevent a Java application from going out of memory. It simply cleans the unused memory when an object is out of scope and no longer needed. As a result, garbage collection is not guaranteed to prevent a Java app from going out of memory.
+
+##### Q4 — Is Java “pass-by-reference” or “pass-by-value”?
+
+##### A4.
+Java is always “pass-by-value”. However, when we pass the value of an object, we pass the reference to it because the variables store the object reference, not the object itself. But this isn’t “pass-by-reference.” This could be confusing for beginners.
+
+##### Q5 — How many String objects are created by the below code?
+```java
+public class Test{
+ public static void main(String[] args){
+   String s = new String("Hello World");
+ }
+}
+```
+
+##### A5.
+Two String objects are created. When the new operator is used to create a String object, if the object does not exist in the Java String Pool, it will first be created in it, and then in the heap memory as well.
+
+##### Q6 — What is the output of the below Java code?
+```java
+public class Test{
+ public static void main(String[] arr){
+    System.out.println(0.1*3 == 0.3);
+    System.out.println(0.1*2 == 0.2);
+ }
+}
+```
+
+##### A6.
+The first print statement prints “false” and the second prints “true”. This happens simply because of the rounding error in floating-point numbers. Only numbers that are powers of 2 can be represented precisely by a simple binary representation. Numbers that do not correspond to a power of 2 must be rounded to fit into a limited number of bits. Here, because Java uses double to represent decimal values, only 64 bits are available to represent the number. Therefore, `0.1*3` would not be equal to `0.3`.
+
+##### Q7 — Is it possible to override or overload a static method in Java?
+
+##### A7.
+It’s possible to overload static Java methods, but it’s not possible to override them. You can write another static method with the same signature in the subclass, but it’s not going to override the superclass method. It’s called method hiding in Java.
+
+##### Q8 — What’s the most reliable way to test whether two double values are equal?
+
+##### A8.
+The most reliable and accurate way to determine whether two double values are equal to each other is to use Double.compare() and test it against 0.
+```java
+Double.compare(d1, d2) == 0
+```
+
+##### Q9 — Will the finally block be executed if the try or catch block executes a return statement?
+
+##### A9.
+Yes, the finally block will still be executed even if a return statement was executed in a try or catch block. This is a very popular and tricky Java question. **The only way we can stop finally block from being executed is to use the `System.exit()` method**.
+
+##### Q10 — What happens when we run the below Java code?
+```java
+public class Test{ 
+ public static void main(String[] args){ 
+  System.out.println("main method");
+ } 
+ public static void main(String args){ 
+  System.out.println("Overloaded main method");
+ } 
+}
+```
+
+##### A10.
+It prints “main method”. There will be no error or exception because the main method can be overloaded in Java. It has to be called from within the main method to be executed just like any other method.
