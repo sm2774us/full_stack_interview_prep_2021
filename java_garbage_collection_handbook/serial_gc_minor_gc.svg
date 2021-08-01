@@ -4,7 +4,6 @@
 			<style>
 			    span#token1 {
 					color: #7FFFD4;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -12,7 +11,6 @@
 				}
 				span#token2 {
 					color: #6495ED;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -20,7 +18,6 @@
 				}
 				span#token3 {
 					color: #F08080;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -28,7 +25,6 @@
 				}
 				span#token4 {
 					color: #CD5C5C;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -36,7 +32,6 @@
 				}
 				span#token5 {
 					color: #32CD32;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -44,7 +39,6 @@
 				}
 				span#token6 {
 					color: #6B8E23;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -52,7 +46,6 @@
 				}
 				span#token7 {
 					color: #98FB98;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -60,7 +53,6 @@
 				}
 				span#token8 {
 					color: #EE82EE;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -68,7 +60,6 @@
 				}
 				span#token9 {
 					color: #FF6347;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -76,7 +67,6 @@
 				}
 				span#token10 {
 					color: #FFFF00;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -84,7 +74,6 @@
 				}
 				span#token11 {
 					color: #663399;
-					font-size: 20px;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
