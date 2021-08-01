@@ -959,7 +959,7 @@ The process of copying these is called Evacuation, and it works in pretty much t
 <div align="center">
 	<br>
 	<a href="./g1_gc_evacuation_pause_fully_young.svg">
-		<img src="./g1_gc_evacuation_pause_fully_young.svg" width="1000" height="1000">
+		<img src="./g1_gc_evacuation_pause_fully_young.svg" width="1000" height="1200">
 	</a>
 	<br>
 </div>
@@ -969,7 +969,7 @@ Most of the heavy-lifting is done by multiple dedicated GC worker threads. Their
 <div align="center">
 	<br>
 	<a href="./g1_gc_evacuation_pause_fully_young_gc_worker_threads.svg">
-		<img src="./g1_gc_evacuation_pause_fully_young_gc_worker_threads.svg" width="1000" height="1000">
+		<img src="./g1_gc_evacuation_pause_fully_young_gc_worker_threads.svg" width="1000" height="1200">
 	</a>
 	<br>
 </div>
@@ -979,7 +979,7 @@ Additionally, there are some miscellaneous activities that are performed during 
 <div align="center">
 	<br>
 	<a href="./g1_gc_evacuation_pause_fully_young_miscellaneous_activities.svg">
-		<img src="./g1_gc_evacuation_pause_fully_young_miscellaneous_activities.svg" width="1000" height="1000">
+		<img src="./g1_gc_evacuation_pause_fully_young_miscellaneous_activities.svg" width="1000" height="1200">
 	</a>
 	<br>
 </div>
