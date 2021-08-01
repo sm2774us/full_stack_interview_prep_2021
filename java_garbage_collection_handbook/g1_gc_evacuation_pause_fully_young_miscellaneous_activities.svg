@@ -31,7 +31,7 @@
 					overflow:hidden;
 				}
 			</style>
-			<p><span id="token1">[Other: 0.4 ms]<sup>1</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Choose CSet: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token2">[Ref Proc: 0.2 ms]<sup>2</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token3">[Ref Enq: 0.0 ms]<sup>3</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Redirty Cards: 0.1 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Humongous Register: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Humongous Reclaim: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token4">[Free CSet: 0.0 ms]<sup>4</sup></span></p>
+			<p><span id="token1">[Other: 0.4 ms]<sup>1</sup></span><br />    <code>[Choose CSet: 0.0 ms]</code><br />    <span id="token2">[Ref Proc: 0.2 ms]<sup>2</sup></span><br />    <span id="token3">[Ref Enq: 0.0 ms]<sup>3</sup></span><br />    <code>[Redirty Cards: 0.1 ms]</code><br />    <code>[Humongous Register: 0.0 ms]</code><br />    <code>[Humongous Reclaim: 0.0 ms]</code><br />    <span id="token4">[Free CSet: 0.0 ms]<sup>4</sup></span></p>
 			<ol>
 				<li><span id="token1">[Other: 0.4 ms]</span> &#8211; Miscellaneous other activities, many of which are also parallelized</li>
 				<li><span id="token2">[Ref Proc: 0.2 ms]</span> &#8211; The time it took to process non-strong references: clear them or determine that no clearing is needed.</li>
