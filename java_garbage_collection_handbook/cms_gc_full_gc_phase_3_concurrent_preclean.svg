@@ -28,7 +28,7 @@
 				}				
 			</style>
 			<pre>2015-05-26T16:23:07.357-0200: 64.460: [CMS-concurrent-preclean-start]
-		2015-05-26T16:23:07.373-0200: 64.476: [<span id="token1">CMS-concurrent-preclean<sup>1</sup></span>: <span id="token2">0.016/0.016 secs<sup>2</sup></span>]</pre>
+	2015-05-26T16:23:07.373-0200: 64.476: [<span id="token1">CMS-concurrent-preclean<sup>1</sup></span>: <span id="token2">0.016/0.016 secs<sup>2</sup></span>]</pre>
 			<div id="just-line-break"></div>
 			<pre><span id="token3">[Times: user=0.02 sys=0.00, real=0.02 secs]<sup>3</sup></span></pre>
 			<ol>
