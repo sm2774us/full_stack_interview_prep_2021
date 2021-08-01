@@ -3,7 +3,7 @@
 		<div xmlns="http://www.w3.org/1999/xhtml">
 			<style>
 			    span#token1 {
-					color: #7FFFD4;
+					color: #0000FF;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -45,7 +45,7 @@
 					overflow:hidden;
 				}
 				span#token7 {
-					color: #98FB98;
+					color: #8B4513;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
@@ -66,7 +66,7 @@
 					overflow:hidden;
 				}
 				span#token10 {
-					color: #FFFF00;
+					color: #FFA500;
 					font-weight: bold;
 					font-family:Helvetica;
 					border:1px solid black;
