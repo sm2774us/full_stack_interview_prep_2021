@@ -540,20 +540,14 @@ Such short snippet from the GC logs exposes a lot of information about what is t
 
 Following snippet contains the information about a GC event cleaning the Young Generation:
 
-<p class="code-line"><span class="node" style="color:aqua;">2015-05-26T14:45:37.987-0200<sup>1</sup></span>:<span class="node">151.126<sup>2</sup></span>:[<span class="node">GC<sup>3</sup></span>(<span class="node">Allocation Failure<sup>4</sup></span>) 151.126: [<span class="node">DefNew<sup>5</sup></span>:<span class="node">629119K-&gt;69888K<sup>6</sup></span><span class="node">(629120K)<sup>7</sup></span>, 0.0584157 secs]<span class="node">1619346K-&gt;1273247K<sup>8</sup></span><span class="node">(2027264K)<sup>9</sup></span>,<span class="node">0.0585007 secs<sup>10</sup></span>]<span class="node">[Times: user=0.06 sys=0.00, real=0.06 secs]<sup>11</sup></span></p>
-<ol class="code-line-components">
-<li class="description"><span class="node" style="color:aqua;">2015-05-26T14:45:37.987-0200</span> &#8211; Time when the GC event started.</li>
-<li class="description"><span class="node">151.126</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
-<li class="description"><span class="node">GC</span> &#8211; Flag to distinguish between Minor &amp; Full GC. This time it is indicating that this was a Minor GC.</li>
-<li class="description"><span class="node">Allocation Failure</span> &#8211; Cause of the collection. In this case, the GC is triggered due to a data structure not fitting into any region in the Young Generation.</li>
-<li class="description"><span class="node">DefNew</span> &#8211; Name of the garbage collector used. This cryptic name stands for the single-threaded mark-copy stop-the-world garbage collector used to clean Young generation.</li>
-<li class="description"><span class="node">629119K-&gt;69888K</span> &#8211; Usage of the Young Generation before and after collection.</li>
-<li class="description"><span class="node">(629120K)</span> &#8211; Total size of the Young Generation.</li>
-<li class="description"><span class="node">1619346K-&gt;1273247K</span> &#8211; Total used heap before and after collection.</li>
-<li class="description"><span class="node">(2027264K)</span> &#8211; Total available heap.</li>
-<li class="description"><span class="node">0.0585007 secs</span> &#8211; Duration of the GC event in seconds.</li>
-<li class="description"><span class="node">[Times: user=0.06 sys=0.00, real=0.06 secs]</span> &#8211; Duration of the GC event, measured in different categories:
-<ul>
+<div align="center">
+	<br>
+	<a href="./header.svg">
+		<img src="./header.svg" width="800" height="400">
+	</a>
+	<br>
+</div>
+
 
 ##### Full GC
 

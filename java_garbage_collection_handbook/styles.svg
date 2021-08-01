@@ -1,0 +1,61 @@
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #7FFFD4;
+				}
+				span#token2 {
+					color: #6495ED;
+				}
+				span#token3 {
+					color: #F08080;
+				}
+				span#token4 {
+					color: #CD5C5C;
+				}
+				span#token5 {
+					color: #32CD32;
+				}
+				span#token6 {
+					color: #6B8E23;
+				}
+				span#token7 {
+					color: #98FB98;
+				}
+				span#token8 {
+					color: #EE82EE;
+				}
+				span#token9 {
+					color: #FF6347;
+				}
+				span#token10 {
+					color: #FFFF00;
+				}
+				span#token11 {
+					color: #663399;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T14:45:37.987-0200<sup>1</sup></span>:<span id="token2">151.126<sup>2</sup></span>:[<span id="token3">GC<sup>3</sup></span>(<span id="token4">Allocation Failure<sup>4</sup></span>) 151.126: [<span id="token5">DefNew<sup>5</sup></span>:<span id="token6">629119K-&gt;69888K<sup>6</sup></span><span id="token7">(629120K)<sup>7</sup></span>, 0.0584157 secs]<span id="token8">1619346K-&gt;1273247K<sup>8</sup></span><span id="token9">(2027264K)<sup>9</sup></span>,<span id="token10">0.0585007 secs<sup>10</sup></span>]<span id="token11">[Times: user=0.06 sys=0.00, real=0.06 secs]<sup>11</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T14:45:37.987-0200</span> &#8211; Time when the GC event started.</li>
+				<li><span id="token2">151.126</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
+				<li><span id="token3">GC</span> &#8211; Flag to distinguish between Minor &amp; Full GC. This time it is indicating that this was a Minor GC.</li>
+				<li><span id="token4">Allocation Failure</span> &#8211; Cause of the collection. In this case, the GC is triggered due to a data structure not fitting into any region in the Young Generation.</li>
+				<li><span id="token5">DefNew</span> &#8211; Name of the garbage collector used. This cryptic name stands for the single-threaded mark-copy stop-the-world garbage collector used to clean Young generation.</li>
+				<li><span id="token6">629119K-&gt;69888K</span> &#8211; Usage of the Young Generation before and after collection.</li>
+				<li><span id="token7">(629120K)</span> &#8211; Total size of the Young Generation.</li>
+				<li><span id="token8">1619346K-&gt;1273247K</span> &#8211; Total used heap before and after collection.</li>
+				<li><span id="token9">(2027264K)</span> &#8211; Total available heap.</li>
+				<li><span id="token10">0.0585007 secs</span> &#8211; Duration of the GC event in seconds.</li>
+				<li><span id="token11">[Times: user=0.06 sys=0.00, real=0.06 secs]</span> &#8211; Duration of the GC event, measured in different categories:				
+					<ul>
+						<li>user &#8211; Total CPU time that was consumed by the garbage collector threads during this collection</li>
+						<li>sys &#8211; Time spent in OS calls or waiting for system event</li>
+						<li>real &#8211; Clock time for which your application was stopped. As Serial Garbage Collector always uses just a single thread, real time is thus equal to the sum of user and system times.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>
