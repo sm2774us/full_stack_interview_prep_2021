@@ -1,0 +1,105 @@
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T14:45:59.690-0200<sup>1</sup></span>: <span id="token2">172.829<sup>2</sup></span>:[GC (Allocation Failure) 172.829:<span id="token3"> [DefNew: 629120K->629120K(629120K), 0.0000372 secs<sup>3</sup></span>]172.829:[<span id="token4">Tenured<sup>4</sup></span>: <span id="token5">1203359K->755802K <sup>5</sup></span><span id="token6">(1398144K) <sup>6</sup></span>,<span id="token7">0.1855567 secs<sup>7</sup></span>] <span id="token8">1832479K->755802K<sup>8</sup></span><span id="token9">(2027264K)<sup>9</sup></span>,<span id="token10">[Metaspace: 6741K->6741K(1056768K)]<sup>10</sup></span> <span id="token11">[Times: user=0.18 sys=0.00, real=0.18 secs]<sup>11</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T14:45:59.690-0200</span> &#8211; Time when the GC event started.</li>
+				<li><span id="token2">172.829</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
+				<li><span id="token3">[DefNew: 629120K->629120K(629120K), 0.0000372 secs</span> &#8211; Similar to the previous example, a minor garbage collection in the Young Generation happened during this event due to Allocation Failure. For this collection the same DefNew collector was run as before and it decreased the usage of the Young Generation from 629120K to 0. Notice that JVM reports this incorrectly due to buggy behavior and instead reports the Young Generation as being completely full. This collection took 0.0000372 seconds. </li>
+				<li><span id="token4">Tenured</span> &#8211; Name of the garbage collector used to clean the Old space. The name Tenured indicates a single-threaded stop-the-world mark-sweep-compact garbage collector being used.</li>
+				<li><span id="token5">1203359K->755802K </span> &#8211; Usage of Old generation before and after the event.</li>
+				<li><span id="token6">(1398144K) </span> &#8211; Total capacity of the Old generation.</li>
+				<li><span id="token7">0.1855567 secs</span> &#8211; Time it took to clean the Old Generation.</li>
+				<li><span id="token8">1832479K->755802K</span> &#8211; Usage of the whole heap before and after the collection of the Young and Old Generations.</li>
+				<li><span id="token9">(2027264K)</span> &#8211; Total heap available for the JVM.</li>
+				<li><span id="token10">[Metaspace: 6741K->6741K(1056768K)]</span> &#8211; Similar information about Metaspace collection. As seen, no garbage was collected in Metaspace during the event.</li>
+				<li><span id="token11">[Times: user=0.18 sys=0.00, real=0.18 secs]</span> &#8211; Duration of the GC event, measured in different categories:
+					<ul>
+						<li>user &#8211; Total CPU time that was consumed by Garbage Collector threads during this collection</li>
+						<li>sys &#8211; Time spent in OS calls or waiting for system event</li>
+						<li>real &#8211; Clock time for which your application was stopped. As Serial Garbage Collector always uses just a single thread, real time is thus equal to the sum of user and system times.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

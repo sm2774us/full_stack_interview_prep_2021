@@ -548,16 +548,93 @@ Following snippet contains the information about a GC event cleaning the Young G
 	<br>
 </div>
 
+From the above snippet we can understand exactly what was happening with the memory consumption inside JVM during the GC event. Before this collection, heap usage totaled at 1,619,346K. Out of this, the Young Generation consumed 629,119K. From this we can calculate the Old Generation usage being equal to 990,227K.
+
+A more important conclusion is hidden in the next batch of numbers indicating that, after the collection, Young Generation usage decreased by 559,231K but total heap usage decreased only by 346,099K. From this we can again derive that 213,132K of objects were promoted from the Young Generation to the Old Generation.
+
+This GC event is also illustrated with the following snapshots showing memory usage right before the GC started and right after it finished:
+
+![serial-gc-in-young-generation](./assets/serial-gc-in-young-generation.png)
 
 ##### Full GC
+
+After understanding the first minor GC event, lets look into the second GC event in the logs:
+
+<div align="center">
+	<br>
+	<a href="./serial_gc_full_gc.svg">
+		<img src="./serial_gc_full_gc.svg" width="800" height="400">
+	</a>
+	<br>
+</div>
+
+The difference with Minor GC is evident – in addition to the Young Generation, during this GC event the Old Generation and Metaspace were also cleaned. The layout of the memory before and after the event would look like the situation in the following picture:
+
+![serial-gc-in-old-gen-java](./assets/serial-gc-in-old-gen-java.png)
 
 #### Parallel GC
 
+This combination of Garbage Collectors uses [mark-copy](#copy) in the Young Generation and [mark-sweep-compact](#compact) in the Old Generation. Both Young and Old collections trigger stop-the-world events, stopping all application threads to perform garbage collection. Both collectors run marking and copying / compacting phases using multiple threads, hence the name ‘Parallel’. Using this approach, collection times can be considerably reduced.
+
+The number of threads used during garbage collection is configurable via the command line parameter `-XX:ParallelGCThreads=NNN`. The default value is equal to the number of cores in your machine.
+
+Selection of Parallel GC is done via the specification of any of the following combinations of parameters in the JVM startup script:
+
+> ```bash
+> java -XX:+UseParallelGC com.mypackages.MyExecutableClass
+> java -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
+> java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
+> ```
+>
+
+Parallel Garbage Collector is suitable on multi-core machines in cases where your primary goal is to increase throughput. Higher throughput is achieved due to more efficient usage of system resources:
+
+  * during collection, all cores are cleaning the garbage in parallel, resulting in shorter pauses
+  * between garbage collection cycles neither of the collectors is consuming any resources
+
+On the other hand, as all phases of the collection have to happen without any interruptions, these collectors are still susceptible to long pauses during which your application threads are stopped. So if latency is your primary goal, you should check the next combinations of garbage collectors.
+
+Let us now review how garbage collector logs look like when using Parallel GC and what useful information one can obtain from there. For this, let’s look again at the garbage collector logs that expose once more one minor and one major GC pause:
+
+> ```bash
+> 2015-05-26T14:27:40.915-0200: 116.115: [GC (Allocation Failure) [PSYoungGen: 2694440K->1305132K(2796544K)] 9556775K->8438926K(11185152K), 0.2406675 secs] [Times: user=1.77 sys=0.01, real=0.24 secs]
+> 2015-05-26T14:27:41.155-0200: 116.356: [Full GC (Ergonomics) [PSYoungGen: 1305132K->0K(2796544K)] [ParOldGen: 7133794K->6597672K(8388608K)] 8438926K->6597672K(11185152K), [Metaspace: 6745K->6745K(1056768K)], 0.9158801 secs] [Times: user=4.49 sys=0.64, real=0.92 secs]
+> ```
+
 ##### Minor GC
+
+The first of the two events indicates a GC event taking place in the Young Generation:
+
+<div align="center">
+	<br>
+	<a href="./serial_gc_minor_gc.svg">
+		<img src="./parallel_gc_minor_gc.svg" width="800" height="400">
+	</a>
+	<br>
+</div>
+
+So, in short, the total heap consumption before the collection was 9,556,775K. Out of this Young generation was 2,694,440K. This means that used Old generation was 6,862,335K. After the collection young generation usage decreased by 1,389,308K, but total heap usage decreased only by 1,117,849K. This means that 271,459K was promoted from Young generation to Old.
+
+![ParallelGC-in-Young-Generation-Java](./assets/ParallelGC-in-Young-Generation-Java.png)
 
 ##### Full GC
 
+After understanding how Parallel GC cleans the Young Generation, we are ready to look at how the whole heap is being cleaned by analyzing the next snippet from the GC logs:
+
+<div align="center">
+	<br>
+	<a href="./parallel_gc_full_gc.svg">
+		<img src="./parallel_gc_full_gc.svg" width="800" height="400">
+	</a>
+	<br>
+</div>
+
+Again, the difference with Minor GC is evident – in addition to the Young Generation, during this GC event the Old Generation and Metaspace were also cleaned. The layout of the memory before and after the event would look like the situation in the following picture:
+
+![Java-ParallelGC-in-Old-Generation](./assets/Java-ParallelGC-in-Old-Generation.png)
+
 #### Concurrent Mark and Sweep
+
 
 ##### Minor GC
 

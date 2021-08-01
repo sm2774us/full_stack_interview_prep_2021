@@ -1,0 +1,121 @@
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token12 {
+					color: #800000;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token13 {
+					color: #B8860B;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}				
+			</style>
+			<p><span id="token1">2015-05-26T14:27:41.155-0200<sup>1</sup></span>:<span id="token2">116.356<sup>2</sup></span>:[<span id="token3">Full GC<sup>3</sup></span> (<span id="token4">Ergonomics<sup>4</sup></span>)<span id="token5">[PSYoungGen: 1305132K-&gt;0K(2796544K)]<sup>5</sup></span>[<span id="token6">ParOldGen<sup>6</sup></span>:<span id="token7">7133794K-&gt;6597672K <sup>7</sup></span><span id="token8">(8388608K)<sup>8</sup></span>] <span id="token9">8438926K-&gt;6597672K<sup>9</sup></span><span id="token10">(11185152K)<sup>10</sup></span>, <span id="token11">[Metaspace: 6745K-&gt;6745K(1056768K)] <sup>11</sup></span>, <span id="token12">0.9158801 secs<sup>12</sup></span>, <span id="token13">[Times: user=4.49 sys=0.64, real=0.92 secs]<sup>13</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T14:27:41.155-0200</span> &#8211; Time when the GC event started</li>
+				<li><span id="token2">116.356</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds. In this case we can see the event started right after the previous Minor GC finished.</li>
+				<li><span id="token3">Full GC</span> &#8211; Flag indicating that the event is Full GC event cleaning both the Young and Old generations.</li>
+				<li><span id="token4">Ergonomics</span> &#8211; Reason for the GC taking place. This indicates that the JVM internal ergonomics decided this is the right time to collect some garbage.</li>
+				<li><span id="token5">[PSYoungGen: 1305132K-&gt;0K(2796544K)]</span> &#8211; Similar to previous example, a parallel mark-copy stop-the-world garbage collector named “PSYoungGen” was used to clean the Young Generation. Usage of Young Generation shrank from 1305132K to 0, which is the typical result of a Full GC.</li>
+				<li><span id="token6">ParOldGen</span> &#8211; Type of the collector used to clean the Old Generation. In this case, parallel mark-sweep-compact stop-the-world garbage collector named ParOldGen was used.</li>
+				<li><span id="token7">7133794K-&gt;6597672K </span> &#8211; Usage of the Old Generation before and after the collection</li>
+				<li><span id="token8">(8388608K)</span> &#8211; Total size of the Old Generation</li>
+				<li><span id="token9">8438926K-&gt;6597672K</span> &#8211; Usage of the whole heap before and after the collection.</li>
+				<li><span id="token10">(11185152K)</span> &#8211; Total heap available</li>
+				<li><span id="token11">[Metaspace: 6745K-&gt;6745K(1056768K)] </span> &#8211; Similar information about Metaspace region. As we can see, no garbage was collected in Metaspace during this event.</li>
+				<li><span id="token12">0.9158801 secs</span> &#8211; Duration of the GC event in seconds</li>
+				<li><span id="token13">[Times: user=4.49 sys=0.64, real=0.92 secs]</span> &#8211; Duration of the GC event, measured in different categories:
+					<ul>
+						<li>user &#8211; Total CPU time that was consumed by Garbage Collector threads during this collection</li>
+						<li>sys &#8211; Time spent in OS calls or waiting for system event</li>
+						<li>real &#8211; Clock time for which your application was stopped. With Parallel GC this number should be close to (user time + system time) divided by the number of threads used by Garbage Collector. In this particular case 8 threads were used. Note that due to some activities not being parallelizable, it always exceeds the ratio by a certain amount.</li>
+					</ul>
+				</li>
+			</ol>	
+		</div>
+	</foreignObject>
+</svg>

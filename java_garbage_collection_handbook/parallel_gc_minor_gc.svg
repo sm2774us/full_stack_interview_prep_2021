@@ -1,0 +1,105 @@
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T14:27:40.915-0200<sup>1</sup></span>: <span id="token2">116.115<sup>2</sup></span>:[<span id="token3">GC<sup>3</sup></span>(<span id="token4">Allocation Failure<sup>4</sup></span>)[<span id="token5">PSYoungGen<sup>5</sup></span>: <span id="token6">2694440K-&gt;1305132K<sup>6</sup></span><span id="token7">(2796544K)<sup>7</sup></span>]<span id="token8">9556775K-&gt;8438926K<sup>8</sup></span><span id="token9">(11185152K)<sup>9</sup></span>, <span id="token10">0.2406675 secs<sup>10</sup></span>]<span id="token11">[Times: user=1.77 sys=0.01, real=0.24 secs]<sup>11</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T14:27:40.915-0200</span> &#8211; Time when the GC event started.</li>
+				<li><span id="token2">116.115</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
+				<li><span id="token3">GC</span> &#8211; Flag to distinguish between Minor &amp; Full GC. This time it is indicating that this was a Minor GC.</li>
+				<li><span id="token4">Allocation Failure</span> &#8211; Cause of the collection. In this case, the GC is triggered due to a data structure not fitting into any region in the Young Generation.</li>
+				<li><span id="token5">PSYoungGen</span> &#8211; Name of the garbage collector used, representing a parallel mark-copy stop-the-world garbage collector used to clean the Young generation.</li>
+				<li><span id="token6">2694440K-&gt;1305132K</span> &#8211; usage of the Young Generation before and after collection</li>
+				<li><span id="token7">(2796544K)</span> &#8211; Total size of the Young Generation</li>
+				<li><span id="token8">9556775K-&gt;8438926K</span> &#8211; Total heap usage before and after collection</li>
+				<li><span id="token9">(11185152K)</span> &#8211; Total available heap</li>
+				<li><span id="token10">0.2406675 secs</span> &#8211; Duration of the GC event in seconds</li>
+				<li><span id="token11">[Times: user=1.77 sys=0.01, real=0.24 secs]</span> &#8211; Duration of the GC event, measured in different categories:
+					<ul>
+						<li>user &#8211; Total CPU time that was consumed by Garbage Collector threads during this collection</li>
+						<li>sys &#8211; Time spent in OS calls or waiting for system event</li>
+						<li>real &#8211; Clock time for which your application was stopped. With Parallel GC this number should be close to (user time + system time) divided by the number of threads used by Garbage Collector. In this particular case 8 threads were used. Note that due to some activities not being parallelizable, it always exceeds the ratio by a certain amount.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>
