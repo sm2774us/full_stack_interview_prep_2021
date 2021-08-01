@@ -786,7 +786,7 @@ In the illustration, a reference pointing away from the “Current object” was
 <div align="center">
 	<br>
 	<a href="./cms_gc_full_gc_phase_2_concurrent_mark.svg">
-		<img src="./cms_gc_full_gc_phase_2_concurrent_mark.svg" width="800" height="600">
+		<img src="./cms_gc_full_gc_phase_2_concurrent_mark.svg" width="1000" height="600">
 	</a>
 	<br>
 </div>
