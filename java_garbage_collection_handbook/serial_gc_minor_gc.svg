@@ -4,47 +4,80 @@
 			<style>
 			    span#token1 {
 					color: #7FFFD4;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token2 {
 					color: #6495ED;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token3 {
 					color: #F08080;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token4 {
 					color: #CD5C5C;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token5 {
 					color: #32CD32;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token6 {
 					color: #6B8E23;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token7 {
 					color: #98FB98;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token8 {
 					color: #EE82EE;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token9 {
 					color: #FF6347;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token10 {
 					color: #FFFF00;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 				span#token11 {
 					color: #663399;
-					text-shadow: 2px 2px 4px #000000;
+					font-size:11px;
+					font-family:Tahoma;
+					border:1px solid black;
+					overflow:hidden;
 				}
 			</style>
 			<p><span id="token1">2015-05-26T14:45:37.987-0200<sup>1</sup></span>:<span id="token2">151.126<sup>2</sup></span>:[<span id="token3">GC<sup>3</sup></span>(<span id="token4">Allocation Failure<sup>4</sup></span>) 151.126: [<span id="token5">DefNew<sup>5</sup></span>:<span id="token6">629119K-&gt;69888K<sup>6</sup></span><span id="token7">(629120K)<sup>7</sup></span>, 0.0584157 secs]<span id="token8">1619346K-&gt;1273247K<sup>8</sup></span><span id="token9">(2027264K)<sup>9</sup></span>,<span id="token10">0.0585007 secs<sup>10</sup></span>]<span id="token11">[Times: user=0.06 sys=0.00, real=0.06 secs]<sup>11</sup></span></p>
