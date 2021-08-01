@@ -1,0 +1,51 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">[Update RS (ms)<sup>1</sup></span><code>: Min: 0.7, Avg: 0.8, Max: 0.9, Diff: 0.2, Sum: 6.1]</code><br /><span id="token2">[Processed Buffers<sup>2</sup></span><code>: Min: 0, Avg: 2.2, Max: 5, Diff: 5, Sum: 18]</code><br /><span id="token3">[Scan RS (ms)<sup>3</sup></span><code>: Min: 0.0, Avg: 0.1, Max: 0.2, Diff: 0.2, Sum: 0.8]</code><br /><span id="token4">[Clear CT: 0.2 ms]<sup>4</sup></span><br /><span id="token5">[Redirty Cards: 0.1 ms]<sup>5</sup></span></p>
+			<ol>
+				<li><span id="token1">[Update RS (ms)</span> &#8211; Since the Remembered Sets are processed concurrently, we have to make sure that the still-buffered cards are processed before the actual collection begins. If this number is high, then the concurrent GC threads are unable to handle the load. It may be, e.g., because of an overwhelming number of incoming field modifications, or insufficient CPU resources.</li>
+				<li><span id="token2">[Processed Buffers</span> &#8211; How many local buffers each worker thread has processed.</li>
+				<li><span id="token3">[Scan RS (ms)</span> &#8211; How long it took to scan the references coming in from remembered sets.</li>
+				<li><span id="token4">[Clear CT: 0.2 ms]</span> &#8211; Time to clean the cards in the card table. Cleaning simply removes the “dirty” status that was put there to signify that a field was updated, to be used for Remembered Sets.</li>
+				<li><span id="token5">[Redirty Cards: 0.1 ms]</span> &#8211; The time it takes to mark the appropriate locations in the card table as dirty. Appropriate locations are defined by the mutations to the heap that GC does itself, e.g. while enqueuing references.</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

@@ -1,0 +1,67 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T16:23:07.321-0200: 64.42<sup>1</sup></span>: [GC (<span id="token2">CMS Initial Mark<sup>2</sup></span>[1 CMS-initial-mark: <span id="token3">10812086K<sup>3</sup></span><span id="token4">(11901376K)<sup>4</sup></span>] <span id="token5">10887844K<sup>5</sup></span><span id="token6">(12514816K)<sup>6</sup></span>, <span id="token7">0.0001997 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]<sup>7</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T16:23:07.321-0200: 64.42</span> &#8211; Time the GC event started, both clock time and relative to the time from the JVM start. For the following phases the same notion is used throughout the event and is thus skipped for brevity.</li>
+				<li><span id="token2">CMS Initial Mark</span> &#8211; Phase of the collection &#8211; “Initial Mark” in this occasion &#8211; that is collecting all GC Roots.</li>
+				<li><span id="token3">10812086K</span> &#8211; Currently used Old Generation.</li>
+				<li><span id="token4">(11901376K)</span> &#8211; Total available memory in the Old Generation.</li>
+				<li><span id="token5">10887844K</span> &#8211; Currently used heap</li>
+				<li><span id="token6">(12514816K)</span> &#8211; Total available heap</li>
+				<li><span id="token7">0.0001997 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span> &#8211; Duration of the phase, measured also in user, system and real time.</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

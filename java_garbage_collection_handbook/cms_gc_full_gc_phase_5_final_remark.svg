@@ -1,0 +1,99 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T16:23:08.447-0200: 65.550<sup>1</sup></span>: [GC (<span id="token2">CMS Final Remark<sup>2</sup></span>) [<span id="token3">YG occupancy: 387920 K (613440 K)<sup>3</sup></span>]65.550: <span id="token4">[Rescan (parallel) , 0.0085125 secs]<sup>4</sup></span>65.559: [<span id="token5">weak refs processing, 0.0000243 secs]65.559<sup>5</sup></span>: [<span id="token6">class unloading, 0.0013120 secs]65.560<sup>6</sup></span>: [<span id="token7">scrub string table, 0.0001759 secs<sup>7</sup></span>][1 CMS-remark: <span id="token8">10812086K(11901376K)<sup>8</sup></span>] <span id="token9">11200006K(12514816K) <sup>9</sup></span>, <span id="token10">0.0110730 secs<sup>10</sup></span>] [<span id="token11">[Times: user=0.06 sys=0.00, real=0.01 secs]<sup>11</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T16:23:08.447-0200: 65.550</span> &#8211; Time the GC event started, both clock time and relative to the time from the JVM start.</li>
+				<li><span id="token2">CMS Final Remark</span> &#8211; Phase of the collection &#8211; “Final Remark” in this occasion &#8211; that is marking all live objects in the Old Generation, including the references that were created/modified during previous concurrent marking phases.</li>
+				<li><span id="token3">YG occupancy: 387920 K (613440 K)</span> &#8211; Current occupancy and capacity of the Young Generation.</li>
+				<li><span id="token4">[Rescan (parallel) , 0.0085125 secs]</span> &#8211; The &#8220;Rescan&#8221; completes the marking of live objects while the application is stopped. In this case the rescan was done in parallel and took 0.0085125 seconds.</li>
+				<li><span id="token5">weak refs processing, 0.0000243 secs]65.559</span> &#8211; First of the sub-phases that is processing weak references along with the duration and timestamp of the phase.</li>
+				<li><span id="token6">class unloading, 0.0013120 secs]65.560</span> &#8211; Next sub-phase that is unloading the unused classes, with the duration and timestamp of the phase.</li>
+				<li><span id="token7">scrub string table, 0.0001759 secs</span> &#8211; Final sub-phase that is cleaning up symbol and string tables which hold class-level metadata and internalized string respectively. Clock time of the pause is also included.</li>
+				<li><span id="token8">10812086K(11901376K)</span> &#8211; Occupancy and the capacity of the Old Generation after the phase.</li>
+				<li><span id="token9">11200006K(12514816K) </span> &#8211; Usage and the capacity of the total heap after the phase.</li>
+				<li><span id="token10">0.0110730 secs</span> &#8211; Duration of the phase.</li>
+				<li><span id="token11">[Times: user=0.06 sys=0.00, real=0.01 secs]</span> &#8211; Duration of the pause, measured in user, system and real time categories.</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

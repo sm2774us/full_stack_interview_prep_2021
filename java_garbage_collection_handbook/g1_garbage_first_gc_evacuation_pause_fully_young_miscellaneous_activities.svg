@@ -1,0 +1,43 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">[Other: 0.4 ms]<sup>1</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Choose CSet: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token2">[Ref Proc: 0.2 ms]<sup>2</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token3">[Ref Enq: 0.0 ms]<sup>3</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Redirty Cards: 0.1 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Humongous Register: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Humongous Reclaim: 0.0 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token4">[Free CSet: 0.0 ms]<sup>4</sup></span></p>
+			<ol>
+				<li><span id="token1">[Other: 0.4 ms]</span> &#8211; Miscellaneous other activities, many of which are also parallelized</li>
+				<li><span id="token2">[Ref Proc: 0.2 ms]</span> &#8211; The time it took to process non-strong references: clear them or determine that no clearing is needed.</li>
+				<li><span id="token3">[Ref Enq: 0.0 ms]</span> &#8211; The time it took to enqueue the remaining non-strong references to the appropriate ReferenceQueue</li>
+				<li><span id="token4">[Free CSet: 0.0 ms]</span> &#8211; The time it takes to return the freed regions in the collection set so that they are available for new allocations.</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

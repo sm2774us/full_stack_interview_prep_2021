@@ -1,0 +1,105 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">0.134: [GC pause (G1 Evacuation Pause) (young), 0.0144119 secs]<sup>1</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token2">[Parallel Time: 13.9 ms, GC Workers: 8]<sup>2</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="token3">&#8230;<sup>3</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token4">[Code Root Fixup: 0.0 ms]<sup>4</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token5">[Code Root Purge: 0.0 ms]<sup>5</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<code>[Clear CT: 0.1 ms]</code><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token6">[Other: 0.4 ms]<sup>6</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="token7">&#8230;<sup>7</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token8">[Eden: 24.0M(24.0M)->0.0B(13.0M) <sup>8</sup></span><span id="token9">Survivors: 0.0B->3072.0K <sup>9</sup></span><span id="token10">Heap: 24.0M(256.0M)->21.9M(256.0M)]<sup>10</sup></span><br />&nbsp;&nbsp;&nbsp;&nbsp;<span id="token11"> [Times: user=0.04 sys=0.04, real=0.02 secs] <sup>11</sup></span></p>
+			<ol>
+				<li><span id="token1">0.134: [GC pause (G1 Evacuation Pause) (young), 0.0144119 secs]</span> &#8211; G1 pause cleaning only (young) regions. The pause started 134ms after the JVM startup and the duration of the pause was 0.0144 seconds measured in wall clock time.</li>
+				<li><span id="token2">[Parallel Time: 13.9 ms, GC Workers: 8]</span> &#8211; Indicating that for 13.9 ms (real time) the following activities were carried out by 8 threads in parallel</li>
+				<li><span id="token3">&#8230;</span> &#8211; Cut for brevity, see the following section below for the details.</li>
+				<li><span id="token4">[Code Root Fixup: 0.0 ms]</span> &#8211; Freeing up the data structures used for managing the parallel activities. Should always be near-zero. This is done sequentially.</li>
+				<li><span id="token5">[Code Root Purge: 0.0 ms]</span> &#8211; Cleaning up more data structures, should also be very fast, but non necessarily almost zero.  This is done sequentially.</li>
+				<li><span id="token6">[Other: 0.4 ms]</span> &#8211; Miscellaneous other activities, many of which are also parallelized</li>
+				<li><span id="token7">&#8230;</span> &#8211; See the section below for details</li>
+				<li><span id="token8">[Eden: 24.0M(24.0M)->0.0B(13.0M) </span> &#8211; Eden usage and capacity before and after the pause</li>
+				<li><span id="token9">Survivors: 0.0B->3072.0K </span> &#8211; Space used by Survivor regions before and after the pause</li>
+				<li><span id="token10">Heap: 24.0M(256.0M)->21.9M(256.0M)]</span> &#8211; Total heap usage and capacity before and after the pause.</li>
+				<li><span id="token11"> [Times: user=0.04 sys=0.04, real=0.02 secs] </span> &#8211; Duration of the GC event, measured in different categories:
+					<ul>
+						<li>user – Total CPU time that was consumed by Garbage Collector threads during this collection</li>
+						<li>sys – Time spent in OS calls or waiting for system event</li>
+						<li>real – Clock time for which your application was stopped. With the parallelizable activities during GC this number is ideally close to (user time + system time) divided by the number of threads used by Garbage Collector. In this particular case 8 threads were used. Note that due to some activities not being parallelizable, it always exceeds the ratio by a certain amount.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>

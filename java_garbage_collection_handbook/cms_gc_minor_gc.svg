@@ -1,0 +1,113 @@
+<svg fill="none" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			    span#token1 {
+					color: #0000FF;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token2 {
+					color: #6495ED;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token3 {
+					color: #F08080;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token4 {
+					color: #CD5C5C;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token5 {
+					color: #32CD32;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token6 {
+					color: #6B8E23;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token7 {
+					color: #8B4513;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token8 {
+					color: #EE82EE;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token9 {
+					color: #FF6347;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token10 {
+					color: #FFA500;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token11 {
+					color: #663399;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+				span#token12 {
+					color: #800000;
+					font-weight: bold;
+					font-family:Helvetica;
+					border:1px solid black;
+					overflow:hidden;
+				}
+			</style>
+			<p><span id="token1">2015-05-26T16:23:07.219-0200<sup>1</sup></span>: <span id="token2">64.322<sup>2</sup></span>:[<span id="token3">GC<sup>3</sup></span>(<span id="token4">Allocation Failure<sup>4</sup></span>) 64.322: [<span id="token5">ParNew<sup>5</sup></span>: <span id="token6">613404K-&gt;68068K<sup>6</sup></span><span id="token7">(613440K) <sup>7</sup></span>, <span id="token8"> 0.1020465 secs<sup>8</sup></span>] <span id="token9">10885349K-&gt;10880154K <sup>9</sup></span><span id="token10">(12514816K)<sup>10</sup></span>, <span id="token11">0.1021309 secs<sup>11</sup></span>]<span id="token12">[Times: user=0.78 sys=0.01, real=0.11 secs]<sup>12</sup></span></p>
+			<ol>
+				<li><span id="token1">2015-05-26T16:23:07.219-0200</span> &#8211; Time when the GC event started.</li>
+				<li><span id="token2">64.322</span> &#8211; Time when the GC event started, relative to the JVM startup time. Measured in seconds.</li>
+				<li><span id="token3">GC</span> &#8211; Flag to distinguish between Minor &amp; Full GC. This time it is indicating that this was a Minor GC.</li>
+				<li><span id="token4">Allocation Failure</span> &#8211; Cause of the collection. In this case, the GC is triggered due to a requested allocation not fitting into any region in Young Generation.</li>
+				<li><span id="token5">ParNew</span> &#8211; Name of the collector used, this time it indicates a parallel mark-copy stop-the-world garbage collector used in the Young Generation, designed to work in conjunction with Concurrent Mark &amp; Sweep garbage collector in the Old Generation.</li>
+				<li><span id="token6">613404K-&gt;68068K</span> &#8211; Usage of the Young Generation before and after collection.</li>
+				<li><span id="token7">(613440K) </span> &#8211; Total size of the Young Generation.</li>
+				<li><span id="token8"> 0.1020465 secs</span> &#8211; Duration for the collection w/o final cleanup.</li>
+				<li><span id="token9">10885349K-&gt;10880154K </span> &#8211; Total used heap before and after collection.</li>
+				<li><span id="token10">(12514816K)</span> &#8211; Total available heap.</li>
+				<li><span id="token11">0.1021309 secs</span> &#8211; The time it took for the garbage collector to mark and copy live objects in the Young Generation. This includes communication overhead with <em>ConcurrentMarkSweep</em> collector, promotion of objects that are old enough to the Old Generation and some final cleanup at the end of the garbage collection cycle.</li>
+				<li><span id="token12">[Times: user=0.78 sys=0.01, real=0.11 secs]</span> &#8211; Duration of the GC event, measured in different categories:
+					<ul>
+						<li>user &#8211; Total CPU time that was consumed by Garbage Collector threads during this collection</li>
+						<li>sys &#8211; Time spent in OS calls or waiting for system event</li>
+						<li>real &#8211; Clock time for which your application was stopped. With Parallel GC this number should be close to (user time + system time) divided by the number of threads used by the Garbage Collector. In this particular case 8 threads were used. Note that due to some activities not being parallelizable, it always exceeds the ratio by a certain amount.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</foreignObject>
+</svg>
