@@ -6,6 +6,11 @@ The contents have been broken down into **4** phases, covering the basics from H
 ---
 ### A) Ice Breaker Questions
 
+#### Open-Ended Questions
+
+1. [What happens when you type a URL in the browser and press enter?](https://medium.com/@maneesha.wijesinghe1/what-happens-when-you-type-an-url-in-the-browser-and-press-enter-bb0aa2449c1a)
+   For a detailed explanation refer to [What happens when... on GitHub](https://github.com/alex/what-happens-when).
+
 #### General Questions
 Believe it or not, some people find that the most difficult part of the interview is the icebreaker portion that involves small talk 
 and requires some clever improvisation on your part. You can prepare by knowing some of the questions potential employers might ask 
@@ -153,28 +158,45 @@ you are not as gung-ho about web design as you thought you were.
 
 # Phase 5
 
+### Garbage Collection
+
+* [Garbage Collection](./java_garbage_collection_handbook/README.md)
+
 ### Java
 
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
 * [Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"](https://github.com/sm2774us/full_stack_interview_prep_2021#explain-the-difference-between-inversion-of-control-dependency-injection-and-dependency-inversion-principle)
+* [Write Java Code that will produce a deadlock and how would you fix it](https://github.com/sm2774us/full_stack_interview_prep_2021#write-java-code-that-will-produce-a-deadlock-and-how-would-you-fix-it)
+* [JVM Tutorial - Java Virtual Machine Architecture Explained for Beginners](https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/)
+* [What is a Java Classloader](https://stackoverflow.com/questions/2424604/what-is-a-java-classloader)
+* [Explain how ClassLoader works in Java with an example](https://javarevisited.blogspot.com/2012/12/how-classloader-works-in-java.html)
+* [Memory Management in Java Interview Questions (+Answers)](https://www.baeldung.com/java-memory-management-interview-questions)
+* [JVM Garbage Collectors](https://www.baeldung.com/jvm-garbage-collectors)
 * [100+ Top Java Interview Questions and Answers in 2021](https://hackr.io/blog/java-interview-questions)
 * [160+ Top Java Interview Questions and Answers in 2021](https://www.mygreatlearning.com/blog/java-interview-questions/)
 * [10 Tricky Java Interview Questions with Answers](https://github.com/sm2774us/full_stack_interview_prep_2021#10-trick-java-interview-questions-with-answers)
+* [Top 10 Tough Core Java Interview Questions Answers for Programmers](https://www.java67.com/2012/09/top-10-tough-core-java-interview-questions-answers.html)
 * [42 Advanced Java Interview Questions For Senior Developers](https://www.fullstack.cafe/blog/advanced-java-interview-questions)
 * [String, StringBuilder, and StringBuffer Do you know the difference?](https://github.com/sm2774us/full_stack_interview_prep_2021#string--stringbuilder--and-stringbuffer-do-you-know-the-difference)
 * [9 New Features in Java 11](https://github.com/sm2774us/full_stack_interview_prep_2021#9-new-features-in-java-11)
 
 ### Spring
-
+[Top Spring Framework Interview Questions](https://www.baeldung.com/spring-interview-questions)
+[Spring Interview Questions](https://hackr.io/blog/spring-interview-questions)
+[Java Spring Interview Questions](https://mindmajix.com/java-spring-interview-questions)
 
 ### Spring Boot
-
+[Spring Boot Interview Questions](https://www.baeldung.com/spring-boot-interview-questions)
+[11 Spring Boot Interview Questions That Make You Think](https://www.marcobehler.com/guides/spring-boot-interview-questions)
 
 ### Gradle
+[Top 50 Gradle Interview Questions And Answers In 2021](https://mindmajix.com/gradle-interview-questions)
+[Gradle Interview Questions and Answers](https://www.qaautomation.co.in/2019/07/gradle-interview-questions-and-answers.html)
 
-### Encryption
+### Cryptography
+[18 Cryptography Interview Questions You'll Be Asked On Your Next Tech Interview](https://www.fullstack.cafe/blog/cryptography-interview-questions)
 
 ---
 
@@ -8976,6 +8998,601 @@ We cannot achieve loosely coupled classes by using IoC alone. Along with IoC, we
 
 * [DIP in the Wild article by Martin Fowler](https://martinfowler.com/articles/dipInTheWild.html#YouMeanDependencyInversionRight)
 * [Inversion of Control Tutorials](https://www.tutorialsteacher.com/ioc/introduction)
+
+---
+
+#### Write Java Code that will produce a deadlock and how would you fix it
+
+---
+
+**What is a deadlock?**
+
+Simply put, given two threads A and B then a deadlock occurs when thread A blocks because it’s waiting for thread B to release a monitor lock, and thread B blocks because it’s waiting for thread A to release the same monitor lock.
+
+**What are the Necessary Conditions for a deadlock to occur?**
+
+Process1: Girl(G) Process2: Boy(B)
+Resource1: Sorry Resource2: Accepting own mistake
+
+Necessary Conditions:
+1. **Mutual Exclusion:** Only one of G or B can say sorry or accept own Mistake at a time.
+2. **Hold and Wait:** At a time, one is holding Sorry and other Accepting own mistake, one is waiting for Accepting own mistake to release sorry, and other is waiting for sorry to release accepting own mistake.
+3. **No preemption:** Not even God can force B or G to release Sorry or Accepting own mistake. And voluntarily? Are you kidding me??
+4. **Circular Wait:** Again, the one holding sorry waits for other to accept own mistakes, and one holding accept own mistakes want other to say sorry first. So it's circular.
+
+So deadlocks occur when all these conditions are in effect at the same time
+
+**A Java Class showing how deadlock can occur**
+
+```java
+public class Account {
+
+	private final int number;
+
+	private int balance;
+
+	public Account(int number, int openingBalance) {
+		this.number = number;
+		this.balance = openingBalance;
+	}
+
+	public void withDrawAmount(int amount) throws OverdrawnException {
+
+		if (amount > balance) {
+			throw new OverdrawnException();
+		}
+
+		balance -= amount;
+	}
+
+	public void deposit(int amount) {
+
+		balance += amount;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+}
+```
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class DeadlockDemo {
+
+	private static final int NUM_ACCOUNTS = 10;
+	private static final int NUM_THREADS = 20;
+	private static final int NUM_ITERATIONS = 100000;
+
+	static final Random rnd = new Random();
+
+	List<Account> accounts = new ArrayList<Account>();
+
+	public static void main(String args[]) {
+
+		DeadlockDemo demo = new DeadlockDemo();
+		demo.setUp();
+		demo.run();
+	}
+
+	void setUp() {
+
+		for (int i = 0; i < NUM_ACCOUNTS; i++) {
+			Account account = new Account(i, rnd.nextInt(1000));
+			accounts.add(account);
+		}
+	}
+
+	void run() {
+
+		for (int i = 0; i < NUM_THREADS; i++) {
+			new BadTransferOperation(i).start();
+		}
+	}
+
+	class BadTransferOperation extends Thread {
+
+		int threadNum;
+
+		BadTransferOperation(int threadNum) {
+			this.threadNum = threadNum;
+		}
+
+		@Override
+		public void run() {
+
+			for (int i = 0; i < NUM_ITERATIONS; i++) {
+
+				Account toAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				Account fromAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				int amount = rnd.nextInt(1000);
+
+				if (!toAccount.equals(fromAccount)) {
+					try {
+						transfer(fromAccount, toAccount, amount);
+						System.out.print(".");
+					} catch (OverdrawnException e) {
+						System.out.print("-");
+					}
+
+					if (i % 60 == 0) {
+						System.out.print("\n");
+					}
+				}
+			}
+			// This will never get to here...
+			System.out.println("Thread Complete: " + threadNum);
+		}
+
+		/**
+		 * The clue to spotting deadlocks is in the nested locking -
+		 * synchronized keywords. Note that the locks DON'T have to be next to
+		 * each other to be nested.
+		 */
+		private void transfer(Account fromAccount, Account toAccount, int transferAmount) throws OverdrawnException {
+
+			synchronized (fromAccount) {
+				synchronized (toAccount) {
+					fromAccount.withDrawAmount(transferAmount);
+					toAccount.deposit(transferAmount);
+				}
+			}
+		}
+	}
+}
+```
+
+**Obtaining a thread dump**
+
+* **kill SIGQUIT**
+On Unix/Linux servers run the command `kill -3 <pid_of_java_process>` or (kill SIGQUIT).
+
+* **jstack**
+On Windows run the command `jstack.exe <pid_of_java_process>`.
+
+* **jVisualVM**
+jVisualVM is the 'Rolls Royce' way of obtaining a thread dump. It’s provided by Oracle as tool that allows you to get hold of lots of different info about a Java VM. This includes heap dumps, CPU usage, memory profiling and much more.
+
+jVisualVM’s actual program name is jvisualvm or jvisualvm.exe on Windows. Once running you’ll see something like this:
+
+![jvisualvm-deadlock-1](./assets/jvisualvm-deadlock-1.png)
+
+To obtain a thread dump, find your application in the left hand applications panel, then right click and select: “Thread Dump”.
+
+![jvisualvm-deadlock-2](./assets/jvisualvm-deadlock-2.png)
+
+A thread dump is then displayed in jvisualvm’s right-hand pane as shown below:
+
+![jvisualvm-deadlock-3](./assets/jvisualvm-deadlock-3.png)
+
+> **Note** that I have seen jvisualvm hang on several occasions when connecting to a local VM. When this happens ensure that its proxy settings are set to No Proxy
+>
+
+**How to analyze a thread dump** read the [following article](http://www.captaindebug.com/2012/10/investigating-deadlocks-part-3.html).
+
+**Fixing the deadlocked code with Lock ordering**
+
+In the sample code, a deadlock occurs because of a timing issue and the nested synchronized keywords in the `BadTransferOperation` class. In this code, the synchronized keywords are on adjacent lines; however, as a final point, it’s worth noting that it doesn't matter where in your code the synchronized keywords are (they don't have to be adjacent). So long as you're locking two (or more) different monitor objects with the same thread, then ordering matters and deadlocks happen.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class AvoidsDeadlockDemo {
+
+	private static final int NUM_ACCOUNTS = 10;
+	private static final int NUM_THREADS = 20;
+	private static final int NUM_ITERATIONS = 100000;
+
+	static final Random rnd = new Random();
+
+	List<Account> accounts = new ArrayList<Account>();
+
+	public static void main(String args[]) {
+
+		AvoidsDeadlockDemo demo = new AvoidsDeadlockDemo();
+		demo.setUp();
+		demo.run();
+	}
+
+	void setUp() {
+
+		for (int i = 0; i < NUM_ACCOUNTS; i++) {
+			Account account = new Account(i, rnd.nextInt(1000));
+			accounts.add(account);
+		}
+	}
+
+	void run() {
+
+		for (int i = 0; i < NUM_THREADS; i++) {
+			new BadTransferOperation(i).start();
+		}
+	}
+
+	class BadTransferOperation extends Thread {
+
+		int threadNum;
+
+		BadTransferOperation(int threadNum) {
+			this.threadNum = threadNum;
+		}
+
+		@Override
+		public void run() {
+
+			for (int i = 0; i < NUM_ITERATIONS; i++) {
+
+				Account toAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				Account fromAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				int amount = rnd.nextInt(1000);
+
+				if (!toAccount.equals(fromAccount)) {
+					try {
+						transfer(fromAccount, toAccount, amount);
+						System.out.print(".");
+					} catch (OverdrawnException e) {
+						System.out.print("-");
+					}
+
+					if (i % 60 == 0) {
+						System.out.print("\n");
+					}
+				}
+			}
+			System.out.println("Thread Complete: " + threadNum);
+		}
+
+		/**
+		 * This is the crucial point here. The idea is that to avoid deadlock
+		 * you need to ensure that threads can't try to lock the same two
+		 * accounts in the same order
+		 */
+		private void transfer(Account fromAccount, Account toAccount, int transferAmount) throws OverdrawnException {
+
+			if (fromAccount.getNumber() > toAccount.getNumber()) {
+
+				synchronized (fromAccount) {
+					synchronized (toAccount) {
+						fromAccount.withDrawAmount(transferAmount);
+						toAccount.deposit(transferAmount);
+					}
+				}
+			} else {
+
+				synchronized (toAccount) {
+					synchronized (fromAccount) {
+						fromAccount.withDrawAmount(transferAmount);
+						toAccount.deposit(transferAmount);
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+**Fixing the deadlocked code with `ReentrantLock` and the `tryLock(...)` Method**
+
+> The idea here of calling a locking mechanism _explicit_ rather than _implicit_ is that the _explicit_ means that it is not part of the Java language and that classes have been written to fulfill the locking functionality. _Implicit_ locking, on the other hand, can be defined as locking that is part of the language and is implemented in the background using the language keyword synchronchized.
+>
+> You could argue as to whether or not explicit locking is a good idea. Shouldn’t the Java language be improved to include the features of explicit locking rather than adding yet another set of classes to the already enormous API? For example: `trysynchronized()`.
+>
+
+The first version of the explicit locking demo code uses the `tryLock()`.
+
+```java
+public class Account implements Lock {
+
+  private final int number;
+
+  private int balance;
+
+  private final ReentrantLock lock;
+
+  public Account(int number, int openingBalance) {
+    this.number = number;
+    this.balance = openingBalance;
+    this.lock = new ReentrantLock();
+  }
+
+  public void withDrawAmount(int amount) throws OverdrawnException {
+
+    if (amount > balance) {
+      throw new OverdrawnException();
+    }
+
+    balance -= amount;
+  }
+
+  public void deposit(int amount) {
+
+    balance += amount;
+  }
+
+  public int getNumber() {
+    return number;
+  }
+
+  public int getBalance() {
+    return balance;
+  }
+
+  // ------- Lock interface implementation
+
+  @Override
+  public void lock() {
+    lock.lock();
+  }
+
+  @Override
+  public void lockInterruptibly() throws InterruptedException {
+    lock.lockInterruptibly();
+  }
+
+  @Override
+  public Condition newCondition() {
+    return lock.newCondition();
+  }
+
+  @Override
+  public boolean tryLock() {
+    return lock.tryLock();
+  }
+
+  @Override
+  public boolean tryLock(long arg0, TimeUnit arg1) throws InterruptedException {
+    return lock.tryLock(arg0, arg1);
+  }
+
+  @Override
+  public void unlock() {
+    if (lock.isHeldByCurrentThread()) {
+      lock.unlock();
+    }
+  }
+
+}
+```
+
+The second version of the explicit locking demo code uses the `tryLock(long time,TimeUnit unit)`.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import threads.deadlock.OverdrawnException;
+
+public class TrylockDemo {
+
+	private static final int NUM_ACCOUNTS = 10;
+	private static final int NUM_THREADS = 20;
+	private static final int NUM_ITERATIONS = 100000;
+	private static final int LOCK_ATTEMPTS = 10000;
+
+	static final Random rnd = new Random();
+
+	List<Account> accounts = new ArrayList<Account>();
+
+	public static void main(String args[]) {
+
+		TrylockDemo demo = new TrylockDemo();
+		demo.setUp();
+		demo.run();
+	}
+
+	void setUp() {
+
+		for (int i = 0; i < NUM_ACCOUNTS; i++) {
+			Account account = new Account(i, 1000);
+			accounts.add(account);
+		}
+	}
+
+	void run() {
+
+		for (int i = 0; i < NUM_THREADS; i++) {
+			new BadTransferOperation(i).start();
+		}
+	}
+
+	class BadTransferOperation extends Thread {
+
+		int threadNum;
+
+		BadTransferOperation(int threadNum) {
+			this.threadNum = threadNum;
+		}
+
+		@Override
+		public void run() {
+
+			int transactionCount = 0;
+
+			for (int i = 0; i < NUM_ITERATIONS; i++) {
+
+				Account toAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				Account fromAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				int amount = rnd.nextInt(1000);
+
+				if (!toAccount.equals(fromAccount)) {
+
+					boolean successfulTransfer = false;
+
+					try {
+						successfulTransfer = transfer(fromAccount, toAccount, amount);
+
+					} catch (OverdrawnException e) {
+						successfulTransfer = true;
+					}
+
+					if (successfulTransfer) {
+						transactionCount++;
+					}
+
+				}
+			}
+
+			System.out.println("Thread Complete: " + threadNum + " Successfully made " + transactionCount + " out of "
+					+ NUM_ITERATIONS);
+		}
+
+		private boolean transfer(Account fromAccount, Account toAccount, int transferAmount) throws OverdrawnException {
+
+			boolean success = false;
+			for (int i = 0; i < LOCK_ATTEMPTS; i++) {
+
+				try {
+					if (fromAccount.tryLock()) {
+						try {
+							if (toAccount.tryLock()) {
+
+								success = true;
+								fromAccount.withDrawAmount(transferAmount);
+								toAccount.deposit(transferAmount);
+								break;
+							}
+						} finally {
+							toAccount.unlock();
+						}
+					}
+				} finally {
+					fromAccount.unlock();
+				}
+			}
+
+			return success;
+		}
+
+	}
+}
+```
+
+The second version of my explicit locking demo code uses the `tryLock(long time,TimeUnit unit)` mentioned above.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import threads.deadlock.OverdrawnException;
+
+public class TimeoutTrylockDemo {
+
+	private static final int NUM_ACCOUNTS = 10;
+	private static final int NUM_THREADS = 20;
+	private static final int NUM_ITERATIONS = 100000;
+	private static final int LOCK_TIMEOUT = 1;
+
+	static final Random rnd = new Random();
+
+	List<Account> accounts = new ArrayList<Account>();
+
+	public static void main(String args[]) {
+
+		TimeoutTrylockDemo demo = new TimeoutTrylockDemo();
+		demo.setUp();
+		demo.run();
+	}
+
+	void setUp() {
+
+		for (int i = 0; i < NUM_ACCOUNTS; i++) {
+			Account account = new Account(i, 1000);
+			accounts.add(account);
+		}
+	}
+
+	void run() {
+
+		for (int i = 0; i < NUM_THREADS; i++) {
+			new BadTransferOperation(i).start();
+		}
+	}
+
+	class BadTransferOperation extends Thread {
+
+		int threadNum;
+
+		BadTransferOperation(int threadNum) {
+			this.threadNum = threadNum;
+		}
+
+		@Override
+		public void run() {
+
+			int transactionCount = 0;
+
+			for (int i = 0; i < NUM_ITERATIONS; i++) {
+
+				Account toAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				Account fromAccount = accounts.get(rnd.nextInt(NUM_ACCOUNTS));
+				int amount = rnd.nextInt(1000);
+
+				if (!toAccount.equals(fromAccount)) {
+
+					boolean successfulTransfer = false;
+
+					try {
+						successfulTransfer = transfer(fromAccount, toAccount, amount);
+
+					} catch (OverdrawnException e) {
+						successfulTransfer = true;
+					}
+
+					if (successfulTransfer) {
+						transactionCount++;
+					}
+
+				}
+			}
+
+			System.out.println("Thread Complete: " + threadNum + " Successfully made " + transactionCount + " out of "
+					+ NUM_ITERATIONS);
+		}
+
+		private boolean transfer(Account fromAccount, Account toAccount, int transferAmount) throws OverdrawnException {
+
+			boolean success = false;
+
+			try {
+				if (fromAccount.tryLock(LOCK_TIMEOUT, TimeUnit.MILLISECONDS)) {
+					try {
+						if (toAccount.tryLock(LOCK_TIMEOUT, TimeUnit.MILLISECONDS)) {
+
+							success = true;
+							fromAccount.withDrawAmount(transferAmount);
+							toAccount.deposit(transferAmount);
+						}
+					} finally {
+						toAccount.unlock();
+					}
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				fromAccount.unlock();
+			}
+
+			return success;
+		}
+
+	}
+}
+```
+
+##### References:
+* [Captain Debug's Blog on Investigating Deadlocks](http://www.captaindebug.com/p/blogs-on-investigating-deadlocks.html)
 
 ---
 
