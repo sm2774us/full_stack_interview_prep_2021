@@ -167,6 +167,7 @@ you are not as gung-ho about web design as you thought you were.
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
+* [Java OOP Cheat Sheet — A Quick Guide to Object-Oriented Programming in Java](https://medium.com/edureka/java-oop-cheat-sheet-9c6ebb5e1175)
 * [Explain the difference between "Inversion of Control", "Dependency Injection" and "Dependency Inversion Principle"](https://github.com/sm2774us/full_stack_interview_prep_2021#explain-the-difference-between-inversion-of-control-dependency-injection-and-dependency-inversion-principle)
 * [Write Java Code that will produce a deadlock and how would you fix it](https://github.com/sm2774us/full_stack_interview_prep_2021#write-java-code-that-will-produce-a-deadlock-and-how-would-you-fix-it)
 * [JVM Tutorial - Java Virtual Machine Architecture Explained for Beginners](https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/)
