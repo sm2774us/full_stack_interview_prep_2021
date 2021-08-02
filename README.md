@@ -107,8 +107,8 @@ you are not as gung-ho about web design as you thought you were.
 
 ## C) LeetCode
 
-- [LeetCode - Curated List of 75 Problems - Solutions in Python and Kotlin](./curated_list_of_75_leetcode_questions/README.md)
-- [LeetCode - Curated List of 75 Problems - Solutions in Java](./curated_list_of_75_leetcode_questions_java_solutions/README.md)
+- [LeetCode - Curated List of 75 Problems - Solutions in Python and Kotlin](./curated_list_of_75_leetcode_solutions_in_Python_and_Kotlin/README.md)
+- [LeetCode - Curated List of 75 Problems - Solutions in Java](./curated_list_of_75_leetcode_solutions_in_Java/README.md)
 
 ## D) Company-wise Preparation
 
