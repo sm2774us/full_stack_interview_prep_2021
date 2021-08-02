@@ -162,8 +162,13 @@ you are not as gung-ho about web design as you thought you were.
 
 * [Garbage Collection](./java_garbage_collection_handbook/README.md)
 
+### Python
+
+* [Python Cheat Sheet](./Python_Study_Notes/python_cheatsheet.md)
+
 ### Java
 
+* [Java Cheat Sheet](./Java_Study_Notes/java_cheatsheet.md)
 * [OOP](https://github.com/sm2774us/full_stack_interview_prep_2021#oop)
 * [SOLID](https://github.com/sm2774us/full_stack_interview_prep_2021#solid)
 * [Design Patterns](./Java-Design-Patterns/README.md)
