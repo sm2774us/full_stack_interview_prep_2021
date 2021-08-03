@@ -11997,137 +11997,35 @@ class Solution:
 ####  [LC-39:Combination Sum](https://leetcode.com/problems/combination-sum/)
 ##### Solution Explanation:
 ```
-# --------------------------------------
-# Approach-1 : DFS (w/ Backtracking)
-# --------------------------------------
-Combination questions can be solved with dfs most of the time. I'm following caikehe's approach. Also, if you want to fully understand this concept and backtracking, try to finish this post and do all the examples.
-
-We have an array [1, 2, ..., n], if k == 0, meaning combination of zero numbers which is nothing (lines #7, 8, 9), right? Return [[]].
-
-def combine(self, n, k):
-    res = [] #1
-    self.dfs(range(1,n+1), k, 0, [], res) #2
-    return res #3
-    
-def dfs(self, nums, k, index, path, res):  #4
-	print('index is:', index)
-    print('path is:', path)
-    if k == 0:  #7
-        res.append(path)  #8
-        return # backtracking  #9 
-    for i in range(index, len(nums)):  #10
-        self.dfs(nums, k-1, i+1, path+[nums[i]], res)  #11
-		
-Lines #1, 2, 3 are the main function, where you initialize res = []. Also, you call the dfs function to find all the combinations, and finally, you return the res. The dfs function is the main part of the code. Lines #7, 8 were explained before. dfsfuction goes into deeper levels until these two lines get activated. Keep reading.
-
-Let's do an example for the rest! I define levels as the number of times dfs gets called recursively before moving on in the for loop of line #10.
-
----- Level 0 (input: nums, k=2, index = 0, path = [], res = []).
-The idea of dfs is that it starts from first entry of nums = [1, 2, ..., n]. At first, nums[0] gets chosen in line #10, it calls the dfs again in line #11 with updated inputs and goes basically one level deeper to choose the second number in the combination (note that his combination would look something like [1, ...], right? nums doesn't change, but since we have already chosen one entry, variables get updated k = k - 1. Also, since we're already chosen entry 0, index variable becomes i = i +1 to go one step deeper.
-
----- Level 1 (input: nums, k=1, index = 1, path = [1], res = []).
-Now, in line #10, the range changes. It starts from 1 to len(nums). It goes in and calls dfs one more time.
-
---- Level 2 (input: nums, k=0, index = 2, path = [1,2]], res = []).
-This time it gets stuck in line #7, and appends path to res. Now, res = [[1,2]].
-
-Does this make sense?
-
-All these level just return one combination, right? ( res = [[1,2]]). Remember going into deeper levels happened when we were in line #10 and called dfs for the first time in line #11, and then for the second time in level 1, and we ended up in level 2 and got stuck in line #7. Now, we go back one step to level 1 and move on in line #10. This time, i = 1 and index = 2. Again we go back to level 2 and return path = [1,3]. This will be appended to res to get to res = [[1,2],[1,3]]. Finally, we exhaust all indices in level 1. We end up with res = [[1,2],[1,3],[1,4]]. We go up one level, to level 0. Move on in line #10, this time, we'll get to path = [[2,3],[2,4]], and will update res = [[1,2],[1,3],[1,3],[2,3],[2,4]]. We keep going to get the final combination, we're done.
-
-If you want to fully understand how this works, try to print some variables at the start of your dfs function. I printed index and path and this is the outcome.
-
-index is: 0
-path is: []
-index is: 1
-path is: [1]
-index is: 2
-path is: [1, 2]
-index is: 3
-path is: [1, 3]
-index is: 4
-path is: [1, 4]
-index is: 2
-path is: [2]
-index is: 3
-path is: [2, 3]
-index is: 4
-path is: [2, 4]
-index is: 3
-path is: [3]
-index is: 4
-path is: [3, 4]
-index is: 4
-path is: [4]
-
-Final output: [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]
-Another way of doing this without the index variable is:
-
-class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        res = []
-        self.dfs(range(1,n+1), k, [], res)
-        return res
-        
-    def dfs(self, nums, k, path, res):
-        if k == 0:
-            res.append(path)
-            return res
-        
-        if len(nums) >= k:
-            for i in range(len(nums)):
-                self.dfs(nums[i+1:], k-1, path+[nums[i]], res)
-        return
-That's it!
-
-# --------------------------------------
-# Approach-2 : Dynamic Programming
-# --------------------------------------
-class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        dp = [[[]]] + [[] for _ in range(target)]
-        for candidate in candidates:
-            for i in range(candidate, target + 1):
-                dp[i] += [sublist + [candidate] for sublist in dp[i - candidate]]
-        return dp[target]
 ```
 ##### Complexity Analysis:
 ```
 ```
-```python
-# --------------------------------------
-# Approach-1 : DFS
-# --------------------------------------
-from typing import List
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        res = []
-        self.dfs(range(1,n+1), k, [], res)
-        return res
-        
-    def dfs(self, nums, k, path, res):
-        if k == 0:
-            res.append(path)
-            return res
-        
-        if len(nums) >= k:
-            for i in range(len(nums)):
-                self.dfs(nums[i+1:], k-1, path+[nums[i]], res)
-        return
+public class Solution {
+public List<List<Integer>> combinationSum(int[] nums, int target) {
+    List<List<Integer>> list = new ArrayList<>();
+    Arrays.sort(nums);
+    backtrack(list, new ArrayList<>(), nums, target, 0);
+    return list;
+}
 
-# --------------------------------------
-# Approach-2 : Dynamic Programming
-# --------------------------------------
-from typing import List
-
-class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        dp = [[[]]] + [[] for _ in range(target)]
-        for candidate in candidates:
-            for i in range(candidate, target + 1):
-                dp[i] += [sublist + [candidate] for sublist in dp[i - candidate]]
-        return dp[target]
+private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int remain, int start){
+    if(remain < 0) return;
+    else if(remain == 0) list.add(new ArrayList<>(tempList));
+    else{ 
+        for(int i = start; i < nums.length; i++){
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, remain - nums[i], i); // not i + 1 because we can reuse same elements
+            tempList.remove(tempList.size() - 1);
+        }
+    }
+}
+}
 ```
 
 <br/>
@@ -12141,65 +12039,74 @@ class Solution:
 ![lc-22-problem-description-image](./assets/lc-22-problem-description-image.png)
 ##### Learning Points (Catalan Numbers):
 ```
-A famous ancient question in this context is:
-"How many distinct arrangements of n pairs of left-right parentheses are there all of which close?"
-The answer to this question is called the n-th Catalan number, C(n).
-Here are the first few answers:
-  * C(1)=1         ( )
-  * C(2)=2         ()() and (())
-  * C(3)=5         ()()(), ()(()), (())(), (()()) and ((()))
+Idea: We try to construct every possible solution. We observe that a string is valid if: (1) at any point the number of closing parentheses does not exceed the number of opening parenthesis. (2) at the end the number of opening = the number of closing = n. So we keep track of current openning and current closing as curOpen, curClose.
 
+Let C(n) be the total number of valid strings with n parentheses of each type. Then we claim that C(n + 1) = sum{ C(i) * C(n - i)}, i from 0 to n
 
-Generating all combinations of well formed parentheses is a typical example of catalan numbers.
-You can use the links at the bottom here if you are not aware of the catalan numbers since they
-are at the heart of the exercise.
-Let time complexity for the generating all combinations of well-formed parentheses is f(n),
-then,
-f(n) = g(n) * h(n) where g(n) is the time complexity for calculating nth catalan number,
-and h(n) is the time required to copy this combination to result array.
+Why? Let's put the additional pair of parentheses we just got on the table: (). We have the remaining n pairs on our hands. Now, we can choose k pairs from our hands and put them inside the parenthesis pair on the table, the remaining n - k pairs on the outside of the first pair. The number of combinations is C(k) * C(n - k). We can choose k from 0 to n, thus we have C(n + 1) = sum {C(i) * C(n - i)}. We can see that every possible configuration can be generated in such way, and no configuration is counted more than once. This is the definition of Catalan number, which have another formula: 4^n/ n^(3/2). We generate exactly 4^n / n^(3/2) valid strings, for each string we need O(n) for copying the answer, so time complexity would be O(4^n / n^(1/2)).
 
-Therefore, f(n) = catalan(n) * O(n) which is O((4^n/n^1.5)*(n)).
-Broadly saying just remember that this is a typical example of catalan number
-and it's time complexity is similar to how catalan(n) is got.
-Further readings in to catalan numbers:
-
-https://en.wikipedia.org/wiki/Catalan_number
-https://www.youtube.com/watch?v=GlI17WaMrtw
-https://www.youtube.com/watch?v=eoofvKI_Okg
+References: https://www.geeksforgeeks.org/applications-of-catalan-numbers/
+============
+Actually, this a problem mention in MIT 6.006 -- balanced parentheses and catalan number
+Let P be the set of balanced parentheses string.
+Rule 1. empty string belongs to P
+Rule 2. if a,b belongs to P, then '(a)b' belong to P
+We can generate a set containing all possible balanced parentheses strings of certain size.
+============
 ```
 ##### Solution Explanation:
 ```
-# --------------------------------------
-# Backtracking Solution:
-# --------------------------------------
-The idea is to have a empty string, and put “(” and “)” in one by one.
-We put “(” in first. In total there are n “(”. We can keep adding “(” in until we used up all the “(”.
-Then we start adding “)” in. To keep the resulting string well-formed, we only add in “)” 
-when the number of existing “(” exceeds the number of “)” in the current string:
-```
-![lc-22-generate-parentheses-image-1](./assets/lc-22-generate-parentheses-image-1.jpeg)
-```
-When current string length == 2*n, we got an answer. Therefore we record it, 
-and return to previous step to search for other possible combinations.
-```
-##### Code Analysis
-```
-At first sight, it looks complicated to get a clear view of how it backtracks, specifically where the “return” returns to.
-At least I struggled for a while.
+The idea here is to only add '(' and ')' that we know will guarantee us a solution (instead of adding 1 too many close). 
+Once we add a '(' we will then discard it and try a ')' which can only close a valid '('. 
+Each of these steps are recursively called.
 
-I didn’t give up. In the end, I successfully get this tree, which clearly shows how the program goes.
-It turned out, back tracking is just DFS, or in my opinion, traverse a tree:
-```
-![lc-22-generate-parentheses-image-2](./assets/lc-22-generate-parentheses-image-2.jpeg)
-```
-Note that the tree is not full, because our two if-cases cut some of the tree branches.
+The goal is to print a string of “(“ ,”)” in certain order. The length of string is 2n. The constraints are that “(“s need to match “)”s.
+Without constraints, we just simply print out “(“ or “)” until length hits n. So the base case will be length ==2 n, recursive case is print out “(“ and “)”. The code will look like
+
+================
+
+The key to all backtracking problems is "to choose". You have to choose between many options and then come back to choose again. 
+In this problem, you have to choose between left and right parenthesis. 
+In another backtracking problem:letter-combinations-of-a-phone-number [ LeetCode Problem 17 -  Letter Combinations of a Phone Number - https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/ ]. 
+You have to choose between different letters. These problems share a same pattern.
+
+In your helper function, you just need to list all your options and try each one of them out.
+As for this problem, every time you choose a "(" means making another ")" available.
+
+================
+
+
+//base case
+if(string length == 2*n) {
+add(string);
+return;
+}
+//recursive case
+add a “(“
+add a “)"
+
+Let’s add in constraints now. We need to interpret the meanings of constraints. First, the first character should be “(“. Second, at each step, you can either print “(“ or “)”, but print “)” only when there are more “(“s than “)”s. Stop printing out “(“ when the number of “(“ s hit n. The first actually merges into the second condition.
+The code will be:
+
+//base case
+if(string length == 2*n) {
+add(string);
+return;
+}
+//recursive case
+if(number of “(“s < n){
+add a “(“
+}
+if(number of “(“s > number of “)”s){
+add a “)"
+}
 ```
 ##### Complexity Analysis:
 ```
 My Analysis:
 ---------------------------------
-Time Complexity: The tree has a max height of 2n, therefore the max nodes the tree has is 2^ 2n. 
-Therefore the time complexity is O(2^ 2n)=O(4^n).
+Time Complexity: The tree has a max height of 2n, therefore the max nodes the tree has is 2^2n. 
+Therefore the time complexity is O(2^2n)=O(4^n).
 
 Space Complexity: We have 2^(2n-1) leaves at most, therefore, the time complexity is O(4^n).
 Clearly, my analysis over estimated the total tree nodes, and the number of leaves.
@@ -12217,30 +12124,78 @@ SC: O( 4^n / (n^ 1/2) )
 ```
 ##### References:
 [Crack Leetcode 22: Generate Parentheses](https://christinalalay.medium.com/crack-leetcode-22-generate-parentheses-895de3a677c7)
-```python
-# TC: O( 4^n / (n^ 1/2) )
-# SC: O( 4^n / (n^ 1/2) )
-from typing
+```java
+// Recursive Solution (using Backtracking)
+import java.util.ArrayList;
+import java.util.List;
 
-class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
-        """
-		:type n: int
-		:rtype: List[str]
-		"""
-		res = []
-		self.generateHelper(res, n, 0, 0, "")
-		return res
-		
-    def generateHelper(self, res, n, left, right, temp):
-        if len(temp) == 2*n:
-            res.append(temp)
-            return
-        else:
-            if left < n:
-                self.generateHelper(res, n, left+1, right, temp+"(")
-            if right < left:
-                self.generateHelper(res, n, left, right+1, temp+")")
+public class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        backtrack(res, new StringBuilder(), 0, 0, n);
+        return res;
+    }
+
+    private void backtrack(List<String> res, StringBuilder sb, int open, int close, int n) {
+        if(open == n && close == n) {
+            res.add(sb.toString());
+            return;
+        }
+    
+        if(open < n) {
+            sb.append("(");
+            helper(res, sb, open+1, close, n);
+            sb.setLength(sb.length()-1);
+        } 
+        if(close < open) {
+            sb.append(")");
+            helper(res, sb, open, close+1, n);
+            sb.setLength(sb.length()-1);
+        }
+    }
+
+}
+
+// Iterative Solution
+// TC: O( 4^n / (n^ 1/2) )
+// SC: O( 4^n / (n^ 1/2) )
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String>[] dp = new ArrayList[n + 1];
+        for(int i = 0; i < dp.length; i++){
+            dp[i] = new ArrayList<>();
+        }
+        dp[0].add("");//0th catalan
+        dp[1].add("()");//1st catalan
+        for(int i = 2;i < dp.length; i++){
+            for(int j = i - 1, k = 0; j >= 0; j-- , k++){//cn-1.c0 + cn-2.c1 +....+ c0.cn-1
+               helperFun(j, k, dp, i);//calculating cj.ck ans storing in dp 
+            }
+        }
+        return dp[n];
+    }
+    //c0 = "" empty string 0th catalan
+    //c1 = "()" base case 1st catalan 
+    //c2 = (c1)c0 + (c0)c1
+    //c2 = (())"" + ("")() => (()), ()()
+    //c3 = (c2)c0 + (c1)c1 + (c0)c2
+    //(c2)c0 = ((()))"", (()())"" => ((())), (()())
+    //(c1)c1 = (())()           
+    //(c0)c2 = ("")(()), ("")()() => ()(()), ()()()
+    // c3 = ((())), (()()),(())(),()(()),()()()
+    
+    public static void helperFun(int cj, int ck, List<String> dp[], int n) {       
+        for(int i = 0 ; i < dp[cj].size(); i++){//loop for cj
+            String str = "(" + dp[cj].get(i) +")";// adding '(' before and ')' after cj => ( cj )
+            for(String s2 : dp[ck]){
+                dp[n].add(str + s2);//cj + all combinations of ck
+            }
+        }
+    }
+}
 ```
 
 <br/>
