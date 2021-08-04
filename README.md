@@ -2,6 +2,59 @@ Here is a curated list of resources, question and exercises to go through that c
 
 The contents have been broken down into **4** phases, covering the basics from HTML/CSS to APIs. It would be best to cover these phases in chronological order to gain a broad understanding from the basics to the more advanced topics.
 
+# Personal Project Information (Recent Projects Only)
+---
+### A) **PADP** ( <ins><string>P</strong></ins>rovider <ins><string>A</strong></ins>gnostic <ins><string>D</strong></ins>ata <ins><string>P</strong></ins>arser )
+---
+##### Application key-points:
+  * Ability to handle multiple data formats from different market data vendors ( Bloomberg, Reuters, IDC ).
+  * Ability to push content to multiple clients while maintaining the least number of connections possible:
+      * What we wanted to do is basically have each device create one connection into our infrastructure, and then over that one connection, multiplex or send multiple requests through virtual streams. This way, we can make efficient use of the number of connections, and we could actually lower the number of servers that we required because it wouldn't have to maintain as many connections between devices.
+  * Ability to handle multiple requests from clients gracefully and scalably and in a reactive manner.
+
+##### Backpressure control:
+  * In the current implementation of the WebFlux module, the backpressure is regulated by the transport flow control, but it does not expose the real demand of the recipient. In order to finally see the interaction flow, please see the following diagram:
+![Reactive-WebFlux-Backpressure-Diagram](./assets/Reactive-WebFlux-Backpressure-Diagram.png)
+  * Fair backpressure with RSocket Protocol
+    In order to achieve logical-elements backpressure through the network boundaries, we need an appropriate protocol for that. Fortunately, there is one called [RScoket protocol](http://rsocket.io/). RSocket is an application-level protocol that allows transferring real demand through the network boundaries. There is an RSocket-Java implementation of that protocol that allows to set up an RSocket server. In the case of a server to server communication, the same RSocket-Java library provides a client implementation as well. To learn more how to use RSocket-Java, please see the following examples [here](https://github.com/rsocket/rsocket-java/tree/1.0.x/rsocket-examples/src/main/java/io/rsocket/examples/transport/tcp). For browser-server communication, there is an [RSocket-JS](https://github.com/rsocket/rsocket-js) implementation which allows wiring the streaming communication between browser and server through WebSocket.
+
+**NOTE:** **Backpressure** is when the progress of turning that input to output is resisted in some way. In most cases that resistance is computational speed — trouble computing the output as fast as the input comes in — so that’s by far the easiest way to look at it. But other forms of backpressure can happen too: for example, if your software has to wait for the user to take some action.
+
+###### Technologies Used:
+  * Message Exchange Format: [<ins><string>C</strong></ins>oncise <ins><string>B</strong></ins>inary <ins><string>O</strong></ins>bject <ins><string>R</strong></ins>epresentation](https://cbor.io/)
+  * Transport Layer: [RSocket: Application protocol providing Reactive Streams semantics](https://rsocket.io/)
+      * Why?
+	      * **RSocket** is a Message-based Binary Protocol, in RSocket, there is a concept of a requester and responder, they interact with each other by sending binary frames between each other as messages. We picked binary for this instead of text-based because it's up to 30% faster, we found from testing to actually process binary data. When you get to a distributed system, latency becomes more and more important, the slower your system is, it actually affects calls down, your graph of services, creating a worse experience.
+		  * **Bi-Directional** Once the connection is established, they're co-equal members of the transit of the connection, a client connect to a server, and then the server can actually go ahead and request API calls from the client as if it's connected to itself. This lets you do stuff like actually have a web browser connect to a service, and then you can go ahead and call API's that exist in the JavaScript code running in the browser.
+  * Server Side: Spring Boot (Java)
+  * Client Side: React (Typescript)
+  
+  
+### B) **CDash** ( <ins><string>C</strong></ins>yptocurrency Asset <ins><string>D</strong></ins>ashboard )
+---
+##### Application key-points:
+  * Ability to fetch data from major Cryptocurreny Asset Exchanges and provide it to clients in an easy-to-use dashboard UI format.
+  * Ability to push content to multiple clients while maintaining the least number of connections possible:
+      * What we wanted to do is basically have each device create one connection into our infrastructure, and then over that one connection, multiplex or send multiple requests through virtual streams. This way, we can make efficient use of the number of connections, and we could actually lower the number of servers that we required because it wouldn't have to maintain as many connections between devices.
+  * Ability to handle multiple requests from clients gracefully and scalably and in a reactive manner.
+
+##### Backpressure control:
+  * In the current implementation of the WebFlux module, the backpressure is regulated by the transport flow control, but it does not expose the real demand of the recipient. In order to finally see the interaction flow, please see the following diagram:
+![Reactive-WebFlux-Backpressure-Diagram](./assets/Reactive-WebFlux-Backpressure-Diagram.png)
+  * Fair backpressure with RSocket Protocol
+    In order to achieve logical-elements backpressure through the network boundaries, we need an appropriate protocol for that. Fortunately, there is one called [RScoket protocol](http://rsocket.io/). RSocket is an application-level protocol that allows transferring real demand through the network boundaries. There is an RSocket-Java implementation of that protocol that allows to set up an RSocket server. In the case of a server to server communication, the same RSocket-Java library provides a client implementation as well. To learn more how to use RSocket-Java, please see the following examples [here](https://github.com/rsocket/rsocket-java/tree/1.0.x/rsocket-examples/src/main/java/io/rsocket/examples/transport/tcp). For browser-server communication, there is an [RSocket-JS](https://github.com/rsocket/rsocket-js) implementation which allows wiring the streaming communication between browser and server through WebSocket.
+
+**NOTE:** **Backpressure** is when the progress of turning that input to output is resisted in some way. In most cases that resistance is computational speed — trouble computing the output as fast as the input comes in — so that’s by far the easiest way to look at it. But other forms of backpressure can happen too: for example, if your software has to wait for the user to take some action.
+
+###### Technologies Used:
+  * Message Exchange Format: [<ins><string>C</strong></ins>oncise <ins><string>B</strong></ins>inary <ins><string>O</strong></ins>bject <ins><string>R</strong></ins>epresentation](https://cbor.io/)
+  * Transport Layer: [RSocket: Application protocol providing Reactive Streams semantics](https://rsocket.io/)
+      * Why?
+	      * **RSocket** is a Message-based Binary Protocol, in RSocket, there is a concept of a requester and responder, they interact with each other by sending binary frames between each other as messages. We picked binary for this instead of text-based because it's up to 30% faster, we found from testing to actually process binary data. When you get to a distributed system, latency becomes more and more important, the slower your system is, it actually affects calls down, your graph of services, creating a worse experience.
+		  * **Bi-Directional** Once the connection is established, they're co-equal members of the transit of the connection, a client connect to a server, and then the server can actually go ahead and request API calls from the client as if it's connected to itself. This lets you do stuff like actually have a web browser connect to a service, and then you can go ahead and call API's that exist in the JavaScript code running in the browser.
+  * Server Side: Spring Boot (Java)
+  * Client Side: React (Typescript)
+
 # Phase 0
 ---
 ### A) Ice Breaker Questions
