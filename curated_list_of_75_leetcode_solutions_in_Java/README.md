@@ -11995,36 +11995,132 @@ class Solution:
 <br/>
 
 ####  [LC-39:Combination Sum](https://leetcode.com/problems/combination-sum/)
+##### Whats is the difference between Recursion and Backtracking
+```
+Difference between Recursion and Backtracking:
+==============================================
+In recursion, the function calls itself until it reaches a base case. In backtracking, we use recursion 
+to explore all the possibilities until we get the best result for the problem.
+```
 ##### Solution Explanation:
 ```
+
+Algorithm
+==============================================
+for every candidate in candidates:
+  * choose a candidate
+  * add to possible list
+  * target minus candidate
+  * recurse and choose again
+  * stop if less than or equal to zero
+  * add to result if zero
+
+Some Observations on the Algorithm
+==============================================
+(1) Why use sort() ?
+---------------------------------------------------------------------
+We use sort() so that it is faster to avoid duplicates.
+
+Example: nums = [2,2,3], target 5
+Step by step like below :
+--------------------------
+2,2,2 -1 return -> 2,2,2 -1 return -> 2,2,3...
+Clearly, it calls 2,2,2 twice.
+
+In this case (without duplicates), not using it is better.
+
+(2) Why pass index argument ?
+---------------------------------------------------------------------
+Passing argument 'index' will make sure each combination of num run once.
+I think combined with sort() method to explain it will be easy to understand.
+e.g. Like [3,2,4], after sorted, turn to [2,3,4]. (ignore target, just look for what's going on)
+First reached list will be 2,2,2 return --> 2,2,3 return--> 2,2,4 return--> 2,3,3 ...
+After 2,2,4 return, it should go to 2,3,3 (due to arg start) instead of 2,3,2. Because 2,2,3 we already reached.
+
+(3) What is resCandidate.remove(resCandidate.size() - 1) used for ?
+---------------------------------------------------------------------
+resCandidate.remove(resCandidate.size() - 1) is like a pop()
+
+Imagine a recursion tree.
+ * Node1 adds num1 to resCandidate, and calls backtrack() to go into its child Node2. 
+ * Once this child return to its parent Node1, resCandidate.remove() will pop out the num1 it added before, and, 
+ * adds num2 to resCandidateList and call backtrack() again.
 ```
 ##### Complexity Analysis:
 ```
+
+Ill try and explain the time complexity I know and understand the solution to be. 
+In order to get the time complexity easily of these types of solutions, always consider the recursive tree.
+
+Lets say we have 4 elements in our list (call it N) and a target = 7 (call it M):
+
+nums = [2,3,6,7]
+At every single level in our recursion tree we have N choices to decrease target by and then to recurse on.
+
+At the first level target = 7 and we can chose 2,3,6,7.
+
+                            7
+                     5    4    1   0
+* At the second level of our recursive tree where target=5 we also have 4 choices. 
+* Even though some of those choices would lead usto a negative target which isn't valid we can approximate that 
+  we still have about 4 choices. 
+* So we can state that the number of recursive calls on each level of our recursive tree is 4 (N)
+
+So now we have the number of elements on each level. However how many levels (height) will there be worst case?
+
+If you consider a list with only 1s in it we can see the maximum height of our recursion tree is equal to target (M)
+
+target = 7
+nums = [1, 1, 1, 1]
+
+                     7
+                    /
+                   6
+                  /
+                 5
+                /
+               4
+              ..
+             /
+            1
+So we know the number of elements on each level of our recursive tree (N) and we know the height of our recursion tree (M)
+
+Therefore we can say worst case scenario the time complexity is O(len(nums)^target) or O(N^M)
+
+O(N^M) time complexity
+
+O(M)   space complexity
+
+For storing the path, which the height of our recursion tree, i.e., M.
 ```
 ```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class Solution {
-public List<List<Integer>> combinationSum(int[] nums, int target) {
-    List<List<Integer>> list = new ArrayList<>();
-    Arrays.sort(nums);
-    backtrack(list, new ArrayList<>(), nums, target, 0);
-    return list;
-}
-
-private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int remain, int start){
-    if(remain < 0) return;
-    else if(remain == 0) list.add(new ArrayList<>(tempList));
-    else{ 
-        for(int i = start; i < nums.length; i++){
-            tempList.add(nums[i]);
-            backtrack(list, tempList, nums, remain - nums[i], i); // not i + 1 because we can reuse same elements
-            tempList.remove(tempList.size() - 1);
+// TC : O(N^M)
+// SC : O(M)
+// where, N = length of array candidates
+//        M = height of the recursion tree, i.e., target
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);    // sort so faster to avoid duplicates
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(candidates, target, 0, result, new ArrayList<>());
+        return result;
+    }
+    
+    private void backtrack(int[] candidates, int target, int index, List<List<Integer>> result, List<Integer> resCandidate) {
+        if (target == 0) {                              // found a solution
+            result.add(new ArrayList<>(resCandidate));  // clone into result list
+            return;                                     // early exit since cant add more candidate
+        }
+        
+        for (int i = index; i < candidates.length; i++) {   // loop through from current index avoiding duplicates
+            if (target - candidates[i] < 0)             // if current index already too large,
+                return;                                 // later ones also too large, just skip
+            
+            resCandidate.add(candidates[i]);            // add current number to candidate
+            backtrack(candidates, target - candidates[i], i, result, resCandidate);    // recurse to build
+            resCandidate.remove(resCandidate.size() - 1);   // remove the candidate just now for next loop
         }
     }
-}
 }
 ```
 
