@@ -97,6 +97,7 @@ you are not as gung-ho about web design as you thought you were.
 # Roadmap
 
 * [Wed Developer Roadmap 2021](https://github.com/kamranahmedse/developer-roadmap)
+* [All-In-One Fron End Interview Resource](https://30secondsofinterviews.org/)
 
 # Phase 1
 ---
