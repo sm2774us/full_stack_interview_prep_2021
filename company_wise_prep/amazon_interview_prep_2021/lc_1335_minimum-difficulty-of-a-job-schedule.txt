@@ -1,0 +1,341 @@
+Nice solution! But you can do faster with DP + monotonic and minimum stack technique :) 
+https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/discuss/495000/C%2B%2B-0ms!-O(d*n)-time-O(n)-space.-DP-%2B-MonotonicMinimum-Stack!
+
+
+yanrucheng's avatar
+yanrucheng
+1337
+Last Edit: January 26, 2020 12:11 AM
+
+2.2K VIEWS
+
+Recursion with Memoization, Top-down
+
+Starting from the last day, we simply try out all the possible schdules for each day.
+We track the intended finished day (intended) and the first i-th jobs (end).
+
+from functools import lru_cache
+class Solution:
+    def minDifficulty(self, J, d):
+        @lru_cache(maxsize=None) # memoization
+        def helper(intended, end):
+		    # the base case, if we only have 1 day left, we need to handle all the tasks on that day
+            if intended == 1: return max(J[:end])
+			
+            res, mx = math.inf, 0
+            for done in range(1,end-intended+2):
+                mx = max(mx, J[end-done])
+                res = min(helper(intended-1, end-done) + mx, res)
+            return res                
+        
+        return helper(d, len(J)) if len(J) >= d else -1
+DP, Bottom-up
+
+class Solution:
+    def minDifficulty(self, J, d):
+        if len(J) < d: return -1
+        
+        dp = {} # (index of day, index of the last finished job)
+        for i,job in enumerate(J):
+            # the base case, all jobs need to be finish in one day
+            dp[0, i] = max(dp.get((0, i-1), 0), job)
+            
+        for i in range(1, d):
+            for j in range(i, len(J)):
+                mx = J[j]
+                for k in range(j, i-1, -1):
+                    mx = max(mx, J[k])
+                    dp[i, j] = min(dp.get((i, j), math.inf), mx + dp[i-1, k-1])
+                
+        return dp[d-1, len(J)-1]
+#############3
+
+
+
+lee215's avatar
+lee215
+113009
+Last Edit: January 12, 2021 9:02 AM
+
+30.9K VIEWS
+
+Solution 1: Top-down DP with cache
+dfs help find the the minimum difficulty
+if start work at ith job with d days left.
+
+If d = 1, only one day left, we have to do all jobs,
+return the maximum difficulty of jobs.
+
+Time complexity O(nnd)
+Space complexity O(nd)
+
+
+Java
+by @zea7ot
+
+    public int minDifficulty(int[] jobDifficulty, int D) {
+        final int N = jobDifficulty.length;
+        if(N < D) return -1;
+
+        int[][] memo = new int[N][D + 1];
+        for(int[] row : memo) Arrays.fill(row, -1);
+
+        return dfs(D, 0, jobDifficulty, memo);
+    }
+
+    private int dfs(int d, int len, int[] jobDifficulty, int[][] memo){
+        final int N = jobDifficulty.length;
+        if(d == 0 && len == N) return 0;
+        if(d == 0 || len == N) return Integer.MAX_VALUE;
+        if(memo[len][d] != -1) return memo[len][d];
+
+        int curMax = jobDifficulty[len];
+        int min = Integer.MAX_VALUE;
+        for(int schedule = len; schedule < N; ++schedule){
+            curMax = Math.max(curMax, jobDifficulty[schedule]);
+            int temp = dfs(d - 1, schedule + 1, jobDifficulty, memo);
+            if(temp != Integer.MAX_VALUE)
+                min = Math.min(min, temp + curMax);
+        }
+
+        return memo[len][d] = min;
+    }
+Python3:
+
+import functools
+class Solution:
+
+    def minDifficulty(self, A, d):
+        n = len(A)
+        if n < d: return -1
+
+        @functools.lru_cache(None)
+        def dfs(i, d):
+            if d == 1:
+                return max(A[i:])
+            res, maxd = float('inf'), 0
+            for j in range(i, n - d + 1):
+                maxd = max(maxd, A[j])
+                res = min(res, maxd + dfs(j + 1, d - 1))
+            return res
+        return dfs(0, d)
+
+Solution2: Bottom-up 2D DP
+Time complexity O(nnd)
+Space complexity O(nd)
+
+
+Java
+by @zea7ot
+
+    public int minDifficulty(int[] jobDifficulty, int D) {
+        final int N = jobDifficulty.length;
+        if(N < D) return -1;
+        int[][] dp = new int[D][N];
+
+        dp[0][0] = jobDifficulty[0];
+        for(int j = 1; j < N; ++j){
+            dp[0][j] = Math.max(jobDifficulty[j], dp[0][j - 1]);
+        }
+
+        for(int d = 1; d < D; ++d){
+            for(int len = d; len < N; ++len){
+                int localMax = jobDifficulty[len];
+                dp[d][len] = Integer.MAX_VALUE;
+                for(int schedule = len; schedule >= d; --schedule){
+                    localMax = Math.max(localMax, jobDifficulty[schedule]);
+                    dp[d][len] = Math.min(dp[d][len], dp[d - 1][schedule - 1] + localMax);
+                }
+            }
+        }
+
+        return dp[D - 1][N - 1];
+    }
+Python2
+
+    def minDifficulty(self, A, d):
+        n, inf = len(A), float('inf')
+        dp = [[inf] * n + [0] for i in xrange(d + 1)]
+        for d in xrange(1, d + 1):
+            for i in xrange(n - d + 1):
+                maxd = 0
+                for j in xrange(i, n - d + 1):
+                    maxd = max(maxd, A[j])
+                    dp[d][i] = min(dp[d][i], maxd + dp[d - 1][j + 1])
+        return dp[d][0] if dp[d][0] < inf else -1
+
+Solution3: Bottom-up 1D DP
+Time complexity O(nnd)
+Space complexity O(n)
+
+
+Java
+
+    public int minDifficulty(int[] A, int D) {
+        int n = A.length, maxd;
+        if (n < D) return -1;
+        int[] dp = new int[n + 1];
+        for (int i = n - 1; i >= 0; --i)
+            dp[i] = Math.max(dp[i + 1], A[i]);
+        for (int d = 2; d <= D; ++d) {
+            for (int i = 0; i <= n - d; ++i) {
+                maxd = 0;
+                dp[i] = Integer.MAX_VALUE;
+                for (int j = i; j <= n - d; ++j) {
+                    maxd = Math.max(maxd, A[j]);
+                    dp[i] = Math.min(dp[i], maxd + dp[j + 1]);
+                }
+            }
+        }
+        return dp[0];
+    }
+C++
+
+    int minDifficulty(vector<int>& A, int D) {
+        int n = A.size(), inf = 1e9, maxd;
+        if (n < D) return -1;
+        vector<int> dp(n + 1, 1e9);
+        dp[n] = 0;
+        for (int d = 1; d <= D; ++d) {
+            for (int i = 0; i <= n - d; ++i) {
+                maxd = 0, dp[i] = inf;
+                for (int j = i; j <= n - d; ++j) {
+                    maxd = max(maxd, A[j]);
+                    dp[i] = min(dp[i], maxd + dp[j + 1]);
+                }
+            }
+        }
+        return dp[0];
+    }
+Python2
+
+    def minDifficulty(self, A, d):
+        n, inf = len(A), float('inf')
+        if n < d: return -1
+        dp = [inf] * n + [0]
+        for d in xrange(1, d + 1):
+            for i in xrange(n - d + 1):
+                maxd, dp[i] = 0, inf
+                for j in xrange(i, n - d + 1):
+                    maxd = max(maxd, A[j])
+                    dp[i] = min(dp[i], maxd + dp[j + 1])
+        return dp[0]
+
+Solution 4: Stack
+Time O(nd)
+Space O(n)
+
+Java
+
+    public int minDifficulty(int[] A, int D) {
+        int n = A.length;
+        if (n < D) return -1;
+        int[] dp = new int[n], dp2 = new int[n], tmp;
+        Arrays.fill(dp, 1000);
+        Deque<Integer> stack = new ArrayDeque<Integer>();
+
+        for (int d = 0; d < D; ++d) {
+            stack.clear();
+            for (int i = d; i < n; i++) {
+                dp2[i] = i > 0 ? dp[i - 1] + A[i] : A[i];
+                while (!stack.isEmpty() && A[stack.peek()] <= A[i]) {
+                    int j = stack.pop();
+                    dp2[i] = Math.min(dp2[i], dp2[j] - A[j] + A[i]);
+                }
+                if (!stack.isEmpty()) {
+                    dp2[i] = Math.min(dp2[i], dp2[stack.peek()]);
+                }
+                stack.push(i);
+            }
+            tmp = dp;
+            dp = dp2;
+            dp2 = tmp;
+        }
+        return dp[n - 1];
+    }
+C++
+
+    int minDifficulty(vector<int>& A, int D) {
+        int n = A.size();
+        if (n < D) return -1;
+        vector<int> dp(n, 1000), dp2(n), stack;
+        for (int d = 0; d < D; ++d) {
+            stack.clear();
+            for (int i = d; i < n; i++) {
+                dp2[i] = i ? dp[i - 1] + A[i] : A[i];
+                while (stack.size() && A[stack.back()] <= A[i]) {
+                    int j = stack.back(); stack.pop_back();
+                    dp2[i] = min(dp2[i], dp2[j] - A[j] + A[i]);
+                }
+                if (stack.size()) {
+                    dp2[i] = min(dp2[i], dp2[stack.back()]);
+                }
+                stack.push_back(i);
+            }
+            swap(dp, dp2);
+        }
+        return dp[n - 1];
+    }
+Python
+
+    def minDifficulty(self, A, d):
+        n = len(A)
+        if n < d: return -1
+        dp, dp2 = [float('inf')] * n, [0] * n
+        for d in xrange(d):
+            stack = []
+            for i in xrange(d, n):
+                dp2[i] = dp[i - 1] + A[i] if i else A[i]
+                while stack and A[stack[-1]] <= A[i]:
+                    j = stack.pop()
+                    dp2[i] = min(dp2[i], dp2[j] - A[j] + A[i])
+                if stack:
+                    dp2[i] = min(dp2[i], dp2[stack[-1]])
+                stack.append(i)
+            dp, dp2 = dp2, dp
+        return dp[-1]
+		
+
+617280219's avatar
+617280219
+89
+Last Edit: February 2, 2020 1:47 AM
+
+3.3K VIEWS
+
+Firstly we have the basic O(nnd) DP solution:
+f[i][j]=min{f[i-1][k]+max(val[k+1..j])},i-2<=k<j
+where f[i][j] is the minimum difficulty for first j jobs done in i days, and val=jobDifficulty
+Define t=l[j] to be the largest t such that t<j and val[t]>=val[j]
+Then we know that for t<=k<j, max(val[k+1..j])=val[j]; and that for k<t, max(val[k+1..j])=max(val[k+1..t])
+So for k<t case we have min{f[i-1][k]+max(val[k+1..j])}=f[i][t]
+For t<=k<j case we have max(val[k+1..j])=val[j], so we only need to calculate min(f[i-1][t..j-1])
+The DP equation becomes:
+f[i][j]=min(f[i][l[j]],val[j]+min(f[i-1][l[j]..j-1]))
+Here we notice that if a>b and val[a]>val[b] then for any c>a, l[c]!=b
+Therefore for any l[a]<b<a<c, we have l[c]!=b, so we can suppress the interval l[a]..a-1 since they will always be included together
+Finally we use a monotonic stack to maintain the array f[i-1][l[a]..a-1] where a={...,l[l[j]],l[j],j} is the representatives for the intervals
+The time complexity is O(nd) since in each of the d rounds every j will be popped only once, and the space is O(n) because f[i][...] only depends on f[i-1][...]
+
+class Solution:
+    def minDifficulty(self, val: List[int], d: int) -> int:
+        if len(val)<d:
+            return -1
+        n,f=len(val),val[:]
+        for i in range(1,n):
+            f[i]=max(f[i-1],f[i])
+        for t in range(1,d):
+            temp=[10**9]*t
+            st=[(10**9,0,0)]
+            for i in range(t,n):
+                m,j=f[i-1],i-1
+                while st[-1][0]<val[i]:
+                    m,j=min(m,st[-1][1]),st[-1][2]
+                    st.pop()
+                if len(st)>1:
+                    temp.append(min(temp[j],m+val[i]))
+                else:
+                    temp.append(m+val[i])
+                st.append((val[i],m,j))
+            f=temp
+        return f[n-1]
