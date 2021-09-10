@@ -8200,7 +8200,7 @@ class Solution:
             node = node.next
         return dummy.next 		
 
-# Yet Another Solution ( eversed linked-lists based on {2. Add Two Numbers: https://leetcode.com/problems/add-two-numbers/discuss/456844/Python3-Compact-implementation-(96.75)}. )
+# Yet Another Solution ( reversed linked-lists based on {2. Add Two Numbers: https://leetcode.com/problems/add-two-numbers/discuss/456844/Python3-Compact-implementation-(96.75)}. )
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         
@@ -9081,7 +9081,7 @@ if __name__ == '__main__':
 
 #### [LC-287:Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
 ##### Problem Prerequisites:
-![Floyd's Cycle Detection Algorithm][./assets/proof-of-floyd's-cycle-detection-algorithm.PNG)
+![Floyd's Cycle Detection Algorithm](./assets/proof-of-floyd's-cycle-detection-algorithm.PNG)
 > Pigeonhole principle:
 >
 > ---
