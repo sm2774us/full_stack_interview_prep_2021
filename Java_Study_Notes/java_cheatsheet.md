@@ -27,7 +27,7 @@ Map Interface: https://docs.oracle.com/javase/tutorial/collections/interfaces/ma
 
 ---
 
-### Big-O time complexity of Data Structures implemented in Java
+### Big_O time complexity of Data Structures implemented in Java
 
 ---
 
